@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("reset.css");
+@import url("typography.css");
+@import url("forms.css");
+@import url("buttons.css");
+@import url("layout.css");
+@import url("nav.css");
+@import url("alerts.css");
+@import url("list.css");
+
+
+@media (max-width:575px){
+	html {
+	font-size: 47.5%;
+}
+}
+@media (min-width:576px){
+	html {
+	font-size: 48.5%;
+}
+}
+@media (min-width:768px){
+	html {
+	font-size: 52.5%;
+}
+}
+@media (min-width:996px){
+	html {
+	font-size: 57.5%;
+}
+}
+@media (min-width:1200px){
+	html {
+	font-size: 62.5%;
+}
+}
+body {
+	font-family: "Roboto", sans-serif;
+	width: 100%;
+	padding: 0 auto;
+	font-size: 1.6rem;
+	background:#212121;
+	color: #fff;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 996px){
+	#app {
+		padding: 0 160px;
+		padding: 0 16rem;
+	}
+}
+	
+	
+
+	.headline {
+		position: relative;
+		width: 50%;
+		margin-top: 120px;
+		text-align: left;
+		float: left;
+	}
+	.heading {
+		margin-bottom: 15px;
+	}
+	.brief {
+		margin-bottom: 30px;
+		color: #757575;
+	}
+	.quick-access a{
+		text-decoration: underline;
+	}
+	.quick-access p{
+		display: inline-block;
+		margin-left: 15px;
+		color: #757575;
+	}
+	.register {
+		color: #fff;
+	}
+@media (max-width:767px){
+	.headline {
+		width: 100%;
+		margin-top: 120px;
+		text-align: center;
+		
+	}
+}
+	#landing-image {
+		position: absolute;
+		height: 434px;
+		top: 0;
+		right: -100px;
+	}
+
+
+}
+	

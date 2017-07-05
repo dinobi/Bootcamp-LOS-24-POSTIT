@@ -1,0 +1,1 @@
+This directory contains the UI template for the front-end in HTML/CSS
