@@ -179,13 +179,13 @@
 	#auth-header {
 		text-align: center;
 		padding: 15px 0;
-		margin-bottom: 120px;
+		margin-bottom: 80px;
 	}
 	#auth-header .app-name{
 		position: relative;
 	}
 	#auth-tabs {
-		margin-bottom: 60px;
+		margin-bottom: 30px;
 	}
 
 		.main-footer {
