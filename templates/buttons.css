@@ -37,3 +37,15 @@
 		border: 2px solid #FFA000;
 		color: #000;
 	}
+	.btn-reg {
+		background: #4CAF50;
+		width: 100%;
+		border: 2px solid #4CAF50;
+		color: #fff;
+		margin: 0 0 15px 0;
+	}
+	.btn-reg:hover {
+		background: #388E3C;
+		border: 2px solid#388E3C;
+		color: #fff;
+	}

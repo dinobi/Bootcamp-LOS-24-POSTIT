@@ -13,4 +13,19 @@
 					$(this).addClass('open');
 				}
 			})
+
+			//Toggle between authentication window
+            var toggled = false;
+            $(".auth-tab").on("click",function(){
+              if(toggled == false){
+                $(".registration.active").removeClass("active");
+				$(".login").addClass("active");
+                toggled = true;
+              }
+              else {
+                $(".auth-tab #active");
+                toggled = false;
+              }
+            });
+
 		});

@@ -1,0 +1,70 @@
+/*======================================= LANDING SIGNUP FORM =========================================================*/
+	
+	#auth-form {
+		padding:0;
+		background: #fff;
+		width: 576px;
+        min-height: 576px;
+		color: #212121;
+		border-radius: 3px;
+        margin: 0 auto;
+		margin-bottom: 60px;
+	}
+	.auth-tab {
+		position: relative;
+		padding: 15px 0;
+		cursor: pointer;
+	}
+
+	#auth-form-control {
+		margin: 60px 0;
+		padding: 0 60px;
+	}
+	.form-brief {
+		margin-bottom: 30px;
+	}
+	#auth-form-control input {
+		display: block;
+		width: 100%;
+		padding: 15px 10px;
+		font: 400;
+		font-size: 12px;
+		background: transparent;
+		border: 1px solid #bdbdbd;
+		border-radius: 3px;
+		color: #000;
+		margin-bottom: 30px;
+	}
+
+	#auth-form-control .hint {
+		display: block;
+		color: #fff;
+		font: 100 1rem/2.2rem Muli, "sans-serif";
+		line-height: 3rem;
+		letter-spacing: .03rem;
+		word-spacing: .10rem;
+	}
+	.registration, .login {
+		display: none;
+	}
+	#active {
+		color: #FFA000;
+	}
+	.active {
+		display: block;
+	}
+	.google-auth, .facebook-auth {
+		color: #757575;
+		padding: 10px 0;
+		border: 1px solid transparent;
+		border-radius: 3px;
+		font-size: 18px;
+	}
+	.google-auth:hover {
+		color: #F44336;
+		border: 1px solid #F44336;
+	}
+	.facebook-auth:hover {
+		color: #01579B;
+		border: 1px solid #01579B;
+	}
