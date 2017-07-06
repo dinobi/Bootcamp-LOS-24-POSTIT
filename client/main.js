@@ -13,15 +13,4 @@
 					$(this).addClass('open');
 				}
 			})
-
-			$("ul#auth-tab li").click(function(e){
-				if(!$(this).hasClass("active"))
-				let tabNum = $(this).index();
-				let nthChild = tabNum+1;
-				$("ul#auth-tab li.active").removeClass("active");
-				$(this).addClass("active");
-				$("ul#auth-form li.active").removeClass("active");
-				$("ul#auth-form li:nth-child("+ nthChild + ")").addClass("active")
-
-			})
 		});

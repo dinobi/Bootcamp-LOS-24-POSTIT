@@ -54,8 +54,6 @@ body {
 	}
 }
 	
-	
-
 	.headline {
 		position: relative;
 		width: 50%;
@@ -96,13 +94,5 @@ body {
 		right: -100px;
 	}
 
-.auth-form-container {
-	display: block;
-	margin: 0 auto;
-	width: 400px;
-	width: 40rem;
-	height: 400px;
-	height: 40rem;
-	background: #fff;
-}
+
 	

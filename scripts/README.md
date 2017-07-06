@@ -1,1 +1,0 @@
-This directory houses front-end implementation in ReactJS (Redux)

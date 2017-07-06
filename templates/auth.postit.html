@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8.0">
-		<title>PostIt | group messaging app</title>
+		<title>PostIt | authentication</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -20,12 +20,12 @@
 		</header>
 		<form id="auth-form" >
 		<header class="row">
-			<div class="col-xs-6 auth-tab" id="active">REGISTER</div>
+			<div class="col-xs-6 auth-tab" id="toggle">REGISTER</div>
 			<div class="col-xs-6 auth-tab">LOGIN</div>
 		</header>
 		<section id="auth-form-control">
 		<!-- registration form -->
-			<div class="registration active">
+			<div class="registration active" id="register">
 				<h5 class="form-brief">Create an account, and this account will be used for all features on the platform</h5>
 				<div class="row">
 					<div class="col-xs-6"><input class="first-name" type="text" name="name" placeholder="Enter your first name"></div>
@@ -44,11 +44,10 @@
 				</div>
 			</div>
 		<!-- login form -->
-			<div class="login">
+			<div class="login" id="login">
 				<h5 class="form-brief">Log Into Your Account</h5>
 				<input class="email" type="text" name="email" placeholder="Enter your email address">
-				<input class="password" type="text" name="password" placeholder="Enter your strong password">
-					
+				<input class="password" type="text" name="password" placeholder="Enter your strong password">					
 				<button class="app-btn btn-auth btn-login">Log in</button>
 				<p class="form-brief">Or log in with any of this services</p>
 				<div class="row">
@@ -58,9 +57,7 @@
 			</div>
 		</section>
 		<small>Made with &hearts;</small>
-		</form>
-
-	
+		</form>	
 	</section>	
 	</body>
 </html>
