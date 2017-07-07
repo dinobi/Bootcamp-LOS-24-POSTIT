@@ -1,0 +1,56 @@
+	.card1 {background: #2196F3; cursor: pointer;} .card2 {background: #E91E63; cursor: pointer;} .card3 {background: #E91E63; cursor: pointer;} .card4 {background: #4CAF50; cursor: pointer;}
+
+
+	.dashboard-group-content .row:after {
+	    content: " ";
+	    display: block;
+	    clear: both;
+	}
+	.dashboard-group-content .row:last-child {
+	    margin-right: none;
+	}
+	.row h5 {
+		color: #fff;
+	}
+
+	.dashboard-group-content .row .col-4-12,.dashboard-group-content .row .col-8-12{
+	  position: relative;
+	  color: #fff;
+	  text-align: left;
+	  display: inline-block;
+	  margin-bottom: 1%;
+	  overflow: hidden; 
+	  float: none;
+	  background: #1976d2;
+	  box-shadow: 0 0 4px #000;
+	  -webkit-transition: all .3s ease-in-out;
+	  -moz-transition: all .3s ease-in-out;
+	  transition: all .3s ease-in-out;		
+	}
+
+
+@media (min-width: 575px) {
+ .dashboard-group-content .row .col-xs-4,.dashboard-group-content .row .col-xs-8 {
+    float: left;
+	margin-right: 1%;
+	margin-bottom: 1%;
+  }
+  .col-xs-4 {
+	position: relative;
+    width: 32.33333333%;
+    height: 200px;
+    padding: 30px;
+  }
+   .col-xs-8 {
+    width: 65.66666667%;
+    height: 200px;
+    padding: 30px;
+  }
+}
+.dashboard-group-content .row .col-xs-4:hover,.dashboard-group-content .row .col-xs-8:hover{
+  background: #FFC107;
+  box-shadow: 0 0 20px #000;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;		
+}

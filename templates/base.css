@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-@import url("reset.css");
-@import url("typography.css");
-@import url("forms.css");
-@import url("buttons.css");
-@import url("layout.css");
-@import url("nav.css");
+@import url("reset-css/reset.css");
+@import url("typography-css/typography.css");
+@import url("forms-css/forms.css");
+@import url("forms-css/search-form.css");
+@import url("buttons-css/buttons.css");
+@import url("dashboard-css/dashboard.css");
+@import url("dashboard-css/dashboard-group.css");
+@import url("nav-css/nav.css");
 @import url("alerts.css");
 @import url("list.css");
 

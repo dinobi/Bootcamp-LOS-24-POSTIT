@@ -1,0 +1,119 @@
+#search-form{
+		display: block;
+		margin: 0 auto;
+		width: 600px;
+		height: 60px;
+		border-radius: 10px;
+		background: #000;
+		border: none;
+		margin-bottom: 20px;		
+		margin-top: 20px;
+		box-shadow: 0 0 4px #000;
+		text-align: left;
+	}
+	#search-field {
+	  display: inline-block;
+	  text-align: left;
+	  height: 60px;
+	  width: 500px;
+	  font-size: 14px;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	  color: #fff;
+	  background: #000;
+	  border-radius: 10px;
+	  border: none;
+	}
+	.hidden {
+	  display: none;
+	}
+	
+	#search-button {
+		min-width: 60px;
+		height: 60px;
+		background: #FFC107;
+		border: none;
+		font-size: 2.4rem;
+		color: #fff;
+		cursor: pointer;
+	}
+	#search-button:hover {
+		background: #FFC107;
+		color: #fff;
+	}
+	.fit-to-input {
+	  border-bottom-left-radius: 0;
+	  border-top-left-radius: 0;
+	  border-bottom-right-radius: 10px;
+	  border-top-right-radius: 10px;
+	}
+	.rounded {
+		border-radius: 10px;
+	}
+	form #search-button {
+	  float: right;
+	}
+	h5 {
+		font-weight: 900;
+		color: #FFC107;
+		text-transform: Capitalize;
+	}
+	.search-result div {
+		width: 100%;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		background: #212121;
+		box-shadow: 0 0 4px #000;
+		padding: 10px 30px;
+		text-align: left;
+	}
+	.search-result p {
+		width: 100%;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		padding: 10px 30px;
+		text-align: left;
+	}
+	.add-button {
+		width: 40px;
+		height: 40px;
+		background: #FFC107;
+		text-align: center;
+		vertical-align: middle;
+		border: none;
+		font-size: 24px;
+		font-weight: 700;
+		padding: 8px 0;
+		color: #000;
+		cursor: pointer;
+		border-radius: 50%;
+	}
+	.add-button:hover {
+		background: #FFA000;
+	}
+	.close-button {
+		width: 40px;
+		height: 40px;
+		background: #F44336;
+		text-align: center;
+		vertical-align: middle;
+		border: none;
+		font-size: 24px;
+		font-weight: 700;
+		padding: 8px 0;
+		color: #fff;
+		cursor: pointer;
+		border-radius: 50%;
+	}
+	.close-button {
+		background: #D32F2F;
+	}
+	p span{
+		float: right;
+	}
+	span {
+		display: inline-block;
+		vertical-align: middel;
+		margin-left: 100px;
+	}
+

@@ -1,0 +1,60 @@
+
+	#dashboard-ui {
+		padding: 60px 0;
+		box-shadow: 0 0 5px #000;
+		width: 100%;
+        min-height: 520px;
+		color: #FFA000;
+		border-radius: 3px;
+        margin: 0 auto;
+        margin-top: 40px;
+        overflow: hidden;
+	}
+	
+	aside.dashboard-menu {
+	    padding: 0px 60px;
+	    text-align: left;
+	    overflow: hidden;
+	}
+
+	.dashboard-menu h4 {
+		margin: 0px 0px 30px 20px;
+	}
+
+	.dashboard-menu li a {
+	    color: #fff;
+	    text-decoration: none;
+	    padding: 20px;
+	    display: block;
+	    font-size: 14px;
+	}
+
+	.dashboard-menu li a.active {
+	    background-color: #FFC107;
+	    color: #fff;
+	}
+
+	.dashboard-menu li a:hover {
+	    color: #fff;
+	    background-color: #FFA000;
+	    
+	}
+
+	section.dashboard-content {
+		padding: 0px 60px;
+	    text-align: left;
+	    overflow: hidden;
+	    min-height: 400px;
+	}
+
+	.dashboard-content h3 {
+		color: #fff;
+		margin-bottom: 30px;
+	}
+
+	#welcome-card {
+		height: 400px;
+		width: 100%;
+		padding: 30px;
+		text-align: left;
+	}

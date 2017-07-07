@@ -13,4 +13,14 @@
 					$(this).addClass('open');
 				}
 			})
+
+			$("#search-button").click(function(e){
+				$("div").removeClass("hidden");
+				$("p").removeClass("hidden");
+			})
+
+			$(".close-button").click(function(e){
+				$("div").addClass("hidden");
+				$("p").addClass("hidden");
+			})
 		});
