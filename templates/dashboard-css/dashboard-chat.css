@@ -52,17 +52,18 @@ form .btn {
   padding: 30px;
 }
 .chat-box-recieved {
-  background: #eee;
+  border: 1px solid #616161;
   float: left;
 }
 .chat-box-sent {
-  background: #bdbdbd;
+  border: 1px solid #757575;
   float: right;
 }
 .chat-box-active {
   position: fixed;
+  padding: 10px;
+  border: 1px solid #424242;
   border-radius: 5px;
   margin: auto 0;
   width: 50%;
-  background: #616161;
-}
+  }
