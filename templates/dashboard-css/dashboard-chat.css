@@ -1,0 +1,67 @@
+/*======================================= Registration Page =========================================================*/
+
+form {
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, .03);
+  padding: 2rem;
+}
+
+input,
+select,
+textarea,
+label {
+  font: 300 1.6rem/2.2rem Montserrat, "sans-serif";
+  background: transparent;
+  border: none;
+}
+
+.message-group input,
+.message-group select,
+.message-group textearea {
+  border-bottom: .2rem solid rgb(255, 255, 255);
+  color: rgba(255, 255, 255, .50);
+  display: block;
+  margin: .5rem 0 2.7rem 0;
+  padding: .5rem .8rem;
+}
+
+.message-group input,
+.message-group textarea,
+.message-group select {
+  width: 100%;
+}
+
+.message-group select {
+  height: 3.4rem;
+}
+
+.message-group textarea {
+  height: 17px;
+  color: rgba(255, 255, 255, .50);
+}
+
+form .message-btn {
+  right: left;
+}
+.chat-box-ui {
+  display: block;
+  border-radius: 5px;
+  height: 100px;
+  width: 400px;
+  padding: 30px;
+}
+.chat-box-recieved {
+  background: #eee;
+  float: left;
+}
+.chat-box-sent {
+  background: #bdbdbd;
+  float: right;
+}
+.chat-box-active {
+  position: fixed;
+  border-radius: 5px;
+  margin: auto 0;
+  width: 50%;
+  background: #616161;
+}

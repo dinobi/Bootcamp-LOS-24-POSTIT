@@ -19,7 +19,7 @@
 				<h4>User Name</h4>
 				<ul class="dasboard-menu">
 					<li>
-						<a class="active" href="dashboard-main.html">My Space</a>
+						<a href="dashboard-main.html">My Space</a>
 					</li>
 					<li>
 						<a href="dashboard-group.html">My Groups</a>
@@ -31,7 +31,7 @@
 						<a href="search.html">Search</a>
 					</li>
 					<li>
-						<a href="dashboard-create-broadcast.html">Start Broadcast</a>
+						<a class="active" href="dashboard-create-broadcast.html">Start Broadcast</a>
 					</li>
 					<li>
 						<a href="auth.postit.login.html">Logout</a>
@@ -40,11 +40,21 @@
 				</ul>
 			</aside>
 			<section class="col-xs-9 dashboard-content">
-				<div id="welcome-card">
-					<h3>Welcome to your dashboard</h3>
-					<p>This your personal space</p>
-				</div>
-				
+				<div class="chat-box-ui chat-box-sent group"><p>This is a sent message<p></div>
+					<div class="chat-box-ui chat-box-received group"><p>This is a recieved message<p></div>
+					<form action="#" method="post" class="chat-box-active group">
+            			<fieldset class="message-group">
+              				<label>Urgency
+								<select name="contact-category" required>
+									<option value="Normal">Critical</option>
+									<option value="Urgent" selected>Urgent</option>
+									<option value="Critical">Normal</option>								
+								</select>
+							</label>
+              				<textarea name="message" placeholder="Compose Message" required></textarea>
+            			</fieldset>
+            			<a class="btn btn-info">Send Message</a>
+  					</form>				
 			</section>
 
 		</div>
