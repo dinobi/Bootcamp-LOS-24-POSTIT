@@ -1,11 +1,23 @@
-.bot-msg {
+.group-name {
 	margin-bottom: 30px;
 }
+.broadcast-board {
+	    margin-top: 60px;
+	}
+.exit-btn {
+	margin: 30px auto;
+}
+
+.view-message-ui .row {
+	    margin-top: 60px;
+}
+
 .broadcast-board .row:after {
 	    content: " ";
 	    display: block;
 	    clear: both;
 	}
+
 .broadcast-board .row:last-child {
 	    margin-right: none;
 	}
@@ -17,7 +29,7 @@
 	  margin-bottom: 1%;
 	  overflow: hidden; 
 	  float: none;
-	  background: #424242;
+	  background: #212121;
 	  box-shadow: 0 0 4px #000;
 	  -webkit-transition: all .3s ease-in-out;
 	  -moz-transition: all .3s ease-in-out;
@@ -32,20 +44,22 @@
 	margin-bottom: 1%;
   }
   .col-xs-2 {
-	position: relative;
+		position: relative;
     width: 15.666667%;
-    height: 40px;
     background: #FFC107;
-    padding: 0;
+  	height: 100px;
+		width: 100px;
+		border-radius: 50%;
   }
    .col-xs-10 {
-    width: 82.333333%;
-    height: 200px;
+    min-width: 82.333333%;
+    min-height: 200px;
     padding: 30px;
+		border-radius: 5px;
   }
 }
 .broadcast-board .row .col-xs-2:hover,.broadcast-board .row .col-xs-10:hover {
-  background: #FFC107;
+  background: #424242;
   box-shadow: 0 0 20px #000;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;

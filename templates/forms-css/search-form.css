@@ -1,5 +1,4 @@
 
-
     #search-form{
 		display: block;
 		width: 100%;
@@ -105,12 +104,5 @@
 	}
 	.close-button {
 		background: #D32F2F;
-	}
-	p span{
-		float: right;
-	}
-	span {
-		display: inline-block;
-		margin-left: 100px;
 	}
 
