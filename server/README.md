@@ -1,1 +1,0 @@
-This directory houses back-end implementation in NodeJS-Express-Postgres

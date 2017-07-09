@@ -4,7 +4,7 @@
 		box-shadow: 0 0 5px #000;
 		width: 100%;
         min-height: 520px;
-		color: #FFA000;
+		color: #fff;
 		border-radius: 3px;
         margin: 0 auto;
         margin-top: 40px;
@@ -23,6 +23,7 @@
 
 	.dashboard-menu li a {
 	    color: #fff;
+		border: 1px solid transparent;
 	    text-decoration: none;
 	    padding: 20px;
 	    display: block;
@@ -30,17 +31,18 @@
 	}
 
 	.dashboard-menu li a.active {
-	    background-color: #FFC107;
+	    border: 1px solid #FFC107;
 	    color: #fff;
 	}
 
 	.dashboard-menu li a:hover {
 	    color: #fff;
+		border: 1px solid #FFC107;
 	    background-color: #FFA000;
 	    
 	}
 
-	section.dashboard-content {
+	section .dashboard-content {
 		padding: 0px 60px;
 	    text-align: left;
 	    overflow: hidden;
@@ -50,11 +52,4 @@
 	.dashboard-content h3 {
 		color: #fff;
 		margin-bottom: 30px;
-	}
-
-	#welcome-card {
-		height: 400px;
-		width: 100%;
-		padding: 30px;
-		text-align: left;
 	}

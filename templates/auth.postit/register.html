@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8.0">
-		<title>PostIt | authentication login</title>
+		<title>PostIt | authentication register</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link href='base.css' rel='stylesheet' type='text/css'>
+		<link href='../base.css' rel='stylesheet' type='text/css'>
 		<script src="../client/jquery-1.11.3.min.js"></script>
 		<script src="../client/main.js"></script>
 	</head>
@@ -15,21 +15,28 @@
 	<section id="app" class="container-fluid">		
 		<header id="auth-header" class="group">						
 			<nav class="group">
-				<a class="app-name" href="index.html"><img src="postit-logo.png" title="PostIt"></a>
+				<a class="app-name" href="index.html"><img src="../images/postit-logo.png" title="PostIt"></a>
 			</nav>
 		</header>
 		<form id="auth-form" method="post" class="group">
 		<header class="row">
-			<div class="col-xs-12 auth-tab login">LOGIN</div>
+			<div class="col-xs-12 auth-tab register">REGISTER</div>
 		</header>
 		<section id="auth-form-control">
-		<!-- login form -->
-			<div id="login">
-				<h5 class="form-brief">Log Into Your Account and Start Messaging</h5>
+		<!-- registration form -->
+			<div id="registration">
+				<h5 class="form-brief">Create an account, and this account will be used for all features on the platform</h5>
+				<div class="row">
+					<div class="col-xs-6"><input class="first-name" type="text" name="name" placeholder="Enter your first name"></div>
+					<div class="col-xs-6"><input class="last-name" type="text" name="name" placeholder="Enter your last name"></div>
+				</div>
 				<input class="email" type="text" name="email" placeholder="Enter your email address">
-				<input class="password" type="text" name="password" placeholder="Enter your strong password">					
-			    <button class="app-btn btn-auth btn-login">Log in</button>
-				<p class="form-brief">Or log in with any of this services</p>
+				<div class="row">
+					<div class="col-xs-6"><input class="password" type="text" name="password" placeholder="Enter a strong password"></div>
+					<div class="col-xs-6"><input class="password" type="text" name="password" placeholder="Confirm password"></div>
+				</div>
+				<button class="app-btn btn-auth btn-reg">Register</button>
+				<p class="form-brief">Or sign up with any of this services</p>
 				<div class="row">
 					<div class="col-xs-6 google-auth"><i class="fa fa-google-plus"></i></div>
 					<div class="col-xs-6 facebook-auth"><i class="fa fa-facebook"></i></div>

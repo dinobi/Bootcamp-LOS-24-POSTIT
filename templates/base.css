@@ -6,8 +6,10 @@
 @import url("forms-css/search-form.css");
 @import url("buttons-css/buttons.css");
 @import url("dashboard-css/dashboard.css");
+@import url("dashboard-css/dashboard-myspace.css");
 @import url("dashboard-css/dashboard-group.css");
-@import url("dashboard-css/dashboard-chat.css");
+@import url("dashboard-css/dashboard-broadcast.css");
+@import url("dashboard-css/dashboard-messages.css");
 @import url("nav-css/nav.css");
 @import url("alerts.css");
 @import url("list.css");
@@ -63,6 +65,7 @@ body {
 		margin-top: 120px;
 		text-align: left;
 		float: left;
+		z-index: 2;
 	}
 	.heading {
 		margin-bottom: 15px;
@@ -82,20 +85,34 @@ body {
 	.register {
 		color: #fff;
 	}
+	#landing-image {
+		position: absolute;
+		top: 120px;
+		right: -200px;
+	}
+	#landing-image img {
+		height: 400px;
+		height: 40rem;
+		z-index: 0;
+	}
 @media (max-width:767px){
 	.headline {
 		width: 100%;
-		margin-top: 120px;
+		margin-top: 400px;
 		text-align: center;
-		
 	}
-}
 	#landing-image {
 		position: absolute;
-		height: 434px;
-		top: 0;
-		right: -100px;
+		top: 120px;
+		right: -20px;
 	}
+	#landing-image img {
+		height: 400px;
+		height: 40rem;
+		z-index: 0;
+	}
+}
+
 
 
 	

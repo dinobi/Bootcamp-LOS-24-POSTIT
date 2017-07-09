@@ -116,6 +116,7 @@
 		color: #FFEB3B;
 		padding: 20px 10px;
 		text-decoration: none;
+		transition: all .2s ease;
 		-moz-transition: all .2s ease;
 		-webkit-transition: all .2s ease;
 	}
@@ -134,7 +135,8 @@
 		top: 7.858px;
 		right: 0;
 		border-radius: 0;
-		background-color: transparent;
+		border: 1px solid #FFEB3B;
+		background: transparent;
 		height: 38px;
 		width: 38px;
 		padding: 8px 8px;
@@ -145,7 +147,7 @@
 		width: 100%;
 		height: 2px;
 		margin-top: 4px;
-		background-color: #FFEB3B;
+		background: #FFEB3B;
 		transition: all .25s;
 	}
 
@@ -236,3 +238,4 @@
 		display: block;
 		margin-top: 60px;
 	}
+}

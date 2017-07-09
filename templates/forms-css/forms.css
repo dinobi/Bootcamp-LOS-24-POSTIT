@@ -34,7 +34,7 @@
 	.form-brief {
 		margin-bottom: 30px;
 	}
-	.form-brief h5 {
+	.form-brief {
 		color: #000;
 	}
 	#auth-form-control input {
@@ -75,8 +75,4 @@
 	.facebook-auth:hover {
 		color: #01579B;
 		border: 1px solid #01579B;
-	}
-	#search-form-control input {
-		display: block;
-		height: 44px;
 	}
