@@ -36,6 +36,9 @@
 					<li>
 						<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
 					</li>
+					<li>
+						<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+					</li>
 					
 				</ul>
 			</aside>
@@ -46,38 +49,52 @@
 				</div>
 				<h5 class="group-name">Group Name</h5>					
 				<figure class="row">
-					<a href="#view-messages"><section class="col-xs-4 card4"><h5>View Messages</h5><div class="notification-counter">5</div></section></a>
+					<a href="#view-message"><section class="col-xs-4 card4"><h5>View Messages</h5><div class="notification-counter">5</div></section></a>
 					<a href="#send-message"><section class="col-xs-4 card2"><h5>Send Message</h5></section></a>
-					<a href="#add-members"><section class="col-xs-4 card3"><h5>Add New Member</h5></section></a>
+					<a href="search.html"><section class="col-xs-4 card3"><h5>Add New Member</h5></section></a>
 				</figure>
 
-				<div class="broadcast-board">
-					<section id="view-messages" class="view-message-ui">
-						<div class="row first">
-							<figure class="col-xs-2 avatar" id="user-id"></figure>
-							<div class="col-xs-10 message-in" id="received-message"></div>
+				<section class="broadcast-board">
+					<div class="message-board hidden" id="view-message">
+
+						<div class="postlogs">
+
+							<div class="post others">
+								<aside class="user-photo"></aside>
+								<section class="post-message"><p>Wow!!</p></section>
+							</div>
+							<div class="post self">
+								<aside class="user-photo"></aside>
+								<section class="post-message"><p>Yh, welcome to the group</p></section>
+							</div>
+
 						</div>
-						<div class="row second">
-							<div class="col-xs-10 message-in" id="received-message"></div>
-							<figure class="col-xs-2 avatar" id="user-id"></figure>							
-						</div>				
-					</section>
-					<section id="send-messages" class="send-message-ui hidden">						
-						<form id="message-form">
-							<fieldset class="compose-msg group">
-								<div class="row">
-									<div class="col-xs-12 message-out" id="send-message">Hello</div>
-								</div>	
-								<div class="row" id="message-field">
-									<input name="search" type="text" placeholder="Start your search"><button class="app-btn btn-solid">Send Message</button>
-								</div>
-							</fieldset>					
-						</form>
-					</section>
-					<section id="add-members" class="add-members-ui hidden">
-					</section>
-				</div>
-				<a href="group.html"><button class="app-btn btn-solid exit-btn">Go Back</button></a>	
+
+						<div class="compose-form">
+							<textarea></textarea>
+							<button class="app-btn btn-solid">Send Message</button>
+						</div>
+
+					</div>
+
+					<div class="message-board hidden" id="send-message">
+
+						<div class="postlogs">
+
+							<div class="post self">
+								<aside class="user-photo"></aside>
+								<section class="post-message"><p></p></section>
+							</div>
+
+						</div>
+
+						<div class="compose-form">
+							<textarea></textarea>
+							<button class="app-btn btn-solid">Send Message</button>
+						</div>
+
+					</div>
+				</section>	
 			</section>
 
 		</div>

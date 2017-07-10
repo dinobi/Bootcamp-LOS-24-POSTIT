@@ -1,0 +1,30 @@
+{
+  "name": "postit-server",
+  "version": "0.0.1",
+  "description": "server side implementation of postit",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinobi/Bootcamp-LOS-24-POSTIT.git"
+  },
+  "keywords": [
+    "server",
+    "node",
+    "postit"
+  ],
+  "author": "Dinobi Kenkwo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/issues"
+  },
+  "homepage": "https://github.com/dinobi/Bootcamp-LOS-24-POSTIT#readme",
+  "devDependencies": {
+    "eslint": "^4.2.0"
+  },
+  "dependencies": {
+    "eslint-plugin-react": "^7.1.0"
+  }
+}
