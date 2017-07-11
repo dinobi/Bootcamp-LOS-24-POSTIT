@@ -12,14 +12,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Setup a default catch-all route that sends back a success message in JSON format.
+// Default catch-all route that sends back a success message.
 app.get('*', (req, res) => res.status(200).send({
-  message: "Welcome to Andela Bootcamp 24 - PostIt App.";
+  message: "Welcome to Andela Bootcamp 24 - PostIt App.",
 }));
 
-// Setup a default catch-all route that sends back an error message in JSON format.
+// Default catch-all route that sends back an error message.
 app.get('*', (req, res) => res.status(404).send({
-  message: "The resource was not found";
+  message: "The resource was not found",
 }));
 
 module.exports = app;
