@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstname: {
       type: DataTypes.STRING,
@@ -34,11 +34,17 @@ export default (sequelize, DataTypes) => {
         len: [4, 10]
       }
     },
-    classMethods: {
-      associate: (models) => {
-        // associations can be defined here
-      }
-    }
   });
+  User.associate = (models) => {
+    User.belongsToMany(models.Group, {
+      as: 'member',
+      through: 'GroupMembers',
+      foreignKey: 'userId'
+    });
+  };
+
+  User.associate = (models) => {
+    User.hasMany(models.Message, { foreignKey: 'userId', as: 'message' });
+  };
   return User;
 };

@@ -4,7 +4,7 @@
   "description": "server side implementation of postit",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon ./server/bin/www",
+    "start:dev": "nodemon ./server/bin/www --exec babel-node",
     "build": "babel src -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
