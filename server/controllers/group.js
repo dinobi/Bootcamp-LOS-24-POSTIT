@@ -11,13 +11,16 @@ export default {
         name: req.body.name,
       })
       .then(group => res.status(201).send(group))
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send('Group Name Already Exist'));
   },
   fetch(req, res) {
     return models.Group
       .findAll()
-      .then(groups => res.status(200).send(groups))
-      .catch(error => res.status(400).send(error));
+      .then(group => res.status(200).send(group))
+      .catch((error) => {
+        console.log(error)
+        res.status(400).send(error)
+      });
   },
   fetchMembers(req, res) {
     return models.Group

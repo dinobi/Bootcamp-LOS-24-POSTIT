@@ -1,5 +1,6 @@
 {
   "development": {
+    "secret": "PrivateKey",
     "username": "postgres",
     "password": "Andela",
     "database": "postit-db",

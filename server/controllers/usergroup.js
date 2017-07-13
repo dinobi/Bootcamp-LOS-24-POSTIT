@@ -21,7 +21,7 @@ export default {
       .catch(error => res.status(400).send(error));
   },
   update(req, res) {
-    return models.GroupUsers
+    return models.UserGroup
       .update({
         update_trigger: Math.floor((Math.random() * 10000) + 1) },
       { where: {
