@@ -1,24 +1,41 @@
-# Bootcamp-LOS-24-POSTIT
+# Bootcamp-LOS-24-PostIt
+I (Dinobi) took on the development of this project as part of the requirements to become a fellow at Andela  https://andela.com/. I thank Phil, Victoria, Tracy, Femi and the rest of the BFA/LFA's of bootcamp-los-24 for all their support
 
-Templates contain the UI of the front-end in HTML/CSS
+# PostIt
+**Communicate Group Messages Instantly**
+> - PostIt is a simple web application built to allow family, friends and colleagues share message broadcast in a fun way anytime.
 
-ACCESS THE LANDING PAGE
-- Open index.html in the browser
+> - This project is strictly for learning purposes as instructed by Andela and not a commercial product.
 
-The landing page is first point of contact by users of the app
-- Users can see a landing page
-- Users can login from the landing page
-- Users can register from the login page
-- users can create a group from the landing page
-- Users can search for other users from the landing page
+**Project Stack**
+> - UI Template:
+    - Front End Implementation in HTML/CSS
 
-THE DASHBOARD
-- Go to dashboard folder inside templates, locate the index.html file and open in your browser
-The dashboard is a personalised UI for users who have obtained access to the app
-- Users can access every feature of the app from a welcome screen
-- Users can access dashboard menu
-- Users can quickly create broadcast group from the dashboard
-- Users can quickly post messages to all members in a particular group
-- Users can see a message board that displays all the messages sent out in a particular group
-- Users can reset their password
-- Users can logout from the dashboard
+> - Client Side: 
+    - Front End Organization in React/Redux + SASS
+
+> - Serve Side:
+    - Back End Implementation in Node/Express (Server) + Sequelize/Postgres (Database and ORM)
+
+> - Authentication and Code Base Organization
+    - JWT, es6, Babel, Webpack
+    
+> - Testing and Best Practices
+    - eslint, Airbnb JavaScript Style Guide, Mocha/Chai + chai-http
+
+# Features
+- Personalized dashboard UI for users with access
+- Holistic view of every feature of the app from a welcome screen
+- Quickly view all notifications based on group card UI
+- Search for colleagues, friends or family who are on the platform
+- Quickly create a group or add new members to your broadcast group
+- Post messages with added advantage of using wikipedia search right from you dashboard
+- Get messages on different medium based on message priority level
+- Have fun.
+
+# Installation and Dependencies
+> - Run `npm install` to install dependencies/dev-dependencies
+> - Setup Postgres
+> - setup your db with the settings in `server/config/config.json`
+> - Run `$ sequelize db:migrate`
+> - Run `npm run exec` to start server
