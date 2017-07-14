@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+
 import models from '../models';
 
 export default {
