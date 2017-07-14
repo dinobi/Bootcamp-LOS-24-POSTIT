@@ -14,7 +14,8 @@ export default {
       .then(user => res.status(201).send(user))
       .catch((error) => {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send({ message:
+        'Bad request, the email you entered already exist' });
       });
   },
   fetch(req, res) {
@@ -29,17 +30,11 @@ export default {
         password: [req.body.password] } })
       .then((user) => {
         if (user[0]) {
-        // create a token for user if they exist
-          const token = jwt.sign({
-            userData: user[0]
-          }, 'PrivateKey', { expiresIn: '2h' });
-
           res.status(202).send({
-            token,
             message: 'Authentication succesful'
           });
         } else {
-          res.status(404).send({ message: 'Not found'
+          res.status(404).send({ message: 'User has no account on PostIt'
           });
         }
       });
