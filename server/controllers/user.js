@@ -9,13 +9,14 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        phone: req.body.phone
       })
       .then(user => res.status(201).send(user))
       .catch((error) => {
         console.log(error);
         res.status(400).send({ message:
-        'Bad request, the email you entered already exist' });
+        'Bad request, one or more field already exists or violates allowed input' });
       });
   },
   fetch(req, res) {

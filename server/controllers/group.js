@@ -3,7 +3,11 @@ import models from '../models';
 export default {
   create(req, res) {
     if (!req.body.name) {
-      res.status(400).send({ message: 'Param: "group name" is required' });
+      res.status(400).send({ message: 'A group name is required' });
+      return;
+    }
+    if (!req.body.description) {
+      res.status(400).send({ message: 'A group descritption is required' });
       return;
     }
     return models.Group
@@ -31,7 +35,7 @@ export default {
         }],
       })
       .then(groups => res.status(200).send(groups))
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({ message: "you've not added any members" } ));
   },
   message(req, res) {
     return models.Message

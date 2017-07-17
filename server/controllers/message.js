@@ -4,7 +4,7 @@ export default {
   create(req, res) {
     return models.Message
       .create({
-        message: req.body.message,
+        body: req.body.message,
         from_user: req.body.from_user,
         to_group: req.body.to_group,
         priority: req.body.priority

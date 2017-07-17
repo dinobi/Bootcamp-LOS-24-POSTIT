@@ -119,3 +119,9 @@
 	#message-field .app-btn {
 		float: right;
 	}
+	.msg-priority {
+		display: block;
+	}
+	.msg-priority input {
+		display: inline-block;
+	}

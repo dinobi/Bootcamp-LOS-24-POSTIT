@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       unique: true,
+      primaryKey: true,
       allowNull: false  //  dont write to db if data is not supplied
     },
     email: {
@@ -32,6 +33,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false, //  dont write to db if data is not supplied
       validate: {
         len: [4, 10]
+      }
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false, //  dont write to db if data is not supplied
+      validate: {
+        len: [11, 13]
       }
     },
   });
