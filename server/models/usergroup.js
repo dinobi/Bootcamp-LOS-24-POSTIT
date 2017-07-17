@@ -1,17 +1,12 @@
 export default (sequelize, DataTypes) => {
   const UserGroup = sequelize.define('UserGroup', {
-    user_id: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false  //  dont write to db if data is not supplied
     },
-    group_id: {
+    groupname: {
       type: DataTypes.STRING,
       allowNull: false  //  dont write to db if data is not supplied
-    },
-    update_trigger: {
-      // Used to monitor changes to the state of a user data
-      type: DataTypes.STRING,
-      allowNull: false
     }
   }, {
     classMethods: {

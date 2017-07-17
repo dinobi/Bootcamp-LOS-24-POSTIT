@@ -2,7 +2,7 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    if (!req.body.name) {
+    if (!req.body.groupname) {
       res.status(400).send({ message: 'A group name is required' });
       return;
     }
@@ -12,23 +12,50 @@ export default {
     }
     return models.Group
       .create({
-        name: req.body.name,
+        groupname: req.body.groupname,
+        description: req.body.description,
       })
-      .then(group => res.status(201).send(group))
-      .catch(error => res.status(400).send('Group Name Already Exist'));
+      .then((group) => {
+        models.UserGroup
+      .create({
+        username: req.body.username,
+        groupname: req.params.groupname
+      });
+        res.status(201).send(group);
+      })
+      .catch(error => res.status(400).send(error, 'Group Name Already Exist'));
   },
+  // Display a users created group
   fetch(req, res) {
     return models.Group
       .findAll()
       .then(group => res.status(200).send(group))
       .catch((error) => {
-        console.log(error)
-        res.status(400).send(error)
+        res.status(400).send(error, 'There are no created groups');
       });
   },
+  // Add member to group
+  addMember(req, res) {
+    if (!req.body.username) {
+      res.status(400).send({ message: 'Bad request, *username* is required' });
+      return;
+    }
+    if (!req.body.groupname) {
+      res.status(400).send({ message: 'Bad request, *groupname* is required' });
+      return;
+    }
+    return models.UserGroup
+      .create({
+        username: req.body.username,
+        groupname: req.params.groupname
+      })
+      .then(result => res.status(201).send(result))
+      .catch(error => res.status(400).send({ message: 'group was not found' }));
+  },
+  // Get List of group members
   fetchMembers(req, res) {
     return models.Group
-      .findById(req.params.id, {
+      .findById(req.params.groupname, {
         include: [{
           model: models.User,
           as: 'users',

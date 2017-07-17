@@ -14,20 +14,20 @@ export default (app) => {
   app.get('/api/users/', controllers.user.fetch);
 
   // API route that allow users create broadcast groups
-  app.post('/api/user/create-group/', controllers.group.create);
+  app.post('/api/create-group/', controllers.group.create);
 
   // API route to get list of all groups
   app.get('/api/show-groups/', controllers.group.fetch);
 
-  // API route to get list of all users in group
-  app.get('/api/groups/:id', controllers.group.fetchMembers);
-
   // API route that allows users add other user to a group
-  app.post('/api/groups/:id/user/', controllers.usergroup.addMember);
+  app.post('/api/groups/:groupname/user/', controllers.group.addMember);
+
+  // API route to get list of all users in group
+  app.get('/api/groups/:groupname/user', controllers.group.fetchMembers);  
 
   // API route that allows a logged in user post messages to created groups
-  app.post('/api/groups/:id/send-message/', controllers.message.create);
+  app.post('/api/groups/:groupname/send-message/', controllers.message.create);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:id/show-messages/', controllers.group.messages);
+  app.get('/api/groups/:groupname/show-messages/', controllers.group.messages);
 };

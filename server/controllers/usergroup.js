@@ -2,20 +2,20 @@ import models from '../models';
 
 export default {
   addMember(req, res) {
-    if (!req.body.user_id) {
-      res.status(400).send({ message: 'Bad request, *user_id* is required' });
+    if (!req.body.username) {
+      res.status(400).send({ message: 'Bad request, *username* is required' });
       return;
     }
 
-    if (!req.body.group_id) {
-      res.status(400).send({ message: 'Bad request, *group_id* is required' });
+    if (!req.body.groupname) {
+      res.status(400).send({ message: 'Bad request, *groupname* is required' });
       return;
     }
 
     return models.UserGroup
       .create({
-        user_id: req.body.user_id,
-        group_id: req.params.id
+        username: req.body.username,
+        groupname: req.params.groupname
       })
       .then(result => res.status(201).send(result))
       .catch(error => res.status(400).send(error));
@@ -25,8 +25,8 @@ export default {
       .update({
         update_trigger: Math.floor((Math.random() * 10000) + 1) },
       { where: {
-        user_id: req.body.user_id,
-        group_id: req.body.group_id
+        username: req.body.username,
+        groupname: req.body.groupname
       }
       })
       .then(result => res.statu(202).send(result))

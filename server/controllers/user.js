@@ -32,7 +32,7 @@ export default {
       .then((user) => {
         if (user[0]) {
           res.status(202).send({
-            message: 'Authentication succesful'
+            message: 'Authentication successful'
           });
         } else {
           res.status(404).send({ message: 'User has no account on PostIt'
