@@ -23,7 +23,7 @@ export default (app) => {
   app.post('/api/groups/:groupname/user/', controllers.group.addMember);
 
   // API route to get list of all users in group
-  app.get('/api/groups/:groupname/user', controllers.group.fetchMembers);  
+  app.get('/api/groups/:groupname/users/', controllers.group.fetchMembers);  
 
   // API route that allows a logged in user post messages to created groups
   app.post('/api/groups/:groupname/send-message/', controllers.message.create);

@@ -54,14 +54,9 @@ export default {
   },
   // Get List of group members
   fetchMembers(req, res) {
-    return models.Group
-      .findById(req.params.groupname, {
-        include: [{
-          model: models.User,
-          as: 'users',
-        }],
-      })
-      .then(groups => res.status(200).send(groups))
+    return models.UserGroup
+      .findAll({ where: { groupname: [req.params.groupname] } })
+      .then(result => res.status(200).send(result))
       .catch(error => res.status(400).send({ message: "you've not added any members" } ));
   },
   message(req, res) {
