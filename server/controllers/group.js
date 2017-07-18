@@ -44,13 +44,24 @@ export default {
       res.status(400).send({ message: 'Bad request, *groupname* is required' });
       return;
     }
-    return models.UserGroup
-      .create({
-        username: req.body.username,
-        groupname: req.params.groupname
-      })
-      .then(result => res.status(201).send(result))
-      .catch(error => res.status(400).send({ message: 'group was not found' }));
+    return models.User
+      .findOne({ where: { username: req.body.username } })
+      .then((user) => {
+        // check if the username belongs to a registered user
+        if (!user) {
+          res.status(404).send({
+            message: 'Username not found. User has no PostIt account.'
+          });
+        } else if (user) {
+          return models.UserGroup
+            .create({
+              username: req.body.username,
+              groupname: req.params.groupname
+            })
+            .then(result => res.status(201).send(result))
+            .catch(error => res.status(400).send({ message: 'Bad request' }));
+        }
+      });
   },
   // Get List of group members
   fetchMembers(req, res) {
