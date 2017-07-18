@@ -1,4 +1,4 @@
-
+import jwt from 'jsonwebtoken';
 let token;
 app.use((req, res, next) => {
   token = req.body.token || req.query.token || req.headers['x-access-token'];

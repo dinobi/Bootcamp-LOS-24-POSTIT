@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import md5 from 'md5';
 import models from '../models';
 
 export default {
@@ -9,7 +10,7 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
+        password: md5(req.body.password),
         phone: req.body.phone
       })
       .then(user => res.status(201).send(user))
@@ -27,10 +28,10 @@ export default {
   },
   auth(req, res) {
     models.User
-      .findAll({ where: { username: [req.body.username],
-        password: [req.body.password] } })
+      .findOne({ where: { username: req.body.username,
+        password: md5(req.body.password) } })
       .then((user) => {
-        if (user[0]) {
+        if (user) {
           res.status(202).send({
             message: 'Authentication successful'
           });

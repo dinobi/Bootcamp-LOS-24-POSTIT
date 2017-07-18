@@ -59,31 +59,35 @@ export default {
       .then(result => res.status(200).send(result))
       .catch(error => res.status(400).send({ message: "you've not added any members" } ));
   },
-  message(req, res) {
+  // Send a message to a group
+  createMessage(req, res) {
     return models.Message
       .create({
+        body: req.body.message,
         from_user: req.body.from_user,
         to_group: req.body.to_group,
-        message: req.body.message,
         priority: req.body.priority
       })
-      .then(message => res.status(200).send(message))
-      .catch(error => res.status(404).send(error));
+      .then(message => res.status(201).send(message)) // message created
+      .catch(error => res.status(400).send(error)); // bad request
   },
-  messages(req, res) {
-    models.Message
+  // Get all the messages from a group
+  fetchMessages(req, res) {
+    return models.Message
       .findAll({
-        where: { to_group: [req.params.id] },
+        where: { to_group: [req.params.groupname] },
         attributes: [
-          'id',
-          'message',
+          'body',
           'from_user',
           'to_group',
           'priority',
           'createdAt'
         ],
       })
-      .then(messages => res.status(200).send(messages))
-      .catch(error => res.status(404).send(error));
+      .then(message => res.status(200).send(message))
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send({ message: 'No messages found at this time' })
+      });
   }
 };
