@@ -1,9 +1,12 @@
 export default (sequelize, DataTypes) => {
   const Group = sequelize.define('Group', {
-    name: {
+    groupname: {
       type: DataTypes.STRING,
       allowNull: false, //  dont write to db if data is not supplied
-      unique: true,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false, //  dont write to db if data is not supplied
     }
   }, {
     classMethods: {

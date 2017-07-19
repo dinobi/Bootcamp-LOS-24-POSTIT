@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 
+=======
+import jwt from 'jsonwebtoken';
+import md5 from 'md5';
+>>>>>>> server_side_setup
 import models from '../models';
 
 export default {
@@ -9,33 +14,54 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        phone: req.body.phone
       })
       .then(user => res.status(201).send(user))
       .catch((error) => {
         console.log(error);
         res.status(400).send({ message:
-        'Bad request, the email you entered already exist' });
+        'Bad request, one or more field' +
+        ' already exists or violates allowed input' });
       });
   },
   fetch(req, res) {
     return models.User
       .findAll()
       .then(user => res.status(200).send(user))
-      .catch(error => res.status(400).send(error));
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send({
+          message: 'Bad request, check for correct API call'
+        });
+      });
   },
   auth(req, res) {
     models.User
-      .findAll({ where: { username: [req.body.username],
-        password: [req.body.password] } })
+      .findOne({ where: { username: req.body.username,
+        password: req.body.password } })
       .then((user) => {
-        if (user[0]) {
-          res.status(202).send({
-            message: 'Authentication succesful'
+        if (!user) {
+          res.status(404).send({
+            message: 'Authentication failed. User not found'
           });
-        } else {
-          res.status(404).send({ message: 'User has no account on PostIt'
-          });
+        } else if (user) {
+          // check if password matches
+          if (user.password !== req.body.password){
+            res.status(404).send({
+              message: 'Authentication failed. Incorrect password' });
+          } else {
+            // User is found and password is correct
+            // create a token
+            const token = jwt.sign({ data: user }, 'PrivateKey', {
+              expiresIn: '4h' // expires in 4 hours
+            });
+            // return the information including token in JSON format
+            res.status(200).send({
+              message: 'Authentication successful', authToken: token
+            });
+            res.status(400).send({ message: 'Bad request' });
+          }
         }
       });
   }

@@ -18,7 +18,7 @@ routes(app);
 
 // Default catch-all route that sends back a success message.
 app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to Andela Bootcamp 24 - PostIt App.',
+  message: 'Welcome to Andela Bootcamp 24 - PostIt App. Make the right Api call to start enjoying!',
 }));
 
 // Default catch-all route that sends back an error message.

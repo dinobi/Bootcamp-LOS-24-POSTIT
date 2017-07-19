@@ -1,7 +1,5 @@
 import user from './user';
 import group from './group';
-import message from './message';
-import usergroup from './usergroup';
 
-const controllers = { user, group, message, usergroup };
+const controllers = { user, group };
 export default controllers;

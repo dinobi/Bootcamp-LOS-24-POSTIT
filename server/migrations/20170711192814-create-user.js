@@ -21,7 +21,8 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        primaryKey: true
       },
       email: {
         type: Sequelize.STRING,
@@ -31,6 +32,12 @@ module.exports = {
         type: Sequelize.STRING,
         validate: {
           len: [2, 10],
+        }
+      },
+      phone: {
+        type: Sequelize.STRING,
+        validate: {
+          len: [11, 13],
         }
       },
       createdAt: {
@@ -43,6 +50,6 @@ module.exports = {
       }
     }),
   down: (queryInterface /* , Sequelize */) => {
-    queryInterface.dropTable('User');
+    queryInterface.dropTable('Users');
   }
 };

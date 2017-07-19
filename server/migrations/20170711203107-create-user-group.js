@@ -1,19 +1,16 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('UserGroup', {
+    queryInterface.createTable('UserGroups', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      username: {
         type: Sequelize.STRING
       },
-      group_id: {
-        type: Sequelize.STRING
-      },
-      update_trigger: {
+      groupname: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -27,6 +24,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , Sequelize*/) => {
-    queryInterface.dropTable('UserGroup');
+    queryInterface.dropTable('UserGroups');
   }
 };

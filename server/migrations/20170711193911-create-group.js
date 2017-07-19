@@ -7,9 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      groupname: {
         type: Sequelize.STRING,
-        unique: true
+      },
+      description: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -22,6 +24,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , Sequelize*/) => {
-    queryInterface.dropTable('Group');
+    queryInterface.dropTable('Groups');
   }
 };
