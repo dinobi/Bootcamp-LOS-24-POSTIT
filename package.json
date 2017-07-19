@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/dinobi/Bootcamp-LOS-24-POSTIT#readme",
   "devDependencies": {
+    "babel-plugin-istanbul": "^4.1.4",
     "babel-preset-env": "^1.6.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "nyc": "^11.0.3"
