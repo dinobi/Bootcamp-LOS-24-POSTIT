@@ -1,1 +1,12 @@
 language: node_js
+node_js:
+    - "6.11.0"
+branches:
+  only:
+    - master
+    - server_side_setup
+script: npm test
+services:
+  - postgresql
+install: 
+  - npm install
