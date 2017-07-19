@@ -54,7 +54,7 @@ export default {
             // User is found and password is correct
             // create a token
             const token = jwt.sign({ data: user }, 'PrivateKey', {
-              expiresIn: '24h' // expires in 4 hours
+              expiresIn: '24h' // expires in 24 hours
             });
             // return the information including token in JSON format
             res.status(200).send({
