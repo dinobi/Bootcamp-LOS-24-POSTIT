@@ -43,7 +43,8 @@ describe('PostIt Tests: ', () => {
           lastname: 'lastname',
           username: 'username',
           email: 'test@user.com',
-          password: 'password'
+          password: 'password',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.email.should.equal('test@user.com');

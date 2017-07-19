@@ -38,4 +38,4 @@ I (Dinobi) took on the development of this project as part of the requirements t
 > - Setup Postgres
 > - setup your db with the settings in `server/config/config.json`
 > - Run `$ sequelize db:migrate`
-> - Run `npm run exec` to start server
+> - Run `npm start exec` to start server
