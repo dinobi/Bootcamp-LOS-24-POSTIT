@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-
-=======
 import jwt from 'jsonwebtoken';
 import md5 from 'md5';
->>>>>>> server_side_setup
+import bcrypt from 'bcrypt';
 import models from '../models';
 
 export default {
@@ -14,10 +11,11 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: md5(req.body.password),
+        password: req.body.password,
         phone: req.body.phone
       })
-      .then(user => res.status(201).send(user))
+      .then(user => res.status(201)
+      .send({ message: 'User account successfully created.', UserData: user }))
       .catch((error) => {
         console.log(error);
         res.status(400).send({ message:
@@ -27,8 +25,10 @@ export default {
   },
   fetch(req, res) {
     return models.User
-      .findAll()
-      .then(user => res.status(200).send(user))
+      .findAll({ attributes:
+        ['firstname', 'lastname', 'email', 'phone', 'createdAt', 'updatedAt']
+      })
+      .then(users => res.status(200).send(users))
       .catch((error) => {
         console.log(error);
         res.status(400).send({
@@ -54,7 +54,7 @@ export default {
             // User is found and password is correct
             // create a token
             const token = jwt.sign({ data: user }, 'PrivateKey', {
-              expiresIn: '4h' // expires in 4 hours
+              expiresIn: '24h' // expires in 4 hours
             });
             // return the information including token in JSON format
             res.status(200).send({
