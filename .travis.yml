@@ -1,4 +1,8 @@
 language: node_js
-branches: 
-  only:
-      - master
+node_js:
+    - "6.11.0"
+script: npm test
+services:
+  - postgresql
+cache: 
+  - npm install

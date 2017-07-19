@@ -1,4 +1,3 @@
-https://travis-ci.org/travis-ci/travis-web.svg?branch=master
 # Bootcamp-LOS-24-PostIt
 I (Dinobi) took on the development of this project as part of the requirements to become a fellow at Andela  https://andela.com/. I thank Phil, Victoria, Tracy, Femi and the rest of the BFA/LFA's of bootcamp-los-24 for all their support
 
