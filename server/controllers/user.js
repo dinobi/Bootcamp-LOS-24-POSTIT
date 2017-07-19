@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import md5 from 'md5';
+import bcrypt from 'bcrypt';
 import models from '../models';
 
 export default {
@@ -10,10 +11,11 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: md5(req.body.password),
+        password: req.body.password,
         phone: req.body.phone
       })
-      .then(user => res.status(201).send(user))
+      .then(user => res.status(201)
+      .send({ message: 'User account successfully created.', UserData: user }))
       .catch((error) => {
         console.log(error);
         res.status(400).send({ message:
@@ -23,8 +25,10 @@ export default {
   },
   fetch(req, res) {
     return models.User
-      .findAll()
-      .then(user => res.status(200).send(user))
+      .findAll({ attributes:
+        ['firstname', 'lastname', 'email', 'phone', 'createdAt', 'updatedAt']
+      })
+      .then(users => res.status(200).send(users))
       .catch((error) => {
         console.log(error);
         res.status(400).send({
