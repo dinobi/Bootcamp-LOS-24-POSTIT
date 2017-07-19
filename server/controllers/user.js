@@ -43,11 +43,11 @@ export default {
       .then((user) => {
         if (!user) {
           res.status(404).send({
-            message: 'Authentication failed. User not found'
+            message: 'Authentication failed. Username or password incorrect'
           });
         } else if (user) {
           // check if password matches
-          if (user.password !== req.body.password){
+          if (user.password !== req.body.password) {
             res.status(404).send({
               message: 'Authentication failed. Incorrect password' });
           } else {

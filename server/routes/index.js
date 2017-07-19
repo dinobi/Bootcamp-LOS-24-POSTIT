@@ -7,7 +7,7 @@ export default (app) => {
   // API routes for users to create an account
   app.post('/api/user/signup/', controllers.user.create);
 
-  //Api route for user to login to an account
+  // Api route for user to login to an account
   app.post('/api/user/signin/', controllers.user.auth);
 
   // API route to get list of all users
