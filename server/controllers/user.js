@@ -10,7 +10,7 @@ export default {
         lastname: req.body.lastname,
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
+        password: md5(req.body.password),
         phone: req.body.phone
       })
       .then(user => res.status(201).send(user))
