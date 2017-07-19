@@ -50,5 +50,22 @@ describe('PostIt Tests: ', () => {
           done();
         });
     });
+    it('POST /api/user/signup/ creates a new user', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'fistname',
+          lastname: 'lastname',
+          username: 'username',
+          email: 'test@user.com',
+          password: 'password',
+          phone: '08032952998'
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
   });
 });
