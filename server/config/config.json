@@ -3,7 +3,7 @@
     "secret": "PrivateKey",
     "username": "postgres",
     "password": "Andela",
-    "database": "postit-db",
+    "database": "postgres",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
