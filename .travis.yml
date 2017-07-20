@@ -11,7 +11,7 @@ script: npm test
 services:
   - postgresql
 before_script:
-  - createuser postgres -s -U postgres
+  - createuser Dino -s -U Dino
   - createdb postit-db --username=postgres
   - sequelize db:migrate
 after_success:
