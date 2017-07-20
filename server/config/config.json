@@ -15,7 +15,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "postgres",
+    "password": "Andela",
+    "database": "postit-db",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   }
 }
