@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT.svg?branch=master)](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT) [![Coverage Status](https://coveralls.io/repos/github/dinobi/Bootcamp-LOS-24-POSTIT/badge.svg?branch=master)](https://coveralls.io/github/dinobi/Bootcamp-LOS-24-POSTIT?branch=master) [![Code Climate](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT/badges/gpa.svg)](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT)
+[![Build Status](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT.svg?branch=master)](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT) [![Coverage Status](https://coveralls.io/repos/github/dinobi/Bootcamp-LOS-24-POSTIT/badge.svg?branch=master)](https://coveralls.io/github/dinobi/Bootcamp-LOS-24-POSTIT?branch=master) [![Code Climate](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT/badges/gpa.svg)](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT) [![dependencies Status](https://david-dm.org/github/dinobi/Bootcamp-LOS-24-POSTIT/status.svg)](https://david-dm.org/github/dinobi/Bootcamp-LOS-24-POSTIT)
 
 
 
