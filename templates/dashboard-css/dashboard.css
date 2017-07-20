@@ -14,12 +14,22 @@
 	aside.dashboard-menu {
 	    padding: 0px 60px;
 	    text-align: left;
-	    overflow: hidden;
+		overflow: hidden;
+		margin-bottom: 30px;
 	}
 
 	.dashboard-menu h4 {
 		margin: 0px 0px 30px 20px;
 	}
+
+@media (max-width:1080px){
+	aside.dashboard-menu {
+	    padding: 0px 30px;
+	    text-align: left;
+		overflow: hidden;
+		margin-bottom: 30px;
+	}
+}
 
 	.dashboard-menu li a {
 	    color: #fff;

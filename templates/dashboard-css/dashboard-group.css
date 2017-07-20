@@ -17,18 +17,26 @@
 	}
 
 	.dashboard-group .row .col-xs-4,.dashboard-group .row .col-xs-8 {
-	  position: relative;
-	  color: #fff;
-	  text-align: left;
-	  display: inline-block;
-	  margin-bottom: 1%;
-	  overflow: hidden; 
-	  float: none;
 	  box-shadow: 0 0 4px #000;
 	  -webkit-transition: all .3s ease-in-out;
 	  -moz-transition: all .3s ease-in-out;
 	  transition: all .3s ease-in-out;		
 	}
+
+	@media (max-width: 575px){
+.dashboard-group .row .col-xs-4,.dashboard-group .row .col-xs-8 {
+		position: relative;
+		width: 100%;
+		padding: 30px;
+		text-align: center;
+	  color: #fff;
+		border-radius: 3px;
+	  display: block;
+	  margin-bottom: 2%;
+	  overflow: hidden; 
+	  float: none;	
+	}
+}
 
 
 @media (min-width: 575px) {
