@@ -1,8 +1,8 @@
 	.app-btn {
 		position: relative;
 		display: inline-block;
+		font-family: "Open Sans", sans-serif;
 		padding: 12px 10px;
-		padding: 1.2rem 1rem;
 		min-width: 120px;
 		border-radius: 5px;
 		font-weight: 700;
@@ -58,12 +58,12 @@
 		border: 2px solid#388E3C;
 	}
 	.btn-login {
-		background: #2196F3;		
-		border: 2px solid #2196F3;		
+		background: #FFC107;		
+		border: 2px solid #FFC107;	
 	}
 	.btn-login:hover {
-		background: #1976D2;
-		border: 2px solid#1976D2;
+		background: #FFA000;
+		border: 2px solid #FFA000;
 	}
 	.btn-info {
 		background: #FFC107;

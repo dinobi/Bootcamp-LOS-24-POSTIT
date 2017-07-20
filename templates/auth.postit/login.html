@@ -15,29 +15,28 @@
 	<section id="app" class="container-fluid">		
 		<header id="auth-header" class="group">						
 			<nav class="group">
-				<a class="app-name" href="../index.html"><img src="../images/postit-logo.png" title="PostIt"></a>
+				
 			</nav>
 		</header>
-		<form id="auth-form" method="post" class="group">
-		<header class="row">
-			<div class="col-xs-12 auth-tab login">LOGIN</div>
-		</header>
-		<section id="auth-form-control">
-		<!-- login form -->
-			<div id="login">
-				<h5 class="form-brief">Log Into Your Account and Start Messaging</h5>
-				<input class="email" type="text" name="email" placeholder="Enter your email address">
-				<input class="password" type="text" name="password" placeholder="Enter your strong password">					
-			    <button class="app-btn btn-auth btn-login">Log in</button>
-				<p class="form-brief">Or log in with any of this services</p>
-				<div class="row">
-					<div class="col-xs-6 google-auth"><i class="fa fa-google-plus"></i></div>
-					<div class="col-xs-6 facebook-auth"><i class="fa fa-facebook"></i></div>
-				</div>
+
+		<!-- User Authentication from -->
+		<form id="auth-form">
+			<a href="../index.html"><img class="form-logo" src="../images/postit-icon.png"></a>
+			<p class="form-brief">Log Into Your Account and Start Messaging</p>
+			<div class="form-group">
+				<input type="email" class="form-control" id="username" placeholder="Enter your email address">
 			</div>
-		</section>
-		<small>Made with &hearts;</small>
-		</form>	
+			<div class="form-group">
+				<input type="password" class="form-control" id="password" placeholder="Enter your strong password">
+			</div>
+			<button type="submit" class="app-btn btn-auth btn-login">Submit</button>
+			<p class="form-brief">Or log in with any of this services</p>
+			<div class="row">
+				<div class="col-xs-6 google-auth"><i class="fa fa-google-plus"></i></div>
+				<div class="col-xs-6 facebook-auth"><i class="fa fa-facebook"></i></div>
+			</div>
+		</form>
+
 	</section>	
 	</body>
 </html>
