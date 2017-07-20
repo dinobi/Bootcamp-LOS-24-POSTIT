@@ -11,8 +11,7 @@ script: npm test
 services:
   - postgresql
 before_script:
-  - createuser Dinobi
-  - createdb postit-db --username=Dinobi
+  - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate
 after_success:
 - npm run coveralls
