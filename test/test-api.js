@@ -170,5 +170,53 @@ describe('PostIt Tests: ', () => {
           done();
         });
     });
+    it('considers phone numbers less that 11 as invalid', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '0803295299',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('considers phone numbers more than 13 as invalid', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '23408032952998',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('considers phone numbers up to 11 as valid', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '08032952998',
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+    it('considers phone numbers up to 13 as valid', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '2348032952998',
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
   });
 });
