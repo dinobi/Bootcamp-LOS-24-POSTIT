@@ -62,5 +62,41 @@ describe('PostIt Tests: ', () => {
           done();
         });
     });
+    it('creates a unique email per user', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          email: 'test@user.com',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow numbers in firstname', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'fistname12',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow numbers in lastname', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          lastname: 'lastname34',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
   });
 });
