@@ -98,5 +98,77 @@ describe('PostIt Tests: ', () => {
           done();
         });
     });
+    it('does not allow empty field for firstname', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for lastname', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          lastname: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for username', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          username: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for email', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          email: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for password', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          password: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for phone number', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
   });
 });
