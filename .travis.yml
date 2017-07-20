@@ -6,7 +6,7 @@ install:
 branches:
   only:
     - master
-    - server_side_setup
+    - Test_cases
 script: npm test
 services:
   - postgresql
