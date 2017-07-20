@@ -3,6 +3,10 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import routes from './server/routes';
 
+module.exports = process.env.POSTIT_COV
+  ? require('./test/test-api')
+  : require('./test/test-api');
+
 // Set express app
 const app = express();
 
