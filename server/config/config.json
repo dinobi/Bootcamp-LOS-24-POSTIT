@@ -15,10 +15,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "auxtpnwe",
-    "password": "KYs5AX1FatIBRvm8NDV8MlLqhgurJ8Or",
-    "database": "auxtpnwe",
-    "host": "echo.db.elephantsql.com:5432",
+    "username": "postgres",
+    "password": "Andela",
+    "database": "postit-db",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   }
 }
