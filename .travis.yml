@@ -1,6 +1,8 @@
 language: node_js
 node_js:
     - "6.11.0"
+install:
+    - npm install
 branches:
   only:
     - master
@@ -8,3 +10,11 @@ branches:
 script: npm test
 services:
   - postgresql
+before_script:
+  - createuser postgres -s -U postgres
+  - createdb postit-db --username=postgres
+  - sequelize db:migrate
+after_success:
+- npm run coveralls
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=1LqYqgo8Da9hnzuSe1AV8P0SkIuilXTSu
