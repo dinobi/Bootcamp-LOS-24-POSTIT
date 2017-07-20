@@ -15,7 +15,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "auxtpnwe",
+    "password": "KYs5AX1FatIBRvm8NDV8MlLqhgurJ8Or",
+    "database": "auxtpnwe",
+    "host": "echo.db.elephantsql.com:5432",
     "dialect": "postgres"
   }
 }
