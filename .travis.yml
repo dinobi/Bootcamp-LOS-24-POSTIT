@@ -8,5 +8,3 @@ branches:
 script: npm test
 services:
   - postgresql
-install: 
-  - npm install
