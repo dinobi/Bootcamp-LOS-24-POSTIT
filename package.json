@@ -10,9 +10,7 @@
     "build": "babel src -d lib",
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
-    "test-nyc": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "test": "nodeunit test",
-    "coveralls": "jscoverage test && POSTIT_COV=1 nodeunit --reporter=lcov test | coveralls"
+    "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register"
   },
   "repository": {
     "type": "git",
