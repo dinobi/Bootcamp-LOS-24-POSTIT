@@ -2,48 +2,60 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8.0">
-		<title>PostIt | authentication register</title>
+		<title>PostIt | group messaging app</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link href='../base.css' rel='stylesheet' type='text/css'>
+		<link href='base.css' rel='stylesheet' type='text/css'>
 		<script src="../client/jquery-1.11.3.min.js"></script>
 		<script src="../client/main.js"></script>
 	</head>
 	
 	<body id="#Top">
-	<section id="app" class="container-fluid">		
-		<header id="auth-header" class="group">						
-			<nav class="group">
-				<a class="app-name" href="../index.html"><img src="../images/postit-logo.png" title="PostIt"></a>
-			</nav>
+	<section id="app" class="container-fluid">
+		<header id="page-header" class="group">
+						
+						<nav id="main-nav" class="group">
+							<a class="app-name" href="index.html"><img src="images/postit-logo.png" title="PostIt"></a>
+							<a icon-label="mobile-menu" class="nav-mobile">
+							<span></span>
+							<span></span>
+							<span></span>
+							</a>
+							<ul class="nav-list">
+							<li class="nav-item"><a href="#"><i class="fa fa-search"></i>&nbsp;Search PostIt</a></li><!--
+							--><li class="nav-item"><a href="auth.postit/login.html">Login</a></li><!--
+							--><li class="nav-item"><a href="auth.postit/register.html">Register</a></li><!--
+							--><li class="nav-item"><button class="app-btn btn-transparent">Create a new group</button></li>
+							</ul>
+						</nav>
+						<!-- Set Up Responsive Mobile Navigation -->
+						<nav id="mobile-nav"></nav>
 		</header>
-		<form id="auth-form" method="post" class="group">
-		<header class="row">
-			<div class="col-xs-12 auth-tab register">REGISTER</div>
-		</header>
-		<section id="auth-form-control">
-		<!-- registration form -->
-			<div id="registration">
-				<h5 class="form-brief">Create an account, and this account will be used for all features on the platform</h5>
-				<div class="row">
-					<div class="col-xs-6"><input class="first-name" type="text" name="name" placeholder="Enter your first name"></div>
-					<div class="col-xs-6"><input class="last-name" type="text" name="name" placeholder="Enter your last name"></div>
-				</div>
-				<input class="email" type="text" name="email" placeholder="Enter your email address">
-				<div class="row">
-					<div class="col-xs-12"><input class="password" type="text" name="password" placeholder="Enter a strong password"></div>
-				</div>
-				<button class="app-btn btn-auth btn-reg">Register</button>
-				<p class="form-brief">Or sign up with any of this services</p>
-				<div class="row">
-					<div class="col-xs-6 google-auth"><i class="fa fa-google-plus"></i></div>
-					<div class="col-xs-6 facebook-auth"><i class="fa fa-facebook"></i></div>
-				</div>
-			</div>
+		<section class="app-landing group">
+		<div class="headline">
+			<h1 class="heading">Communicate Group Messages Instantly</h1>
+			<h6 class="brief">PostIt is built to allow family, friends and colleagues meetup in groups to share messages in a fun way whenever they want.</h6>
+			<div class="quick-access">
+				<a href="auth.postit/register.html">
+				<button class="app-btn btn-solid">Create an account</button>
+				</a>
+				<p>Already joined PostIt? <a href="auth.postit/login.html">Sign in</a></p></div>
+		</div>
+		<figure id="landing-image"><img src="images/postit-landing.png" title="image of computer and mobile"></figure>
 		</section>
-		<small>Made with &hearts;</small>
-		</form>	
+		<footer class="main-footer">
+			<small id="copywrite" class="group">&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
+			<nav>
+				<ul>					
+					<li><a><i class="fa fa-google-plus"></i></a></li>					
+					<li><a><i class="fa fa-github"></i></a></li>
+					<li><a><i class="fa fa-facebook"></i></a></li>
+					<li><a><i class="fa fa-twitter"></a></i></li>
+				</ul>
+			</nav>
+		</footer>
+		<script src="scripts/components.js" type="text/jsx"></script>
 	</section>	
 	</body>
 </html>
