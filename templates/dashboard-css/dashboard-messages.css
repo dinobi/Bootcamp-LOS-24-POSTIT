@@ -13,24 +13,30 @@
 
 .message-board {
 	border-radius: 5px;
-	width: 80%; 
 	min-height: 400px;
-	background: #000;
-	padding: 20px;
+	padding: 20px 0;
 	margin: 30px auto;
 	box-shadow: 0 0 4px #000;
 }
+@media (max-width: 767px){
+	.message-board {
+	width: 100%;
+	}
+}
 .postlogs {
-	padding: 10px;
 	width: 100%;
 	height: 450px;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
-.postlogs::-webkit-scrollbar {
-	width: 10px;
+.postlogs::-webkit-scrollbar,
+.postlogs::-moz-scrollbar,
+.postlogs::scrollbar  {
+	width: 5px;
 }
-.postlogs::-webkit-scrollbar-thumb {
+.postlogs::-webkit-scrollbar-thumb,
+.postlogs::-moz-scrollbar-thumb,
+.postlogs::scrollbar-thumb {
 	width: 10px;
 	background: rgba(255,193,7,.20);
 	border-radius: 20px;
@@ -39,30 +45,40 @@
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
-	margin-bottom: 20px;
+	padding: 10px 20px;
+}
+.post:hover {
+	background: #000;
 }
 .post .user-photo {
 	width: 60px;
 	height: 60px;
 	background: #ccc;
-	border-radius: 50%;
+	border-radius: 10%;
 }
 .post .post-message {
 	width: 80%;
-	padding: 15px;
-	margin: 5px 10px;
+	padding: 0 15px;
+	margin: 0 10px;
 	color: #fff;
 	font-size: 20px;
-	border-radius: 10px;
 }
-.others .post-message {
-	background: #4CAF50;
+.post-message h6 {
+	font-weight: 900;
+	font-size: 14px;
 }
-.self .post-message {
-	 background: #2196F3;
+.post-message small {
+	font-size: 12px;
+	color: #616161;
+}
+.post-message h6, .post-message small {
+	display: inline-block
+}
+.post-message p {
+	color: #bdbdbd;
 }
 .compose-form {
-	margin: 20px auto 0 auto;
+	margin: 20px 0 0 20px;
 	display: flex;
 	align-items: flex-start;
 }
