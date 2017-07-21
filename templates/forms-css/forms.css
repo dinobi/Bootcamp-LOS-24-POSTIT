@@ -8,47 +8,52 @@
 		color: #212121;
 		border-radius: 5px;
         margin: 0 auto;
-		margin-bottom: 60px;
+		margin-bottom: 30px;
 		overflow: hidden;
+	}
+	.external {
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	.external a {
+		font-size: 12px;
 	}
 	.form-logo {
 		margin-bottom: 15px;
 	}
 	.form-brief {
+		color: #000;
 		margin-bottom: 15px;
 		font-size: 14px;
 		font-family: "Open Sans", sans-serif;
 	}
-	.form-brief {
-		color: #000;
-	}
 	#auth-form input {
 		display: block;
 		height: 44px;
-		font-family: "Open Sans";
+		font-family: "Open Sans", sans-serif;
 		font-weight: 400;
 		font-size: 12px;
 		color: #000;
 		margin-bottom: 30px;
 	}
 	#auth-form input:focus {
-		background: #FFF8E1;
+		border-color: #FFA000;
+		box-shadow: 0 0 10px #FFD54F;
 	}
 	
 	.google-auth, .facebook-auth {
-		color: #757575;
+		color: #FFC107;
 		padding: 10px 0;
-		border: 1px solid transparent;
-		border-radius: 3px;
+		border-radius: 5px;
 		font-size: 18px;
 	}
 	.google-auth:hover {
-		color: #F44336;
-		border: 1px solid #F44336;
+		background: #F44336;
+		color: #fff;
 	}
 	.facebook-auth:hover {
-		color: #01579B;
-		border: 1px solid #01579B;
+		background: #01579B;
+		color: #fff;
 	}
 
 	/** compose message button **/
