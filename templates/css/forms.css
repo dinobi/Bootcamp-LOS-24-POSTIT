@@ -27,16 +27,21 @@
 	}
 
 	#auth-form {
-		padding:15px 30px;
+		padding:15px 40px;
 		background: #fff;
-		max-width: 400px;
-        min-height: 400px;
+		max-width: 480px;
+        min-height: 500px;
 		color: #212121;
-		border-radius: 3px;
+		border-radius: 1px;
         margin: 60px auto 30px auto;
 		overflow: hidden;
 		text-align: center;
 	}
+@media (max-width:992px){
+	#auth-form {
+		padding: 30px;
+	}
+}
 	.external {
 		margin: 0 auto;
 		max-width: 400px;
@@ -49,13 +54,14 @@
 	}
 	.form-brief {
 		color: #000;
-		margin-bottom: 30px;
+		margin-bottom: 40px;
 		font-size: 14px;
+		font-weight: 700;
 		font-family: "Open Sans", sans-serif;
 	}
 	#auth-form input {
 		display: block;
-		height: 44px;
+		height: 60px;
 		font-family: "Open Sans", sans-serif;
 		font-weight: 400;
 		font-size: 14px;
