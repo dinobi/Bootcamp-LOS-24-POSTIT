@@ -19,15 +19,21 @@
 			<nav class="amber">
 				<div class="container nav-wrapper">
 					<a href="index.html" class="postit-logo"><img src="images/postit-logo.png" title="PostIt"></a>
-					<a></a>
-					<ul class="right hide-on-med-and-down">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Login</a></li>
-						<li><a href="#">Register</a></li>
-						<li><a href="#"><button class="btn btn-create">Create a new group</button></a></li>
+					<a icon-label="mobile-menu" class="nav-mobile">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<ul class="nav-list right hide-on-med-and-down">
+						<li class="nav-item"><a href="#">About</a></li>
+						<li class="nav-item"><a href="#">Login</a></li>
+						<li class="nav-item"><a href="#">Register</a></li>
+						<li class="nav-item"><a href="#"><button class="btn btn-create">Create a new group</button></a></li>
 					</ul>
 				</div>
-				<div id="mobile-nav"></div>
+				<div class="mobile-nav">
+					<div class="container" id="mobile-nav"></div>					
+				</div>
 			</nav>
 		</header>
 			<main class="container">			
@@ -60,6 +66,7 @@
 			
 	<!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>	
+	  <script type="text/javascript" src="js/materialize.min.js"></script>
+	  <script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
