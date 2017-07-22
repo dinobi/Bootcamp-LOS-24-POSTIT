@@ -67,7 +67,8 @@
 		font-size: 14px;
 	}
 	#auth-form .input-field input[type=email] + label,
-	#auth-form .input-field input[type=password] + label {
+	#auth-form .input-field input[type=password] + label,
+	#auth-form .input-field input[type=text] + label {
 		color: #000 !important;
 		font-size: 14px;	 
 	}
