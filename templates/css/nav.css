@@ -1,0 +1,88 @@
+nav {
+  color: #000;
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+}
+
+nav .postit-logo {
+  position: absolute;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 0;
+  padding: 1rem 0;
+	}
+.postit-logo img {
+  height: 3.5rem;
+	}
+
+nav ul a {
+  font-size: 1.8rem;
+}
+nav ul a:hover {
+  color: #fff;
+}
+
+
+nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
+  margin-top: -2px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+nav ul a:hover {
+  background-color: #FFA000;
+}
+nav li:last-child a:hover {
+  background-color: #ffc107;
+}
+
+nav ul.left {
+  float: left;
+}
+
+
+	.page-footer {
+		background: transparent;
+		color: #616161;
+		padding-top: 10px;
+		
+	}
+	.page-footer .divider {
+		background-color: #FFEB3B;
+	}
+	.page-footer i{
+		font-size: 24px;
+	}
+	.page-footer i:hover {
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
+	.page-footer li {
+		display: inline-block;
+		margin-right: 20px;
+		margin-right: 2rem;
+	}
+	.page-footer li:last-child {
+		margin-right: 0;
+	}
+	.page-footer .copyright {
+		min-height: 50px;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+			-ms-flex-align: center;
+				align-items: center;
+		padding: 10px 0px;
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+@media (max-width:420px){
+	.page-footer .left {
+		float: none !important;
+	}
+	ul.right {
+		float: none !important;
+	}
+}
