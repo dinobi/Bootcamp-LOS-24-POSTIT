@@ -76,4 +76,7 @@ $(document).ready(() => {
       });
     }
   }); // end of wiki search
+
+  // Character counter for auth form
+  $('input#password').characterCounter();
 });

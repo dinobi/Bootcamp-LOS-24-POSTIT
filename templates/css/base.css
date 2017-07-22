@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("reset-css/reset.css");
 @import url("../fonts/typography.css");
-@import url("forms-css/forms.css");
-@import url("forms-css/search-form.css");
+@import url("forms.css");
+@import url("search-form.css");
 @import url("buttons.css");
 @import url("dashboard-css/dashboard.css");
 @import url("dashboard-css/dashboard-myspace.css");
@@ -19,6 +19,14 @@ body {
 	color: #fff;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
 }
 	.headline {
 		margin-top: 80px;

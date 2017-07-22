@@ -1,0 +1,54 @@
+<!Doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8.0">
+		<title>PostIt | authentication login</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<!--Import Google Icon Font-->
+      	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+		<!--Import postit base css -->
+		<link href='../css/base.css' rel='stylesheet' type='text/css'>
+      	<!--Let browser know website is optimized for mobile-->
+      	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	
+	<body id="#Top">
+	<section class="container">
+
+		<!-- User Authentication from -->
+		<form id="auth-form">
+			<a href="../index.html"><img class="form-logo" src="../images/postit-icon.png"></a>
+			<p class="form-brief">Login to your account:</p>  		
+			<div class="input-field">				
+				<input type="email" class="validate" id="email" placeholder="Enter your email address">
+				<label class="active" for="email">Email</label>
+			</div>
+			<div class="input-field">
+				<input type="password" class="validate" id="password" placeholder="Enter your password (4 - 10 characters long)">
+				<label class="active" for="password">Password</label>
+			</div>
+			<button type="submit" class="btn btn-login">Submit</button>
+			<p class="form-brief">Or login with any of this services:</p>
+			<div class="external">
+				<div class="row">
+					<div class="col s6 md6 google-auth"><i class="fa fa-google-plus"></i></div>
+					<div class="col s6 md6 facebook-auth"><i class="fa fa-facebook"></i></div>
+				</div>
+			</div>
+		</form>
+		<section class="external">
+		<div class="row">
+			<div class="col s6 md6"><a><i class="material-icons">memory</i>You forgot password?</a></div>
+			<div class="col s6 md6"><a href="register.html"><i class="material-icons">lock</i>Don't have an account?</a></div>
+		</div>
+		</section>
+
+	</section>
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>

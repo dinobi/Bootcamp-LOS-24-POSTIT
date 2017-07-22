@@ -1,12 +1,12 @@
-	.btn-login {
-		background: #FFC107;	
-	}
-	.btn-login:hover {
-		background: #FFA000;
-	}
-	.btn-login:focus {
-		background: #FFA000;
-	}
+.btn-login {
+	background: #FFC107;	
+}
+.btn-login:hover {
+	background: #FFA000;
+}
+.btn-login:focus {
+	background: #FFA000;
+}
 
 .btn-create, .btn-large {
   text-decoration: none;
