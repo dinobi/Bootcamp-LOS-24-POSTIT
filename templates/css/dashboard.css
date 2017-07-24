@@ -1,26 +1,73 @@
-	.dashboard-logo	img {
-		height: 2rem;
-	}
-
 	#dashboard-ui {
 		width: 100%;
         margin: 0 auto;
 		overflow: hidden;
-	}	
-	.dashboard-menu {
-	    padding: 15px 0;
-		text-align: left;
-		min-height: 84vh;
-		overflow: hidden;
-		margin: 0 -0.75rem;
-		background-color: #454545 !important;
-
 	}
-	.dashboard-content {
-		padding: 15px;
+	.dashboard-menu {
 		text-align: left;
-		min-height: 84vh;
-		overflow: hidden;
+		height: 85vh;
+		overflow: auto;
+		margin: 0 -0.75rem;
+		background-color: #212121!important;
+	}
+	.dashboard-menu .menu-nav {
+		margin: 0;
+		padding: 0;
+		height: 66vh;
+		overflow: auto;
+	}
+	.dashboard-menu .my-tab,  .dashboard-menu .utility {
+		height: 62px;
+		background-color: transparent;
+		text-align: center;
+		padding: 15px;
+	}
+	.dashboard-menu .my-tab:hover,  .dashboard-menu .utility:hover {
+		background-color: #000; 
+	}
+	.dashboard-menu .utility {
+		border-top: 1px solid #424242; 
+	}
+	.dashboard-menu .utility:hover {
+		background-color: #000;
+		border-top: 1px solid #000;
+	}
+
+	.dashboard-content {
+		padding: 15rem;
+		text-align: left;
+		height: 85vh;		
+		overflow: auto;
 		margin: 0 -0.75rem;
 		background-color: #fff !important;
+		transition: all .5s ease;
+		-moz-transition: all .5s ease;
+		-webkit-transition: all .5s ease;
 	}
+	
+	.dashboard-menu li a {
+	    color: #fff;
+		text-decoration: none;
+		min-width: 200px;
+		padding: 14px 20px;
+		padding: 1.4rem 2rem;
+	    display: block;
+	    font-size: 14px;
+	}
+	.dashboard-menu li a:hover {
+	    color: #fff;
+	    background-color: #424242;	    
+	}
+	.dashboard-menu li a.active {
+		background: #FFC107;
+		background: linear-gradient(#FFC107, #FFA000);
+		background: -moz-linear-gradient(#FFC107, #FFA000);
+		background: -webkit-linear-gradient(#FFC107, #FFA000);
+	}
+	.dashboard-menu li a.active:hover {
+	    background: #FFC107;
+		background: linear-gradient(#FFC107, #FFA000);
+		background: -moz-linear-gradient(#FFC107, #FFA000);
+		background: -webkit-linear-gradient(#FFC107, #FFA000);
+	}
+	
