@@ -2,110 +2,122 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8.0">
-		<title>PostIt | dashboard group accessibility</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1" rel="stylesheet">
+		<title>PostIt | my dashboard</title>
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link href='../base.css' rel='stylesheet' type='text/css'>
-		<script src="../../client/jquery-1.11.3.min.js"></script>
-		<script src="../../client/main.js"></script>
+		<!--Import Google Icon Font-->
+      	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	 <!-- Compiled and minified CSS -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+		<!--Import postit base css -->
+		<link href='../css/base.css' rel='stylesheet' type='text/css'>
+      	<!--Let browser know website is optimized for mobile-->
+      	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	</head>
 	
-	<body id="#Top">
-	<section class="container-fluid">
-		<section id="dashboard-ui">
-		<div class="row">
-			<aside class="col-sm-3 dashboard-menu">
-				<h4>User Name</h4>
-				<ul class="dasboard-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
-					</li>
-					<li>
-						<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
-					</li>
-					<li>
-						<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
-					</li>
-					<li>
-						<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
-					</li>
-					<li>
-						<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
-					</li>
-					<li>
-						<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
-					</li>
-					<li>
-						<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-					</li>
-					
-				</ul>
-			</aside>
-			<section class="col-sm-9 dashboard-content dashboard-group">
-				<div class="row group-headline">
-					<div class="col-sm-9"><h3>Quick accessibilty to group controls</h3></div>
-					<div class="col-sm-3"><button class="app-btn btn-solid delete-btn">Delete this group</button></div>
+	<body class="amber">
+	<header>
+			<nav class="amber">
+				<div class="nav-wrapper">
+					<a href="index.html" class="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
+					<a icon-label="mobile-menu" class="nav-mobile">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<ul class="nav-list right hide-on-med-and-down">
+						<li class="nav-item"><a href="#">About</a></li>
+						<li class="nav-item"><a href="auth.postit/login.html">Login</a></li>
+						<li class="nav-item"><a href="auth.postit/register.html">Register</a></li>
+						<li class="nav-item"><a href="auth.postit/login.html"><button class="btn btn-create">Create a new group</button></a></li>
+					</ul>
 				</div>
-				<h5 class="group-name">Group Name</h5>					
-				<figure class="row">
-					<a href="#view-message"><section class="col-xs-4 card4"><h5>View Messages</h5><div class="notification-counter">5</div></section></a>
-					<a href="#send-message"><section class="col-xs-4 card2"><h5>Send Message</h5></section></a>
-					<a href="search.html"><section class="col-xs-4 card3"><h5>Add New Member</h5></section></a>
-				</figure>
+				<div class="mobile-nav">
+					<div class="container" id="mobile-nav"></div>					
+				</div>
+			</nav>
+		</header>
+		<main id="dashboard-ui">
+			<div class="row">
+				<aside class="col s12 m3 l2">
+					<div class="dashboard-menu">
 
-				<section class="broadcast-board">
-					<div class="message-board">
-
-						<div class="postlogs" id="view-message">
-
-							<div class="post">
-								<aside class="user-photo"></aside>
-								<section class="post-message">
-									<div><h6 class="sender">Michael</h6> &nbsp;<small>9:00 AM</small></div>
-									<p class="message">Welcome to the group</p>
-								</section>
-							</div>
-							<div class="post">
-								<aside class="user-photo"></aside>
-								<section class="post-message">
-									<div><h6 class="sender">Tee</h6> &nbsp;<small>9:14 AM</small></div>
-									<p class="message">Welcome to the group</p>
-								</section>
-							</div>
-							<div class="post">
-								<aside class="user-photo"></aside>
-								<section class="post-message">
-									<div><h6 class="sender">Fred</h6> &nbsp;<small>11:15 AM</small></div>
-									<p class="message">Welcome to the group</p>
-								</section>
-							</div>							
-
-						</div>
-
-						<div class="compose-form" id="send-message">
-							<textarea></textarea>
-							<button class="app-btn btn-solid">Send Message</button>
-						</div>
+						<section class="my-tab"> My Tab</section>
+						<ul class="menu-nav">
+							<li>
+								<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
+							</li>
+							<li>
+								<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							</li>
+							<li>
+								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
+							</li>
+							<li>
+								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
+							</li>
+							<li>
+								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							</li>
+							<li>
+								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							</li>
+							<li>
+								<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+							</li>
+							
+						</ul>
+						<section class="utility">Hello Utility</section>
 
 					</div>
-				</section>	
-			</section>
+				</aside>
+				<section class="col s12 m9 l10">
+					<div class="dashboard-content">
+						<div class="bot-msg">
+							<h3>Messages</h3>							
+						</div>
+						<div class="row message-board">
 
-		</div>
-		</section>
-		<footer class="main-footer">
-			<small id="copywrite" class="group">&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
-			<nav>
-				<ul>					
-					<li><a><i class="fa fa-google-plus"></i></a></li>					
-					<li><a><i class="fa fa-github"></i></a></li>
-					<li><a><i class="fa fa-facebook"></i></a></li>
-					<li><a><i class="fa fa-twitter"></a></i></li>
-				</ul>
-			</nav>
-		</footer>
-		<script src="scripts/components.js" type="text/jsx"></script>
-	</section>	
+								<div class="postlogs" id="view-message">
+
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Michael</h6> &nbsp;<small class="time">9:00 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Tee</h6> &nbsp;<small class="time">9:14 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Fred</h6> &nbsp;<small class="time">11:15 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>							
+
+								</div>
+
+								<div class="compose-form" id="send-message">
+									<textarea></textarea>
+									<button class="btn btn-create">Normal</button>
+								</div>	
+						</div>					
+											
+					</div>					
+				</section>
+			</div>
+			<small class="dashboard-copy">&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
+		</main>
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+		<script type="text/javascript" src="../js/main.js"></script>	
 	</body>
 </html>

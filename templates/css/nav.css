@@ -2,8 +2,12 @@ nav {
   color: #000;
   width: 100%;
   height: 55px;
-  line-height: 55px;
-  z-index: 100;
+	line-height: 55px;
+	z-index: 1000;	
+}
+.nav-wrapper {
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
 }
 
 nav .postit-logo {
@@ -67,6 +71,7 @@ nav ul.left {
 		position: relative;
 		width: 100%;
 		background-color: #ffc107;
+		z-index: 1000;
 	}
 	#mobile-nav {
 		position: relative;

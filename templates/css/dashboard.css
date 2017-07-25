@@ -3,6 +3,8 @@
         margin: 0 auto;
 		overflow: hidden;
 	}
+
+	/*--Dashboard Menu Setup--*/
 	.dashboard-menu {
 		text-align: left;
 		height: 85vh;
@@ -13,14 +15,16 @@
 	.dashboard-menu .menu-nav {
 		margin: 0;
 		padding: 0;
-		height: 66vh;
+		height: 70%;
 		overflow: auto;
+		overflow-x: hidden;
 	}
 	.dashboard-menu .my-tab,  .dashboard-menu .utility {
-		height: 62px;
+		height: 15%;
 		background-color: transparent;
 		text-align: center;
 		padding: 15px;
+		overflow: hidden;
 	}
 	.dashboard-menu .my-tab:hover,  .dashboard-menu .utility:hover {
 		background-color: #000; 
@@ -33,18 +37,6 @@
 		border-top: 1px solid #000;
 	}
 
-	.dashboard-content {
-		padding: 15rem;
-		text-align: left;
-		height: 85vh;		
-		overflow: auto;
-		margin: 0 -0.75rem;
-		background-color: #fff !important;
-		transition: all .5s ease;
-		-moz-transition: all .5s ease;
-		-webkit-transition: all .5s ease;
-	}
-	
 	.dashboard-menu li a {
 	    color: #fff;
 		text-decoration: none;
@@ -70,4 +62,31 @@
 		background: -moz-linear-gradient(#FFC107, #FFA000);
 		background: -webkit-linear-gradient(#FFC107, #FFA000);
 	}
+	
+	/*--Dashboard Content Setup--*/
+	.dashboard-content {
+		text-align: left;
+		color: #000;
+		height: 85vh;		
+		overflow-y: scroll;
+		margin: 0 -0.75rem;
+		background-color: #fff !important;
+		transition: all .5s ease;
+		-moz-transition: all .5s ease;
+		-webkit-transition: all .5s ease;
+	}
+	.card {
+		overflow: hidden;
+	}
+	.card .card-title {
+		font-size: 24px;
+		font-size: 2.4rem;
+		font-weight: 300;
+	}
+	.card a, .card i {
+		color: #FFC107;
+	}
+
+	
+	
 	

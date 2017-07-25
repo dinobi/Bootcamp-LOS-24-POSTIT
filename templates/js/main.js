@@ -79,4 +79,7 @@ $(document).ready(() => {
 
   // Character counter for auth form
   $('input#password').characterCounter();
+  
+  // Text area to fit content
+  $('.compose-form textarea').autoResize();
 });
