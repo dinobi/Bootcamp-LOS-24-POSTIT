@@ -1,13 +1,10 @@
-.group-name {
-	margin-bottom: 30px;
+.action-ribbon {
+	background-color: #FFA000;
+	height: 7.5%;
+	overflow: hidden;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
 }
-.exit-btn {
-	margin: 30px auto;
-}
-.back-btn  {
-	background: transparent;
-}
-
 .message-board {
 	min-height: 400px;
 	margin: 0 auto;
@@ -20,8 +17,8 @@
 }
 .postlogs {
 	width: 100%;
-	height: 58vh;
-	padding: 15px 0;
+	height: 69vh;
+	padding: 10px 0;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -63,7 +60,7 @@
 	font-family: "Open Sans", sans-serif;
 }
 .compose-form {
-	margin: 20px 0 0 20px;
+	margin: 10px 0 0 20px;
 	display: flex;
 	align-items: flex-start;
 }
@@ -71,7 +68,7 @@
 	background: #FFF8E1;
 	resize: none;
 	color: #212121;
-	width: 84%;
+	width: 85%;
 	min-height: 44px;
 	overflow: hidden;
 	padding: 10px;
@@ -84,4 +81,7 @@
 	background: #fff;
 	border-color: #FFA000;
 	outline: none;
+}
+.compose-form .btn {
+	width: 12%;
 }

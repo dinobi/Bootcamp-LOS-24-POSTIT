@@ -10,7 +10,7 @@
 		height: 85vh;
 		overflow: auto;
 		margin: 0 -0.75rem;
-		background-color: #212121!important;
+		background-color: #212121!important;	
 	}
 	.dashboard-menu .menu-nav {
 		margin: 0;
@@ -67,24 +67,27 @@
 	.dashboard-content {
 		text-align: left;
 		color: #000;
-		height: 85vh;		
-		overflow-y: scroll;
+		height: 85vh;
+		overflow: hidden;
 		margin: 0 -0.75rem;
 		background-color: #fff !important;
 		transition: all .5s ease;
 		-moz-transition: all .5s ease;
 		-webkit-transition: all .5s ease;
 	}
-	.card {
+	#dashboard-ui .card {
 		overflow: hidden;
 	}
-	.card .card-title {
+	#dashboard-ui .card .card-title {
 		font-size: 24px;
 		font-size: 2.4rem;
 		font-weight: 300;
 	}
-	.card a, .card i {
+	#dashboard-ui .card a, .card i {
 		color: #FFC107;
+	}
+	#dashboard-ui small {
+		margin: 0;
 	}
 
 	
