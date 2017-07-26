@@ -11,7 +11,8 @@ script: npm test
 services:
   - postgresql
 before_script:
-  - postgres -d postitdb -U dinobi
+  - psql -d postitdb -U dinobi
+  - 'create database travis_ci_test;'
   - sequelize db:migrate
 after_success:
 - npm run coveralls
