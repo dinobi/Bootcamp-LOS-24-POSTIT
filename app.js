@@ -13,17 +13,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Setup routes for api calls
+// Default catch-all route that sends back a success message on all req.
 routes(app);
 
-// Default catch-all route that sends back a success message.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to Andela Bootcamp 24 - PostIt App. Make the right Api call to start enjoying!',
+// Default catch-all route that sends back an error message on get req.
+app.get('api/*', (req, res) => res.status(404).send({
+  message: 'Resource not found. Make the right Api call to start enjoying!',
 }));
 
-// Default catch-all route that sends back an error message.
-app.get('*', (req, res) => res.status(404).send({
-  message: 'Resource was not found',
+// Default catch-all route that sends back an error message on post req.
+app.post('api/*', (req, res) => res.status(404).send({
+  message: 'Resource not found. Make the right Api call to start enjoying!',
 }));
 
 module.exports = app;
