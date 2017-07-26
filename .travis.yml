@@ -13,7 +13,7 @@ services:
 env:
   - NODE_ENV=test
 before_script:
-  - psql -c 'create database travis_ci_test;' -U dinobi
+  - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate
 after_success:
 - npm run coveralls
