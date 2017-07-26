@@ -9,9 +9,10 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "dinobi",
+    "secret": "PrivateKey",
+    "username": "postgres",
     "password": "Andela",
-    "database": "postitdb",
+    "database": "postgres",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"

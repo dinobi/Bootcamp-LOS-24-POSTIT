@@ -10,11 +10,13 @@ branches:
 script: npm test
 services:
   - postgresql
+env:
+  - NODE_ENV=test
 before_script:
-  - psql -d postitdb -U dinobi
-  - 'create database travis_ci_test;'
+  - psql -c 'create database travis_ci_test;' -U dinobi
   - sequelize db:migrate
 after_success:
 - npm run coveralls
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=1LqYqgo8Da9hnzuSe1AV8P0SkIuilXTSu
+email: false
