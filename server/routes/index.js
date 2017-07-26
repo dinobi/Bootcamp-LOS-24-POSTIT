@@ -12,10 +12,10 @@ export default (app) => {
   app.post('/api/user/signin/', controllers.user.auth);
 
   // Middleware to protect the following API access
-  let authToken;
+  let token;
   app.use((req, res, next) => {
-    authToken = req.headers['x-access-token'];
-    jwt.verify(authToken, 'PrivateKey', (err, decoded) => {
+    token = req.headers['x-access-token'];
+    jwt.verify(token, 'PrivateKey', (err, decoded) => {
       if (err) {
         res.status(401)
         .send({ message: 'Authentication failed. Invalid access token' });
