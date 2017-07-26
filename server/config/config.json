@@ -1,17 +1,19 @@
 {
   "development": {
     "secret": "PrivateKey",
-    "username": "postgres",
+    "username": "dinobi",
     "password": "Andela",
-    "database": "postgres",
+    "database": "postitdb",
     "host": "127.0.0.1",
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
+    "username": "dinobi",
     "password": "Andela",
-    "database": "postit-db",
+    "database": "postitdb",
     "host": "127.0.0.1",
+    "port": 5432,
     "dialect": "postgres"
   },
   "production": {

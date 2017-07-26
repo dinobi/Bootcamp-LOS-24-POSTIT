@@ -31,9 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false, //  dont write to db if data is not supplied
-      validate: {
-        len: [4, 10]
-      }
     },
     phone: {
       type: DataTypes.STRING,
