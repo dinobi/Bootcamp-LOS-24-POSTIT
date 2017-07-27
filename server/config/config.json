@@ -9,11 +9,10 @@
   },
   "test": {
     "secret": "PrivateKey",
-    "username": "dinobi",
+    "username": "postgres",
     "password": "Andela",
     "database": "postgres",
     "host": "127.0.0.1",
-    "port": 5432,
     "dialect": "postgres"
   },
   "production": {
