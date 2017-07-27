@@ -4,6 +4,7 @@ import app from '../app';
 import models from '../server/models';
 
 process.env.NODE_ENV = 'test';
+
 const should = chai.should();
 chai.use(chaiHttp);
 
