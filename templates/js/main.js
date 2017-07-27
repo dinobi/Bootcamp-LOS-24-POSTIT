@@ -10,17 +10,7 @@ $(document).ready(() => {
       mobileNav.addClass('expanded').slideDown(500);
       $(this).addClass('open');
     }
-  });
-  $('#search-button').click(() => {
-    const div = $('div'), p = $('p');
-    div.removeClass('hidden');
-    p.removeClass('hidden');
-  });
-  $('.close-button').click(() => {
-    const div = $('div'), p = $('p');
-    div.addClass('hidden');
-    p.addClass('hidden');
-  }); // end of header nav
+  });// end of header nav
 
   // Add smooth scroll to in-page anchor references
   $('a').on('click', function smoothScroll(event) {
