@@ -18,7 +18,9 @@ before_script:
   - export DATABASE_URL=postgres://auxtpnwe:KYs5AX1FatIBRvm8NDV8MlLqhgurJ8Or@echo.db.elephantsql.com:5432/auxtpnwe
   - sequelize db:migrate
 after_success:
-- npm run coveralls
+  - npm run coveralls
+after_script:
+  - nyc npm test && nyc report --reporter=text-lcov | coveralls
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=1LqYqgo8Da9hnzuSe1AV8P0SkIuilXTSu
 email: false
