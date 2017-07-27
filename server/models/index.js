@@ -4,7 +4,8 @@ import Sequelize from 'sequelize';
 import configuration from '../config/config.json';
 
 const basename = path.basename(module.filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development' || 'test';
+
 const config = configuration[env];
 const db = {};
 
@@ -32,6 +33,7 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
+db.sequelize = sequelize;
 db.sequelize = sequelize;
 
 export default db;

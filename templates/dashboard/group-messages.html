@@ -43,23 +43,26 @@
 
 						<section class="my-tab"> My Tab</section>
 						<ul class="menu-nav">
-							<li class="dashboard-menu-item">
+							<li>
 								<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
 							</li>
-							<li class="dashboard-menu-item">
+							<li>
 								<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
 							</li>
-							<li class="dashboard-menu-item">
+							<li>
 								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
 							</li>
-							<li class="dashboard-menu-item">
+							<li>
 								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
 							</li>
-							<li class="dashboard-menu-item">
+							<li>
 								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
 							</li>
-							<li class="dashboard-menu-item">
+							<li>
 								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							</li>
+							<li>
+								<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 							</li>
 							
 						</ul>
@@ -68,61 +71,42 @@
 					</div>
 				</aside>
 				<section class="col s12 m9 l10">
-					<div class="dashboard-content dashboard-myspace">
-						<div class="bot-msg">
-							<h3>Select a group to start messaging</h3>
+					<div class="dashboard-content">
+						<div class="action-ribbon">							
 						</div>
-						<div class="features dashboard-group">
-						<div class="row">
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">family<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">Andela Bootcamp-24<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">Write Post<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="row message-board">
 
-						<div class="row">
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">Write Post<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">Write Post<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
-							<div class="col s12 m4">
-								<div class="card">
-									<div class="card-content">
-									<span class="card-title activator grey-text text-darken-4 truncate">Write Post<i class="material-icons right">more_vert</i></span>
-									</div>
-								</div>
-							</div>
+								<div class="postlogs" id="view-message">
 
-						</div>
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Michael</h6> &nbsp;<small class="time">9:00 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Tee</h6> &nbsp;<small class="time">9:14 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>
+									<div class="post">
+										<aside class="user-photo"></aside>
+										<section class="post-message">
+											<div><h6 class="sender">Fred</h6> &nbsp;<small class="time">11:15 AM</small></div>
+											<p class="message">Welcome to the group</p>
+										</section>
+									</div>							
 
-						</div>
+								</div>
+
+								<div class="compose-form" id="send-message">
+									<textarea></textarea>
+									<button class="btn btn-create">Normal</button>
+								</div>	
+						</div>					
 											
 					</div>					
 				</section>

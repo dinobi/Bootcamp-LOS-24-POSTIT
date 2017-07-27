@@ -29,10 +29,7 @@ module.exports = {
         unique: true
       },
       password: {
-        type: Sequelize.STRING,
-        validate: {
-          len: [2, 10],
-        }
+        type: Sequelize.STRING
       },
       phone: {
         type: Sequelize.STRING,
