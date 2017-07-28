@@ -12,10 +12,9 @@ script: npm test
 services:
   - postgresql
 env:
-  - NODE_ENV=production
+  - NODE_ENV=test
 before_script:
-  - npm install -g sequelize-cli
-  - export DATABASE_URL=postgres://auxtpnwe:KYs5AX1FatIBRvm8NDV8MlLqhgurJ8Or@echo.db.elephantsql.com:5432/auxtpnwe
+  - psql -c 'create database travis_ci_test;' -U postgres
   - sequelize db:migrate
 after_success:
   - npm run coveralls
