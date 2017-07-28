@@ -47,6 +47,7 @@ describe('PostIt Tests: ', () => {
         })
         .then((res) => {
           res.should.have.status(201);
+          done();
         })
         .catch((error) => {
           console.log(error);
