@@ -5,7 +5,7 @@ import models from '../models';
 const salt = bcrypt.genSaltSync(8);
 export default {
   create(req, res) {
-    return models.Users
+    return models.User
       .create({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -24,7 +24,7 @@ export default {
       });
   },
   fetch(req, res) {
-    return models.Users
+    return models.User
       .findAll({ attributes:
         ['firstname', 'lastname', 'email', 'phone', 'createdAt', 'updatedAt']
       })

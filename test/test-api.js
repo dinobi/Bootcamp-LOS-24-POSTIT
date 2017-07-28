@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import app from '../app';
