@@ -10,10 +10,6 @@ module.exports = {
     publicPath: '/dist/' },
   devtool: debug ? 'source-map' : true,
   watch: true,
-  devServer: {
-    contentBase: './client/src'
-  },
-
   module: {
     loaders: [
       {
@@ -23,7 +19,21 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
-      }
+      },
+      {
+        test: /\.scss$/,
+        loader: '!style-loader!scss-loader!autoprefixer-loader!css-loader'
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?importLoaders=1',
+        ]
+      },
     ]
+  },
+  devServer: {
+    contentBase: './client/src'
   },
 };
