@@ -3,13 +3,16 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: ['./client/dev/app.js',
+  entry: ['./client/src/app.js',
     'webpack-dev-server/client?http://localhost:8000'],
   output: { path: `${__dirname}/client/dist/`,
     filename: 'bundle.min.js',
     publicPath: '/dist/' },
   devtool: debug ? 'source-map' : true,
   watch: true,
+  devServer: {
+    contentBase: './client/src'
+  },
 
   module: {
     loaders: [
