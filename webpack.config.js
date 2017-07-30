@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   entry: ['./client/src/app.js',
-    'webpack-dev-server/client?http://localhost:8000'],
+    'webpack-dev-server/client?http://localhost:8080'],
   output: { path: `${__dirname}/client/dist/`,
     filename: 'bundle.min.js',
     publicPath: '/dist/' },
