@@ -1,0 +1,109 @@
+<!Doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8.0">
+		<title>PostIt | authentication register</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<!--Import Google Icon Font-->
+      	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	 <!-- Compiled and minified CSS -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+		<!--Import postit base css -->
+		<link href='../css/base.css' rel='stylesheet' type='text/css'>
+      	<!--Let browser know website is optimized for mobile-->
+      	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	
+	<body id="#Top">
+		<header>
+			<nav class="amber">
+				<div class="container nav-wrapper">
+					<a href="../index.html" class="postit-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
+					<a icon-label="mobile-menu" class="nav-mobile">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<ul class="nav-list right hide-on-med-and-down">
+						<li class="nav-item"><a href="#">About</a></li>
+						<li class="nav-item"><a href="login.html">Login</a></li>
+						<li class="nav-item"><a href="register.html">Register</a></li>
+						<li class="nav-item"><a href="login.html"><button class="btn btn-create">Create a new group</button></a></li>
+					</ul>
+				</div>
+				<div class="mobile-nav">
+					<div class="container" id="mobile-nav"></div>					
+				</div>
+			</nav>
+		</header>
+			<main class="container">			
+				<div class="row">
+
+					<div class="col s12 m4 headline">
+						<h1 class="heading">Register with PostIt</h1>
+						<h6 class="brief">PostIt is built to allow family, friends and colleagues meetup in groups to share messages in a fun way whenever they want.</h6>
+						<div class="quick-access">
+							<p>Already joined PostIt? <a href="login.html">Sign in</a></p>
+						</div>
+					</div>
+					<div class="col s12 m8">			
+					<form id="signup-form">
+					<div class="row">
+						<div class="input-field col s6">
+						<input placeholder="Enter your first name" id="first_name" type="text" class="validate">
+						<label class="active" for="first_name">First Name</label>
+						</div>
+						<div class="input-field col s6">
+						<input placeholder="Enter your last name" id="last_name" type="text" class="validate">
+						<label class="active" for="first_name">Last Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+						<input placeholder="Enter a user name" id="username" type="text" class="validate">
+						<label class="active" for="user_name">Username</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+						<input placeholder="Enter your email" id="username" type="email" class="validate">
+						<label class="active" for="email">Email</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+						<input placeholder="Enter a password" id="password" type="password" class="validate">
+						<label class="active" for="password">Password</label>
+						</div>
+						<div class="input-field col s6">
+						<input placeholder="Enter your phone" id="phone-number" type="number" class="validate">
+						<label class="active" for="phone-number">Phone Number</label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-create">Submit</button>
+					</form>
+					</div>
+	
+				</div>
+			</main>
+
+			<footer class="container page-footer">				
+				<div class="divider"></div>
+					<ul class="right">
+						<li><a><i class="fa fa-google-plus"></i></a></li>					
+						<li><a href="https://github.com/dinobi/Bootcamp-LOS-24-POSTIT"><i class="fa fa-github"></i></a></li>
+						<li><a><i class="fa fa-facebook"></i></a></li>
+						<li><a><i class="fa fa-twitter"></i></a></li>
+					</ul>
+				<div class="copyright left">
+					<small>&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
+				</div>
+			</footer>
+			
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+		<script type="text/javascript" src="../js/main.js"></script>
+	</body>
+</html>
