@@ -1,14 +1,17 @@
 import React from 'react';
+import Base from './css/base.css';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Welcome to PostIt</h2>
+          <h1>Welcome to PostIt</h1>
+          <h3>Communicate Group Messages Instantly</h3>
         </div>
         <p className="App-intro">
-          Simplified group messaging
+          PostIt is built to allow family, friends and colleagues meetup in groups to share
+           messages in a fun way whenever they want.
         </p>
       </div>
     );
