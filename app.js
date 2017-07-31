@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Default catch-all route that sends a message on all PostIt hit.
 app.all('/', (req, res) => res.status(200).send({
-  message: 'This is PostIT, Make the right Api call to start enjoying!',
+  message: 'This is PostIT. Sign up now to start enjoying!',
 }));
 
 // Default catch-all route that sends an error message on all incorrect req.

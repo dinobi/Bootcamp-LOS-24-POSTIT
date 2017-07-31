@@ -8,6 +8,8 @@ I (Dinobi) took on the development of this project as part of the requirements t
 **Communicate Group Messages Instantly**
 > - PostIt is a simple web application built to allow family, friends and colleagues share message broadcast in a fun way anytime.
 
+> - https://postit-webapp.herokuapp.com/
+
 > - This project is strictly for learning purposes as instructed by Andela and not a commercial product.
 
 **Project Stack**
