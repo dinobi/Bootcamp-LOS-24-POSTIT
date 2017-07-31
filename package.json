@@ -13,6 +13,9 @@
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
+    "start-client": "node client/scripts/start.js",
+    "build-client": "node client/scripts/build.js",
+    "test-client": "node client/scripts/test.js --env=jsdom",
     "webpack": "webpack"
   },
   "repository": {
@@ -44,8 +47,13 @@
     "nyc": "^11.0.3"
   },
   "dependencies": {
+    "autoprefixer": "7.1.1",
     "autoprefixer-loader": "^3.2.0",
     "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "20.0.3",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -53,20 +61,36 @@
     "bcrypt": "^1.0.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
+    "babel-preset-react-app": "^3.0.1",
+    "babel-runtime": "6.23.0",
+    "case-sensitive-paths-webpack-plugin": "2.1.1",
+    "chalk": "1.1.3",
     "chai": "^4.1.0",
     "chai-http": "^3.0.0",
     "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
+    "eslint-loader": "1.7.1",
+    "eslint-plugin-flowtype": "2.34.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-react": "^7.1.0",
+    "extract-text-webpack-plugin": "2.1.2",
     "express": "^4.15.3",
+    "file-loader": "0.11.2",
+    "fs-extra": "3.0.1",
     "html-webpack-plugin": "^2.29.0",
     "i": "^0.3.5",
     "jsonwebtoken": "^7.4.1",
+    "jest": "20.0.4",
+    "object-assign": "4.1.1",
+    "postcss-flexbugs-fixes": "3.0.0",
+    "postcss-loader": "2.0.6",
+    "promise": "7.1.1",
     "md5": "^2.2.1",
     "mocha": "^3.4.2",
     "morgan": "^1.8.2",
+    "node-sass": "^4.5.3",
     "node-sass-chokidar": "0.0.3",
     "nodemon": "^1.11.0",
     "pg": "^6.4.0",
@@ -78,11 +102,56 @@
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redux": "^3.7.2",
+    "react-error-overlay": "^1.0.9",
+    "style-loader": "0.18.2",
+    "sw-precache-webpack-plugin": "0.11.3",
+    "url-loader": "0.5.9",
+    "whatwg-fetch": "2.0.3",
+    "sass-loader": "^6.0.6",
     "scss-loader": "0.0.1",
     "sequelize": "^4.3.0",
     "sequelize-cli": "^2.7.0",
-    "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/client/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/client/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/client/src/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/client/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/client/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
