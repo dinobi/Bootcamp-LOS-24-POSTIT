@@ -1,4 +1,5 @@
 server/test/*
 server/coverage/*
-client/main.js
-client/jquery-1.11.3.min.js
+client/*
+client/*
+webpack.config.js

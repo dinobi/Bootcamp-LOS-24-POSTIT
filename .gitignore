@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/client/node_modules
 
 # misc
 .DS_Store
@@ -19,3 +20,11 @@ materialize.css
 materialize.min.js
 materialize.js
 roboto*
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+npm-debug.log*
