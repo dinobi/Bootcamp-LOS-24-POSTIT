@@ -34,7 +34,7 @@ $(document).ready(() => {
   }); // End of smooth scroll
 
   // Wikipedia search Request
-  $('.search button').on('click', () => {
+  $('.search-wiki button').on('click', () => {
     $('form').submit(() => false);
     let searchTerm = $('#search-wiki').val();
     if (searchTerm === '' || searchTerm === undefined) {

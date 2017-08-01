@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models';
 
-const salt = bcrypt.genSaltSync(2);
+const salt = bcrypt.genSaltSync(8);
 export default {
   create(req, res) {
     return models.User
@@ -42,7 +42,7 @@ export default {
       .then((user) => {
         if (!user) {
           res.status(404).send({
-            message: 'Authentication failed. Username is incorrect'
+            message: 'Authentication failed. Username does not exist'
           });
         } else if (user) {
           // check if password matches
@@ -59,8 +59,6 @@ export default {
             res.status(200).send({
               message: 'Authentication successful', authToken: token
             });
-            res.status(400)
-            .send({ message: 'Bad request. Account does not exist on postit' });
           }
         }
       });

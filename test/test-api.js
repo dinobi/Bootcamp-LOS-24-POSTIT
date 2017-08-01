@@ -4,7 +4,6 @@ import app from '../app';
 import models from '../server/models';
 
 process.env.NODE_ENV = 'test';
-
 const should = chai.should();
 chai.use(chaiHttp);
 
@@ -39,15 +38,19 @@ describe('PostIt Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          firstname: 'fistname',
-          lastname: 'lastname',
-          username: 'username',
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio',
           email: 'test@user.com',
-          password: 'password',
+          password: '123456',
           phone: '08032952998'
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(201);
+          done();
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -56,10 +59,13 @@ describe('PostIt Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          firstname: 'fistname',
+          username: 'dinobaggio'
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -70,8 +76,11 @@ describe('PostIt Tests: ', () => {
         .send({
           email: 'test@user.com',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -82,8 +91,11 @@ describe('PostIt Tests: ', () => {
         .send({
           firstname: 'fistname12',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -94,8 +106,11 @@ describe('PostIt Tests: ', () => {
         .send({
           lastname: 'lastname34',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -106,8 +121,11 @@ describe('PostIt Tests: ', () => {
         .send({
           firstname: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -118,8 +136,11 @@ describe('PostIt Tests: ', () => {
         .send({
           lastname: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -130,8 +151,11 @@ describe('PostIt Tests: ', () => {
         .send({
           username: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -142,8 +166,11 @@ describe('PostIt Tests: ', () => {
         .send({
           email: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -154,8 +181,11 @@ describe('PostIt Tests: ', () => {
         .send({
           password: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -166,8 +196,11 @@ describe('PostIt Tests: ', () => {
         .send({
           phone: '',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -178,8 +211,11 @@ describe('PostIt Tests: ', () => {
         .send({
           phone: '0803295299',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
@@ -190,8 +226,11 @@ describe('PostIt Tests: ', () => {
         .send({
           phone: '23408032952998',
         })
-        .end((err, res) => {
+        .then((res) => {
           res.should.have.status(400);
+        })
+        .catch((error) => {
+          console.log(error);
           done();
         });
     });
