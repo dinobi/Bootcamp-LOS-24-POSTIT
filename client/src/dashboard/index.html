@@ -1,0 +1,187 @@
+<!Doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8.0">
+		<title>PostIt | my dashboard</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<!--Import Google Icon Font-->
+      	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	 <!-- Compiled and minified CSS -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+		<!--Import postit base css -->
+		<link href='../css/base.css' rel='stylesheet' type='text/css'>
+      	<!--Let browser know website is optimized for mobile-->
+      	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	
+	<body class="amber">
+	<header>
+			<nav class="amber">
+				<div class="nav-wrapper">
+					<a href="index.html" class="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
+					<a icon-label="mobile-menu" class="nav-mobile">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<ul class="nav-list right hide-on-med-and-down">
+						<li class="nav-item"><a href="#">About</a></li>
+						<li class="nav-item"><a href="auth.postit/login.html">Login</a></li>
+						<li class="nav-item"><a href="auth.postit/register.html">Register</a></li>
+						<li class="nav-item"><a href="auth.postit/login.html"><button class="btn btn-create">Create a new group</button></a></li>
+					</ul>
+				</div>
+				<div class="mobile-nav">
+					<div class="container" id="mobile-nav"></div>					
+				</div>
+			</nav>
+		</header>
+		<main id="dashboard-ui">
+			<div class="row">
+				<aside class="col s12 m3 l2">
+					<div class="dashboard-menu">
+
+						<section class="my-tab"> My Tab</section>
+						<ul class="menu-nav">
+							<li class="dashboard-menu-item">
+								<a class="active" href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							</li>
+							
+						</ul>
+						<section class="utility">Hello Utility</section>
+
+					</div>
+				</aside>
+				<section class="col s12 m9 l10">
+					<div class="dashboard-content dashboard-myspace">
+						<div class="bot-msg">
+							<h3>Welcome to your dashboard</h3>
+							<p>What would you like to do?</p>
+						</div>
+						<div class="features">
+						<div class="row">
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">Write Post<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">Write Post<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">Create Group<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">Create Group<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">Add Member<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">Add Member<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">View Messages<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">View Messages<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">Search Member<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">Search Member<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 m4">
+								<div class="card small">
+									<div class="card-image waves-effect waves-block waves-light">
+									<img class="activator" src="images/office.jpg">
+									</div>
+									<div class="card-content">
+									<span class="card-title activator grey-text text-darken-4">Search Wikipedia<i class="material-icons right">more_vert</i></span>
+									<p><a href="#">This is a link</a></p>
+									</div>
+									<div class="card-reveal">
+									<span class="card-title grey-text text-darken-4">Search Wikipedia<i class="material-icons right">close</i></span>
+									<p>Here is some more information about this product that is only revealed once clicked on.</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						</div>
+											
+					</div>					
+				</section>
+			</div>
+			<small class="dashboard-copy">&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
+		</main>
+		<!--Import jQuery before materialize.js-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+		<script type="text/javascript" src="../js/main.js"></script>	
+	</body>
+</html>
