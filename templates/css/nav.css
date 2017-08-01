@@ -7,7 +7,9 @@ nav {
 }
 .nav-wrapper {
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+	-moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+	overflow: hidden;
 }
 
 nav .postit-logo {
@@ -29,9 +31,11 @@ nav .dashboard-logo {
   padding: 7.5px 0;
   padding: .75rem 0;
 }
+
 .dashboard-logo img {
   height: 2.5rem;
 }
+
 nav ul a {
   font-size: 1.8rem;
 }
@@ -79,7 +83,7 @@ nav ul.left {
 		padding: 10px 0;
 	}
 		
-	#mobile-nav .nav-list{
+	#mobile-nav .nav-list {
 		margin: 0;
 		display: block;
 		max-height: none;
@@ -214,4 +218,14 @@ nav ul.left {
 	ul.right {
 		float: none !important;
 	}
+}
+/** Configure dashboard header **/
+.dashboard-header nav .nav-item {
+	height: 55px;
+}
+.dashboard-header nav .nav-mobile {
+	margin-right: 15px;
+}
+.nav a i.material-icons {
+	height: 55px;
 }
