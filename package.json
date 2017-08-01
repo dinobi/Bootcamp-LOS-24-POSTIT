@@ -1,5 +1,5 @@
 {
-  "name": "postit-server",
+  "name": "postit-webapp",
   "version": "0.0.1",
   "description": "server side implementation of postit",
   "main": "app.js",
@@ -13,9 +13,9 @@
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "start-client": "node client/scripts/start.js",
-    "build-client": "node client/scripts/build.js",
-    "test-client": "node client/scripts/test.js --env=jsdom",
+    "start-client": "node ./client/scripts/start.js",
+    "build-client": "node ./client/scripts/build.js",
+    "test-client": "node ./client/scripts/test.js --env=jsdom",
     "webpack": "webpack"
   },
   "repository": {
