@@ -1,5 +1,5 @@
 import React from 'react';
-import Base from './css/base.css';
+import Base from '../css/base.css';
 
 class App extends React.Component {
   render() {
