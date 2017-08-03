@@ -1,3 +1,6 @@
+import $ from 'jquery';
+
+const main =
 $(document).ready(() => {
   const mobileNav = $('#mobile-nav');
   // Responsive page header navigation
@@ -68,3 +71,5 @@ $(document).ready(() => {
     }
   }); // end of wiki search
 });
+
+export default main;
