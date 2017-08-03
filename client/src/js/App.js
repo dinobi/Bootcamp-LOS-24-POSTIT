@@ -1,11 +1,15 @@
 import React from 'react';
-import Base from '../css/base.css';
+import JQuery from 'jquery';
+import $ from 'jquery';
+
 
 class App extends React.Component {
   render() {
-    let myText = this.props.myText;
-    return (      
-      <h1>{myText}</h1>
+    return (
+      <body className="amber">
+        <h1>Hello World</h1>
+        <button className="btn btn-create">Start Here</button>
+      </body>
     );
   }
 }

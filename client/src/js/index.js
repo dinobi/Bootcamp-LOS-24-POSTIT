@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Base from '../css/base.css';
 
-ReactDOM.render(<App myText = 'This is my first Prop'/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
