@@ -3,7 +3,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
-@import url("../fonts/typography.css");
+@import url("typography.css");
 @import url("forms.css");
 @import url("search-form.css");
 @import url("buttons.css");
