@@ -15,7 +15,7 @@
 	</head>
 	
 	<body class="amber">
-	<header>
+	<header class="dashboard-header">
 			<nav class="amber">
 				<div class="nav-wrapper">
 					<a href="index.html" class="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
@@ -25,10 +25,8 @@
 						<span></span>
 					</a>
 					<ul class="nav-list right hide-on-med-and-down">
-						<li class="nav-item"><a href="#">About</a></li>
-						<li class="nav-item"><a href="auth.postit/login.html">Login</a></li>
-						<li class="nav-item"><a href="auth.postit/register.html">Register</a></li>
-						<li class="nav-item"><a href="auth.postit/login.html"><button class="btn btn-create">Create a new group</button></a></li>
+						<li class="nav-item"><a href="#more"><i class="material-icons">more_vert</i></a></li>
+						<li class="nav-item"><a href="#create-group"><button class="btn btn-create">Create a new group</button></a></li>
 					</ul>
 				</div>
 				<div class="mobile-nav">
@@ -43,41 +41,36 @@
 
 						<section class="my-tab"> My Tab</section>
 						<ul class="menu-nav">
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
 							</li>
-							<li>
-								<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							<li class="dashboard-menu-item">
+								<a href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
 							</li>
-							<li>
-								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							<li class="dashboard-menu-item">
+								<a class="active" href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
 							</li>
-							<li>
-								<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-							</li>							
-                        </ul>
-                        
+							
+						</ul>
 						<section class="utility">Hello Utility</section>
 
 					</div>
 				</aside>
 				<section class="col s12 m9 l10">
-					<div class="dashboard-content dashboard-myspace">
+					<div class="dashboard-content dashboard-account">
 						<div class="bot-msg">
-							<h3>Group members</h3>
-						</div>
-						<div class="dashboard-members">
-						</div>
-											
+							<h3>Account Information</h3>
+							<p>View, edit or update your account information</p>
+						</div>									
 					</div>					
 				</section>
 			</div>
