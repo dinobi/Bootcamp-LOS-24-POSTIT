@@ -1,14 +1,14 @@
 import React from 'react';
 
-class HeaderNav extends React.Component {
+class DashHeader extends React.Component {
     render() {
       return (
         <header className="dashboard-header">
 			<nav className="amber">
 				<div className="nav-wrapper">
 					<a href="index.html" className="dashboard-logo">
-						<img src="https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/blob/master/client/src/images/postit-logo.png" alt="postit-logo"/></a>
-					<a icon-label="mobile-menu" class="nav-mobile">
+						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
+					<a icon-label="mobile-menu" className="nav-mobile">
 						<span></span>
 						<span></span>
 						<span></span>
