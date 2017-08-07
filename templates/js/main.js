@@ -50,7 +50,7 @@ $(document).ready(() => {
         success: (data) => {
           let contentUI = `<div><h5>${data[0]}</h5><br>`;
           if (data[2].length < 3) {
-            contentUI += `<p><em>'${data[1]}</em><br>${data[2]}</p></div>`;
+            contentUI += `<p><em>${data[1]}</em><br>${data[2]}</p></div>`;
             $('.search-result').html(contentUI);
           } else {
             for (let i = 1; i < 10; i += 1) {

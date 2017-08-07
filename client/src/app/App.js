@@ -1,32 +1,55 @@
 import React from 'react';
+import { DashHeader, footer } from '../components/views'
 
-
+let greeting = 'Yeah right'
 class App extends React.Component {
   render() {
+    console.log('this.props: ',this.props);
     return (
-      <body className="amber">
-        <header>
-            <nav className="amber">
-              <div class="nav-wrapper">
-                <a href="index.html" className="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt" alt="postit-logo"/></a>
-                <a icon-label="mobile-menu" class="nav-mobile">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </a>
-                <ul className="nav-list right hide-on-med-and-down">
-                  <li className="nav-item"><a href="">About</a></li>
-                  <li className="nav-item"><a href="auth.postit/login.html">Login</a></li>
-                  <li className="nav-item"><a href="auth.postit/register.html">Register</a></li>
-                  <li className="nav-item"><a href="auth.postit/login.html"><button className="btn btn-create">Create a new group</button></a></li>
-                </ul>
-              </div>
-              <div className="mobile-nav">
-                <div className="container" id="mobile-nav"></div>					
-              </div>
-            </nav>
-        </header>
-        </body>
+      <div>
+        <DashHeader/>
+        <FullName
+          firstName = { this.props.userData.firstName }
+          lastName = { this.props.userData.lastName }
+        />
+        <Groups
+          group = { this.props.userData.group }
+        />
+        and now: {greeting}
+      </div>
+    );
+  }
+}
+
+class FullName extends React.Component {
+  render() {
+    return (
+      <div>
+        <h3>Names:</h3>
+        <h5>
+          { this.props.firstName } { this.props.lastName }
+        </h5>
+      </div>
+    );
+  }
+}
+
+class Groups extends React.Component {
+  render() {
+    return (
+      <div>
+        <h3>My Groups:</h3>
+        <h5>
+          <ul>
+              { 
+                this.props.group.map((group, index) => {
+                return <li key={index}>{group}</li>
+                }) 
+              }
+
+          </ul>
+        </h5>
+      </div>
     );
   }
 }

@@ -15,7 +15,7 @@
 	</head>
 	
 	<body class="amber">
-		<header class="dashboard-header">
+	<header class="dashboard-header">
 			<nav class="amber">
 				<div class="nav-wrapper">
 					<a href="index.html" class="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
@@ -41,26 +41,23 @@
 
 						<section class="my-tab"> My Tab</section>
 						<ul class="menu-nav">
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
 							</li>
-							<li>
-								<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							<li class="dashboard-menu-item">
+								<a href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
 							</li>
-							<li>
-								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							<li class="dashboard-menu-item">
+								<a class="active" href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
 							</li>
-							<li>
+							<li class="dashboard-menu-item">
 								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
-							</li>
-							<li>
-								<a href="group.html"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 							</li>
 							
 						</ul>
@@ -69,43 +66,11 @@
 					</div>
 				</aside>
 				<section class="col s12 m9 l10">
-					<div class="dashboard-content">
-						<div class="action-ribbon">							
-						</div>
-						<div class="row message-board">
-
-								<div class="postlogs" id="view-message">
-
-									<div class="post">
-										<aside class="user-photo"></aside>
-										<section class="post-message">
-											<div><h6 class="sender">Michael</h6> &nbsp;<small class="time">9:00 AM</small></div>
-											<p class="message">Welcome to the group</p>
-										</section>
-									</div>
-									<div class="post">
-										<aside class="user-photo"></aside>
-										<section class="post-message">
-											<div><h6 class="sender">Tee</h6> &nbsp;<small class="time">9:14 AM</small></div>
-											<p class="message">Welcome to the group</p>
-										</section>
-									</div>
-									<div class="post">
-										<aside class="user-photo"></aside>
-										<section class="post-message">
-											<div><h6 class="sender">Fred</h6> &nbsp;<small class="time">11:15 AM</small></div>
-											<p class="message">Welcome to the group</p>
-										</section>
-									</div>							
-
-								</div>
-
-								<div class="compose-form" id="send-message">
-									<textarea></textarea>
-									<button class="btn btn-create">Normal</button>
-								</div>	
-						</div>					
-											
+					<div class="dashboard-content dashboard-account">
+						<div class="bot-msg">
+							<h3>Account Information</h3>
+							<p>View, edit or update your account information</p>
+						</div>									
 					</div>					
 				</section>
 			</div>

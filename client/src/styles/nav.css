@@ -7,7 +7,8 @@ nav {
 }
 .nav-wrapper {
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+	overflow: hidden;
 }
 
 nav .postit-logo {
@@ -21,6 +22,7 @@ nav .postit-logo {
 .postit-logo img {
   height: 3.5rem;
 }
+/** Dashboard header **/
 nav .dashboard-logo {
   position: absolute;
   left: 15px;
@@ -49,6 +51,14 @@ nav ul a:hover {
 }
 nav li:last-child a:hover {
   background-color: #ffc107;
+}
+/** Dashboard header **/
+.dashboard-header nav ul a {
+  color: #ff6f00;
+}
+.dashboard-header nav ul a:hover {
+	background-color: transparent;
+	color: #fff;
 }
 
 nav ul.left {
@@ -171,7 +181,7 @@ nav ul.left {
 		
 	}
 	.page-footer .divider {
-		background-color: #FFEB3B;
+		background-color: #616161;
 	}
 	.page-footer i{
 		font-size: 24px;
