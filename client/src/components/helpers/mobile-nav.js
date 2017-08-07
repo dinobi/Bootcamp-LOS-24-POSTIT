@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const mobileNav = () => {
+const MobileNav = () => {
     const mobileNav = $('#mobile-nav');
     // Responsive page header navigation
     mobileNav.html($('.nav-list').html());
@@ -15,4 +15,4 @@ const mobileNav = () => {
     });// end of header nav
   }
 
-export default mobileNav;
+export default MobileNav;

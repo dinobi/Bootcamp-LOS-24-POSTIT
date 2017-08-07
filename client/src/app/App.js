@@ -1,5 +1,5 @@
 import React from 'react';
-import MySpace from '../components/layout';
+import { MySpace } from '../components/layout';
 
 class App extends React.Component {
   render() {

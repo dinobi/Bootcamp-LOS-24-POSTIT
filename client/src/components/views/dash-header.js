@@ -1,4 +1,5 @@
 import React from 'react';
+import '../helpers'
 
 class DashHeader extends React.Component {
     render() {

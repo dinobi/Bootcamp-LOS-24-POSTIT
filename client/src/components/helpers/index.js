@@ -1,5 +1,5 @@
-import SmoothScroll from './smoothScroll';
-import MobileNav from './mobileNav';
+import SmoothScroll from './smooth-scroll';
+import MobileNav from './mobile-nav';
 import * as S from './simpletons';
 
 export { SmoothScroll, MobileNav, S};
