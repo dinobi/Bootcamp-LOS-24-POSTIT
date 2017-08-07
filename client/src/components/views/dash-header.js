@@ -1,4 +1,5 @@
 import React from 'react';
+import '../helpers'
 
 class DashHeader extends React.Component {
     render() {
@@ -7,7 +8,7 @@ class DashHeader extends React.Component {
 			<nav className="amber">
 				<div className="nav-wrapper">
 					<a href="index.html" className="dashboard-logo">
-						<img src="https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/blob/master/client/src/images/postit-logo.png" alt="postit-logo"/></a>
+						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
 					<a icon-label="mobile-menu" className="nav-mobile">
 						<span></span>
 						<span></span>

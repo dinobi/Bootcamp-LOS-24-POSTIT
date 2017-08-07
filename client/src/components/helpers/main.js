@@ -1,6 +1,5 @@
 import $ from 'jquery';
 
-const main =
 $(document).ready(() => {
   const mobileNav = $('#mobile-nav');
   // Responsive page header navigation
@@ -37,7 +36,7 @@ $(document).ready(() => {
   }); // End of smooth scroll
 
   // Wikipedia search Request
-  $('.search button').on('click', () => {
+  $('.search-wiki button').on('click', () => {
     $('form').submit(() => false);
     let searchTerm = $('#search-wiki').val();
     if (searchTerm === '' || searchTerm === undefined) {
@@ -53,7 +52,7 @@ $(document).ready(() => {
         success: (data) => {
           let contentUI = `<div><h5>${data[0]}</h5><br>`;
           if (data[2].length < 3) {
-            contentUI += `<p><em>'${data[1]}</em><br>${data[2]}</p></div>`;
+            contentUI += `<p><em>${data[1]}</em><br>${data[2]}</p></div>`;
             $('.search-result').html(contentUI);
           } else {
             for (let i = 1; i < 10; i += 1) {
@@ -71,5 +70,3 @@ $(document).ready(() => {
     }
   }); // end of wiki search
 });
-
-export default main;

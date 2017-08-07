@@ -1,4 +1,4 @@
 import DashHeader from './dash-header';
-import Footer from './footer';
+import SideMenu from './dash-menu';
 
-export { DashHeader, Footer };
+export { DashHeader, SideMenu };
