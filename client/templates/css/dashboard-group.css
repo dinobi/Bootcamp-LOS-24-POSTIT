@@ -20,7 +20,7 @@
 .dashboard-group .card {
     height: 108px;
 }
-.right {
+.dashboard-group .card .right {
 	position: absolute;
 	right: 24px;
 	bottom: 24px;

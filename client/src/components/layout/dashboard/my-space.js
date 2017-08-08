@@ -1,50 +1,6 @@
 import React from 'react';
 import { DashHeader, SideMenu, FeatureCard } from '../../views';
 
-const featureCards = {
-    post: {
-        imgDesc: '../../../images/write-post.png',
-        imgAlt: 'post message image',
-        title: 'Write Post',
-        description: 'Compose a post and send as broadcast to group members',
-        link: '#messages',
-        linkTitle: 'Compose'        
-    },
-    createGroup: {
-        imgDesc: '../../../images/create-group.png',
-        imgAlt: 'create group image',
-        title: 'Create Group',
-        description: 'Create a new group, add members and start posting',
-        link: '#Groups',
-        linkTitle: 'New Group'        
-    },
-    addMember: {
-        imgDesc: '../../../images/add-member.png',
-        imgAlt: 'Add member image',
-        title: 'Add Member',
-        description: 'Add a new member to your created group for them to start sending and receiving posts within the group',
-        link: '#Group',
-        linkTitle: 'Add'        
-    },
-    viewMessages: {
-        imgDesc: '../../../images/view-messages.png',
-        imgAlt: 'View messages image',
-        title: 'View Messages',
-        description: 'View what your group members are writing about and stay in the know',
-        link: '#Messages',
-        linkTitle: 'Message'        
-    },
-    search: {
-        imgDesc: ['../../../images/search-postit.png', '../../images/search-wikipedia.png'],
-        imgAlt: ['Search postit image', 'Search wikipedia image'],
-        title: ['Search Postit', 'Search Wikipedia'],
-        description: ['Search for a user who has registered with postit, or any group to see if they exist on postit.',
-        'Search wikipedia right from your inbox and start posting messages backed by fact.'],
-        link: ['#Search', '#Search-Wiki'],
-        linkTitle: 'Start'        
-    }
-}
-
 class MySpace extends React.Component {
   render() {
     return (
@@ -64,78 +20,96 @@ class MySpace extends React.Component {
                 <div className="features">
                   <div className="row">
                     <div className="col s12 m4">
-                      { 
-                        FeatureCard(
-                          featureCards.post.imgDesc,
-                          featureCards.post.imgAlt,
-                          featureCards.post.title,
-                          featureCards.post.link,
-                          featureCards.post.linkTitle,
-                          featureCards.post.description
-                        ) 
-                      }
+                      <div className="card small">
+                        <div className="card-image waves-effect waves-block waves-light">
+                        <img className="activator" src={ FeatureCard.post.imgDesc } alt={ FeatureCard.post.imgAlt }/>
+                      </div>
+                      <div className="card-content">
+                        <span className="card-title activator grey-text text-darken-4">{ FeatureCard.post.title }<i className="material-icons right">more_vert</i></span>
+                        <p><a href= { FeatureCard.post.link }>{ FeatureCard.post.linkTitle }</a></p>
+                      </div>
+                      <div className="card-reveal">
+                        <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                        <p>{ FeatureCard.post.description }</p>
+                      </div>
+                      </div>
                     </div>
                       <div className="col s12 m4">
-                        { 
-                        FeatureCard(
-                          featureCards.createGroup.imgDesc,
-                          featureCards.createGroup.imgAlt,
-                          featureCards.createGroup.title,
-                          featureCards.createGroup.link,
-                          featureCards.createGroup.linkTitle,
-                          featureCards.createGroup.description
-                        ) 
-                      }
+                        <div className="card small">
+                          <div className="card-image waves-effect waves-block waves-light">
+                          <img className="activator" src={ FeatureCard.createGroup.imgDesc } alt={ FeatureCard.createGroup.imgAlt }/>
+                        </div>
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4">{ FeatureCard.createGroup.title }<i className="material-icons right">more_vert</i></span>
+                          <p><a href= { FeatureCard.createGroup.link }>{ FeatureCard.createGroup.linkTitle }</a></p>
+                        </div>
+                        <div className="card-reveal">
+                          <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                          <p>{ FeatureCard.createGroup.description }</p>
+                        </div>
+                        </div>
                       </div>
                     <div className="col s12 m4">
-                      { 
-                        FeatureCard(
-                          featureCards.addMember.imgDesc,
-                          featureCards.addMember.imgAlt,
-                          featureCards.addMember.title,
-                          featureCards.addMember.link,
-                          featureCards.addMember.linkTitle,
-                          featureCards.addMember.description
-                        ) 
-                      }
+                      <div className="card small">
+                          <div className="card-image waves-effect waves-block waves-light">
+                          <img className="activator" src={ FeatureCard.addMember.imgDesc } alt={ FeatureCard.addMember.imgAlt }/>
+                        </div>
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4">{ FeatureCard.addMember.title }<i className="material-icons right">more_vert</i></span>
+                          <p><a href= { FeatureCard.addMember.link }>{ FeatureCard.addMember.linkTitle }</a></p>
+                        </div>
+                        <div className="card-reveal">
+                          <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                          <p>{ FeatureCard.addMember.description }</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col s12 m4">
-                      { 
-                        FeatureCard(
-                          featureCards.viewMessages.imgDesc,
-                          featureCards.viewMessages.imgAlt,
-                          featureCards.viewMessages.title,
-                          featureCards.viewMessages.link,
-                          featureCards.viewMessages.linkTitle,
-                          featureCards.viewMessages.description
-                        ) 
-                      }
+                      <div className="card small">
+                          <div className="card-image waves-effect waves-block waves-light">
+                          <img className="activator" src={ FeatureCard.viewMessages.imgDesc } alt={ FeatureCard.viewMessages.imgAlt }/>
+                        </div>
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4">{ FeatureCard.viewMessages.title }<i className="material-icons right">more_vert</i></span>
+                          <p><a href= { FeatureCard.viewMessages.link }>{ FeatureCard.viewMessages.linkTitle }</a></p>
+                        </div>
+                        <div className="card-reveal">
+                          <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                          <p>{ FeatureCard.viewMessages.description }</p>
+                        </div>
+                      </div>
                     </div>
                     <div className="col s12 m4">
-                      { 
-                        FeatureCard(
-                          featureCards.search.imgDesc,
-                          featureCards.search.imgAlt,
-                          featureCards.search.title,
-                          featureCards.search.link,
-                          featureCards.search.linkTitle,
-                          featureCards.search.description
-                        ) 
-                      }
+                      <div className="card small">
+                          <div className="card-image waves-effect waves-block waves-light">
+                          <img className="activator" src={ FeatureCard.search.imgDesc[0] } alt={ FeatureCard.search.imgAlt[0] }/>
+                        </div>
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4">{ FeatureCard.search.title[0] }<i className="material-icons right">more_vert</i></span>
+                          <p><a href= { FeatureCard.search.link[0] }>{ FeatureCard.search.linkTitle[0] }</a></p>
+                        </div>
+                        <div className="card-reveal">
+                          <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                          <p>{ FeatureCard.search.description[0] }</p>
+                        </div>
+                      </div>
                     </div>
                     <div className="col s12 m4">
-                      { 
-                        FeatureCard(
-                          featureCards.search.imgDesc[1],
-                          featureCards.search.imgAlt[1],
-                          featureCards.search.title[1],
-                          featureCards.search.link,
-                          featureCards.search.linkTitle[1],
-                          featureCards.search.description[1]
-                        ) 
-                      }
+                      <div className="card small">
+                          <div className="card-image waves-effect waves-block waves-light">
+                          <img className="activator" src={ FeatureCard.search.imgDesc[1] } alt={ FeatureCard.search.imgAlt[1] }/>
+                        </div>
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4">{ FeatureCard.search.title[1] }<i className="material-icons right">more_vert</i></span>
+                          <p><a href= { FeatureCard.search.link[1] }>{ FeatureCard.search.linkTitle[1] }</a></p>
+                        </div>
+                        <div className="card-reveal">
+                          <span className="card-title grey-text text-darken-4">Write Post<i className="material-icons right">close</i></span>
+                          <p>{ FeatureCard.search.description[1] }</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
