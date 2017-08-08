@@ -7,6 +7,6 @@ import '../styles/base.css';
 
 const app = document.getElementById('app')
 ReactDOM.render(
-  <Router history = {hashHistory}>
+  <Router history = { hashHistory }>
   </Router>
   , app);

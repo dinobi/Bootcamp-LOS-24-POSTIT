@@ -1,31 +1,22 @@
 	.card1 {background: #2196F3; cursor: pointer;} .card2 {background: #9C27B0; cursor: pointer;}
 	.card3 {background: #F44336; cursor: pointer;} .card4 {background: #4CAF50; cursor: pointer;}
 
-.notify-counter span{
-	display: inline-block;
-	margin-right: 1rem;
-	font-weight: 700;
-	cursor: pointer;
-}
-.notify-counter .critical{
-	color: #F44336;
-}
-.notify-counter .urgent{
-	color: #2196F3;
-}
-.notify-counter .normal{
-	color: #4CAF50;
-}
-
-.dashboard-group .card {
-    height: 108px;
-}
-.right {
+.notification-counter {
 	position: absolute;
-	right: 24px;
-	bottom: 24px;
+	top: 30px;
+	right: 30px;
+	border-radius: 50%;
+	background: #B71C1C;
+	height: 30px;
+	width: 30px;
+	padding: 7px;
+	margin-left: 30rem;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	z-index: 100;
 }
 
-.dashboard-group .card i:hover {
-    color: #ff6f00;
+.dashboard-group card {
+	max-height: 30rem;
 }
