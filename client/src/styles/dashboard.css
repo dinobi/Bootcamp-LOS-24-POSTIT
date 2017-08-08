@@ -1,6 +1,7 @@
 	.dashboard-ui {
 		width: 100%;
-        margin: 0 auto;
+		margin: 0 auto;
+		background-color: #FFC107;
 		overflow: hidden;
 	}
 
