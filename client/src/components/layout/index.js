@@ -7,5 +7,6 @@ import Group from './dashboard/group';
 import Members from './dashboard/members';
 import Messages from './dashboard/messages';
 import Search from './dashboard/search';
+import AccountDetails from './dashboard/account-details';
 
-export { Landing, Register, Login, MySpace, Groups, Group, Members, Messages, Search };
+export { Landing, Register, Login, MySpace, Groups, Group, Members, Messages, Search, AccountDetails };
