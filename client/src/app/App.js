@@ -4,6 +4,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import 'jquery';
 import '../components/helpers/mobile-nav';
 import '../components/helpers/wiki-search';
+import { GroupCard } from '../components/views'
 import { Landing, Register, Login, MySpace, Groups, Group, Search, AccountDetails } from '../components/layout'
 import '../styles/base.css';
 

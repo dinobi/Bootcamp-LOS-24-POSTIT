@@ -1,5 +1,5 @@
 import React from 'react';
-import { DashHeader, SideMenu } from '../../views';
+import { DashHeader, SideMenu, GroupCard } from '../../views';
 
 class Groups extends React.Component {
   render() {
@@ -18,13 +18,14 @@ class Groups extends React.Component {
                 </div>
                 <div className="features dashboard-group">
                   <div className="row">
+                    <GroupCard groupTitle={"Your title"} criticalCount= {0} urgentCount= {0} normalCount= {0} />
                     <div className="col s12 m4">
                       <div className="card">
                         <div className="card-content">
                           <span className="card-title activator grey-text text-darken-4 truncate">Create Group<i className="material-icons right">add</i></span>
                         </div>											
                       </div>
-                    </div>
+                    </div>                  
                   </div>
                 </div>
               </div>			
