@@ -10,7 +10,9 @@ class Register extends React.Component {
           <div className="row">
 			<div className="col s12 m4 headline">
 			  <h1 className="heading">Register with PostIt</h1>
-			  <h6 className="brief">PostIt is built to allow family, friends and colleagues meetup in groups to share messages in a fun way whenever they want.</h6>
+			  <h6 className="brief">
+                PostIt is built to allow family, friends and colleagues meetup in groups to share messages in a fun way whenever they want.
+              </h6>
 			  <div className="quick-access">
 			    <p>Already joined PostIt? <a href="#login">Sign in</a></p>
 			  </div>
