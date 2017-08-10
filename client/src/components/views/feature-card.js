@@ -28,7 +28,7 @@ const FeatureCard = {
         imgAlt: 'View messages image',
         title: 'View Messages',
         description: 'View what your group members are writing about and stay in the know',
-        link: '#Messages',
+        link: '#group',
         linkTitle: 'Message'        
     },
     search: {

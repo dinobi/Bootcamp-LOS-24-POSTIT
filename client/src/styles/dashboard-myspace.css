@@ -2,6 +2,15 @@
   background-color: #e0e0e0 !important;
   z-index: 0;
 }
+
+.dashboard-myspace a {
+  color: #FFC107;
+}
+.dashboard-myspace a:hover, .dashboard-myspace a:focus,
+.dashboard-myspace i:hover, .dashboard-myspace i:hover {
+  color: #ff6f00;
+}
+
 .bot-msg {
   margin-bottom: 30px;
   background-color: #FFA000;

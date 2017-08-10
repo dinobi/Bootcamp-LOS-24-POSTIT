@@ -1,6 +1,5 @@
 import $ from 'jquery';
 
-const wikiSearch = () => {
 // Wikipedia search Request
     $('.search button').on('click', () => {
       $('form').submit(() => false);
@@ -35,6 +34,3 @@ const wikiSearch = () => {
         });
       }
     }); // end of wiki search
-}
-
-export default wikiSearch;

@@ -8,7 +8,7 @@ class SideMenu extends React.Component {
 				<section className="my-tab">My Tab</section>
 					<ul className="menu-nav">
 						<li className="dashboard-menu-item">
-							<a className="active" href="#index"><i className="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
+							<a className="active" href="#my-space"><i className="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
 						</li>
 						<li className="dashboard-menu-item">
 							<a href="#group"><i className="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
