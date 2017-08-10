@@ -27,7 +27,7 @@ class Search extends React.Component {
 					    <label for="groups">Groups</label>
 					  </div>
 					</div>
-                    <SearchForm SearchContext = '#search-postit'/>
+                    <SearchForm SearchContext = "#search-postit"/>
                   </fieldset>
                 </form>
               </div>

@@ -19,7 +19,7 @@ class SearchWiki extends React.Component {
                 </div>
                 <form id="search-form">
 				  <fieldset className="search-term">
-                    <SearchForm SearchContext = { "#search-wiki" }/>
+                    <SearchForm SearchContext = "#search-wiki" />
                   </fieldset>
                 </form>
                 <section class="search-result">
