@@ -1,12 +1,12 @@
 import React from 'react';
 
-class DashHeader extends React.Component {
+class MainHeader extends React.Component {
     render() {
       return (
-        <header className="dashboard-header">
+        <header>
 			<nav className="amber">
-				<div className="nav-wrapper">
-					<a href="index.html" className="dashboard-logo">
+				<div className="container nav-wrapper">
+					<a href="#index" className="postit-logo">
 						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
 					<a icon-label="mobile-menu" className="nav-mobile">
 						<span></span>
@@ -14,8 +14,10 @@ class DashHeader extends React.Component {
 						<span></span>
 					</a>
 					<ul className="nav-list right hide-on-med-and-down">
-						<li className="nav-item"><a href="#more"><i className="material-icons">more_vert</i></a></li>
-						<li className="nav-item"><a href="#create-group"><button className="btn btn-create">Create a new group</button></a></li>
+					  <li className="nav-item"><a href="#">About</a></li>
+					  <li className="nav-item"><a href="#login">Login</a></li>
+					  <li className="nav-item"><a href="#register">Register</a></li>
+					  <li className="nav-item"><a href="#login"><button className="btn btn-create">Create a new group</button></a></li>
 					</ul>
 				</div>
 				<div className="mobile-nav">
@@ -27,5 +29,5 @@ class DashHeader extends React.Component {
     }
 }
 
-export default DashHeader;
+export default MainHeader;
 
