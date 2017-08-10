@@ -5,14 +5,16 @@ import 'jquery';
 import '../components/helpers/mobile-nav';
 import '../components/helpers/wiki-search';
 import { GroupCard } from '../components/views'
-import { Landing, Register, Login, MySpace, Groups, Group, Search, AccountDetails } from '../components/layout'
+import { 
+  Landing, Register, Login, MySpace, Groups, Search, SearchWiki, AccountDetails 
+} from '../components/layout'
 import '../styles/base.css';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Groups/>
+        <SearchWiki />
       </div>
     );
   }
