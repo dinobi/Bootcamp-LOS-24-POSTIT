@@ -59,29 +59,27 @@
 	color: #757575;
 	font-family: "Open Sans", sans-serif;
 }
-.compose-form {
+.message-box {
 	margin: 10px 0 0 20px;
 	display: flex;
 	align-items: flex-start;
 }
-.compose-form textarea{
+.message-box textarea{
 	background: #FFF8E1;
-	resize: none;
 	color: #212121;
 	width: 85%;
-	min-height: 44px;
 	overflow: hidden;
-	padding: 10px;
+	padding: .25rem 1rem;
 	border: 2px solid #FFA000;
 	margin-right: 10px;
 	border-radius: 5px;
 	resize: none;
 }
-.compose-form textarea:focus {
+.message-box textarea:focus {
 	background: #fff;
 	border-color: #FFA000;
 	outline: none;
 }
-.compose-form .btn {
+.message-box .btn {
 	width: 12%;
 }
