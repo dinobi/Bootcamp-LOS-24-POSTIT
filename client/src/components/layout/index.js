@@ -9,5 +9,6 @@ import MessageBoard from './dashboard/message-board';
 import Search from './dashboard/search';
 import SearchWiki from './dashboard/search-wiki'
 import AccountDetails from './dashboard/account-details';
+import NewGroup from './dashboard/create-group'
 
-export { Landing, Register, Login, MySpace, Groups, Group, Members, MessageBoard, Search, SearchWiki, AccountDetails };
+export { Landing, Register, Login, MySpace, Groups, Group, Members, MessageBoard, Search, SearchWiki, AccountDetails, NewGroup };
