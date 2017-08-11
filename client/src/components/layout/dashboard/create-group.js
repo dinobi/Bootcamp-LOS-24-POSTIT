@@ -18,11 +18,9 @@ class NewGroup extends React.Component {
                 </div>
                 <div className="features">
                   <form id="create-group-form">
-                    <fieldset>				
-                      <input placeholder="Enter a group name" id="group_name" type="text" className="validate"/>
-                      <label className="active" for="group_name">Group Name</label>						
-                      <input placeholder="Enter a group description" id="group-description" type="text" className="validate"/>
-                      <label className="active" for="group-description">Group description</label>
+                    <fieldset className="input-field">				
+                      <input placeholder="Enter a group name" id="group_name" type="text" className="validate"/>						
+                      <textarea placeholder="Enter group description" id="group-description" className="validate"/>
                     </fieldset>
 					<button type="submit" className="btn btn-create">Submit</button>
 				  </form>
