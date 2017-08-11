@@ -74,25 +74,36 @@
 		overflow: hidden;
 		overflow-y: auto;
 		margin: 0 -0.75rem;
-		transition: all .5s ease;
-		-moz-transition: all .5s ease;
-		-webkit-transition: all .5s ease;
-	}
-	#dashboard-ui .card {
-		overflow: hidden;
-	}
-	#dashboard-ui .card .card-title {
-		font-size: 24px;
-		font-size: 2.4rem;
-		font-weight: 300;
-	}
-	#dashboard-ui .card a, .card i {
-		color: #FFC107;
-	}
-	#dashboard-ui small {
-		margin: 0;
 	}
 
-	
+::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+    background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+    background: #757575;
+	-webkit-border-radius: 1ex;
+	border-radius: 1ex;
+}
+::-webkit-scrollbar-corner {
+    background: #757575;
+}	
+
+/** General Style for all dashboard card **/ 
+	.dashboard-ui .card {
+		overflow: hidden;
+	}
+	.dashboard-ui .card .card-title {
+		font-size: 24px;
+		font-size: 2.4rem;
+		font-weight: 400;
+	}
+	.dashboard-ui .card a, .card i {
+		color: #FFC107;
+	}
+	.dashboard-ui small {
+		margin: 0;
+	}
 	
 	
