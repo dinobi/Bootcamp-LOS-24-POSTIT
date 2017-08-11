@@ -50,7 +50,7 @@ $(document).ready(() => {
   }); // end of wiki search
 
 //Auto resize textarea to fit content
-  $('.message-box').on( 'change keyup keydown paste cut', 'textarea', function (){
+  $('.message-box').on( 'change keydown paste cut', 'textarea', function (){
       $(this).height(0).height(this.scrollHeight);
   }).find( 'textarea' ).change();
   

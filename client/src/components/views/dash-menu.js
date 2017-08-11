@@ -24,7 +24,8 @@ class SideMenu extends React.Component {
 						</li>
 						<li className="dashboard-menu-item">
 							<a href="#login.html"><i className="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
-						</li>							
+						</li>
+						{ this.props.back}						
 					</ul>
 				<section className="utility">Hello Utility</section>
 

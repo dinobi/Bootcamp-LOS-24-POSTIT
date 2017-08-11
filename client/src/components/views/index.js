@@ -6,5 +6,6 @@ import FeatureCard from './feature-card';
 import SearchForm from './search-form';
 import GroupCard from './group-card';
 import MessageBox from './message-box';
+import Message from './message-log';
 
-export { MainHeader, DashHeader, SideMenu, Footer, FeatureCard, SearchForm, GroupCard, MessageBox };
+export { MainHeader, DashHeader, SideMenu, Footer, FeatureCard, SearchForm, GroupCard, MessageBox, Message };
