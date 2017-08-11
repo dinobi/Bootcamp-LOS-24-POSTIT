@@ -5,6 +5,7 @@ import 'jquery';
 import '../components/helpers/main';
 import { Landing, Register, Login, MySpace, Groups, Group, Search, SearchWiki, AccountDetails, MessageBoard, NewGroup
 } from '../components/layout'
+import NotFound from '../components/helpers/not-found'
 import '../styles/base.css';
 
 class App extends React.Component {
@@ -13,17 +14,18 @@ class App extends React.Component {
       <Router history = { hashHistory }>
         <div>
           <Route exact path='/' component={ Landing }/>
-          <Route path='/register' component={ Register }/>
-          <Route path='/login' component={ Login }/>
-          <Route exact path='/my-space' component={ MySpace }/>
-          <Route exact path='/create-group' component={ NewGroup }/>
+          <Route exact path='/register' component={ Register }/>
+          <Route exact path='/login' component={ Login }/>
+          <Route path='/my-space' component={ MySpace }/>
+          <Route path='/create-group' component={ NewGroup }/>
           <Route path='/groups' component={ Groups }/>
-          <Route path='/groups/:group-name' component={ Group }/>
+          <Route exact path='/groups/:group-name' component={ Group }/>
           <Route path='/groups/:group-name/message-board' component={ MessageBoard }/>
           <Route path='/groups/:group-name/members' component={ Group }/>
           <Route path='/search' component={ Search }/>
           <Route path='/search-wiki' component={ SearchWiki }/>
           <Route path='/account-details' component={ AccountDetails }/>
+          <Route path='' component={ NotFound }/>
         </div>   
       </Router>
     );
