@@ -6,7 +6,7 @@ class MainHeader extends React.Component {
         <header>
 			<nav className="amber">
 				<div className="container nav-wrapper">
-					<a href="#index" className="postit-logo">
+					<a href="#landing" className="postit-logo">
 						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
 					<a icon-label="mobile-menu" className="nav-mobile">
 						<span></span>

@@ -6,7 +6,7 @@ class Login extends React.Component {
       <section className="container">
 
 		<form id="auth-form">
-		  <a href="#index"><img className="form-logo" src="../../../images/postit-icon.png" alt="postit-icon"/></a>
+		  <a href="#landing"><img className="form-logo" src="../../../images/postit-icon.png" alt="postit-icon"/></a>
 		  <p className="form-brief">Login to your account:</p>  		
 		  <div className="input-field">				
 		  	<input type="text" id="username" placeholder="Enter your username or email"/>
@@ -27,8 +27,8 @@ class Login extends React.Component {
 		</form>
 		<section className="external">
 		<div className="row">
-			<div className="col s6 md6"><a><i className="material-icons">memory</i>Forgot your password?</a></div>
-			<div className="col s6 md6"><a href="register.html"><i className="material-icons">lock</i>Don't have an account?</a></div>
+			<div className="col s6 md6"><a href="#register"><i className="material-icons">memory</i>Forgot your password?</a></div>
+			<div className="col s6 md6"><a href="#register"><i className="material-icons">lock</i>Don't have an account?</a></div>
 		</div>
 	  </section>
 
