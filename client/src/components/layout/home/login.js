@@ -6,7 +6,7 @@ class Login extends React.Component {
       <section className="container">
 
 				<form id="auth-form">
-					<a href="#landing"><img className="form-logo" src="../../../images/postit-icon.png" alt="postit-icon"/></a>
+					<a href="#/"><img className="form-logo" src="../../../images/postit-icon.png" alt="postit-icon"/></a>
 					<p className="form-brief">Login to your account:</p>  		
 					<div className="input-field">				
 						<input type="text" id="username" placeholder="Enter your username or email"/>

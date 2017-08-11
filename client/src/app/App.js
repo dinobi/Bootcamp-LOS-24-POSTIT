@@ -14,18 +14,17 @@ class App extends React.Component {
       <Router history = { hashHistory }>
         <div>
           <Route exact path='/' component={ Landing }/>
-          <Route exact path='/register' component={ Register }/>
-          <Route exact path='/login' component={ Login }/>
-          <Route path='/my-space' component={ MySpace }/>
+          <Route path='/register' component={ Register }/>
+          <Route path='/login' component={ Login }/>
+          <Route exact path='/my-space' component={ MySpace }/>
           <Route path='/create-group' component={ NewGroup }/>
-          <Route path='/groups' component={ Groups }/>
+          <Route exact path='/groups' component={ Groups }/>
           <Route exact path='/groups/:group-name' component={ Group }/>
           <Route path='/groups/:group-name/message-board' component={ MessageBoard }/>
           <Route path='/groups/:group-name/members' component={ Group }/>
           <Route path='/search' component={ Search }/>
           <Route path='/search-wiki' component={ SearchWiki }/>
           <Route path='/account-details' component={ AccountDetails }/>
-          <Route path='' component={ NotFound }/>
         </div>   
       </Router>
     );

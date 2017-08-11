@@ -6,7 +6,7 @@ class DashHeader extends React.Component {
         <header className="dashboard-header">
 			<nav className="amber">
 				<div className="nav-wrapper">
-					<a href="index.html" className="dashboard-logo">
+					<a href="#/" className="dashboard-logo">
 						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
 					<a icon-label="mobile-menu" className="nav-mobile">
 						<span></span>
