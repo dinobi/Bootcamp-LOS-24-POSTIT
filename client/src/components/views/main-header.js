@@ -8,7 +8,7 @@ class MainHeader extends React.Component {
 				<div className="container nav-wrapper">
 					<a href="#/" className="postit-logo">
 						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
-					<a icon-label="mobile-menu" className="nav-mobile">
+					<a aria-label="mobile-menu" className="nav-mobile">
 						<span></span>
 						<span></span>
 						<span></span>

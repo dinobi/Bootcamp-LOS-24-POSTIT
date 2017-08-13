@@ -1,19 +1,32 @@
 import React from 'react';
 import { DashHeader, SideMenu, SearchForm, SearchResult, Copyright } from '../../views';
+import api from '../../helpers/api'
 
 class Search extends React.Component {
   constructor() {
     super();
     this.state = {
       searchQuery: '',
+      searchResult: [],
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(e) {
     this.setState({
       searchQuery: e.target.value,
     });
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    //todo: make your search api call here
+    
+    const results = [];
+    this.setState({
+      searchResult: results,
+    })
   }
 
   render() {
@@ -43,10 +56,11 @@ class Search extends React.Component {
                     </div>
                     <SearchForm searchContext = "search-postit" 
                       searchQuery={ this.state.searchQuery } 
-                      handleChange= { this.handleChange }/>
+                      handleChange={ this.handleChange }
+                      handleClick={ this.handleClick }/>
                   </fieldset>
                 </form>
-                <SearchResult/>
+                <SearchResult searchResult={ this.state.searchResult }/>
               </div>
             </section>
           </div>
