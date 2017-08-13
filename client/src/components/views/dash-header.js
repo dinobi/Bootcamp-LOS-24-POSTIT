@@ -1,5 +1,4 @@
 import React from 'react';
-import '../helpers'
 
 class DashHeader extends React.Component {
     render() {
@@ -7,9 +6,9 @@ class DashHeader extends React.Component {
         <header className="dashboard-header">
 			<nav className="amber">
 				<div className="nav-wrapper">
-					<a href="index.html" className="dashboard-logo">
-						<img src="../../images/postit-logo.png" alt="postit-logo"/></a>
-					<a icon-label="mobile-menu" className="nav-mobile">
+					<a href="#/" className="dashboard-logo">
+					  <img src="../../images/postit-logo.png" alt="postit-logo"/></a>
+					<a aria-label="mobile-menu" className="nav-mobile">
 						<span></span>
 						<span></span>
 						<span></span>

@@ -1,5 +1,5 @@
-.card1 {background: #2196F3; cursor: pointer;} .card2 {background: #9C27B0; cursor: pointer;}
-.card3 {background: #F44336; cursor: pointer;} .card4 {background: #4CAF50; cursor: pointer;}
+	.card1 {background: #2196F3; cursor: pointer;} .card2 {background: #9C27B0; cursor: pointer;}
+	.card3 {background: #F44336; cursor: pointer;} .card4 {background: #4CAF50; cursor: pointer;}
 
 .notify-counter span{
 	display: inline-block;
@@ -7,7 +7,6 @@
 	font-weight: 700;
 	cursor: pointer;
 }
-
 .notify-counter .critical{
 	color: #F44336;
 }
@@ -21,8 +20,7 @@
 .dashboard-group .card {
     height: 108px;
 }
-
-.dashboard-group .card .right {
+.dashboard-group .right {
 	position: absolute;
 	right: 24px;
 	bottom: 24px;
