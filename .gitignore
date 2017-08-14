@@ -29,3 +29,6 @@ roboto*
 /coverage
 
 npm-debug.log*
+
+# github-directory
+/templates
