@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
-const Members = () => {
+const Members =   
   <div>
-      <h3>Group Members</h3>
+    <h3>Group Members</h3>
   </div>
-}
 
 export default Members;

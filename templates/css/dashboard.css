@@ -36,7 +36,6 @@
 		background-color: #000;
 		border-top: 1px solid #000;
 	}
-
 	.dashboard-menu li a {
 	    color: #fff;
 		text-decoration: none;
@@ -66,12 +65,12 @@
 	/*--Dashboard Content Setup--*/
 	.dashboard-content {
 		text-align: left;
-		background-color: #fff;
 		color: #000;
 		height: 85vh;
 		overflow: hidden;
 		overflow-y: auto;
 		margin: 0 -0.75rem;
+		background-color: #fff !important;
 		transition: all .5s ease;
 		-moz-transition: all .5s ease;
 		-webkit-transition: all .5s ease;

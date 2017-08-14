@@ -12,7 +12,7 @@ $(document).ready(() => {
       mobileNav.addClass('expanded').slideDown(500);
       $(this).addClass('open');
     }
-  });// end of header nav  
+  });// end of header nav
 
 //Auto resize textarea to fit content
   $('.message-box').on( 'change keydown paste cut', 'textarea', function (){
