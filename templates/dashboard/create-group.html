@@ -11,31 +11,70 @@
 		<script src="../../client/main.js"></script>
 	</head>
 	
-	<body id="#Top">
-	<section class="container-fluid">
-		<section id="dashboard-ui">
-		<div class="row">
-			<aside class="col-sm-3 dashboard-menu">
-				<h4>User Name</h4>
-				<ul class="dasboard-menu">
-					<li>
-						<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
-					</li>
-					<li>
-						<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
-					</li>
-					<li>
-						<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
-					</li>
-					<li>
-						<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
-					</li>
-					<li>
-						<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
-					</li>
-					<li>
-						<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
-					</li>
+	<body class="amber">
+	    <header class="dashboard-header">
+			<nav class="amber">
+				<div class="nav-wrapper">
+					<a href="index.html" class="dashboard-logo"><img src="../images/postit-logo.png" title="PostIt"></a>
+					<a icon-label="mobile-menu" class="nav-mobile">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<ul class="nav-list right hide-on-med-and-down">
+						<li class="nav-item"><a href="#more"><i class="material-icons">more_vert</i></a></li>
+						<li class="nav-item"><a href="#create-group"><button class="btn btn-create">Create a new group</button></a></li>
+					</ul>
+				</div>
+				<div class="mobile-nav">
+					<div class="container" id="mobile-nav"></div>					
+				</div>
+			</nav>
+		</header>
+		<main id="dashboard-ui">
+			<div class="row">
+				<aside class="col s12 m3 l2">
+					<div class="dashboard-menu">
+
+						<section class="my-tab"> My Tab</section>
+						<ul class="menu-nav">
+							<li class="dashboard-menu-item">
+								<a href="index.html"><i class="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a class="active" href="group.html"><i class="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="search.html"><i class="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="search-wikipedia.html"><i class="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="account-details.html"><i class="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							</li>
+							<li class="dashboard-menu-item">
+								<a href="../auth.postit/login.html"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							</li>
+							
+						</ul>
+						<section class="utility">Hello Utility</section>
+
+					</div>
+				</aside>
+				<section class="col s12 m9 l10">
+					<div class="dashboard-content">
+						<div class="bot-msg">
+							<h3>Create a new group</h3>
+						</div>
+						<div>
+						
+							<form id="create-group-form">					
+								<input placeholder="Enter a group name" id="group_name" type="text" class="validate">
+								<label class="active" for="group_name">Group Name</label>
+						
+								<input placeholder="Enter a group description" id="group-description" type="text" class="validate">
+								<label class="active" for="group-description">Group description</label>
 					
 				</ul>
 			</aside>

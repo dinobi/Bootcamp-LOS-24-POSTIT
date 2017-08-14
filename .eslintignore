@@ -2,5 +2,5 @@ server/test/*
 server/coverage/*
 client/config/*
 client/scripts/*
-client/*
+client/public/*
 
