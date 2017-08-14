@@ -16,7 +16,9 @@
     "build-client": "cd client && npm run build",
     "test-client": "cd client && npm run test",
     "start-full": "concurrently \"npm run start\" \"npm run client\"",
-    "client": "node start-client.js"
+    "start-prod": "concurrently \"npm run start\" \"npm run client-prod\"",
+    "client": "node start-client.js",
+    "client-prod": "node start-client-prod.js"
   },
   "repository": {
     "type": "git",
