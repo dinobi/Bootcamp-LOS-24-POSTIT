@@ -13,8 +13,6 @@ $(document).ready(() => {
       $(this).addClass('open');
     }
   });// end of header nav
-<<<<<<< HEAD
-=======
 
   // Wikipedia search Request
   $('.search-wiki button').on('click', () => {
@@ -50,7 +48,6 @@ $(document).ready(() => {
       });
     }
   }); // end of wiki search
->>>>>>> 7d59da7768f5e78c4d0a3204a4dfe521bb7af987
 
 //Auto resize textarea to fit content
   $('.message-box').on( 'change keydown paste cut', 'textarea', function (){
