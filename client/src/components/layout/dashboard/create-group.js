@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import { DashHeader, SideMenu, Copyright } from '../../views';
+=======
+import { DashHeader, SideMenu } from '../../views';
+>>>>>>> d278e7235a2af234eeebac54cd5d9e74c4bba712
 
 class NewGroup extends React.Component {
   render() {
@@ -28,7 +32,11 @@ class NewGroup extends React.Component {
               </div>			
 			</section>
           </div>
+<<<<<<< HEAD
 		  <Copyright/>
+=======
+		  <small className="dashboard-copy">&copy;Bootcamp24, Andela Nigeria. All rights reserved.</small>
+>>>>>>> d278e7235a2af234eeebac54cd5d9e74c4bba712
 		</main>
       </div>
     );
