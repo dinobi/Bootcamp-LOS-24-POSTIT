@@ -21,12 +21,9 @@ class Landing extends React.Component {
                 <p>Already joined PostIt? <a href="#login">Sign in</a></p>
               </div>
             </div>
-<<<<<<< HEAD
             <div className="col s12 m6" id="landing-image">
               <img src={ LandingImg } alt="postit-landing-img"/>
             </div>
-=======
->>>>>>> d278e7235a2af234eeebac54cd5d9e74c4bba712
           </div>
         </main>
         <Footer/>
