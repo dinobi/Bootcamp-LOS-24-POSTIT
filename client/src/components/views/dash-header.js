@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from '../../images/postit-logo.png'
 
 class DashHeader extends React.Component {
     render() {
@@ -7,7 +8,7 @@ class DashHeader extends React.Component {
 			<nav className="amber">
 				<div className="nav-wrapper">
 					<a href="#/" className="dashboard-logo">
-					  <img src="../../images/postit-logo.png" alt="postit-logo"/></a>
+					  <img src={ Logo } alt="postit-logo"/></a>
 					<a aria-label="mobile-menu" className="nav-mobile">
 						<span></span>
 						<span></span>

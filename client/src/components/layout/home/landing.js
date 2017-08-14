@@ -1,5 +1,6 @@
 import React from 'react';
 import { MainHeader, Footer } from '../../views';
+import LandingImg from '../../../images/postit-landing.png'
 
 class Landing extends React.Component {
   render() {
@@ -19,6 +20,9 @@ class Landing extends React.Component {
               </a>
                 <p>Already joined PostIt? <a href="#login">Sign in</a></p>
               </div>
+            </div>
+            <div className="col s12 m6" id="landing-image">
+              <img src={ LandingImg } alt="postit-landing-img"/>
             </div>
           </div>
         </main>

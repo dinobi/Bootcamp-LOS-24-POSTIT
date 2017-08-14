@@ -47,7 +47,7 @@ class Register extends React.Component {
 							<label className="active" htmlFor="password">Password</label>
 							</div>
 							<div className="input-field col s6">
-							<input placeholder="Enter your phone" id="phone-number" type="number" class="validate"/>
+							<input placeholder="Enter your phone" id="phone-number" type="number" className="validate"/>
 							<label className="active" htmlFor="phone-number">Phone Number</label>
 							</div>
 						</div>

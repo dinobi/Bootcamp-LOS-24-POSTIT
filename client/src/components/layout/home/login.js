@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '../../../images/postit-icon.png'
 
 class Login extends React.Component {
   render() {
@@ -6,8 +7,8 @@ class Login extends React.Component {
       <section className="container">
 
 				<form id="auth-form">
-					<a href="#/"><img className="form-logo" src="../../../images/postit-icon.png" alt="postit-icon"/></a>
-					<p className="form-brief">Login to your account:</p>  		
+					<a href="#/"><img className="form-logo" src={ Icon } alt="postit-icon"/></a>
+					<p className="form-brief">Login to your postit account:</p>  		
 					<div className="input-field">				
 						<input type="text" id="username" placeholder="Enter your username or email"/>
 					<label className="active" htmlFor="username">Username</label>
