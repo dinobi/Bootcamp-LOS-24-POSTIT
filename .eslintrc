@@ -8,8 +8,20 @@
     "mocha": true
   },
   "globals": {
-        "$": false
+        "$": false,
+        "describe": true,
+        "expect": true,
+        "should": true,
+        "React" : true
     },
+  "parserOptions": {
+     "ecmaFeatures" : {
+         "jsx" : true
+      } 
+  },
+  "plugins" : [
+    "react"
+  ],
   "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
