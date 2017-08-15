@@ -29,7 +29,7 @@ class Landing extends React.Component {
               </div>
             </div>
             <div className="col s12 m6" id="landing-image">
-              <img src={LandingImg} alt="postit-landing-img" />
+              <img src={ LandingImg } alt="postit-landing-img" />
             </div>
           </div>
         </main>

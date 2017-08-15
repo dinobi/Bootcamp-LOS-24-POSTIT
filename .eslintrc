@@ -32,6 +32,7 @@
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { "commonjs": true }],
+    "react/no-unknown-property": [2, {"ignore": ["class", "for"]}],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
