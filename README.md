@@ -1,7 +1,7 @@
 # Bootcamp-LOS-24-PostIt
 I (Dinobi) took on the development of this project as part of the requirements to become a fellow at Andela  https://andela.com/. I thank Phil, Victoria, Tracy, Femi and the rest of the BFA/LFA's of bootcamp-los-24 for all their support
 
-![postit-landing](https://raw.githubusercontent.com/dinobi/Bootcamp-LOS-24-POSTIT/blob/master/client/src/images/postit-landing.png)
+![postit-landing](https://user-images.githubusercontent.com/13672476/29314076-3ff95124-81b4-11e7-824c-d2757e27d5a4.png)
 
 # PostIt
 
