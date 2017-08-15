@@ -11,7 +11,7 @@ module.exports = {
     // Silence WebpackDevServer's own logs since they're generally not useful.
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
-    contentBase: './client/src',
+    contentBase: './client/public',
     port: 8000,
     watchContentBase: true,
     hot: true,

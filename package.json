@@ -1,7 +1,7 @@
 {
   "name": "postit-app",
   "main": "index.js",
-  "description": "full stack web application",
+  "description": "full stack web messaging application",
   "scripts": {
     "babel-version": "babel --version",
     "build": "babel src -d lib",
