@@ -17,7 +17,7 @@ module.exports = {
     hot: true,
     quiet: true,
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: [require.resolve('react-dev-utils/webpackHotDevClient'),
     './client/src/app/index.js'],
   module: {
@@ -30,7 +30,7 @@ module.exports = {
         use: [
           {
             options: {
-              formatter: eslintFormatter,              
+              formatter: eslintFormatter,
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -107,6 +107,15 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Hammer: 'hammerjs/hammer'
+    }),
+    // Search for equal or similar files and deduplicate them in the output
+    new webpack.optimize.DedupePlugin(),
+    // Uglify and compress code
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

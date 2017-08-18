@@ -16,7 +16,7 @@ class NewGroup extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2">
-              <SideMenu />
+              <SideMenu active="groups"/>
             </aside>
             <section className="col s12 m9 l10">
               <div className="dashboard-content">

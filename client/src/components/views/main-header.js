@@ -15,7 +15,6 @@ class MainHeader extends React.Component {
 						<span></span>
 					</a>
 					<ul className="nav-list right hide-on-med-and-down">
-					  <li className="nav-item"><a href="#about">About</a></li>
 					  <li className="nav-item"><a href="#login">Login</a></li>
 					  <li className="nav-item"><a href="#register">Register</a></li>
 					  <li className="nav-item"><a href="#login"><button className="btn btn-create">Create a new group</button></a></li>

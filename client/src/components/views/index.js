@@ -1,6 +1,6 @@
 import MainHeader from './main-header'
 import DashHeader from './dash-header';
-import SideMenu from './dash-menu';
+import SideMenu from './side-menu';
 import Footer from './footer';
 import SearchForm from './search-form';
 import SearchResult from './search-result';
