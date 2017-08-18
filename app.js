@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Default catch-all route that sends a message on all PostIt hit.
-const indexPath = path.join(__dirname, '../client/public/index.html');
+const indexPath = path.join(__dirname, '/client/public/index.html');
 const publicPath =
-express.static(path.join(__dirname, '../client/public/dist'));
+express.static(path.join(__dirname, '/client/public/dist'));
 
 app.use('/dist', publicPath);
 app.get('/', (req, res) => { res.sendFile(indexPath); });
