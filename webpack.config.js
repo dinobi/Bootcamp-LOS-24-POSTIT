@@ -108,15 +108,6 @@ module.exports = {
       'window.jQuery': 'jquery',
       Hammer: 'hammerjs/hammer'
     }),
-    // Search for equal or similar files and deduplicate them in the output
-    new webpack.optimize.DedupePlugin(),
-    // Uglify and compress code
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // This is necessary to emit hot updates (currently CSS only):
