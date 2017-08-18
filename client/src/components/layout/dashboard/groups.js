@@ -1,7 +1,6 @@
 import React from "react";
 import { DashHeader, SideMenu, GroupCard, Copyright } from "../../views";
 
-class Groups extends React.Component {
 /**
  * Groups layout component that provides access to groups a user belongs to
  * 
@@ -10,6 +9,13 @@ class Groups extends React.Component {
  * @param {component} <GroupCard/> - Card representing individual group a user belong to
  * @param {component} <Copyright/> - The dashboard footer copyright information.
  */
+class Groups extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      groups: [],
+    }
+  }
   render() {
     return (
       <div>
@@ -17,7 +23,7 @@ class Groups extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2">
-              <SideMenu />
+              <SideMenu active="groups" />
             </aside>
             <section className="col s12 m9 l10">
               <div className="dashboard-content dashboard-myspace">
@@ -26,7 +32,7 @@ class Groups extends React.Component {
                 </div>
                 <div className="features dashboard-group">
                   <div className="row">
-                    <GroupCard />
+                    {this.state.groups}
                     <div className="col s12 m4">
                       <div className="card">
                         <div className="card-content">

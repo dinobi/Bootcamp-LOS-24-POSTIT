@@ -7,7 +7,7 @@ class Footer extends React.Component {
 			<div className="divider"></div>
 			<ul className="right">
 				<li>
-					<a href="#google-plus">
+					<a>
 						<i className="fa fa-google-plus"></i>
 					</a>
 				</li>					
@@ -17,12 +17,12 @@ class Footer extends React.Component {
 					</a>
 				</li>
 				<li>
-					<a href="#facebook">
+					<a>
 						<i className="fa fa-facebook"></i>
 					</a>
 				</li>
 				<li>
-					<a href="#twitter">
+					<a>
 						<i className="fa fa-twitter"></i>
 					</a>
 				</li>
