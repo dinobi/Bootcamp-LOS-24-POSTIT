@@ -6,18 +6,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 
 module.exports = {
-  devServer: {
-    inline: true,
-    // Silence WebpackDevServer's own logs since they're generally not useful.
-    // It will still show compile warnings and errors with this setting.
-    clientLogLevel: 'none',
-    contentBase: './client/public',
-    port: 8000,
-    watchContentBase: true,
-    hot: true,
-    quiet: true,
-  },
-  devtool: 'eval-cheap-source-map',
+  devtool: 'source-map',
   entry: [require.resolve('react-dev-utils/webpackHotDevClient'),
     './client/src/app/index.js'],
   module: {
@@ -82,6 +71,7 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: ['react-html-attrs', 'transform-decorators-legacy',
             'transform-class-properties'],
+          compact: true,
         }
       },
       {
