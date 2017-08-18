@@ -6,11 +6,4 @@ const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 
 const server = http.createServer(app);
-
-if (process.env.NODE_ENV === 'production') {
-  const webpack = require.resolve('webpack');
-  const config = require.resolve('../../../webpack.prod.config.js');
-  app.use(webpack(config));
-}
-
 server.listen(port);
