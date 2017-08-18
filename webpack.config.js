@@ -17,7 +17,7 @@ module.exports = {
     hot: true,
     quiet: true,
   },
-  devtool: 'eval-cheap-source-map',
+  devtool: 'source-map',
   entry: [require.resolve('react-dev-utils/webpackHotDevClient'),
     './client/src/app/index.js'],
   module: {
