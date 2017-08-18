@@ -3,6 +3,8 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import routes from './server/routes';
 
+const path = require('path');
+
 // Set express app
 const app = express();
 
@@ -14,9 +16,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Default catch-all route that sends a message on all PostIt hit.
-app.all('/', (req, res) => res.status(200).send({
-  message: 'This is PostIT. Sign up now to start enjoying!',
-}));
+const indexPath = path.join(__dirname, '../client/public/index.html');
+const publicPath = express.static(path.join(__dirname, '../client/public/dist'));
+
+app.use('/dist', publicPath);
+app.get('/', (req, res) => { res.sendFile(indexPath); });
 
 // Default catch-all route that sends an error message on all incorrect req.
 app.all('api/*', (req, res) => res.status(404).send({
