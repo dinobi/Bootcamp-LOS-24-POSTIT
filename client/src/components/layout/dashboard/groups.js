@@ -14,8 +14,11 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       groups: [],
-    }
+      hasErrored: false,
+			isLoading: false,
+		};
   }
+
   render() {
     return (
       <div>

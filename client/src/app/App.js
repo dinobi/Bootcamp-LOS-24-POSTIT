@@ -8,7 +8,7 @@ import '../components/helpers/main';
 import { Landing, Register, Login, ResetPassword, Dashboard, Groups,
   Group, Search, SearchWiki, AccountDetails, MessageBoard, Members, NewGroup
 } from '../components/layout';
-import '../styles/base.css';
+import '../styles/base.scss';
 
 /**
  * App component that creates routing relationship between
