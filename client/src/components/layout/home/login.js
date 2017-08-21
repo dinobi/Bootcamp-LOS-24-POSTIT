@@ -7,8 +7,7 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			user: [],
-			hasErrored: true,
-			isLoading: false,
+			hasErrored: false
 		};
 	}
 
