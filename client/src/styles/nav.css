@@ -66,7 +66,7 @@ nav ul.left {
 #mobile-nav {
 		display: none;
 }
-#mobile-nav .nav-item{
+#mobile-nav .nav-item, #mobile-nav .dashboard-menu-item{
 		display: none;
 }
 .nav-mobile {
@@ -74,7 +74,7 @@ nav ul.left {
 }
 
 /**Nav Mobile**/
-@media (max-width:992px){
+@media (max-width:600px){
 	.mobile-nav {
 		display: block;
 		position: relative;
@@ -88,7 +88,7 @@ nav ul.left {
 		padding: 10px 0;
 	}
 		
-	#mobile-nav .nav-list{
+	#mobile-nav .nav-list, #mobile-nav .menu-nav{
 		margin: 0;
 		display: block;
 		max-height: none;
@@ -99,22 +99,22 @@ nav ul.left {
 		transition: all 0.2s ease-out;
 		z-index: 100;
 	}
-	#mobile-nav .nav-item{
+	#mobile-nav .nav-item, #mobile-nav .dashboard-menu-item {
 		display: block;
 		text-align: left;
 		margin: 0;
-		padding: 10px 0;
+		padding: 0;
 	}
 
-	#mobile-nav .nav-item a {
+	#mobile-nav .nav-item a, #mobile-nav .dashboard-menu-item a {
 		display: block;
-		font-size: 24px;
+		font-size: 18px;
 		font-weight: 400;
 		transition: all .2s ease;
 		-moz-transition: all .2s ease;
 		-webkit-transition: all .2s ease;
 	}
-	#mobile-nav .nav-item a:hover{
+	#mobile-nav .nav-item a:hover, #mobile-nav .dashboard-menu-item a:hover {
 		color: #fff;
 		padding: 0 10px;
 		text-decoration: none;

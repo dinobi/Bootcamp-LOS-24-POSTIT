@@ -1,6 +1,6 @@
-import React from "react";
-import { DashHeader, SideMenu, SearchForm, Copyright } from "../../views";
-import $ from "jquery";
+import React from 'react';
+import $ from 'jquery';
+import { DashHeader, SideMenu, SearchForm, Copyright } from '../../views';
 
 class SearchWiki extends React.Component {
 /**
@@ -35,30 +35,30 @@ class SearchWiki extends React.Component {
   handleClick(e) {
     e.preventDefault();
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: `https://en.wikipedia.org/w/api.php?action=opensearch&search=
         ${this.state.searchQuery}&format=json&callback=?`,
-      dataType: "json",
+      dataType: 'json',
       cache: false,
-      success: data => {
-        let searchTitle = data[0];
-        let resultTitle = data[1];
-        let resultBody = data[2];
+      success: (data) => {
+        const searchTitle = data[0];
+        const resultTitle = data[1];
+        const resultBody = data[2];
         let content = `<div><h5>${searchTitle}</h5><br>`;
         if (data[2].length < 3) {
           content += `<p><em>${resultTitle}</em><br>${resultBody}</p></div>`;
-          $(".search-result").html(content);
+          $('.search-result').html(content);
         } else {
           for (let i = 1; i < 10; i += 1) {
             content += `<p><em>${resultTitle[i]}</em><br>
             ${resultBody[i]}</p><br>`;
           }
-          content += "</div>";
-          $(".search-result").html(content);
+          content += '</div>';
+          $('.search-result').html(content);
         }
       },
       error: () => {
-        $(".search-result").html("An error was encountered, try again soon!");
+        $('.search-result').html('An error was encountered, try again soon!');
       }
     });
   }
@@ -69,7 +69,7 @@ class SearchWiki extends React.Component {
         <DashHeader />
         <main className="dashboard-ui">
           <div className="row">
-            <aside className="col s12 m3 l2">
+            <aside className="col s12 m3 l2 hide-on-small-and-down">
               <SideMenu active="search-wiki"/>
             </aside>
             <section className="col s12 m9 l10">

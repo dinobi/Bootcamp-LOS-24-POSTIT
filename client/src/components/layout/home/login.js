@@ -1,10 +1,17 @@
-import React from "react";
-import Icon from "../../../images/postit-icon.png";
+import React from 'react';
+import Icon from '../../../images/postit-icon.png';
 
 class Login extends React.Component {
-/**
- * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
- */
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			user: [],
+			hasErrored: true,
+			isLoading: false,
+		};
+	}
+
   render() {
     return (
       <section className="container">
@@ -31,6 +38,11 @@ class Login extends React.Component {
 						/>
 						<label className="active" htmlFor="password">Password</label>
 					</div>
+					{ this.state.hasErrored ?
+						<p className="alert error-alert">
+							Authentication failed. Incorrect username or password
+						</p>
+						: '' }
 					<button type="submit" className="btn btn-login">Submit</button>
 					<p className="form-brief">Or login with any of this services:</p>
 					<div className="external">
