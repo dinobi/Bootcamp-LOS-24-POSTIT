@@ -24,7 +24,7 @@ class MessageBoard extends React.Component {
         <DashHeader />
         <main className="dashboard-ui">
           <div className="row">
-            <aside className="col s12 m3 l2">
+            <aside className="col s12 m3 l2 hide-on-small-and-down">
               <SideMenu back={backToGroup} active="groups" />
             </aside>
             <section className="col s12 m9 l10">

@@ -7,7 +7,7 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			user: [],
-			hasErrored: false,
+			hasErrored: true,
 			isLoading: false,
 		};
 	}
@@ -42,10 +42,7 @@ class Login extends React.Component {
 						<p className="alert error-alert">
 							Authentication failed. Incorrect username or password
 						</p>
-						:
-						<p className="alert success-alert">
-							Login Successful
-						</p> }
+						: '' }
 					<button type="submit" className="btn btn-login">Submit</button>
 					<p className="form-brief">Or login with any of this services:</p>
 					<div className="external">

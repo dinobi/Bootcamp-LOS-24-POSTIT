@@ -9,7 +9,7 @@ class DashHeader extends React.Component {
 	}
   handleClick(e) {	
     const mobileNav = $('#mobile-nav');
-    mobileNav.html($('.nav-list').html());
+    mobileNav.html($('.menu-nav').html());
     if (mobileNav.hasClass('expanded')) {
       $('#mobile-nav.expanded').removeClass('expanded').slideUp(500);
       $('.nav-mobile').removeClass('open');
@@ -23,15 +23,14 @@ class DashHeader extends React.Component {
         <header className="dashboard-header">
 			<nav className="amber">
 				<div className="nav-wrapper">
-					<a href="#/" className="dashboard-logo">
+					<a href="#dashboard" className="dashboard-logo">
 					  <img src={ Logo } alt="postit-logo"/></a>
 					<a aria-label="mobile-menu" className="nav-mobile" onClick={ () => this.handleClick() }>
 						<span></span>
 						<span></span>
 						<span></span>
 					</a>
-					<ul className="nav-list right hide-on-med-and-down">
-						<li className="nav-item"><a href="#more"><i className="material-icons">more_vert</i></a></li>
+					<ul className="nav-list right hide-on-small-and-down">
 						<li className="nav-item"><a href="#create-group"><button className="btn btn-create">Create a new group</button></a></li>
 					</ul>
 				</div>
