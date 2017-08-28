@@ -30,9 +30,6 @@ const App = () =>
         <Route path='/groups/:group-name/message-board'
           component={ MessageBoard }
         />
-        <Route path='/members'
-          component={ Members }
-        />
         <Route path='/groups/:group-name/members' component={ Members }/>
         <Route path='/search' component={ Search }/>
         <Route path='/search-wiki' component={ SearchWiki }/>
