@@ -5,6 +5,52 @@ import models from '../models';
 const salt = bcrypt.genSaltSync(2);
 export default {
   create(req, res) {
+    if (req.body.firstname === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'firstname field cannot be empty' },
+        userData: req.body
+      });
+    }
+    if (req.body.lastname === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'lastname field cannot be empty' },
+        userData: req.body
+      });
+    }
+
+    if (req.body.username === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'username field cannot be empty' },
+        userData: req.body
+      });
+    }
+
+    if (req.body.email === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'email field cannot be empty' },
+        userData: req.body
+      });
+    }
+
+    if (req.body.password === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'password field cannot be empty' },
+        userData: req.body
+      });
+    }
+
+    if (req.body.phone === '') {
+      return res.status(400)
+      .send({
+        error: { message: 'phone field cannot be empty' },
+        userData: req.body
+      });
+    }
     return models.User
       .create({
         firstname: req.body.firstname,
@@ -15,7 +61,7 @@ export default {
         phone: req.body.phone
       })
       .then(user => res.status(201)
-      .send({ message: 'User account successfully created.', UserData: user }))
+      .send({ message: 'User account successfully created.', userData: user }))
       .catch((error) => {
         console.log(error);
         res.status(400).send({ message:
@@ -26,13 +72,13 @@ export default {
   fetch(req, res) {
     return models.User
       .findAll({ attributes:
-        ['firstname', 'lastname', 'email', 'phone', 'createdAt', 'updatedAt']
+        ['id', 'firstname', 'lastname', 'username', 'email', 'phone', 'createdAt', 'updatedAt']
       })
       .then(users => res.status(200).send(users))
       .catch((error) => {
         console.log(error);
         res.status(400).send({
-          message: 'Bad request, check for correct API call'
+          error: { message: 'Bad request, check for correct API call' }
         });
       });
   },

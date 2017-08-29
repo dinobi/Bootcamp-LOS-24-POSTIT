@@ -14,12 +14,10 @@ export default (sequelize, DataTypes) => {
     },
     priority: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
-  }, {
-    classMethods: {
-      associate: (models) => {
-        // associations can be defined here
+      defaultValue: 'Normal',
+      allowNull: true,
+      validate: {
+        isIn: [['Normal', 'Urgent', 'Critical']]
       }
     }
   });

@@ -39,17 +39,17 @@ module.exports = (sequelize, DataTypes) => {
         len: [11, 13]
       }
     },
+    lastSeenTrigger: {
+      allowNull: true,
+      type: DataTypes.STRING
+    }
   });
   User.associate = (models) => {
     User.belongsToMany(models.Group, {
-      as: 'member',
-      through: 'GroupMembers',
-      foreignKey: 'userId'
+      through: 'UserGroup',
+      as: 'group',
+      foreignKey: 'username'
     });
-  };
-
-  User.associate = (models) => {
-    User.hasMany(models.Message, { foreignKey: 'userId', as: 'message' });
   };
   return User;
 };
