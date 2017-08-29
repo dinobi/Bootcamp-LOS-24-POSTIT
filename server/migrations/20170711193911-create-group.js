@@ -4,14 +4,17 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       groupname: {
-        type: Sequelize.STRING,
+        allowNull: false,
+        type: Sequelize.STRING,        
+        primaryKey: true,
       },
       description: {
+        allowNull: true,
         type: Sequelize.STRING,
+        defaultValue: 'There is no description for this group'
       },
       createdAt: {
         allowNull: false,

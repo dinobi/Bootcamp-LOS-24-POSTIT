@@ -4,31 +4,39 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       firstname: {
-        type: Sequelize.STRING,
+        allowNull: false,
+        type: Sequelize.STRING,        
+        primaryKey: true,
         validate: {
           isAlpha: true
         }
       },
       lastname: {
+        allowNull: false,
         type: Sequelize.STRING,
         validate: {
           isAplha: true
         }
       },
       username: {
+        allowNull: false,
         type: Sequelize.STRING,
         unique: true,
         primaryKey: true
       },
       email: {
+        allowNull: false,
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       phone: {
@@ -36,6 +44,10 @@ module.exports = {
         validate: {
           len: [11, 13],
         }
+      },
+      lastSeen: {
+        allowNull: true,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

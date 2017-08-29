@@ -22,7 +22,11 @@ module.exports = {
       },
       priority: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: 'Normal',
+        validate: {
+          isIn: [['Normal', 'Urgent', 'Critical']]
+        }
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , Sequelize*/) => {
-    queryInterface.dropTable('Message');
+    queryInterface.dropTable('Messages');
   }
 };

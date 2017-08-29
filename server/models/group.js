@@ -8,7 +8,8 @@ export default (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false, //  dont write to db if data is not supplied
+      allowNull: true, //  dont write to db if data is not supplied
+      defaultValue: 'There is no description for this group'
     }
   });
   Group.associate = (models) => {

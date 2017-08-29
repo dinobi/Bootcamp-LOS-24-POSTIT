@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [11, 13]
       }
     },
-    lastSeenTrigger: {
+    lastSeen: {
       allowNull: true,
       type: DataTypes.STRING
     }
