@@ -2,13 +2,15 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    if (!req.body.groupname) {
-      res.status(400).send({ message: 'A group name is required' });
-      return;
+    if (!req.body.groupname || req.body.groupname.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'A group name is required' }
+      });
     }
-    if (!req.body.description) {
-      res.status(400).send({ message: 'A group descritption is required' });
-      return;
+    if (!req.body.description || req.body.description.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'A group description is required' }
+      });
     }
     return models.Group
       .create({
@@ -21,27 +23,38 @@ export default {
         username: req.body.username,
         groupname: req.params.groupname
       });
-        res.status(201).send(group);
+        res.status(201).send({
+          message: `${group.groupname} was created successfully` });
       })
-      .catch(error => res.status(400).send(error, 'Group Name Already Exist'));
+      .catch((error) => {
+        if (error.errors[0].message === 'groupname must be unique') {
+          res.status(400).send({
+            error: { message: 'Group Name Already Exist' }
+          });
+        }
+      });
   },
   // Display a users created group
   fetch(req, res) {
     return models.Group
-      .findAll()
+      .findAll({ attributes:
+        ['groupname', 'description']
+      })
       .then(group => res.status(200).send(group))
       .catch((error) => {
-        res.status(400).send(error, 'There are no created groups');
+        res.status(400).send({
+          error: { message: 'There are no created groups' }
+        });
       });
   },
   // Add member to group
   addMember(req, res) {
     if (!req.body.username) {
-      res.status(400).send({ message: 'Bad request, *username* is required' });
+      res.status(400).send({ message: 'Bad request, username is required' });
       return;
     }
     if (!req.body.groupname) {
-      res.status(400).send({ message: 'Bad request, *groupname* is required' });
+      res.status(400).send({ message: 'Bad request, groupname is required' });
       return;
     }
     return models.User
@@ -58,8 +71,14 @@ export default {
               username: req.body.username,
               groupname: req.params.groupname
             })
-            .then(result => res.status(201).send(result))
-            .catch(error => res.status(400).send({ message: 'Bad request' }));
+            .then(success => res.status(201).send(success))
+            .catch((error) => {
+              if (error.errors[0].message === 'username must be unique') {
+                res.status(400).send({
+                  error: { message: 'User already belongs to this group' }
+                });
+              }
+            });
         }
       });
   },

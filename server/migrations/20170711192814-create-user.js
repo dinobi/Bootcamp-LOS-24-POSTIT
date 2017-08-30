@@ -8,8 +8,7 @@ module.exports = {
       },
       firstname: {
         allowNull: false,
-        type: Sequelize.STRING,        
-        primaryKey: true,
+        type: Sequelize.STRING,
         validate: {
           isAlpha: true
         }
