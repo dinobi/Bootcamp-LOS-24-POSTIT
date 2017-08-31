@@ -255,7 +255,7 @@ describe('PostIt Api Tests: ', () => {
     });
   // creating a new user account
   //
-  // Correct response message
+  // quality response message
     it('responds with correct message for account creation ', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
@@ -272,140 +272,139 @@ describe('PostIt Api Tests: ', () => {
           res.body.message.should.equal('User account successfully created.');
           done();
         });
+    });    
+    it('responds with correct message for unique username violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          username: 'dinobaggio',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Username already exists');
+          done();
+        });
     });
-    
-    // it('responds with correct message for unique username violation', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       username: 'dinobaggio',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('Username already exist.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message for unique email violation', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       email: 'test@user.com',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('Email already exist.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message for email format violation', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       email: 'testuser',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('Username already exist.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message for firstname format violation', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       firstname: 'fistname12',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('Firstname cannot contain digits.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message for laststname format violation', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       lastname: 'lastname34',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('lastname cannot contain digits.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if firstname field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       firstname: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('firstname field cannot be empty.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if lastname field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       lastname: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('lastname field cannot be empty.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if username field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       username: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('username field cannot be empty.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if email field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       email: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('email field cannot be empty.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if password field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       password: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('password field cannot be empty.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if phone field is empty', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       phone: '',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('phone field cannot be empty.');
-    //       done();
-    //     });
-    // });
+    it('responds with correct message for unique email violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          email: 'test@user.com',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Email already exists');
+          done();
+        });
+    });
+    it('responds with correct message for email format violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          email: 'testuser',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Enter a valid email');
+          done();
+        });
+    });
+    it('responds with correct message for firstname format violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'fistname12',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Firstname cannot contain digits');
+          done();
+        });
+    });
+    it('responds with correct message for laststname format violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          lastname: 'lastname34',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('lastname cannot contain digits');
+          done();
+        });
+    });
+    it('responds with correct message if firstname field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('firstname field cannot be empty');
+          done();
+        });
+    });
+    it('responds with correct message if lastname field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          lastname: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('lastname field cannot be empty');
+          done();
+        });
+    });
+    it('responds with correct message if username field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          username: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('username field cannot be empty');
+          done();
+        });
+    });
+    it('responds with correct message if email field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          email: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('email field cannot be empty');
+          done();
+        });
+    });
+    it('responds with correct message if password field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          password: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('password field cannot be empty.');
+          done();
+        });
+    });
+    it('responds with correct message if phone field is empty', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          phone: '',
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('phone field cannot be empty.');
+          done();
+        });
+    });
     // it('responds with correct message if phone numbers is less than 11', (done) => {
     //   chai.request(app)
     //     .post('/api/user/signup/')
@@ -462,27 +461,40 @@ describe('PostIt Api Tests: ', () => {
     //     });
     // });
   });
-  describe('Create a new group', () => {
-
-  });
-
-  describe('Add user to a new group', () => {
-
-  });
-
-  describe('Send message to a group', () => {
-
-  });
-
-  describe('View all messages in a group', () => {
-
-  });
 
   describe('View all registered users', () => {
 
   });
 
-  describe('View current registered user', () => {
+  describe('Search postit for users and groups', () => {
+
+  });
+
+  describe('Create a new group', () => {
+
+  });
+
+  describe('View all created groups', () => {
+
+  });
+
+  describe('Delete an existing group', () => {
+
+  });
+
+  describe('Add or remove user from a group', () => {
+
+  });
+
+  describe('View group members', () => {
+
+  });
+  
+  describe('Send message to a group', () => {
+
+  });
+
+  describe('View all group messages', () => {
 
   });
 });
