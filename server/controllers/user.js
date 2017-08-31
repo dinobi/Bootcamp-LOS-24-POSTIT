@@ -65,15 +65,25 @@ export default {
       .send({ message: 'User account successfully created.', userData: user }))
       .catch((error) => {
         if (error.errors[0].message === 'username must be unique') {
-          res.status(400).send({ message: 'Username already exists' });
+          res.status(400).send({
+            error: { message: 'Username already exists' }
+          });
         } else if (error.errors[0].message === 'email must be unique') {
-          res.status(400).send({ message: 'Email already exists' });
+          res.status(400).send({
+            error: { message: 'Email already exists' }
+          });
         } else if (error.errors[0].message === 'Validation isAlpha on firstname failed') {
-          res.status(400).send({ message: 'Firstname cannot contain digits' });
+          res.status(400).send({
+            error: { message: 'Firstname cannot contain digits' }
+          });
         } else if (error.errors[0].message === 'Validation isAlpha on lastname failed') {
-          res.status(400).send({ message: 'Lastname cannot contain digits' });
+          res.status(400).send({
+            error: { message: 'Lastname cannot contain digits' }
+          });
         } else if (error.errors[0].message === 'Validation isEmail on email failed') {
-          res.status(400).send({ message: 'Enter a valid email' });
+          res.status(400).send({
+            error: { message: 'Enter a valid email' }
+          });
         }
       });
   },
