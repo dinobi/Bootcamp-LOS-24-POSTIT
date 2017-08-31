@@ -89,8 +89,48 @@ export default {
   },
   //Login in a user
   auth(req, res) {
+    if (!req.body.username || req.body.username.trim() === '') {
+      res.status(404).send({
+        message: 'Authentication failed. Username is required'
+      });
+      return req.body;
+    }
+    if (!req.body.password || req.body.password.trim() === '') {
+      res.status(404).send({
+        message: 'Authentication failed. Password is required'
+      });
+      return req.body;
+    }
+    const data = req.body.username;
+    if (data.match(/@/) !== null) {
+      return models.User
+      .findOne({ where: { email: data } })
+      .then((user) => {
+        if (!user) {
+          res.status(404).send({
+            message: 'Authentication failed.Username is incorrect or does not exist'
+          });
+        } else if (user) {
+          // check if password matches
+          if (!(bcrypt.compareSync(req.body.password, user.password))) {
+            res.status(404).send({
+              message: 'Authentication failed. Incorrect password' });
+          } else {
+            // User is found and password is correct
+            // create a token
+            const token = jwt.sign({ data: user }, 'PrivateKey', {
+              expiresIn: '24h' // expires in 24 hours
+            });
+            // return success message including token in JSON format
+            res.status(200).send({
+              message: 'Authentication successful', authToken: token
+            });
+          }
+        }
+      });
+    }
     models.User
-      .findOne({ where: { username: req.body.username } })
+      .findOne({ where: { username: data } })
       .then((user) => {
         if (!user) {
           res.status(404).send({

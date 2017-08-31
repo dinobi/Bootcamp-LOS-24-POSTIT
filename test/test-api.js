@@ -536,19 +536,176 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    // it('can also take a unique email as username', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signin/')
-    //     .type('form')
-    //     .send({
-    //       username: 'test@user.com',
-    //       password: '123456'
-    //     })
-    //     .end((error, res) => {
-    //       res.should.have.status(200);
-    //       done();
-    //     });
-    // });
+    it('can also take a unique email as username for authentication', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'test@user.com',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+    it('does not authenticate an unknown username', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'unknownUser',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('does not authenticate an unknown email as username', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'unknownemail@postit.comr',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('does not authenticate an incorrect password', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'dinobaggio',
+          password: '1234567'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed. Incorrect password');
+          done();
+        });
+    });
+    it('requires a username', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: '',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    it('requires a password', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'test@user.com',
+          password: ''
+        })
+        .end((error, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+    // Correct response messages
+    it('responds with correct message for successful authentication', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'dinobaggio',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication successful');
+          done();
+        });
+    });
+    it('responds with correct message for successful authentication using email', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'test@user.com',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication successful');
+          done();
+        });
+    });
+    it('responds with correct message for unknown username', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'unknownUsername',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed.Username is incorrect or does not exist');
+          done();
+        });
+    });
+    it('responds with correct message for unknown email', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'unknownEmail@postit.comr',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed.Username is incorrect or does not exist');
+          done();
+        });
+    });
+    it('responds with correct message for incorrect password', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'dinobaggio',
+          password: '1234567'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed. Incorrect password');
+          done();
+        });
+    });
+    it('responds with correct message for empty username field', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: '',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed. Username is required');
+          done();
+        });
+    });
+    it('responds with correct message for empty password field', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'test@user.com',
+          password: ''
+        })
+        .end((error, res) => {
+          res.body.message.should.equal('Authentication failed. Password is required');
+          done();
+        });
+    });
   });
 
   describe('View all registered users', () => {
