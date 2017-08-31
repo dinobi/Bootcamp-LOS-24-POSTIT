@@ -19,17 +19,18 @@ export default {
       })
       .then((group) => {
         models.UserGroup
-      .create({
-        username: req.body.username,
-        groupname: req.params.groupname
-      });
-        res.status(201).send({
-          message: `${group.groupname} was created successfully` });
+        .create({
+          username: req.body.username,
+          groupname: req.params.groupname
+        })
+        .then(res.status(201).send({
+          message: `Group - ${group.groupname}, was created successfully`
+        }));
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
           res.status(400).send({
-            error: { message: 'Group Name Already Exist' }
+            error: { message: `Group - ${req.body.groupname}, Already Exist` }
           });
         }
       });
@@ -58,10 +59,16 @@ export default {
       .findAll({ attributes:
         ['groupname', 'description']
       })
-      .then(group => res.status(200).send(group))
+      .then((groups) => {
+        if (groups.length === 0) {
+          res.status(200).send({ message: 'You have not created any group' });
+        } else {
+          return res.status(200).send(groups);
+        }
+      })
       .catch((error) => {
         res.status(400).send({
-          error: { message: 'There are no created groups' }
+          error: { message: error }
         });
       });
   },
@@ -71,16 +78,16 @@ export default {
       res.status(400).send({ message: 'Bad request, username is required' });
       return;
     }
-    if (!req.params.groupname || req.params.groupname === '') {
+    if (!req.params.groupname || req.params.groupname.trim() === '') {
       res.status(400).send({ message: 'Bad request, go to group you want to edit' });
       return;
     }
     return models.Group
       .findOne({ where: { groupname: req.params.groupname } })
       .then((group) => {
-        // check if the username belongs to a registered user
+        // check if the group exists
         if (!group) {
-          res.status(404).send({
+          return res.status(404).send({
             message: 'Group not found or has not been created'
           });
         }
@@ -89,7 +96,7 @@ export default {
           .then((user) => {
             // check if the username belongs to a registered user
             if (!user) {
-              res.status(404).send({
+              return res.status(404).send({
                 message: 'Username not found. User has no PostIt account.'
               });
             }
@@ -101,20 +108,19 @@ export default {
                 if (result !== null) {
                   models.UserGroup.destroy({
                     where: { username: req.body.username,
-                    groupname: req.params.groupname }
+                      groupname: req.params.groupname }
                   });
                   return res.status(200).send({
                     message: `${req.body.username} was successfully removed from ${req.params.groupname}`
-                  })
-                } else {
-                  models.UserGroup.create({
-                    username: req.body.username,
-                    groupname: req.params.groupname
-                  })
-                  return res.status(201).send({
-                    message: `${req.body.username} was successfully added to ${req.params.groupname}`
                   });
                 }
+                models.UserGroup.create({
+                  username: req.body.username,
+                  groupname: req.params.groupname
+                });
+                return res.status(201).send({
+                  message: `${req.body.username} was successfully added to ${req.params.groupname}`
+                });
               });
           });
       });
@@ -147,8 +153,8 @@ export default {
     return models.Message
       .create({
         body: req.body.message,
-        from_user: req.body.from_user,
-        to_group: req.body.to_group,
+        from_user: req.body.username,
+        to_group: req.params.groupname,
         priority: req.body.priority
       })
       .then(message => res.status(201).send(message)) // message created
@@ -158,7 +164,7 @@ export default {
   fetchMessages(req, res) {
     return models.Message
       .findAll({
-        where: { to_group: [req.params.groupname] },
+        where: { to_group: req.params.groupname },
         attributes: [
           'body',
           'from_user',

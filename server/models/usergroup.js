@@ -11,6 +11,7 @@ export default (sequelize, DataTypes) => {
     },
     groupname: {
       type: DataTypes.STRING,
+      unique: false,
       allowNull: false,  //  dont write to db if data is not supplied
       refrences: {
         model: 'Group',
