@@ -89,6 +89,18 @@ export default {
   },
   //Login in a user
   auth(req, res) {
+    if (!req.body.username || req.body.username.trim() === '') {
+      res.status(404).send({
+        message: 'Authentication failed. Username is required'
+      });
+      return req.body;
+    }
+    if (!req.body.password || req.body.password.trim() === '') {
+      res.status(404).send({
+        message: 'Authentication failed. Password is required'
+      });
+      return req.body;
+    }
     const data = req.body.username;
     if (data.match(/@/) !== null) {
       return models.User
