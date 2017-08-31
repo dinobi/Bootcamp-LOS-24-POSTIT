@@ -255,7 +255,7 @@ describe('PostIt Api Tests: ', () => {
     });
   // creating a new user account
   //
-  // quality response message
+  // quality response messages
     it('responds with correct message for account creation ', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
@@ -264,7 +264,7 @@ describe('PostIt Api Tests: ', () => {
           firstname: 'dinobi',
           lastname: 'kenkwo',
           username: 'dinobaggio2',
-          email: 'test@user2.com',
+          email: 'dinobaggio2@postit.com',
           password: '123456',
           phone: '08032952998'
         })
@@ -278,7 +278,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          username: 'dinobaggio',
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio2',
+          email: 'dinobaggio@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('Username already exists');
@@ -290,7 +295,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          email: 'test@user.com',
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobiK',
+          email: 'dinobaggio2@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('Email already exists');
@@ -302,7 +312,46 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          email: 'testuser',
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio1',
+          email: 'dinobaggio',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Enter a valid email');
+          done();
+        });
+    });
+    it('responds with correct message for email format violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio4',
+          email: 'dinobaggio@postit',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((err, res) => {
+          res.body.error.message.should.equal('Enter a valid email');
+          done();
+        });
+    });
+    it('responds with correct message for email format violation', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio5',
+          email: 'dinobaggio-postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('Enter a valid email');
@@ -314,7 +363,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          firstname: 'fistname12',
+          firstname: 'dinobi6',
+          lastname: 'kenkwo',
+          username: 'dinobaggio6',
+          email: 'dinobaggio6@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('Firstname cannot contain digits');
@@ -326,10 +380,15 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          lastname: 'lastname34',
+          firstname: 'dinobi',
+          lastname: 'kenkwo7',
+          username: 'dinobaggio7',
+          email: 'dinobaggio7@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
-          res.body.error.message.should.equal('lastname cannot contain digits');
+          res.body.error.message.should.equal('Lastname cannot contain digits');
           done();
         });
     });
@@ -339,6 +398,11 @@ describe('PostIt Api Tests: ', () => {
         .type('form')
         .send({
           firstname: '',
+          lastname: 'kenkwo',
+          username: 'dinobaggio8',
+          email: 'dinobaggio8@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('firstname field cannot be empty');
@@ -350,7 +414,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
+          firstname: 'dinobi',
           lastname: '',
+          username: 'dinobaggio9',
+          email: 'dinobaggio9@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('lastname field cannot be empty');
@@ -362,7 +431,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
           username: '',
+          email: 'dinobi@postit.com',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('username field cannot be empty');
@@ -374,7 +448,12 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobi1',
           email: '',
+          password: '123456',
+          phone: '08032952998'
         })
         .end((err, res) => {
           res.body.error.message.should.equal('email field cannot be empty');
@@ -386,10 +465,15 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobi2',
+          email: 'dinobi2@postit.com',
           password: '',
+          phone: '08032952998'
         })
         .end((err, res) => {
-          res.body.error.message.should.equal('password field cannot be empty.');
+          res.body.error.message.should.equal('password field cannot be empty');
           done();
         });
     });
@@ -398,10 +482,15 @@ describe('PostIt Api Tests: ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          phone: '',
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobi3',
+          email: 'dinobi3@postit.com',
+          password: '123456',
+          phone: ''
         })
         .end((err, res) => {
-          res.body.error.message.should.equal('phone field cannot be empty.');
+          res.body.error.message.should.equal('phone field cannot be empty');
           done();
         });
     });
