@@ -1,4 +1,6 @@
 server/test/*
 server/coverage/*
-client/main.js
-client/jquery-1.11.3.min.js
+client/config/*
+client/scripts/*
+client/public/*
+

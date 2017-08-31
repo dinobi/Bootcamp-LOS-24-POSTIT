@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models';
 
-const salt = bcrypt.genSaltSync(2);
+const salt = bcrypt.genSaltSync(8);
 export default {
   //create a new user account
   create(req, res) {
@@ -101,8 +101,6 @@ export default {
             res.status(200).send({
               message: 'Authentication successful', authToken: token
             });
-            res.status(400)
-            .send({ message: 'Bad request. Account does not exist on postit' });
           }
         }
       });

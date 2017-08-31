@@ -16,3 +16,4 @@ ratings:
 exclude_paths:
 - node_modules/
 - server/test/
+- templates

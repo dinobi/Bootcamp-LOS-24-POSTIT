@@ -8,8 +8,20 @@
     "mocha": true
   },
   "globals": {
-        "$": false
+        "$": false,
+        "describe": true,
+        "expect": true,
+        "should": true,
+        "React" : true
     },
+  "parserOptions": {
+     "ecmaFeatures" : {
+         "jsx" : true
+      } 
+  },
+  "plugins" : [
+    "react"
+  ],
   "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -20,6 +32,7 @@
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { "commonjs": true }],
+    "react/no-unknown-property": [2, {"ignore": ["class", "for"]}],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
