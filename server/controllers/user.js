@@ -161,7 +161,7 @@ export default {
           .catch((error) => {
             if (error) {
               res.status(400).send({
-                error: { message: 'Bad request, Check search term or make the right API call' }
+                error: { message: 'Bad request. Check search term or make the right API call' }
               });
             }
           });
@@ -194,7 +194,7 @@ export default {
       .catch((error) => {
         if (error) {
           res.status(400).send({
-            error: { message: 'Bad request, Check search term or make the right API call' }
+            error: { message: 'Bad request. Check search term or make the right API call' }
           });
         }
       });

@@ -34,6 +34,24 @@ export default {
         }
       });
   },
+  delete(req, res) {
+    if (!req.params.groupname || req.params.groupname.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'Go to group you want to delete' }
+      });
+    }
+    return models.Group
+      .findOne({ where: { groupname: req.params.groupname } })
+      .then((group) => {
+        if (!group) {
+          return res.status(200).send({ message: `Group - ${req.params.groupname}, does not exist` });
+        }
+        models.Group.destroy({ where: { groupname: req.params.groupname } });
+        return res.status(200).send({
+          message: `Group - ${req.params.groupname}, has been deleted`
+        });
+      });
+  },
   // Display a users created group
   fetch(req, res) {
     return models.Group
@@ -47,47 +65,82 @@ export default {
         });
       });
   },
-  // Add member to group
-  addMember(req, res) {
-    if (!req.body.username) {
+  // Add/Remove member from group
+  editGroup(req, res) {
+    if (!req.body.username || req.body.username.trim() === '') {
       res.status(400).send({ message: 'Bad request, username is required' });
       return;
     }
-    if (!req.body.groupname) {
-      res.status(400).send({ message: 'Bad request, groupname is required' });
+    if (!req.params.groupname || req.params.groupname === '') {
+      res.status(400).send({ message: 'Bad request, go to group you want to edit' });
       return;
     }
-    return models.User
-      .findOne({ where: { username: req.body.username } })
-      .then((user) => {
+    return models.Group
+      .findOne({ where: { groupname: req.params.groupname } })
+      .then((group) => {
         // check if the username belongs to a registered user
-        if (!user) {
+        if (!group) {
           res.status(404).send({
-            message: 'Username not found. User has no PostIt account.'
+            message: 'Group not found or has not been created'
           });
-        } else if (user) {
-          return models.UserGroup
-            .create({
-              username: req.body.username,
-              groupname: req.params.groupname
-            })
-            .then(success => res.status(201).send(success))
-            .catch((error) => {
-              if (error.errors[0].message === 'username must be unique') {
-                res.status(400).send({
-                  error: { message: 'User already belongs to this group' }
-                });
-              }
-            });
         }
+        return models.User
+          .findOne({ where: { username: req.body.username } })
+          .then((user) => {
+            // check if the username belongs to a registered user
+            if (!user) {
+              res.status(404).send({
+                message: 'Username not found. User has no PostIt account.'
+              });
+            }
+            return models.UserGroup
+              .findOne({
+                where: { username: req.body.username, groupname: req.params.groupname }
+              })
+              .then((result) => {
+                if (result !== null) {
+                  models.UserGroup.destroy({
+                    where: { username: req.body.username,
+                    groupname: req.params.groupname }
+                  });
+                  return res.status(200).send({
+                    message: `${req.body.username} was successfully removed from ${req.params.groupname}`
+                  })
+                } else {
+                  models.UserGroup.create({
+                    username: req.body.username,
+                    groupname: req.params.groupname
+                  })
+                  return res.status(201).send({
+                    message: `${req.body.username} was successfully added to ${req.params.groupname}`
+                  });
+                }
+              });
+          });
       });
   },
   // Get List of group members
   fetchMembers(req, res) {
-    return models.UserGroup
-      .findAll({ where: { groupname: [req.params.groupname] } })
-      .then(result => res.status(200).send(result))
-      .catch(error => res.status(400).send({ message: "you've not added any members" } ));
+    return models.Group.findOne({ where: { groupname: req.params.groupname } })
+      .then((group) => {
+        if (!group) {
+          res.status(400).send({
+            error: { message: `Group - ${req.params.groupname} does not exist` }
+          });
+        } else {
+          return models.UserGroup
+          .findAll({ where: { groupname: req.params.groupname } })
+          .then((result) => {
+            if (result.length === 0) {
+              res.status(200).send({
+                message: 'You have not added any members'
+              });
+            } else {
+              res.status(200).send(result);
+            }
+          });
+        }
+      });
   },
   // Send a message to a group
   createMessage(req, res) {
