@@ -536,19 +536,19 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    // it('can also take a unique email as username', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signin/')
-    //     .type('form')
-    //     .send({
-    //       username: 'test@user.com',
-    //       password: '123456'
-    //     })
-    //     .end((error, res) => {
-    //       res.should.have.status(200);
-    //       done();
-    //     });
-    // });
+    it('can also take a unique email as username for authentication', (done) => {
+      chai.request(app)
+        .post('/api/user/signin/')
+        .type('form')
+        .send({
+          username: 'test@user.com',
+          password: '123456'
+        })
+        .end((error, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
   });
 
   describe('View all registered users', () => {
