@@ -7,7 +7,6 @@ const api = (body, url, method) => (
     if (sessionStorage.getItem('user') !== null) {
       headers.append('x-access-token', JSON.parse(sessionStorage.getItem('user')).token);
     }
-
     if (body === null) {
       body = '';
     }

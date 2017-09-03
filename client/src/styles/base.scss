@@ -64,6 +64,16 @@ main {
 		height: 50rem;
 	}
 @media (max-width:767px){
+	#landing-image img {
+		height: 50rem;
+	}
+	#landing-image {
+		position: relative;
+		top: 40px;
+		right: -20px;
+	}
+}
+@media (max-width:600px){
 	.headline {
 		text-align: center;
 	}

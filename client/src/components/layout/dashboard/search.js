@@ -1,34 +1,35 @@
-import React from "react";
+import React from 'react';
 import {
   DashHeader,
   SideMenu,
   SearchForm,
   SearchResult,
   Copyright
-} from "../../views";
-import api from "../../helpers/api";
-
-class Search extends React.Component {
+} from '../../views';
+import api from '../../helpers/api';
 /**
  * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
+ */
+class Search extends React.Component {
+/**
+ * SearchWiki Sets up a constructor and renders the following UI components.
  * 
- * @constructor
- * @param {object} state - Handle state of the value of searchQuery and searchResult.
- * @param {function} handleChange - Listener for changes to search query.
- * @param {function} handleClick - Listener for click event on search button in order to send search query.
+ * @constructor -initial state - setup initial state of the value of searchQuery and searchResult.
+ * @function handleChange - Listener for changes to search query.
+ * @function handleClick - Listener for click event on search button in order to send search query.
  * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SearchForm> - Search form gui for user to perform search request.
- * @param {component} <SearchResult> - Search result gui for user to view and act on search result.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <FeatureCard/> - Card that contains quick link to post features.
- * @param {component} <Copyright/> - The dashboard footer copyright information.
+ * @component <DashHeader/> - The dashboard header navigation.
+ * @component <SearchForm> - Search form gui for user to perform search request.
+ * @component <SearchResult> - Search result gui for user to view and act on search result.
+ * @component <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
+ * @component <FeatureCard/> - Card that contains quick link to post features.
+ * @component <Copyright/> - The dashboard footer copyright information.
  */
 
   constructor() {
     super();
     this.state = {
-      searchQuery: "",
+      searchQuery: '',
       searchResult: []
     };
     this.handleChange = this.handleChange.bind(this);
