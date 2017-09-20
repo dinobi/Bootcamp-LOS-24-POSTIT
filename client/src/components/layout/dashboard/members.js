@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { onMemberClick } from '../../../actions';
 
 class Members extends React.Component {
   constructor() {

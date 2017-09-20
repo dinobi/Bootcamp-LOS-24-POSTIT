@@ -5,7 +5,6 @@ import configuration from '../config/config.json';
 
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development' || 'test';
-
 const config = configuration[env];
 const db = {};
 
@@ -34,6 +33,6 @@ Object.keys(db).forEach((modelName) => {
 });
 
 db.sequelize = sequelize;
-db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
 export default db;

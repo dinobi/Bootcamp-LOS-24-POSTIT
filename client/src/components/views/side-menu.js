@@ -1,13 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import onLogoutUser from '../../actions/logout-user';
+import onLoadGroups from '../../actions/load-groups';
 
 class SideMenu extends React.Component {
- 
+  constructor(props) {
+		super(props);
+	}
+
   render() {
-		const { active = 'dashboard' } = this.props;
+		const { auth, active, back, onLogoutUser } = this.props;
+		const { email, username, phone } = auth.userData;
     return (
       <div className="dashboard-menu">
-        
-				<section className="my-tab">My Tab</section>
+
+				<section className="my-tab">
+					<h5><i className="fa fa-lock"></i>&nbsp;&nbsp;{ username }</h5>
+					<h6><i className="fa fa-asterisk"></i>&nbsp;&nbsp;{email}</h6>
+					<h6><i className="fa fa-asterisk"></i>&nbsp;&nbsp;{phone}</h6>
+					</section>
 					<ul className="menu-nav">
 						<li className="dashboard-menu-item">
 							<a href="#dashboard" className={ active === 'dashboard' ? 'active' : '' }><i className="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
@@ -25,15 +37,31 @@ class SideMenu extends React.Component {
 							<a href="#account-details" className={ active === 'account-details' ? 'active' : '' }><i className="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a href="#login"><i className="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							<a onClick = { onLogoutUser }><i className="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
 						</li>
-						{ this.props.back}						
+						{ back }
 					</ul>
-				<section className="utility">Hello Utility</section>
+				{/* Todo: Add a quick actions window here */}
+				<section className="utility">
+				<a><i className="fa fa-plug"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-envelope-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-archive"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-list"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-group"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</section>
 
 			</div>
     );
   }
 }
 
-export default SideMenu;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  search: state.search,
+});
+
+const mapDispatchToProps = dispatch =>
+bindActionCreators({ onLogoutUser }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenu);

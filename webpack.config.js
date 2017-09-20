@@ -12,14 +12,15 @@ module.exports = {
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
     contentBase: './client/public',
-    port: 8000,
+    port: 3001,
     watchContentBase: true,
     hot: true,
     quiet: true,
   },
   devtool: 'source-map',
-  entry: [require.resolve('react-dev-utils/webpackHotDevClient'),
-    './client/src/app/index.js'],
+  entry: [require.resolve('webpack-hot-middleware/client'),
+    path.join(__dirname, '/client/src/app/index.js')
+  ],
   module: {
     loaders: [
       // First, run the linter.

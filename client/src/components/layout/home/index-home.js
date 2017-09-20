@@ -1,8 +1,15 @@
-import React from "react";
-import { MainHeader, Footer } from "../../views";
-import LandingImg from "../../../images/postit-landing.png";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { MainHeader, Footer } from '../../views';
+import * as actionCreators from '../../../actions';
 
-class Landing extends React.Component {
+import LandingImg from '../../../images/postit-landing.png';
+
+class IndexHome extends React.Component {
+  constructor (props) {
+    super(props);
+  }
 /**
  * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
  * 
@@ -39,4 +46,19 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+function mapStateToProps(state) {
+  return {
+    authMessage: state.auth.message,
+    groups: state.groups,
+    search: state.search,
+    messages: state.messages,
+    users: state.users,
+    members: state.members
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndexHome);

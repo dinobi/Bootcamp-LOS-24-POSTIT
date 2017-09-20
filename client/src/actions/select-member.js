@@ -1,4 +1,4 @@
-import actionType from '../constants';
+import actionType from '../actionTypes';
 
 const onMemberClick = (member) => {
   console.log(`member: ${member['First Name']} was clicked`);

@@ -7,7 +7,7 @@ class SearchResult extends React.Component {
       <section className="search-result">
          {
             this.props.searchResult.map(
-              (item, index) => <ResultItem item={item} key={index}/>
+              (item, index) => <ResultItem item={item} key={index} />
             )
         }
       </section>

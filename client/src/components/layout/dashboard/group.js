@@ -1,16 +1,37 @@
-import React from "react";
-import { DashHeader, SideMenu, Copyright } from "../../views";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { DashHeader, SideMenu, MessageBoard, Members, Copyright } from '../../views';
+import loadGroupMessages from '../../../actions/load-group-messages';
+import loadGroupMembers from '../../../actions/load-group-members';
 
-class Group extends React.Component {
 /**
- * Group layout component that provides access to a user group.
- * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <Copyright/> - The dashboard footer copyright information.
- * @param {expression} backToGroup - link to send user back to the groups gui
+ * @class {Group} - Group class component
  */
+class Group extends React.Component {
+  /**
+   * @param {props} - class constructor props
+  */
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorMessage: '',
+    };
+  }
+  /**
+   * @return {undefined} - Returns action creators.
+   * */
+  componentWillMount() {
+    props.loadGroupMessages();
+    props.loadGroupMembers();
+  }
+  /**
+   * @return {undefined} - returns presentationals.
+   * */
   render() {
+    const { groupMessages, groupMembers } = this.props;
+    const posts = groupMessages.groupMessages;
+    const members = groupMembers.groupMembers;
     const backToGroup = (
       <li>
         <a href="#groups">
@@ -24,76 +45,21 @@ class Group extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu back={backToGroup} active="groups"/>
+              <SideMenu back={ backToGroup } active="groups"/>
             </aside>
             <section className="col s12 m9 l10">
               <div className="dashboard-content dashboard-myspace">
                 <div className="bot-msg">
-                  <h3>{this.props.groupName}</h3>
-                  <p>What would you like to do?</p>
+                  <h3>{ groupMessages.toGroup }</h3>
+                  <p>Message Board</p>
                 </div>
                 <div className="features">
                   <div className="row">
-                    <div className="col s12 m6">
-                      <div className="card small">
-                        <div className="card-image waves-effect waves-block waves-light">
-                          <img
-                            className="activator"
-                            src="images/group.jpg"
-                            alt="group illustration"
-                          />
-                        </div>
-                        <div className="card-content">
-                          <span className="card-title activator grey-text text-darken-4">
-                            Message Board<i className="material-icons right">
-                            more_vert
-                            </i>
-                          </span>
-                          <p><a href="#message-board">Compose</a></p>
-                        </div>
-                        <div className="card-reveal">
-                          <span className="card-title grey-text text-darken-4">
-                            Message Board<i className="material-icons right">
-                            close
-                            </i>
-                          </span>
-                          <p>
-                            This is your message board where you can see
-                            messages that have been
-                            posted to this group and where you can also post
-                            your message.
-                          </p>
-                        </div>
-                      </div>
+                    <div className="col s12 m9">
+                      <MessageBoard posts={ posts }/>
                     </div>
-                    <div className="col s12 m6">
-                      <div className="card small">
-                        <div className="card-image waves-effect waves-block waves-light">
-                          <img
-                            className="activator"
-                            src="images/members.jpg"
-                            alt="create group illustration"
-                          />
-                        </div>
-                        <div className="card-content">
-                          <span className="card-title activator grey-text text-darken-4">
-                            Members<i className="material-icons right">
-                            more_vert
-                            </i>
-                          </span>
-                          <p><a href="#create-group">View members</a></p>
-                        </div>
-                        <div className="card-reveal">
-                          <span className="card-title grey-text text-darken-4">
-                            Members<i className="material-icons right">close</i>
-                          </span>
-                          <p>
-                            This is the members panel where you can see all
-                            members in this group, delete members
-                            or add new ones.
-                          </p>
-                        </div>
-                      </div>
+                    <div className="col s12 m3">
+                      <Members members = { members }/>
                     </div>
                   </div>
                 </div>
@@ -107,4 +73,14 @@ class Group extends React.Component {
   }
 }
 
-export default Group;
+const mapStateToProps = state => ({
+  groupMessages: state.groupMessages,
+  groupMembers: state.groupMembers
+});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ loadGroupMessages, loadGroupMembers }, dispatch)
+);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Group);

@@ -8,10 +8,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       groupname: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -23,7 +25,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /* , Sequelize*/) => {
+  down: (queryInterface /* , Sequelize */) => {
     queryInterface.dropTable('UserGroups');
   }
 };

@@ -8,21 +8,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      from_user: {
+      fromUser: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      to_group: {
+      toGroup: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      body: {
+      message: {
         type: Sequelize.STRING,
         allowNull: false
       },
       priority: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: 'normal',
+        validate: {
+          isIn: [['normal', 'urgent', 'critical']]
+        }
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , Sequelize*/) => {
-    queryInterface.dropTable('Message');
+    queryInterface.dropTable('Messages');
   }
 };

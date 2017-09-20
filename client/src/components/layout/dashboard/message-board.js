@@ -1,47 +1,56 @@
-import React from "react";
-import { DashHeader, SideMenu, MessageBox, Copyright } from "../../views";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { DashHeader, SideMenu, Copyright } from '../../views';
+import { MessageLog } from '../../views/message-log';
 
-class MessageBoard extends React.Component {
 /**
  * MessageBoard layout component that provides access to a user's message board
  * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <MessageBox/> - Gui that enables a user compose a new post.
- * @param {component} <Message/> - Gui that enables a user to messages posted to the group message board
- * @param {component} <Copyright/> - The dashboard footer copyright information.
+ * 
  */
+class MessageBoard extends React.Component {
+  /**
+   * @param {props} - props
+  */
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorMessage: '',
+    };
+  }
+
+  /** */
   render() {
-    const backToGroup = (
-      <li>
-        <a href="#groups">
-          <i className="fa fa-chevron-left" />&nbsp;&nbsp;Back
-        </a>
-      </li>
-    );
+    const { posts } = this.props;
     return (
       <div>
-        <DashHeader />
-        <main className="dashboard-ui">
-          <div className="row">
-            <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu back={backToGroup} active="groups" />
-            </aside>
-            <section className="col s12 m9 l10">
-              <div className="dashboard-content messages">
-              <div className="action-ribbon" />
-              <div className="message-board">
-                <div className="postlogs" id="view-message" />
-                <MessageBox />
-              </div>
-              </div>
-            </section>
-          </div>
-          <Copyright />
-        </main>
+      {
+        posts.map((post, index) =>
+          <MessageLog message={ post } key={index} />
+        )
+      }
+
+      <div className="message-box" id="send-message">
+        <textarea className="compose" placeholder="Type your message - always be nice...">
+          ref= { (input) => { this.body = input; }}
+        </textarea>
+        <select id="priority" className="btn btn-create"
+          ref= {(input) => { this.priority = input; }}>
+          <option value="normal">normal</option>
+          <option value="Urgent">urgent</option>
+          <option value="critical">critical</option>
+        </select>
       </div>
+      <div>
+        <button className="btn btn-primary">
+          Send
+        </button>
+      </div>
+  </div>
     );
   }
 }
+
 
 export default MessageBoard;

@@ -1,25 +1,34 @@
-import React from "react";
-import { DashHeader, SideMenu, GroupCard, Copyright } from "../../views";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { DashHeader, SideMenu, GroupCard, Copyright } from '../../views';
+import
+  onLoadGroups
+  from '../../../actions/load-groups';
+import loadGroupMessages from '../../../actions/load-group-messages';
+import loadGroupMembers from '../../../actions/load-group-members';
 
 /**
- * Groups layout component that provides access to groups a user belongs to
  * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <GroupCard/> - Card representing individual group a user belong to
- * @param {component} <Copyright/> - The dashboard footer copyright information.
+ * @class {container} - provides access to groups a user belongs to
  */
 class Groups extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      groups: [],
-      hasErrored: false,
-			isLoading: false,
-		};
+    this.state = {};
   }
-
+  /**
+   * @return {undefined} - Returns action creators.
+   * */
+  componentWillMount() {
+    this.props.onLoadGroups();
+  }
+  /**
+   * @return {presentationals} - some presentational components
+   */
   render() {
+    let { groups } = this.props;
+    groups = groups.groups;
     return (
       <div>
         <DashHeader />
@@ -35,7 +44,29 @@ class Groups extends React.Component {
                 </div>
                 <div className="features dashboard-group">
                   <div className="row">
-                    {this.state.groups}
+                    { groups.length !== 0 ?
+                      groups.map((group, index) =>
+                        <GroupCard
+                          key = { index }
+                          groupName = { group.groupname }
+                          location = {
+                            <a href={`#groups/${group.groupname}`}>{ group.groupname }</a>
+                          }
+                          criticalCount={ group.unreadCritical }
+                          urgentCount={ group.unreadUrgent }
+                          normalCount={ group.unreadNormal }
+                        />
+                      ) :
+                      <div className="col s12 m4">
+                      <div className="card">
+                        <div className="card-content">
+                          <span className="card-title activator grey-text text-darken-4 truncate">
+                            Pls join or create a group
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    }
                     <div className="col s12 m4">
                       <div className="card">
                         <div className="card-content">
@@ -60,5 +91,14 @@ class Groups extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  groups: state.groups,
+  // messages: state.messages
+});
 
-export default Groups;
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ onLoadGroups, loadGroupMessages, loadGroupMembers }, dispatch)
+);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Groups);
