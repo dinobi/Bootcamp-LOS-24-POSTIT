@@ -33,6 +33,9 @@ export default (app) => {
   // API route to perform postit search
   app.post('/api/search/', controllers.user.search);
 
+  // API route to perform postit search
+  app.post('/api/search/', controllers.user.search);
+
   // API route that allow users create broadcast groups
   app.post('/api/create-group/', controllers.group.create);
 
