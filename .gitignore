@@ -15,12 +15,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-post-it
 materialize.min.css
 materialize.css
 materialize.min.js
 materialize.js
 roboto*
+/client/public/dist
 
 # dependencies
 /node_modules

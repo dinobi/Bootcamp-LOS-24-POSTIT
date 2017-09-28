@@ -20,15 +20,14 @@ export const loadGroupMessagesFailure = message => ({
 
 const loadGroupMessages = () =>
 (dispatch) => {
+  const groupname = location.href.split('/')[location.href.split('/').length - 1];
   dispatch(loadGroupMessagesRequest());
   let headers;
-  apiHandler('/api/groups/:groupname/show-messages', '', 'get', headers)
+  apiHandler(`/api/groups/${groupname}/show-messages`, '', 'get', headers)
   .then((groupMessagesRes) => {
-    console.log('Success response', groupMessagesRes.data);
     dispatch(loadGroupMessagesSuccess(groupMessagesRes.data));
   }).catch((groupMessagesRes) => {
-    console.log('failure res', groupMessagesRes);
-    //dispatch(loadGroupMessagesFailure(groupMessagesRes.data.error.message));
+    dispatch(loadGroupMessagesFailure(groupMessagesRes));
   });
 };
 

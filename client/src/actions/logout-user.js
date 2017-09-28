@@ -21,7 +21,16 @@ export const onLogoutSuccess = message => ({
 const onLogoutUser = () => {
   return (dispatch) => {
     dispatch(onLogoutRequest());
-    localStorage.removeItem('userAuth')
+    localStorage.removeItem('userAuth');
+    localStorage.removeItem('userAuth');
+    localStorage.removeItem('reduxPersist:selectMember');
+    localStorage.removeItem('reduxPersist:members');
+    localStorage.removeItem('reduxPersist:messages');
+    localStorage.removeItem('reduxPersist:toasts');
+    localStorage.removeItem('reduxPersist:auth');
+    localStorage.removeItem('reduxPersist:signup');                                                                                      m
+    localStorage.removeItem('reduxPersist:groups');
+    localStorage.removeItem('reduxPersist:newGroup');
     dispatch(onLogoutSuccess('You signed out successfully'));
     location.hash = '#login';
   };

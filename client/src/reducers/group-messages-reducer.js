@@ -8,7 +8,7 @@ import actionType from '../actionTypes';
  */
 const groupMessagesReducer = (state = {
   groupMessagesIsLoading: false,
-  groupMessages: {}
+  groupMessages: []
 }, action) => {
   switch (action.type) {
     case 'REHYDRATE':

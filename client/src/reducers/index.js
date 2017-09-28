@@ -10,8 +10,8 @@ import createGroupReducer from './create-group-reducer';
 
 const rootReducer = combineReducers({
   selectMember: selectMemberReducer,
-  groupMember: groupMembersReducer,
-  groupMessages: groupMessagesReducer,
+  members: groupMembersReducer,
+  messages: groupMessagesReducer,
   toasts: toastReducer,
   auth: authReducer,
   signup: signupReducer,

@@ -23,6 +23,7 @@ class Groups extends React.Component {
   componentWillMount() {
     this.props.onLoadGroups();
   }
+  
   /**
    * @return {presentationals} - some presentational components
    */
@@ -97,7 +98,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ onLoadGroups, loadGroupMessages, loadGroupMembers }, dispatch)
+  bindActionCreators({ onLoadGroups }, dispatch)
 );
 
 

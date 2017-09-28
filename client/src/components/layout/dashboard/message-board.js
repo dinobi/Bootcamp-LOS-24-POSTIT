@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { DashHeader, SideMenu, Copyright } from '../../views';
 import { MessageLog } from '../../views/message-log';
 
@@ -26,14 +24,14 @@ class MessageBoard extends React.Component {
     return (
       <div>
       {
+        posts.length !== 0 ?
         posts.map((post, index) =>
           <MessageLog message={ post } key={index} />
-        )
+        ) :
+        <h3>{ posts.message }</h3>
       }
-
       <div className="message-box" id="send-message">
         <textarea className="compose" placeholder="Type your message - always be nice...">
-          ref= { (input) => { this.body = input; }}
         </textarea>
         <select id="priority" className="btn btn-create"
           ref= {(input) => { this.priority = input; }}>
