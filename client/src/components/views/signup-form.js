@@ -19,16 +19,12 @@ class SignupForm extends React.Component {
 	onSubmitClick(e) {
     e.preventDefault();
     console.log(this.props);
-		let {
-			firstname, lastname, username,
-			email, password, phone
-		} = this;
-		firstname = firstname.value.trim();
-		lastname = lastname.value.trim();
-		username = username.value.trim();
-		email = email.value.trim();
-		password = password.value;
-		phone = phone.value.trim();
+		this.firstname = firstname.value.trim();
+		this.lastname = lastname.value.trim();
+		this.username = username.value.trim();
+		this.email = email.value.trim();
+		this.password = password.value;
+		this.phone = phone.value.trim();
 		if (
 			firstname === '' ||
 			lastname === '' ||
