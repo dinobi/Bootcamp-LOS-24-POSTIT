@@ -19,9 +19,6 @@ class Login extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// console.log('Next props', nextProps);
-		// console.log('Current props', this.props);
-		// console.log('Current state', this.state);
 		if (nextProps.message) {
 			this.setState({
 				errorMessage: nextProps.message
@@ -33,8 +30,8 @@ class Login extends React.Component {
 		this.setState({ errorMessage: '' });
 	}
 	/** handleLogin {e} */
-	handleLogin(e) {
-		e.preventDefault();
+	handleLogin(event) {
+		event.preventDefault();
 		let { username, password } = this;
     username = username.value.trim();
     password = password.value.trim();

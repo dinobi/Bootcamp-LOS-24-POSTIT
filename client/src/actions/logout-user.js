@@ -18,8 +18,8 @@ export const onLogoutSuccess = message => ({
   message
 });
 
-const onLogoutUser = () => {
-  return (dispatch) => {
+const onLogoutUser = () =>
+  (dispatch) => {
     dispatch(onLogoutRequest());
     localStorage.removeItem('userAuth');
     localStorage.removeItem('userAuth');
@@ -34,6 +34,6 @@ const onLogoutUser = () => {
     dispatch(onLogoutSuccess('You signed out successfully'));
     location.hash = '#login';
   };
-};
 
 export default onLogoutUser;
+

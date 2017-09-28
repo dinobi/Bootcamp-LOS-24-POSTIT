@@ -32,7 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Default catch-all route that sends a message on all PostIt hit.
 
-app.get('/', (req, res) => { res.sendFile(path.join(__dirname, '/client/public/index.html')); });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/public/index.html'));
+});
 
 // Default catch-all route that sends an error message on all incorrect req.
 app.all('api/*', (req, res) => res.status(404).send({

@@ -22,6 +22,8 @@ materialize.min.js
 materialize.js
 roboto*
 /client/public/dist
+/.nyc_output
+/coverage
 
 # dependencies
 /node_modules

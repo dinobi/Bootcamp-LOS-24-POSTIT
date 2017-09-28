@@ -597,7 +597,7 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.should.have.status(404);
+          res.should.have.status(400);
           done();
         });
     });
@@ -610,7 +610,7 @@ describe('PostIt Api Tests: ', () => {
           password: ''
         })
         .end((error, res) => {
-          res.should.have.status(404);
+          res.should.have.status(400);
           done();
         });
     });
@@ -650,7 +650,7 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed.Username is incorrect or does not exist');
+          res.body.error.message.should.equal('Authentication failed. Username is incorrect or does not exist');
           done();
         });
     });
@@ -663,7 +663,7 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed.Username is incorrect or does not exist');
+          res.body.error.message.should.equal('Authentication failed. Email is incorrect or does not exist');
           done();
         });
     });
@@ -689,7 +689,7 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Username is required');
+          res.body.error.message.should.equal('username field cannot be empty');
           done();
         });
     });
@@ -702,7 +702,7 @@ describe('PostIt Api Tests: ', () => {
           password: ''
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Password is required');
+          res.body.error.message.should.equal('password field cannot be empty');
           done();
         });
     });

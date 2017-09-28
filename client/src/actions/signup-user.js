@@ -24,11 +24,9 @@ const onSignupUser = userData =>
     dispatch(onSignupRequest(userData));
     return axios.post('/api/user/signup', userData)
     .then((signupRes) => {
-      console.log(JSON.stringify(signupRes.data.message));
       dispatch(onSignupSuccess(signupRes.data.message));
-      // this.props.onLoginRequest({username: JSON.stringify(signupRes.data.userData.firstname) });
-      // localStorage.setItem('userAuth', signupRes.data.token);
-      // location.hash = '#dashboard';
+      localStorage.setItem('userAuth', signupRes.data.token);
+      location.hash = '#dashboard';
     }).catch((signupRes) => {
       dispatch(onSignupFailure(signupRes.response.data.error.message));
     });
