@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
   const PasswordReset = sequelize.define('PasswordReset', {
     email: {
