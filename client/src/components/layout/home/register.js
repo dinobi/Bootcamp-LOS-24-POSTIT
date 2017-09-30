@@ -37,15 +37,10 @@ class Register extends React.Component {
   }
 }
 
-// Register.propTypes = {
-// 	onSignupUser: PropTypes.func.isRequired
-// };
-
-const mapStateToProps = state => ({
-	message: state.signup
-})
-
+Register.propTypes = {
+	onSignupUser: PropTypes.func.isRequired
+};
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({ onSignupUser, onLoginUser }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register);

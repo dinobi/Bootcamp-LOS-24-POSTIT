@@ -14,7 +14,7 @@ const createGroupReducer = (state = {
   switch (action.type) {
     case actionType.CREATE_GROUP_REQUEST:
       return Object.assign({}, state, {
-        createGroupIsLoading: true,
+        createGroupIsLoading: true
       });
     case actionType.CREATE_GROUP_SUCCESS:
       return Object.assign({}, state, {

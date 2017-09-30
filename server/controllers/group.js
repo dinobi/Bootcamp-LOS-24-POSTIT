@@ -2,8 +2,8 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    console.log('Body at controller::::', req.body);
     if (!req.body.groupname || req.body.groupname.trim() === '') {
+      console.log('Body at controller::::', req.body);
       return res.status(400).send({
         error: { message: 'A group name is required' }
       });

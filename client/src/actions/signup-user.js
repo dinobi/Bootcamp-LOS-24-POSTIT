@@ -1,15 +1,15 @@
 import axios from 'axios';
 import actionType from '../actionTypes';
 
-export const onSignupRequest = userData => ({
+export const onSignupRequest = signupCreds => ({
   type: actionType.SIGNUP_REQUEST,
-  isLoading: true,
-  userData
+  isLoading: true
 });
 
-export const onSignupSuccess = message => ({
+export const onSignupSuccess = (userData, message) => ({
   type: actionType.SIGNUP_SUCCESS,
   isLoading: false,
+  userData,
   message
 });
 
@@ -19,13 +19,13 @@ export const onSignupFailure = message => ({
   message
 });
 
-const onSignupUser = userData =>
+const onSignupUser = signupCreds =>
   (dispatch) => {
-    dispatch(onSignupRequest(userData));
-    return axios.post('/api/user/signup', userData)
+    dispatch(onSignupRequest(signupCreds));
+    return axios.post('/api/user/signup', signupCreds)
     .then((signupRes) => {
-      dispatch(onSignupSuccess(signupRes.data.message));
-      localStorage.setItem('userAuth', signupRes.data.token);
+      console.log(JSON.stringify(signupRes.data));
+      dispatch(onSignupSuccess(signupRes.data.userData, signupRes.data.message));
       location.hash = '#dashboard';
     }).catch((signupRes) => {
       dispatch(onSignupFailure(signupRes.response.data.error.message));

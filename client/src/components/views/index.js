@@ -11,9 +11,10 @@ import Message from './message-log';
 import SignupForm from './signup-form';
 import ToastMessage from './toast-message';
 import Copyright from './copyright';
+import Modal from './modal';
 
 export { MainHeader, DashHeader, SideMenu,
   Footer, SearchForm, SearchResult, Features,
   GroupCard, MessageBox, Message, SignupForm,
-  ToastMessage, Copyright
+  ToastMessage, Copyright, Modal
 };

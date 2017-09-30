@@ -26,14 +26,14 @@ class SearchWiki extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(e) {
     this.setState({
-      searchQuery: event.target.value
+      searchQuery: e.target.value
     });
   }
 
-  handleClick(event) {
-    event.preventDefault();
+  handleClick(e) {
+    e.preventDefault();
     $.ajax({
       type: 'GET',
       url: `https://en.wikipedia.org/w/api.php?action=opensearch&search=

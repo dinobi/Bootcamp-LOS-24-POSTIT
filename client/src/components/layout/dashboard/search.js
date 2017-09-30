@@ -36,14 +36,14 @@ class Search extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(e) {
     this.setState({
-      searchQuery: event.target.value
+      searchQuery: e.target.value
     });
   }
 
-  handleClick(event) {
-    event.preventDefault();
+  handleClick(e) {
+    e.preventDefault();
     //todo: make your search api call here
 
     const results = [];

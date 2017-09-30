@@ -24,14 +24,11 @@ const App = () =>
         <Route exact path='/dashboard' component={ Dashboard }/>
         <Route exact path='/groups' component={ Groups } />
         <Route path='/create-group' component={ NewGroup } />
-        <Route path='/groups/:groupname' component={ Group } />
-        {/* <Route path='/groups/:groupname/message-board'
-          component={ MessageBoard }
-        /> */}
-        <Route path='/message-board'
+        <Route path='/groups/:group-name' component={ Group } />
+        <Route path='/groups/:group-name/message-board'
           component={ MessageBoard }
         />
-        <Route path='/groups/:groupname/members' component={ Members } />
+        <Route path='/groups/:group-name/members' component={ Members } />
         <Route path='/search' component={ Search } />
         <Route path='/search-wiki' component={ SearchWiki } />
         <Route path='/account-details' component={ AccountDetails } />

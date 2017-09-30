@@ -5,7 +5,8 @@ import * as onLoadGroups from './load-groups';
 import * as onSignupUser from './signup-user';
 import * as onDiplayToast from './display-toast';
 import * as onSelectMember from './select-member';
+import * as onLoadMember from './load-member';
 
 export {
   onLoginUser, onLogoutUser, loadGroupMessages, onLoadGroups,
-  onSignupUser, onDiplayToast, onSelectMember };
+  onSignupUser, onDiplayToast, onSelectMember, onLoadMember };

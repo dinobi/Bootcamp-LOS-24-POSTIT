@@ -1,0 +1,29 @@
+.dashboard-myspace {
+  background-color: #e0e0e0 !important;
+  z-index: 0;
+}
+
+.dashboard-myspace a {
+  color: #FFC107;
+}
+.dashboard-myspace a:hover, .dashboard-myspace a:focus,
+.dashboard-myspace i:hover, .dashboard-myspace i:hover {
+  color: #ff6f00;
+}
+
+.bot-msg {
+  margin-bottom: 30px;
+  background-color: #FFA000;
+  padding: 5px 15px;
+  text-align: center;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+}
+.bot-msg p {
+  color: #fff;
+}
+.features {
+  position: relative;
+  padding: 0 7.5px;
+  z-index: 1px;
+}

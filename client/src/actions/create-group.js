@@ -1,9 +1,10 @@
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onCreateGroupRequest = (groupDasta) => ({
+export const onCreateGroupRequest = groupData => ({
   type: actionType.CREATE_GROUP_REQUEST,
-  createGroupIsLoading: true
+  createGroupIsLoading: true,
+  groupData
 });
 
 export const onCreateGroupSuccess = message => ({

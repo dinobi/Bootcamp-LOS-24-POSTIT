@@ -1,0 +1,16 @@
+$success-alert: #4CAF50;
+$error-alert: #F44336;
+
+p.alert {
+  color: #fff;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: $error-alert;
+}
+p.alert.error-alert {
+  background-color: $error-alert;
+}
+p.alert.success-alert {
+  background-color: $success-alert;
+}

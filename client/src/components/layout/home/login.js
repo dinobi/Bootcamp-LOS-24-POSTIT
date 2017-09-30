@@ -11,6 +11,7 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			logoutMessage: '',
 			errorMessage: '',
 			isLoading: false
 		};
@@ -30,8 +31,8 @@ class Login extends React.Component {
 		this.setState({ errorMessage: '' });
 	}
 	/** handleLogin {e} */
-	handleLogin(event) {
-		event.preventDefault();
+	handleLogin(e) {
+		e.preventDefault();
 		let { username, password } = this;
     username = username.value.trim();
     password = password.value.trim();
@@ -124,16 +125,14 @@ class Login extends React.Component {
 
 Login.propTypes = {
   onLoginUser: PropTypes.func.isRequired
-	//addToastMessage: PropTypes.func.isRequired
+  // addToastMessage: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-	userData: state.auth.userData,
-	message: state.auth.message
+  userData: state.auth.userData,
+  message: state.auth.message
 });
 
-const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ onLoginUser }, dispatch);
-}
+const mapDispatchToProps = dispatch => bindActionCreators({ onLoginUser }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

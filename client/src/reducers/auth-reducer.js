@@ -11,11 +11,30 @@ import actionType from '../actionTypes';
 const authReducer = (state = {
   userIsLoading: false,
   userIsAuthenticated: false,
-  userData: {}
+  userData: {},
+  message: ''
 }, action) => {
   switch (action.type) {
-    case 'REHYDRATE':
+    case 'persis/REHYDRATE':
       return { ...state, persistedState: action.userData };
+    case actionType.SIGNUP_REQUEST:
+      return Object.assign({}, state, {
+        userIsLoading: true,
+        userIsAuthenticated: false
+      });
+    case actionType.SIGNUP_SUCCESS:
+      return Object.assign({}, state, {
+        userIsLoading: false,
+        userIsAuthenticated: true,
+        userData: action.userData,
+        message: action.message
+      });
+    case actionType.SIGNUP_FAILURE:
+      return Object.assign({}, state, {
+        userIsLoading: false,
+        userIsAuthenticated: false,
+        message: action.message
+      });
     case actionType.LOGIN_REQUEST:
       return Object.assign({}, state, {
         userIsLoading: true,
@@ -25,12 +44,14 @@ const authReducer = (state = {
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: true,
-        userData: action.userData
+        userData: action.userData,
+        message: action.message
       });
     case actionType.LOGIN_FAILURE:
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: false,
+        userData: state.userData,
         message: action.message
       });
     case actionType.LOGOUT_REQUEST:
@@ -42,6 +63,7 @@ const authReducer = (state = {
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: false,
+        userData: state.userData,
         message: action.message
       });
     default:

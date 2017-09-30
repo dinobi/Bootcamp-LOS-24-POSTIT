@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../../images/postit-logo.png'
+import Modal from './modal';
 
 class DashHeader extends React.Component {
 	constructor() {
@@ -19,26 +20,29 @@ class DashHeader extends React.Component {
     }
 	}
     render() {
+			const actionName = <button className="btn btn-create">Create a new group</button>;
       return (
         <header className="dashboard-header">
-			<nav className="amber">
-				<div className="nav-wrapper">
-					<a href="#dashboard" className="dashboard-logo">
-					  <img src={ Logo } alt="postit-logo"/></a>
-					<a aria-label="mobile-menu" className="nav-mobile" onClick={ () => this.handleClick() }>
-						<span></span>
-						<span></span>
-						<span></span>
-					</a>
-					<ul className="nav-list right hide-on-small-and-down">
-						<li className="nav-item"><a href="#create-group"><button className="btn btn-create">Create a new group</button></a></li>
-					</ul>
-				</div>
-				<div className="mobile-nav">
-					<div className="container" id="mobile-nav"></div>					
-				</div>
-			</nav>
-		</header>
+					<nav className="amber">
+						<div className="nav-wrapper">
+							<a href="#dashboard" className="dashboard-logo">
+								<img src={ Logo } alt="postit-logo"/></a>
+							<a aria-label="mobile-menu" className="nav-mobile" onClick={ () => this.handleClick() }>
+								<span></span>
+								<span></span>
+								<span></span>
+							</a>
+							<ul className="nav-list right hide-on-small-and-down">
+								<li className="nav-item">
+									<Modal action={actionName} />
+								</li>
+							</ul>
+						</div>
+						<div className="mobile-nav">
+							<div className="container" id="mobile-nav"></div>					
+						</div>
+					</nav>
+				</header>
       );
     }
 }

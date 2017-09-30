@@ -21,8 +21,8 @@ class NewGroup extends React.Component {
 		this.setState({ errorMessage: '' });
 	}
 	/** handleLogin {e} */
-	handleCreate(event) {
-		event.preventDefault();
+	handleCreate(e) {
+		e.preventDefault();
 		let { groupname, description } = this;
     groupname = groupname.value.trim();
     description = description.value.trim();
