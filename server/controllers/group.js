@@ -3,7 +3,6 @@ import models from '../models';
 export default {
   create(req, res) {
     if (!req.body.groupname || req.body.groupname.trim() === '') {
-      console.log('Body at controller::::', req.body);
       return res.status(400).send({
         error: { message: 'A group name is required' }
       });
@@ -13,6 +12,8 @@ export default {
         error: { message: 'A group description is required' }
       });
     }
+
+    console.log('Body at controller::::', req.body);
     return models.Group
       .create({
         groupname: req.body.groupname,
@@ -32,7 +33,6 @@ export default {
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
-          console.log(error)
           res.status(400).send({
             error: { message: `Group - ${req.body.groupname}, Already Exist` }
           });

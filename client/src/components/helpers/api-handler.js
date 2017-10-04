@@ -22,7 +22,6 @@ const apiHandler = (url, body, method, headers) => {
     return axios.get(url, { headers });
   }
   if (method.toUpperCase() === 'POST') {
-    console.log('Body type at handler', body);
     return axios({
       method: 'post',
       url,

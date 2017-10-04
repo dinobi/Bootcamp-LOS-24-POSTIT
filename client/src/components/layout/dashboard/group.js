@@ -4,9 +4,6 @@ import { bindActionCreators } from 'redux';
 import {
   DashHeader, SideMenu, Copyright
 } from '../../views';
-import MessageBoard from './message-board';
-import { MessageLog } from '../../views/message-log';
-import Members from './members';
 import loadGroupMessages from '../../../actions/load-group-messages';
 import loadGroupMembers from '../../../actions/load-group-members';
 

@@ -25,7 +25,7 @@ const onLoadGroups = () =>
   apiHandler('/api/groups/me', '', 'get', headers).then((loadGroupsRes) => {
     dispatch(onLoadGroupsSuccess(loadGroupsRes.data));
   }).catch((loadGroupsRes) => {
-    dispatch(onLoadGroupsFailure(loadGroupsRes.data.message));
+    dispatch(onLoadGroupsFailure(loadGroupsRes.data.error.message));
   });
 };
 
