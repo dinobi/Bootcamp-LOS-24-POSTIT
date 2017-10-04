@@ -3,8 +3,7 @@
 * from localStorage. These actions are more useful if we
 * were calling the API to log the user out
 */
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
 /**
  * onLogoutRequest()
@@ -12,22 +11,10 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
  * and authentication status properties for a
  * logout request
 */
-export const onLogoutRequest = () => ({
-  type: LOGOUT_REQUEST,
-  userIsLoading: true,
-  userIsAuthenticated: true
-});
-/**
- * onLogoutSuccess()
- * @param {string} - message to be displayed to user
- * @return {object} - action-type, loading status,
- * authentication status, and success message properties for
- * successful logout
-*/
-export const onLogoutSuccess = message => ({
-  type: LOGOUT_SUCCESS,
-  userIsLoading: false,
+export const logout = message => ({
+  type: LOGOUT,
   userIsAuthenticated: false,
+  userData: {},
   message
 });
 /**
@@ -37,10 +24,9 @@ export const onLogoutSuccess = message => ({
 */
 const onLogoutUser = () =>
   (dispatch) => {
-    dispatch(onLogoutRequest());
-    localStorage.clear();
+    dispatch(logout('You signed out successfully'));
     location.hash = '#login';
-    dispatch(onLogoutSuccess('You signed out successfully'));
+    localStorage.clear();
   };
 
 export default onLogoutUser;

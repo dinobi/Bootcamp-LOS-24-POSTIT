@@ -63,7 +63,7 @@ class Group extends React.Component {
                     <div className="col s9 m9">
                       {/* <MessageBoard posts={ posts }/> */}
                       {
-                        posts.length !== 0 ?
+                        posts.length > 0 ?
                         posts.map((post, index) =>
                           <li key={index}>{post.message}</li>
                         ) :

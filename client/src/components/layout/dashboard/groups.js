@@ -44,7 +44,7 @@ class Groups extends React.Component {
                 </div>
                 <div className="features dashboard-group">
                   <div className="row">
-                    { groups.length !== 0 ?
+                    { groups.length > 0 ?
                       groups.map((group, index) =>
                         <GroupCard
                           key = { index }
