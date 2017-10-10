@@ -13,8 +13,6 @@ export default {
         error: { message: 'A group description is required' }
       });
     }
-
-    console.log('Body at controller::::', req.body);
     return models.Group
       .create({
         groupname: req.body.groupname,

@@ -7,7 +7,7 @@ import SearchResult from './search-result';
 import Features from './features';
 import GroupCard from './group-card';
 import MessageBox from './message-box';
-import Message from './message-log';
+import MessageLog from './message-log';
 import SignupForm from './signup-form';
 import ToastMessage from './toast-message';
 import Copyright from './copyright';
@@ -15,6 +15,6 @@ import Modal from './modal';
 
 export { MainHeader, DashHeader, SideMenu,
   Footer, SearchForm, SearchResult, Features,
-  GroupCard, MessageBox, Message, SignupForm,
+  GroupCard, MessageBox, MessageLog, SignupForm,
   ToastMessage, Copyright, Modal
 };

@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DashHeader, SideMenu, Copyright } from '../../views';
-import { MessageLog } from '../../views/message-log';
+import { DashHeader, SideMenu, Copyright, MessageLog, MessageBox } from '../../views';
 
 /**
  * MessageBoard layout component that provides access to a user's message board
@@ -24,16 +23,17 @@ class MessageBoard extends React.Component {
   render() {
     const { posts } = this.props;
     return (
-      <div>
-      {
-        posts.map((post, index) =>
-          <MessageLog message={ post } key={index} />
-        )
-      }
+      <div className="message-board">
+        <div className="postlogs">
+          {
+            posts.map((post, index) =>
+              <MessageLog message={ post } key={index} />
+            )
+          }
+      </div>
 
       <div className="message-box" id="send-message">
         <textarea className="compose" placeholder="Type your message - always be nice...">
-          ref= { (input) => { this.body = input; }}
         </textarea>
         <select id="priority" className="btn btn-create"
           ref= {(input) => { this.priority = input; }}>
@@ -41,11 +41,6 @@ class MessageBoard extends React.Component {
           <option value="Urgent">urgent</option>
           <option value="critical">critical</option>
         </select>
-      </div>
-      <div>
-        <button className="btn btn-primary">
-          Send
-        </button>
       </div>
   </div>
     );

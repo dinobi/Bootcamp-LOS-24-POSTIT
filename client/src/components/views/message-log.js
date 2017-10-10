@@ -1,22 +1,27 @@
 import React from 'react';
-
-class MessageLog extends React.Component {
- 
-  render() {
-    const { post } = this.props;
-    return (      
-      <div className="post">
-        <aside className="avatar">{ post.fromUser.subStr(0, 1).toUpperCase() }</aside>
-        <section className="post-message">
-          <div className="message-details">
-            <h6 className="sender">{ post.fromUser }</h6> &nbsp;
-            <small className="time">{ post.createdAt }</small>
-          </div>
-          <p className="message">{ post.message }</p>
-        </section>
-      </div>
-    );
-  }
-}
+/**
+ * MessageLog - displays message from a group member.
+ * @returns {*} message.
+ */
+const MessageLog = (props) => {
+/**
+ * Renders DOM elements.
+ * @returns {*} message.
+ */
+  const { message } = props;
+  const date = new Date(message.createdAt).toUTCString();
+  return (
+    <div className="post">
+      <aside className="avatar">{ message.fromUser.substr(0, 1).toUpperCase() }</aside>
+      <section className="post-message">
+        <div className="message-details">
+          <h6 className="sender">{ message.fromUser }</h6> &nbsp;
+          <small className="time">{ date }</small>
+        </div>
+        <p className="message">{ message.message }</p>
+      </section>
+    </div>
+  );
+};
 
 export default MessageLog;
