@@ -111,6 +111,10 @@
 		overflow-y: auto;
 		margin: 0 -0.75rem;
 	}
+	/** Dashboard content for messageboard **/
+	.group-gui {
+		overflow-y: hidden !important;
+	}
 
 ::-webkit-scrollbar {
     height: 12px;

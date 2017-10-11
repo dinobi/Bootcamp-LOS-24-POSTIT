@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageBoard from './message-board';
+import MessageBoard from './MessageBoard';
 import {
   DashHeader, SideMenu, Copyright
 } from '../../views';
@@ -52,7 +52,7 @@ class Group extends React.Component {
               <SideMenu back={ backToGroup } active="groups"/>
             </aside>
             <section className="col s12 m9 l10">
-              <div className="dashboard-content">
+              <div className="dashboard-content group-gui">
                 <div className="bot-msg">
                   <h3>{ groupName }</h3>
                   <p>Message Board</p>
@@ -62,14 +62,13 @@ class Group extends React.Component {
                     <div className="col s9 m9">
                       {
                         posts.length > 0 ?
-                          <MessageBoard posts={ posts } /> :
-                          <h3>{ posts.message }</h3>
+                        <MessageBoard posts={ posts } /> :
+                        <h3 className="black-text">{ posts.message }</h3>
                       }
                     </div>
-                    <div className="col s3 m3">
-                      {/* <Members members = { members }/> */}
+                    <div className="col s3 m3 members-list">
                       { members.map((member, index) =>
-                        <li key={index}>{member.username}</li>
+                        <li key={index}><i className="fa fa-user"></i>&nbsp;&nbsp;{member.username}</li>
                       )}
                     </div>
                   </div>
