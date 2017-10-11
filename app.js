@@ -1,5 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
+import favicon from 'serve-favicon';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -30,8 +31,10 @@ if (env === 'development') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Default catch-all route that sends a message on all PostIt hit.
+// serve favicon
+app.use(favicon(path.join(__dirname, '/client/public', 'favicon.ico')))
 
+// Serve index page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/public/index.html'));
 });
