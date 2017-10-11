@@ -9,12 +9,15 @@ import loadGroupMessages from '../../../actions/load-group-messages';
 import loadGroupMembers from '../../../actions/load-group-members';
 
 /**
- * @class {Group} - Group class component
+ * @class Group
+ * @extends {React.Component}
  */
 class Group extends React.Component {
   /**
-   * @param {props} - class constructor props
-  */
+   * Creates an instance of Group.
+   * @param {any} props 
+   * @memberof Group
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -67,7 +70,10 @@ class Group extends React.Component {
                       }
                     </div>
                     <div className="col s3 m3 members-list">
-                      { members.map((member, index) =>
+                      <div className="member-list-title">
+                        <h5>Members</h5>
+                      </div>
+                      { members.map((member, index) => 
                         <li key={index}><i className="fa fa-user"></i>&nbsp;&nbsp;{member.username}</li>
                       )}
                     </div>

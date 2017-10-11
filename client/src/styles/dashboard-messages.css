@@ -62,21 +62,21 @@
 	display: flex;
 	align-items: flex-start;
 }
-.message-box textarea{
+.message-box > textarea{
 	background: #FFF8E1;
 	color: #212121;
 	width: 85%;
 	overflow: hidden;
-	max-height: 200px;
 	overflow-y: auto;
-	min-height: 30px;
+	max-height: 200px;
+	min-height: 40px !important;
 	padding: .5rem 1rem;
 	border: 2px solid #FFA000;
 	margin-right: 10px;
 	border-radius: 5px;
 	resize: none;
 }
-.message-box textarea:focus {
+.message-box > textarea:focus {
 	background: #fff;
 	border-color: #FFA000;
 	outline: none;
