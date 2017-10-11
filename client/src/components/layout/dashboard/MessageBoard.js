@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import onSendMessage from '../../../actions/send-message';
 import { DashHeader, SideMenu, Copyright, MessageLog, MessageBox } from '../../views';
 
 /**
@@ -17,6 +18,14 @@ class MessageBoard extends React.Component {
     this.state = {
       errorMessage: '',
     };
+    this.handleSend = this.handleSend.bind(this);
+  }
+
+  handleSend(e) {
+    e.preventDefault();
+    
+    onSendMessage()
+
   }
 
   /** */
@@ -32,7 +41,7 @@ class MessageBoard extends React.Component {
           }
       </div>
 
-      <form className="message-box" id="send-message">
+      <form className="message-box" id="send-message" onSubmit={ this.handleSend }>
         <textarea className="compose" placeholder="always be nice..."></textarea>
         <select id="priority" className="btn btn-create">
           <option value="Normal">Normal</option>

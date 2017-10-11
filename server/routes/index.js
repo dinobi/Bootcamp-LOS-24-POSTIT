@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import controllers from '../controllers';
+import authUser from '../helpers/authUser';
 
 export default (app) => {
   app.all('/api', (req, res) => res.status(200).send({
@@ -11,21 +12,8 @@ export default (app) => {
   // Api route for user to login to an account
   app.post('/api/user/signin/', controllers.user.authUser);
 
-  // Middleware to protect the following API access
-  let token;
-  app.use((req, res, next) => {
-    token = req.headers['x-access-token'];
-    jwt.verify(token, process.env.JWT_TOKEN || 'PrivateKey', (err, decoded) => {
-      if (err) {
-        res.status(401)
-        .send({ message: 'Authentication failed. Invalid access token' });
-        return;
-      }
-      // If valid, save request for use on all routes
-      req.decoded = decoded;
-      next();
-    });
-  });
+  // Middleware to protect the following API routes
+  app.use(authUser);
 
   // API route to get list of all users
   app.get('/api/users/', controllers.user.fetchUsers);
