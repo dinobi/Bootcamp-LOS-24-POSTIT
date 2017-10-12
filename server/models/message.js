@@ -1,23 +1,23 @@
 export default (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
-    from_user: {
+    fromUser: {
       type: DataTypes.STRING,
       allowNull: false //  dont write to db if data is not supplied
     },
-    to_group: {
+    toGroup: {
       type: DataTypes.STRING,
       allowNull: false //  dont write to db if data is not supplied
     },
-    body: {
+    message: {
       type: DataTypes.STRING,
       allowNull: false //  dont write to db if data is not supplied
     },
     priority: {
       type: DataTypes.STRING,
-      defaultValue: 'Normal',
+      defaultValue: 'normal',
       allowNull: true,
       validate: {
-        isIn: [['Normal', 'Urgent', 'Critical']]
+        isIn: [['normal', 'urgent', 'critical']]
       }
     }
   });

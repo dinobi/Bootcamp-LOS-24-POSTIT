@@ -2,6 +2,7 @@ import models from '../models';
 
 export default {
   create(req, res) {
+    console.log(req.body);
     if (!req.body.groupname || req.body.groupname.trim() === '') {
       return res.status(400).send({
         error: { message: 'A group name is required' }
@@ -18,13 +19,15 @@ export default {
         description: req.body.description,
       })
       .then((group) => {
+        const user = req.decoded.data.username;
+        // Add user to the group
         models.UserGroup
         .create({
-          username: req.body.username,
-          groupname: req.params.groupname
+          username: user,
+          groupname: req.body.groupname
         })
         .then(res.status(201).send({
-          message: `Group - ${group.groupname}, was created successfully`
+          message: `Group - ${group.groupname}, was created successfully`,
         }));
       })
       .catch((error) => {
@@ -32,6 +35,8 @@ export default {
           res.status(400).send({
             error: { message: `Group - ${req.body.groupname}, Already Exist` }
           });
+        } else {
+          res.status(400).send(error);
         }
       });
   },
@@ -45,7 +50,9 @@ export default {
       .findOne({ where: { groupname: req.params.groupname } })
       .then((group) => {
         if (!group) {
-          return res.status(200).send({ message: `Group - ${req.params.groupname}, does not exist` });
+          return res.status(200).send({
+            message: `Group - ${req.params.groupname}, does not exist`
+          });
         }
         models.Group.destroy({ where: { groupname: req.params.groupname } });
         return res.status(200).send({
@@ -53,8 +60,8 @@ export default {
         });
       });
   },
-  // Display a users created group
-  fetch(req, res) {
+  // Display all created groups on postit
+  fetchAllGroups(req, res) {
     return models.Group
       .findAll({ attributes:
         ['groupname', 'description']
@@ -70,6 +77,21 @@ export default {
         res.status(400).send({
           error: { message: error }
         });
+      });
+  },
+  // Users can see all the groups that they belong to
+  fetchMyGroups(req, res) {
+    const user = req.decoded.data.username;
+    return models.UserGroup
+      .findAll({ where: { username: user } })
+      .then((groups) => {
+        if (groups.length === 0) {
+          res.status(200).send({ message: 'You have no group yet' });
+        } else {
+          return res.status(200).send(groups);
+        }
+      }).catch((error) => {
+        res.status(500).send({ error: error.message, status: 500 });
       });
   },
   // Add/Remove member from group
@@ -121,8 +143,8 @@ export default {
                 return res.status(201).send({
                   message: `${req.body.username} was successfully added to ${req.params.groupname}`
                 });
-              });
-          });
+              }).catch(error => console.log('This is the error: ', error));
+          }).catch(error => console.log('This is the error: ', error));
       });
   },
   // Get List of group members
@@ -146,37 +168,6 @@ export default {
             }
           });
         }
-      });
-  },
-  // Send a message to a group
-  createMessage(req, res) {
-    return models.Message
-      .create({
-        body: req.body.message,
-        from_user: req.body.username,
-        to_group: req.params.groupname,
-        priority: req.body.priority
-      })
-      .then(message => res.status(201).send(message)) // message created
-      .catch(error => res.status(400).send(error)); // bad request
-  },
-  // Get all the messages from a group
-  fetchMessages(req, res) {
-    return models.Message
-      .findAll({
-        where: { to_group: req.params.groupname },
-        attributes: [
-          'body',
-          'from_user',
-          'to_group',
-          'priority',
-          'createdAt'
-        ],
-      })
-      .then(message => res.status(200).send(message))
-      .catch((error) => {
-        console.log(error);
-        res.status(404).send({ message: 'No messages found at this time' })
       });
   }
 };

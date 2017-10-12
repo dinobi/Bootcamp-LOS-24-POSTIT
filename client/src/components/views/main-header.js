@@ -19,28 +19,29 @@ class MainHeader extends React.Component {
     }
 	}
     render() {
+			const { active } = this.props;
       return (
         <header>
-			<nav className="amber">
-				<div className="container nav-wrapper">
-					<a href="#/" className="postit-logo">
-						<img src={Logo} alt="postit-logo"/></a>
-					<a aria-label="mobile-menu" className="nav-mobile" onClick={ () => this.handleClick() }>
-						<span></span>
-						<span></span>
-						<span></span>
-					</a>
-					<ul className="nav-list right hide-on-small-and-down">
-					  <li className="nav-item"><a href="#login">Login</a></li>
-					  <li className="nav-item"><a href="#register">Register</a></li>
-					  <li className="nav-item"><a href="#login"><button className="btn btn-create">Create a new group</button></a></li>
-					</ul>
-				</div>
-				<div className="mobile-nav">
-					<div className="container" id="mobile-nav"></div>					
-				</div>
-			</nav>
-		</header>
+					<nav className="amber">
+						<div className="container nav-wrapper">
+							<a href="#/" className="postit-logo">
+								<img src={Logo} alt="postit-logo"/></a>
+							<a aria-label="mobile-menu" className="nav-mobile" onClick={ () => this.handleClick() }>
+								<span></span>
+								<span></span>
+								<span></span>
+							</a>
+							<ul className="nav-list right hide-on-small-and-down">
+								<li className="nav-item"><a href="#login">Login</a></li>
+								<li className="nav-item"><a href="#register">Register</a></li>
+								<li className="nav-item"><a href="#login"><button className="btn btn-create">Create a new group</button></a></li>
+							</ul>
+						</div>
+						<div className="mobile-nav">
+							<div className="container" id="mobile-nav"></div>					
+						</div>
+					</nav>
+				</header>
       );
     }
 }

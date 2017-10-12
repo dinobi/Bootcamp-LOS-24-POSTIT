@@ -8,24 +8,24 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      from_user: {
+      fromUser: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      to_group: {
+      toGroup: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      body: {
+      message: {
         type: Sequelize.STRING,
         allowNull: false
       },
       priority: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: 'Normal',
+        defaultValue: 'normal',
         validate: {
-          isIn: [['Normal', 'Urgent', 'Critical']]
+          isIn: [['normal', 'urgent', 'critical']]
         }
       },
       createdAt: {

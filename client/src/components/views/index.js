@@ -4,10 +4,17 @@ import SideMenu from './side-menu';
 import Footer from './footer';
 import SearchForm from './search-form';
 import SearchResult from './search-result';
-import FeatureCards from './feature-cards';
+import Features from './features';
 import GroupCard from './group-card';
 import MessageBox from './message-box';
-import Message from './message-log';
+import MessageLog from './message-log';
+import SignupForm from './signup-form';
+import ToastMessage from './toast-message';
 import Copyright from './copyright';
+import Modal from './modal';
 
-export { MainHeader, DashHeader, SideMenu, Footer, SearchForm, SearchResult, FeatureCards, GroupCard, MessageBox, Message, Copyright };
+export { MainHeader, DashHeader, SideMenu,
+  Footer, SearchForm, SearchResult, Features,
+  GroupCard, MessageBox, MessageLog, SignupForm,
+  ToastMessage, Copyright, Modal
+};
