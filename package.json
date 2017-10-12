@@ -7,7 +7,7 @@
     "build": "babel src -d lib",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "exec": "nodemon --watch ./server/bin/www --exec babel-node -- server/app",
-    "start": "node ./server/bin/www --exec babel-node .server/app",
+    "start": "nodemon ./server/bin/www --exec babel-node .server/app",
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
