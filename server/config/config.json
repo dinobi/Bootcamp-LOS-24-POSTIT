@@ -15,7 +15,13 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
+
   "production": {
-    "HEROKU_POSTGRESQL_SILVER_URL":"postgres://fixckoxwlujbjy:d8fefc83d9b0565d4dc9cbc94ad22a13883bd0e2e4de317e5b03bcc57d494d57@ec2-23-21-169-238.compute-1.amazonaws.com:5432/d3h76lbv286nah"
+    "username": "fixckoxwlujbjy",
+    "password": "d8fefc83d9b0565d4dc9cbc94ad22a13883bd0e2e4de317e5b03bcc57d494d57",
+    "database": "d4nq09rjst5t70",
+    "host": "ec2-23-21-169-238.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
+
