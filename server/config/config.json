@@ -16,11 +16,5 @@
     "dialect": "postgres"
   },
   "production": {
-    "secret": "PrivateKey",
-    "username": "postgres",
-    "password": "Andela",
-    "database": "postitdb",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
   }
 }
