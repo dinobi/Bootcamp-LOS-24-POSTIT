@@ -1,6 +1,5 @@
-import jwt from 'jsonwebtoken';
 import controllers from '../controllers';
-import authUser from '../helpers/authUser';
+import { authUser } from '../helpers/authService';
 
 export default (app) => {
   app.all('/api', (req, res) => res.status(200).send({
