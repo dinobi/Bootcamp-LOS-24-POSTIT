@@ -21,30 +21,66 @@
 		overflow: auto;
 		overflow-x: hidden;
 	}
-	.dashboard-menu .my-tab,  .dashboard-menu .utility {
-		height: 15%;
+	.dashboard-menu .my-tab {
+		height: 20%;
 		background-color: transparent;
-		text-align: center;
-		padding: 15px;
+		font-weight: 700;
+		text-align: left;
+		padding: 20px;
+		padding: 2rem;
 		overflow: hidden;
 	}
+	.dashboard-menu .utility {
+		height: 10%;
+		background-color: transparent;
+		font-weight: 700;
+		text-align: left;
+		padding: 20px;
+		padding: 2rem;
+		overflow: hidden;
+	}
+	/**  Set hover effectfor my-tab and utility  **/
 	.dashboard-menu .my-tab:hover,  .dashboard-menu .utility:hover {
 		background-color: #000; 
 	}
+
+	.dashboard-menu .my-tab {
+		border-bottom: 1px solid #424242;
+	}
+	.dashboard-menu .my-tab:hover {
+		background-color: #000;
+		border-bottom: 1px solid #000;
+	}
+
 	.dashboard-menu .utility {
-		border-top: 1px solid #424242; 
+		border-top: 1px solid #424242;
 	}
 	.dashboard-menu .utility:hover {
 		background-color: #000;
 		border-top: 1px solid #000;
 	}
 
+	/** set text size within my-tab and utility **/
+	.my-tab > h5, .utility > h5 {
+		font-weight: 900;
+		line-height: 2.4rem;
+		cursor: pointer;
+	}
+	.my-tab > h6, .utility > h6 {
+		font-size: 12px;
+		font-weight: 900;
+		line-height: 2.4rem;
+		color: #FFC107;
+		cursor: pointer;
+	}
+
+
 	.dashboard-menu li a {
 	    color: #fff;
 		text-decoration: none;
 		min-width: 200px;
-		padding: 14px 20px;
-		padding: 1.4rem 2rem;
+		padding: 10px 20px;
+		padding: 1rem 2rem;
 	    display: block;
 	    font-size: 14px;
 	}
@@ -74,6 +110,10 @@
 		overflow: hidden;
 		overflow-y: auto;
 		margin: 0 -0.75rem;
+	}
+	/** Dashboard content for messageboard **/
+	.group-gui {
+		overflow-y: hidden !important;
 	}
 
 ::-webkit-scrollbar {

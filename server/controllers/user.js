@@ -1,162 +1,119 @@
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import models from '../models';
+import generateAuthToken from '../helpers/authService';
+import { loginValidator, signupValidator, responseErrorValidator } from '../helpers/inputValidator';
 
 const salt = bcrypt.genSaltSync(8);
 export default {
-  //create a new user account
-  create(req, res) {
-    if (!req.body.firstname || req.body.firstname.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'firstname field cannot be empty' },
-        userData: req.body
-      });
-    }
-    if (!req.body.lastname || req.body.lastname.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'lastname field cannot be empty' },
-        userData: req.body
-      });
-    }
-
-    if (!req.body.username || req.body.username.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'username field cannot be empty' },
-        userData: req.body
-      });
-    }
-
-    if (!req.body.email || req.body.email.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'email field cannot be empty' },
-        userData: req.body
-      });
-    }
-
-    if (!req.body.password || req.body.password.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'password field cannot be empty' },
-        userData: req.body
-      });
-    }
-
-    if (!req.body.phone || req.body.phone.trim() === '') {
-      return res.status(400)
-      .send({
-        error: { message: 'phone field cannot be empty' },
-        userData: req.body
-      });
+  // A visitor can create a new account
+  createNewUser(req, res) {
+    if (signupValidator(req, res) !== 'validated') {
+      return;
     }
     return models.User
       .create({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-        username: req.body.username,
-        email: req.body.email,
+        username: req.body.username.trim().toLowerCase(),
+        email: req.body.email.trim().toLowerCase(),
         password: bcrypt.hashSync(req.body.password, salt, null),
         phone: req.body.phone
       })
       .then(user => res.status(201)
-      .send({ message: 'User account successfully created.', userData: user }))
+      .send({
+        message: 'User account successfully created.',
+        userData: {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          username: user.username,
+          email: user.email,
+          phone: user.phone
+        }
+      }))
       .catch((error) => {
-        if (error.errors[0].message === 'username must be unique') {
-          res.status(400).send({
-            error: { message: 'Username already exists' }
-          });
-        } else if (error.errors[0].message === 'email must be unique') {
-          res.status(400).send({
-            error: { message: 'Email already exists' }
-          });
-        } else if (error.errors[0].message === 'Validation isAlpha on firstname failed') {
-          res.status(400).send({
-            error: { message: 'Firstname cannot contain digits' }
-          });
-        } else if (error.errors[0].message === 'Validation isAlpha on lastname failed') {
-          res.status(400).send({
-            error: { message: 'Lastname cannot contain digits' }
-          });
-        } else if (error.errors[0].message === 'Validation isEmail on email failed') {
-          res.status(400).send({
-            error: { message: 'Enter a valid email' }
-          });
+        if (responseErrorValidator(res, error) !== 'validated') {
+          return;
         }
       });
   },
-  //Login in a user
-  auth(req, res) {
-    if (!req.body.username || req.body.username.trim() === '') {
-      res.status(404).send({
-        message: 'Authentication failed. Username is required'
-      });
-      return req.body;
-    }
-    if (!req.body.password || req.body.password.trim() === '') {
-      res.status(404).send({
-        message: 'Authentication failed. Password is required'
-      });
-      return req.body;
+  // A user can login into thier account
+  authUser(req, res) {
+    if (loginValidator(req, res) !== 'validated') {
+      return;
     }
     const data = req.body.username;
+    // check if user is login in with email and resolve accordingly
     if (data.match(/@/) !== null) {
       return models.User
       .findOne({ where: { email: data } })
       .then((user) => {
         if (!user) {
           res.status(404).send({
-            message: 'Authentication failed.Username is incorrect or does not exist'
+            error: { message: 'Authentication failed. Email is incorrect or does not exist' }
           });
         } else if (user) {
           // check if password matches
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
             res.status(404).send({
-              message: 'Authentication failed. Incorrect password' });
+              error: { message: 'Authentication failed. Incorrect password' } });
           } else {
-            // User is found and password is correct
-            // create a token
-            const token = jwt.sign({ data: user }, 'PrivateKey', {
-              expiresIn: '24h' // expires in 24 hours
-            });
+            // User is found--password is correct--generate token
+            const token = generateAuthToken(user);
             // return success message including token in JSON format
             res.status(200).send({
-              message: 'Authentication successful', authToken: token
+              message: 'Authentication successful',
+              userData:
+              {
+                firstname: user.firstname,
+                lastname: user.lastname,
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+              },
+              authToken: token
             });
           }
         }
-      });
+      }).catch(error => res.status(500).send({ error: error.message, status: 500 }));
     }
-    models.User
+    // Else user uses his username
+    return models.User
       .findOne({ where: { username: data } })
       .then((user) => {
         if (!user) {
-          res.status(404).send({
-            message: 'Authentication failed.Username is incorrect or does not exist'
+          res.status(404).send({ error:
+            { message: 'Authentication failed. Username is incorrect or does not exist' }
           });
         } else if (user) {
           // check if password matches
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
-            res.status(404).send({
-              message: 'Authentication failed. Incorrect password' });
-          } else {
-            // User is found and password is correct
-            // create a token
-            const token = jwt.sign({ data: user }, 'PrivateKey', {
-              expiresIn: '24h' // expires in 24 hours
+            res.status(404).send({ error:
+              { message: 'Authentication failed. Incorrect password' }
             });
+          } else {
+            // User is found---password is correct---generate token
+            const token = generateAuthToken(user);
             // return success message including token in JSON format
             res.status(200).send({
-              message: 'Authentication successful', authToken: token
+              message: 'Authentication successful',
+              userData:
+              {
+                firstname: user.firstname,
+                lastname: user.lastname,
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+              },
+              authToken: token
             });
           }
         }
-      });
-  },  
-  //View all users
-  fetch(req, res) {
+      }).catch(error => res.status(500).send({ error: error.message, status: 500 }));
+  },
+  //Users can view all other users
+  fetchUsers(req, res) {
     return models.User
       .findAll({ attributes:
         ['firstname', 'lastname', 'username', 'email', 'phone']
@@ -164,13 +121,13 @@ export default {
       .then(users => res.status(200).send(users))
       .catch((error) => {
         if (error) {
-          res.status(400).send({
-            error: { message: 'Bad request, check for correct API call' }
+          res.status(500).send({
+            error: error.message, status: 500
           });
         }
       });
   },
-  //Search for users or groups
+  //Users can search for other users or groups
   search(req, res) {
     //make sure search context is specified
     if (!req.body.search || req.body.search.trim() === '') {
@@ -201,7 +158,8 @@ export default {
             if (user.length === 0) {
               res.status(400).send({
                 error: {
-                  message: `${Object.keys(req.body)[1]}: ${searchTerm}, could not be found or does not exist`
+                  message:
+                  `${Object.keys(req.body)[1]}: ${searchTerm}, could not be found or does not exist`
                 }
               });
             } else { res.status(200).send(user); }
@@ -209,7 +167,7 @@ export default {
           .catch((error) => {
             if (error) {
               res.status(400).send({
-                error: { message: 'Bad request. Check search term or make the right API call' }
+                error: { message: 'Bad request. Check for the correct search term' }
               });
             }
           });
@@ -247,5 +205,15 @@ export default {
         }
       });
     }
+  },
+  // Users can request for a new password
+  passwordRequest(req,res) {
+    if (!req.body.email || req.body.password.email.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'Your postit associated email is required' }
+      });
+    }
+    const email = req.body.email;
+    const date = new Date();
   },
 };

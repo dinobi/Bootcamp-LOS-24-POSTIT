@@ -6,7 +6,7 @@ import {
   SearchResult,
   Copyright
 } from '../../views';
-import api from '../../helpers/api';
+import apiHandler from '../../helpers/api-handler';
 /**
  * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
  */

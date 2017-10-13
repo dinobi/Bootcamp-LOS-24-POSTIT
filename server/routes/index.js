@@ -6,16 +6,16 @@ export default (app) => {
     message: 'Welcome to the PostIT API',
   }));
   // API routes for users to create an account
-  app.post('/api/user/signup/', controllers.user.create);
+  app.post('/api/user/signup/', controllers.user.createNewUser);
 
   // Api route for user to login to an account
-  app.post('/api/user/signin/', controllers.user.auth);
+  app.post('/api/user/signin/', controllers.user.authUser);
 
   // Middleware to protect the following API access
   let token;
   app.use((req, res, next) => {
     token = req.headers['x-access-token'];
-    jwt.verify(token, 'PrivateKey', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_TOKEN || 'PrivateKey', (err, decoded) => {
       if (err) {
         res.status(401)
         .send({ message: 'Authentication failed. Invalid access token' });
@@ -28,7 +28,10 @@ export default (app) => {
   });
 
   // API route to get list of all users
-  app.get('/api/users/', controllers.user.fetch);
+  app.get('/api/users/', controllers.user.fetchUsers);
+
+  // API route to perform postit search
+  app.post('/api/search/', controllers.user.search);
 
   // API route to perform postit search
   app.post('/api/search/', controllers.user.search);
@@ -40,7 +43,10 @@ export default (app) => {
   app.post('/api/groups/:groupname/delete-group/', controllers.group.delete);
 
   // API route to get list of all groups
-  app.get('/api/groups/', controllers.group.fetch);
+  app.get('/api/groups/', controllers.group.fetchAllGroups);
+
+  // API route to get list of group a user belongs to
+  app.get('/api/groups/me/', controllers.group.fetchMyGroups);
 
   // API route that allows users to add or remove group members
   app.post('/api/groups/:groupname/user/', controllers.group.editGroup);
@@ -49,8 +55,14 @@ export default (app) => {
   app.get('/api/groups/:groupname/members/', controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
-  app.post('/api/groups/:groupname/send-message/', controllers.group.createMessage);
+  app.post('/api/groups/:groupname/send-message/', controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:groupname/show-messages/', controllers.group.fetchMessages);
+  app.get('/api/groups/:groupname/show-messages/', controllers.message.fetchMessages);
+
+  // API route to serve error page
+  app.all('/*', (req, res) => res.status(404).send({
+    error: 'Resource not found',
+    status: 404
+  }));
 };

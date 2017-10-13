@@ -10,12 +10,10 @@ module.exports = {
       username: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique: true,
       },
       groupname: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique: false
       },
       createdAt: {
         allowNull: false,
@@ -27,7 +25,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /* , Sequelize*/) => {
+  down: (queryInterface /* , Sequelize */) => {
     queryInterface.dropTable('UserGroups');
   }
 };

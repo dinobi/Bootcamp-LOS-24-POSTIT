@@ -29,3 +29,18 @@
 .dashboard-group .card i:hover {
     color: #ff6f00;
 }
+.members-list > li {
+	list-style: none;
+	font-weight: 900;
+	padding: 10px 10px;
+}
+.members-list > li:hover {
+	border-radius: 3px;
+	color: #fff;
+	background: linear-gradient(#FFC107, #FFA000);;
+}
+.members-list > li:active, .members-list > li:focus {
+	border-radius: 3px;
+	color: #fff;
+	background: linear-gradient(#FFC107, #FFA000);;
+}
