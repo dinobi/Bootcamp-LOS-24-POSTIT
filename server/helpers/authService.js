@@ -20,7 +20,9 @@ const authUser = (req, res, next) => {
   jwt.verify(token, jwtSecret, (error, decoded) => {
     if (error) {
       return res.status(401)
-      .send({ error: { message: 'Authentication failed. Invalid access token' } });
+      .send({
+        error: { message: 'Authentication failed. Invalid access token' }
+      });
     }
     // If valid, save request for use on all routes
     req.decoded = decoded;
