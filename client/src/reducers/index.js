@@ -6,6 +6,7 @@ import groupsReducer from './groups-reducer';
 import groupMessagesReducer from './group-messages-reducer';
 import groupMembersReducer from './group-members-reducer';
 import createGroupReducer from './create-group-reducer';
+import sendMessageReducer from './send-message-reducer';
 
 const rootReducer = combineReducers({
   selectMember: selectMemberReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   toasts: toastReducer,
   auth: authReducer,
   groups: groupsReducer,
-  newGroup: createGroupReducer
+  newGroup: createGroupReducer,
+  sendMessage: sendMessageReducer
 });
 
 export default rootReducer;

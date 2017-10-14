@@ -16,8 +16,31 @@ class MessageBoard extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
+      newPost: '',
     };
+    this.handleSend = this.handleSend.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+    this.setState({
+      newPost: e.target.value
+    });
+  }
+  /** handleSend {e} */
+	handleSend(e) {
+		e.preventDefault();
+		let { fromUser, message, priority } = this;
+    groupname = groupname.value.trim();
+    description = description.value.trim();
+		 if (groupname === '' || description === '') {
+			this.setState({ errorMessage: 'Error. All field are required to create a new group' });
+    } else {
+      const groupData = { groupname, description };
+      this.props.onCreateGroup(groupData);
+		}
+	}
+
 
   /** */
   render() {
@@ -32,8 +55,12 @@ class MessageBoard extends React.Component {
           }
       </div>
 
-      <form className="message-box" id="send-message">
-        <textarea className="compose" placeholder="always be nice..."></textarea>
+      <form className="message-box" id="send-message" onSubmit = { this.handleSend }>
+        <textarea
+          value={ this.state.newPost }
+          className="compose"
+          placeholder="always be nice...">
+        </textarea>
         <select id="priority" className="btn btn-create">
           <option value="Normal">Normal</option>
           <option value="Urgent">Urgent</option>
