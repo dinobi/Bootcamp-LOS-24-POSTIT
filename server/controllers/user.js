@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import models from '../models';
 import { generateAuthToken } from '../helpers/authService';
 import filterUser from '../helpers/filterUser';
-import { loginValidator, signupValidator, responseErrorValidator }
+import { loginValidator, signupValidator, uniqueValidator }
 from '../helpers/inputValidator';
 
 const salt = bcrypt.genSaltSync(8);
@@ -38,7 +38,7 @@ export default {
           res.status(500).send({ error: error.message, status: 500 }));
       })
       .catch((error) => {
-        if (responseErrorValidator(res, error) !== 'validated') {
+        if (uniqueValidator(res, error) !== 'validated') {
           return;
         }
       });
