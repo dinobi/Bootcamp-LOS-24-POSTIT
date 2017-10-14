@@ -758,7 +758,7 @@ describe('PostIt Api Tests: ', () => {
         .set('x-access-token', token)
         .type('form')
         .send({
-          groupname: 'Test Group',
+          groupname: 'Test group',
           description: 'A dupliacte test group',
         })
         .end((error, res) => {
@@ -774,10 +774,97 @@ describe('PostIt Api Tests: ', () => {
         .type('form')
         .send({
           groupname: 'Test group2',
-          description: 'A Test Group',
+          description: 'A duplicate test group',
         })
         .end((error, res) => {
           res.should.have.status(201);
+          done();
+        });
+    });
+    // Create Group
+    // Correct response messages
+    it('responds with correct message for unauthorized users', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', '')
+        .type('form')
+        .send({
+          groupname: 'Test group1',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('Unauthorized: No access token provided');
+          done();
+        });
+    });
+    it('responds with correct message for successful creation', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group3',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('Group - Test group3, was created successfully');
+          done();
+        });
+    });
+    it('responds with correct message for blank groupname', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: '   ',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('A group name is required');
+          done();
+        });
+    });
+    it('responds with correct message for blank group desciption', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test Group',
+          description: '   ',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('A group description is required');
+          done();
+        });
+    });
+    it('responds with correct message for duplicate groupname', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('Group - Test group, Already Exist');
+          done();
+        });
+    });
+    it('responds with success for similar description but different names',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group4',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('Group - Test group3 was created successfully');
           done();
         });
     });
