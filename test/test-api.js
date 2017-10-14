@@ -807,7 +807,7 @@ describe('PostIt Api Tests: ', () => {
           description: 'A Test Group',
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Group - Test group3, was created successfully');
+          res.body.message.should.equal('Group - Test group3, was created successfully');
           done();
         });
     });
@@ -864,14 +864,27 @@ describe('PostIt Api Tests: ', () => {
           description: 'A dupliacte test group',
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Group - Test group3 was created successfully');
+          res.body.message.should.equal('Group - Test group4, was created successfully');
           done();
         });
     });
   });
-
+  // Fetching users created group
   describe('View all created groups', () => {
-
+    it('responds with status 200 if groups exist', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', '')
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
   });
 
   describe('Delete an existing group', () => {
