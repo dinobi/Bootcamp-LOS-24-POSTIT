@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import models from '../models';
-import generateAuthToken from '../helpers/authService';
+import { generateAuthToken } from '../helpers/authService';
 import { loginValidator, signupValidator, responseErrorValidator } from '../helpers/inputValidator';
 
 const salt = bcrypt.genSaltSync(8);
