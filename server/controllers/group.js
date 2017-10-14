@@ -32,11 +32,11 @@ export default {
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
-          res.status(400).send({
+          res.status(409).send({
             error: { message: `Group - ${req.body.groupname}, Already Exist` }
           });
         } else {
-          res.status(400).send(error);
+          res.status(500).send({ error: error.message, status: 500 });
         }
       });
   },
