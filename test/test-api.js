@@ -6,6 +6,7 @@ import models from '../server/models';
 process.env.NODE_ENV = 'test';
 const should = chai.should();
 chai.use(chaiHttp);
+let token;
 
 models.User.destroy({
   where: {},
@@ -38,7 +39,7 @@ describe('PostIt Api Tests: ', () => {
   //
   // Correct status code responses
   describe('Creating a new user account: ', () => {
-    it('(POST /api/user/signup/) creates a new user with status code 201', (done) => {
+    it('Creates a new user with status code 201', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
@@ -52,6 +53,7 @@ describe('PostIt Api Tests: ', () => {
         })
         .end((error, res) => {
           res.should.have.status(201);
+          token = res.body.authToken;
           done();
         });
     });
@@ -494,34 +496,10 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    // it('responds with correct message if phone numbers is less than 11', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       phone: '0803295299',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('phone number cannot be less than 11 digits.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if phone numbers is more than 13', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       phone: '23408032952998',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('phone number cannot be more than 13 digits.');
-    //       done();
-    //     });
-    // });
   });
   // Authenticate a user account
   //
-// Correct status code responses
+  // Correct status code responses
   describe('Login a user into their account: ', () => {
     it('(POST /api/user/signin/) authenticates a user', (done) => {
       chai.request(app)
@@ -715,9 +693,23 @@ describe('PostIt Api Tests: ', () => {
   describe('Search postit for users and groups', () => {
 
   });
-
+  // Create Group
+  // Correct status code responses
   describe('Create a new group', () => {
-
+    it('Creates a new group with status code 201', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'dinobi',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
   });
 
   describe('View all created groups', () => {
