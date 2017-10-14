@@ -16,6 +16,34 @@
 .notify-counter .normal{
 	color: #4CAF50;
 }
+.tag {
+	float: right;
+  padding: 1px 8px;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 900;
+}
+@media (max-width: 600px) {
+	.tag {
+		float: none;
+		display: inline-block;
+		position: relative;
+		right: 0;
+		top: 0;
+		
+	}
+}
+.normal-tag {
+	background: #4CAF50;
+}
+.urgent-tag {
+	background: #2196F3;
+}
+.critical-tag {
+	background: #F44336;
+}
 
 .dashboard-group .card {
     height: 108px;
@@ -29,10 +57,20 @@
 .dashboard-group .card i:hover {
     color: #ff6f00;
 }
+
+.member-list-title {
+	background: #212121;
+	padding: 5px 10px;
+	font-weight: 900 !important;
+}
+.member-list-title h5 {
+	font-weight: 900 !important;
+}
 .members-list > li {
+	cursor: pointer;
 	list-style: none;
 	font-weight: 900;
-	padding: 10px 10px;
+	padding: 10px;
 }
 .members-list > li:hover {
 	border-radius: 3px;

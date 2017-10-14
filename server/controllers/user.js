@@ -2,8 +2,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import models from '../models';
-import generateAuthToken from '../helpers/authService';
-import { loginValidator, signupValidator, responseErrorValidator } from '../helpers/inputValidator';
+import { generateAuthToken } from '../helpers/authService';
+import filterUser from '../helpers/filterUser';
+import { loginValidator, signupValidator, responseErrorValidator }
+from '../helpers/inputValidator';
 
 const salt = bcrypt.genSaltSync(8);
 export default {
@@ -21,17 +23,20 @@ export default {
         password: bcrypt.hashSync(req.body.password, salt, null),
         phone: req.body.phone
       })
-      .then(user => res.status(201)
-      .send({
-        message: 'User account successfully created.',
-        userData: {
-          firstname: user.firstname,
-          lastname: user.lastname,
-          username: user.username,
-          email: user.email,
-          phone: user.phone
-        }
-      }))
+      .then((user) => {
+        user.save()
+        .then((savedUser) => {
+          const token = generateAuthToken(savedUser);
+          res.status(201)
+          .send({
+            message: 'User account successfully created.',
+            userData: filterUser(user),
+            authToken: token
+          });
+        })
+        .catch(error =>
+          res.status(500).send({ error: error.message, status: 500 }));
+      })
       .catch((error) => {
         if (responseErrorValidator(res, error) !== 'validated') {
           return;
@@ -64,14 +69,7 @@ export default {
             // return success message including token in JSON format
             res.status(200).send({
               message: 'Authentication successful',
-              userData:
-              {
-                firstname: user.firstname,
-                lastname: user.lastname,
-                username: user.username,
-                email: user.email,
-                phone: user.phone,
-              },
+              userData: filterUser(user),
               authToken: token
             });
           }
@@ -98,14 +96,7 @@ export default {
             // return success message including token in JSON format
             res.status(200).send({
               message: 'Authentication successful',
-              userData:
-              {
-                firstname: user.firstname,
-                lastname: user.lastname,
-                username: user.username,
-                email: user.email,
-                phone: user.phone,
-              },
+              userData: filterUser(user),
               authToken: token
             });
           }

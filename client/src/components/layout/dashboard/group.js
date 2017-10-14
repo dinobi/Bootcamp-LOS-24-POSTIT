@@ -67,6 +67,9 @@ class Group extends React.Component {
                       }
                     </div>
                     <div className="col s3 m3 members-list">
+                      <div className="member-list-title">
+                        <h5>Members</h5>
+                      </div>
                       { members.map((member, index) =>
                         <li key={index}><i className="fa fa-user"></i>&nbsp;&nbsp;{member.username}</li>
                       )}

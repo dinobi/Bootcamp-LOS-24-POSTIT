@@ -20,7 +20,7 @@ class SearchWiki extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchQuery: ""
+      searchQuery: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
