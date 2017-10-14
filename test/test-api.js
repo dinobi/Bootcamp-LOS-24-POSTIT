@@ -696,13 +696,84 @@ describe('PostIt Api Tests: ', () => {
   // Create Group
   // Correct status code responses
   describe('Create a new group', () => {
+    it('allows only authenticated users to create new groups', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', '')
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
     it('Creates a new group with status code 201', (done) => {
       chai.request(app)
         .post('/api/create-group/')
         .set('x-access-token', token)
         .type('form')
         .send({
-          groupname: 'dinobi',
+          groupname: 'Test group',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+    it('responds with status code 400 if groupname is not supplied', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: '   ',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('response status code 400 if description is not supplied', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test Group',
+          description: '   ',
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('responds with status code 409 if groupname already exist', (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test Group',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.should.have.status(409);
+          done();
+        });
+    });
+    it('creates a group with similar description but different names',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group2',
           description: 'A Test Group',
         })
         .end((error, res) => {
