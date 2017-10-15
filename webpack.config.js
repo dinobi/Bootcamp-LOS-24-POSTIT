@@ -11,7 +11,7 @@ module.exports = {
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
     contentBase: './client/public',
-    port: 3001,
+    port: parseInt(process.env.PORT, 10) || 5000,
     watchContentBase: true,
     hot: true,
     quiet: true,
