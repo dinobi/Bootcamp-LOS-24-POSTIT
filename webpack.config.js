@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
 
 module.exports = {
   devServer: {
@@ -23,24 +22,10 @@ module.exports = {
   ],
   module: {
     loaders: [
-      // First, run the linter.
-      // It's important to do this before Babel processes the JS.
-      {
-        test: /.js?$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: '/client/src',
-      },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
-      // The `exclude` list *must* be updated with every change to loader extensions.
+      // The `exclude` list *must* be updated with every change to
+      // loader extensions.
       // When adding a new loader, you must add its `test`
       // as a new entry in the `exclude` list for "file" loader.
 

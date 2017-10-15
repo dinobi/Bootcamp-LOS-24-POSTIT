@@ -11,8 +11,7 @@
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "build-client": "webpack -p && webpack-dev-server",
-    "heroku-postbuild": ""
+    "build-client": "webpack -p && webpack-dev-server"
   },
   "repository": {
     "type": "git",
