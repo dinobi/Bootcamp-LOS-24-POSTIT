@@ -23,10 +23,11 @@ const onCreateGroup = groupData =>
 (dispatch) => {
   dispatch(onCreateGroupRequest(groupData));
   let headers;
-  apiHandler('/api/create-group', groupData, 'post', headers).then((groupRes) => {
-    dispatch(onCreateGroupSuccess(groupRes.data));
+  apiHandler('/api/create-group', groupData, 'post', headers)
+  .then((groupRes) => {
+    dispatch(onCreateGroupSuccess(groupRes.data.message));
   }).catch((groupRes) => {
-    dispatch(onCreateGroupFailure(groupRes.data));
+    dispatch(onCreateGroupFailure(groupRes.response.data.error.message));
   });
 };
 

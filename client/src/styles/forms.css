@@ -174,7 +174,8 @@
 .modal-container {
   z-index: 1050;
   position: fixed;
-  border: 1px solid #ffc107;
+	border: 1px solid #ffc107;
+	padding: 30px;
   border-radius: 6px;
   background: white;
   width: 600px;

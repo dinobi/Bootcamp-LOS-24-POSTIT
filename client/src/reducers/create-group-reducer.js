@@ -1,12 +1,5 @@
 import actionType from '../actionTypes';
 
-/**
- * users reducer to return user data
- * @param {state} - initial state object
- * @param {action} - action creator
- * @param {action.type} - action type
- * @return {object} - new state object
- */
 const createGroupReducer = (state = {
   createGroupIsLoading: false,
   message: ''
