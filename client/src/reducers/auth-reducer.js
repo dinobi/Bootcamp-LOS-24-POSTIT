@@ -27,7 +27,6 @@ const authReducer = (state = {
         userIsLoading: false,
         userIsAuthenticated: true,
         userData: action.userData,
-        message: action.message
       });
     case actionType.SIGNUP_FAILURE:
       return Object.assign({}, state, {
@@ -44,8 +43,7 @@ const authReducer = (state = {
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: true,
-        userData: action.userData,
-        message: action.message
+        userData: action.userData
       });
     case actionType.LOGIN_FAILURE:
       return Object.assign({}, state, {
@@ -57,8 +55,7 @@ const authReducer = (state = {
     case actionType.LOGOUT:
       return Object.assign({}, state, {
         userIsAuthenticated: false,
-        userData: action.userData,
-        message: action.message
+        userData: action.userData
       });
     default:
       return state;
