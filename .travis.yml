@@ -5,9 +5,9 @@ install:
     - npm install
 branches:
   only:
-    - master
-    - Test_cases
-    - Optimize_frontend
+    - develop
+    - api-test
+    - frontend_app
 script: npm test
 services:
   - postgresql
@@ -21,5 +21,4 @@ after_success:
 after_script:
   - nyc npm test && nyc report --reporter=text-lcov | coveralls
 notifications:
-  webhooks: https://coveralls.io/webhook?repo_token=1LqYqgo8Da9hnzuSe1AV8P0SkIuilXTSu
 email: false

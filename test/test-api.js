@@ -6,29 +6,31 @@ import models from '../server/models';
 process.env.NODE_ENV = 'test';
 const should = chai.should();
 chai.use(chaiHttp);
+let token;
 
 models.User.destroy({
-  where: {},
   cascade: true,
-  truncate: true
+  truncate: true,
+  restartIdentity: true
 });
 
 models.Message.destroy({
-  where: {},
   cascade: true,
-  truncate: true
+  truncate: true,
+  restartIdentity: true
 });
 
 models.Group.destroy({
-  where: {},
   cascade: true,
-  truncate: true
+  truncate: true,
+  restartIdentity: true
 });
 
 models.UserGroup.destroy({
   where: {},
   cascade: true,
-  truncate: true
+  truncate: true,
+  restartIdentity: true
 });
 /**
  * Test all use cases including edge cases of the PostIt Api
@@ -38,7 +40,8 @@ describe('PostIt Api Tests: ', () => {
   //
   // Correct status code responses
   describe('Creating a new user account: ', () => {
-    it('(POST /api/user/signup/) creates a new user with status code 201', (done) => {
+    it('Creates a new user with status code 201',
+    (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
@@ -52,10 +55,12 @@ describe('PostIt Api Tests: ', () => {
         })
         .end((error, res) => {
           res.should.have.status(201);
+          token = res.body.authToken;
           done();
         });
     });
-    it('does not require unique firstname, lastname, password and phone', (done) => {
+    it('does not require unique firstname, lastname, password and phone',
+    (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
@@ -72,191 +77,26 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('creates a unique username per user', (done) => {
+    it('creates a unique username per user',
+    (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
         .send({
-          username: 'dinobaggio'
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
         })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
+        .end((error, res) => {
+          res.should.have.status(409);
           done();
         });
     });
-    it('creates a unique email per user', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          email: 'test@user.com',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow numbers in firstname', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          firstname: 'fistname12',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow numbers in lastname', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          lastname: 'lastname34',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for firstname', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          firstname: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for lastname', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          lastname: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for username', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          username: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for email', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          email: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for password', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          password: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('does not allow empty field for phone number', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          phone: '',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('considers phone numbers less that 11 as invalid', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          phone: '0803295299',
-        })
-        .then((res) => {
-          res.should.have.status(400);
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-    it('considers phone numbers more than 13 as invalid', (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          phone: '23408032952998',
-        })
-        .end((res) => {
-          res.should.have.status(400);
-          done();
-        })
-        .catch((error) => {
-          console.log(error);
-          done();
-        });
-    });
-  // creating a new user account
-  //
-  // quality response messages
-    it('responds with correct message for account creation ', (done) => {
+    it('creates a unique email per user',
+    (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
@@ -264,6 +104,207 @@ describe('PostIt Api Tests: ', () => {
           firstname: 'dinobi',
           lastname: 'kenkwo',
           username: 'dinobaggio2',
+          email: 'test@user1.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(409);
+          done();
+        });
+    });
+    it('does not allow numbers in firstname',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi4',
+          lastname: 'kenkwo',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow numbers in lastname',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for firstname',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: '  ',
+          lastname: 'kenkwo',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for lastname',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: '  ',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for username',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: '',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for email',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: ' ',
+          password: '123456',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for password',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '  ',
+          phone: '08032952998'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('does not allow empty field for phone number',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '  '
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('considers phone numbers less that 11 as invalid',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '080329529'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('considers phone numbers more than 13 as invalid',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo4',
+          username: 'dinobaggio2',
+          email: 'test@user2.com',
+          password: '123456',
+          phone: '0803295234566677'
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  // creating a new user account
+  //
+  // quality response messages
+    it('responds with correct message for account creation ',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          firstname: 'dinobi',
+          lastname: 'kenkwo',
+          username: 'dinobaggio3',
           email: 'dinobaggio2@postit.com',
           password: '123456',
           phone: '08032952998'
@@ -272,15 +313,16 @@ describe('PostIt Api Tests: ', () => {
           res.body.message.should.equal('User account successfully created.');
           done();
         });
-    });    
-    it('responds with correct message for unique username violation', (done) => {
+    });
+    it('responds with correct message for unique username violation',
+    (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
         .send({
           firstname: 'dinobi',
           lastname: 'kenkwo',
-          username: 'dinobaggio2',
+          username: 'dinobaggio3',
           email: 'dinobaggio@postit.com',
           password: '123456',
           phone: '08032952998'
@@ -494,36 +536,13 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    // it('responds with correct message if phone numbers is less than 11', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       phone: '0803295299',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('phone number cannot be less than 11 digits.');
-    //       done();
-    //     });
-    // });
-    // it('responds with correct message if phone numbers is more than 13', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       phone: '23408032952998',
-    //     })
-    //     .end((err, res) => {
-    //       res.body.error.message.should.equal('phone number cannot be more than 13 digits.');
-    //       done();
-    //     });
-    // });
   });
   // Authenticate a user account
   //
-// Correct status code responses
+  // Correct status code responses
   describe('Login a user into their account: ', () => {
-    it('(POST /api/user/signin/) authenticates a user', (done) => {
+    it('(POST /api/user/signin/) authenticates a user',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -536,7 +555,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('can also take a unique email as username for authentication', (done) => {
+    it('can also take a unique email as username for authentication',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -549,7 +569,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('does not authenticate an unknown username', (done) => {
+    it('does not authenticate an unknown username',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -562,7 +583,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('does not authenticate an unknown email as username', (done) => {
+    it('does not authenticate an unknown email as username',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -575,7 +597,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('does not authenticate an incorrect password', (done) => {
+    it('does not authenticate an incorrect password',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -584,7 +607,9 @@ describe('PostIt Api Tests: ', () => {
           password: '1234567'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Incorrect password');
+          res.body.error.message.should.equal(
+            'Authentication failed. Incorrect password'
+          );
           done();
         });
     });
@@ -615,7 +640,8 @@ describe('PostIt Api Tests: ', () => {
         });
     });
     // Correct response messages
-    it('responds with correct message for successful authentication', (done) => {
+    it('responds with correct message for successful authentication',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -628,7 +654,9 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('responds with correct message for successful authentication using email', (done) => {
+    it(
+      'responds with correct message for successful authentication using email',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -641,7 +669,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('responds with correct message for unknown username', (done) => {
+    it('responds with correct message for unknown username',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -650,11 +679,14 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Username is incorrect or does not exist');
+          res.body.error.message.should.equal(
+            'Authentication failed. Username is incorrect or does not exist'
+          );
           done();
         });
     });
-    it('responds with correct message for unknown email', (done) => {
+    it('responds with correct message for unknown email',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -663,11 +695,14 @@ describe('PostIt Api Tests: ', () => {
           password: '123456'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Email is incorrect or does not exist');
+          res.body.error.message.should.equal(
+            'Authentication failed. Email is incorrect or does not exist'
+          );
           done();
         });
     });
-    it('responds with correct message for incorrect password', (done) => {
+    it('responds with correct message for incorrect password',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -676,11 +711,14 @@ describe('PostIt Api Tests: ', () => {
           password: '1234567'
         })
         .end((error, res) => {
-          res.body.error.message.should.equal('Authentication failed. Incorrect password');
+          res.body.error.message.should.equal(
+            'Authentication failed. Incorrect password'
+          );
           done();
         });
     });
-    it('responds with correct message for empty username field', (done) => {
+    it('responds with correct message for empty username field',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -693,7 +731,8 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('responds with correct message for empty password field', (done) => {
+    it('responds with correct message for empty password field',
+    (done) => {
       chai.request(app)
         .post('/api/user/signin/')
         .type('form')
@@ -715,17 +754,248 @@ describe('PostIt Api Tests: ', () => {
   describe('Search postit for users and groups', () => {
 
   });
-
+  // Create Group
+  // Correct status code responses
   describe('Create a new group', () => {
-
+    it('allows only authenticated users to create new groups',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', '')
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
+    it('Creates a new group with status code 201',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+    it('responds with status code 400 if groupname is not supplied',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: '   ',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('response status code 400 if description is not supplied',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test Group',
+          description: '   ',
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+    it('responds with status code 409 if groupname already exist',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.should.have.status(409);
+          done();
+        });
+    });
+    it('creates a group with similar description but different names',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group2',
+          description: 'A duplicate test group',
+        })
+        .end((error, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+    // Create Group
+    // Correct response messages
+    it('responds with correct message for unauthorized users',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', '')
+        .type('form')
+        .send({
+          groupname: 'Test group1',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal(
+            'Unauthorized: No access token provided'
+          );
+          done();
+        });
+    });
+    it('responds with correct message for successful creation',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group3',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.message.should.equal(
+            'Group - Test group3, was created successfully'
+          );
+          done();
+        });
+    });
+    it('responds with correct message for blank groupname',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: '   ',
+          description: 'A Test Group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal('A group name is required');
+          done();
+        });
+    });
+    it('responds with correct message for blank group desciption',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test Group',
+          description: '   ',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal(
+            'A group description is required')
+            ;
+          done();
+        });
+    });
+    it('responds with correct message for duplicate groupname',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.body.error.message.should.equal(
+            'Group - Test group, Already Exist'
+          );
+          done();
+        });
+    });
+    it('responds with success for similar description but different names',
+    (done) => {
+      chai.request(app)
+        .post('/api/create-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send({
+          groupname: 'Test group4',
+          description: 'A dupliacte test group',
+        })
+        .end((error, res) => {
+          res.body.message.should.equal(
+            'Group - Test group4, was created successfully'
+          );
+          done();
+        });
+    });
   });
-
+  // Fetching all created groups
   describe('View all created groups', () => {
-
+    it('responds with status 200 if groups exist',
+    (done) => {
+      chai.request(app)
+        .get('/api/groups/')
+        .set('x-access-token', token)
+        .type('form')
+        .send()
+        .end((error, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+    it('responds with status 204 if no group exist',
+    (done) => {
+      models.Group.destroy({
+        cascade: true,
+        truncate: true,
+        restartIdentity: true
+      });
+      chai.request(app)
+        .get('/api/groups/')
+        .set('x-access-token', token)
+        .type('form')
+        .send()
+        .end((error, res) => {
+          res.should.have.status(204);
+          done();
+        });
+    });
   });
-
+  // Delete a user created group
   describe('Delete an existing group', () => {
-
+    it('responds with status 404 if group does not exist',
+    (done) => {
+      chai.request(app)
+        .post('/api/groups/Test group/delete-group/')
+        .set('x-access-token', token)
+        .type('form')
+        .send()
+        .end((error, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
   });
 
   describe('Add or remove user from a group', () => {
@@ -735,7 +1005,6 @@ describe('PostIt Api Tests: ', () => {
   describe('View group members', () => {
 
   });
-  
   describe('Send message to a group', () => {
 
   });

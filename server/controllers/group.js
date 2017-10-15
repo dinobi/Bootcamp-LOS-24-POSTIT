@@ -32,11 +32,11 @@ export default {
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
-          res.status(400).send({
+          res.status(409).send({
             error: { message: `Group - ${req.body.groupname}, Already Exist` }
           });
         } else {
-          res.status(400).send(error);
+          res.status(500).send({ error: error.message, status: 500 });
         }
       });
   },
@@ -50,7 +50,7 @@ export default {
       .findOne({ where: { groupname: req.params.groupname } })
       .then((group) => {
         if (!group) {
-          return res.status(200).send({
+          return res.status(404).send({
             message: `Group - ${req.params.groupname}, does not exist`
           });
         }
@@ -68,14 +68,14 @@ export default {
       })
       .then((groups) => {
         if (groups.length === 0) {
-          res.status(200).send({ message: 'You have not created any group' });
+          res.status(204).send({ message: 'You have not created any group' });
         } else {
           return res.status(200).send(groups);
         }
       })
       .catch((error) => {
-        res.status(400).send({
-          error: { message: error }
+        res.status(500).send({
+          error: error.message, status: 500
         });
       });
   },
@@ -86,7 +86,7 @@ export default {
       .findAll({ where: { username: user } })
       .then((groups) => {
         if (groups.length === 0) {
-          res.status(200).send({ message: 'You have no group yet' });
+          res.status(204).send({ message: 'You have no group yet' });
         } else {
           return res.status(200).send(groups);
         }
@@ -143,8 +143,10 @@ export default {
                 return res.status(201).send({
                   message: `${req.body.username} was successfully added to ${req.params.groupname}`
                 });
-              }).catch(error => console.log('This is the error: ', error));
-          }).catch(error => console.log('This is the error: ', error));
+              }).catch(error =>
+                res.status(500).send({ error: error.message, status: 500 }));
+          }).catch(error =>
+            res.status(500).send({ error: error.message, status: 500 }));
       });
   },
   // Get List of group members
@@ -168,6 +170,7 @@ export default {
             }
           });
         }
-      });
+      }).catch(error =>
+        res.status(500).send({ error: error.message, status: 500 }));
   }
 };

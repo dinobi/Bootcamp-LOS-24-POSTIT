@@ -1,3 +1,7 @@
+/* eslint-disable no-useless-escape */
+
+const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+
 const signupValidator = (req, res) => {
   if (!req.body.firstname || req.body.firstname.trim() === '') {
     return res.status(400)
@@ -5,10 +9,23 @@ const signupValidator = (req, res) => {
       error: { message: 'firstname field cannot be empty' }
     });
   }
+  if (!/^[a-zA-Z]*$/.test(req.body.firstname)) {
+    return res.status(400)
+    .send({
+      error: { message: 'Firstname cannot contain digits' }
+    });
+  }
   if (!req.body.lastname || req.body.lastname.trim() === '') {
     return res.status(400)
     .send({
       error: { message: 'lastname field cannot be empty' }
+    });
+  }
+
+  if (!/^[a-zA-Z]*$/.test(req.body.lastname)) {
+    return res.status(400)
+    .send({
+      error: { message: 'Lastname cannot contain digits' }
     });
   }
 
@@ -23,6 +40,13 @@ const signupValidator = (req, res) => {
     return res.status(400)
     .send({
       error: { message: 'email field cannot be empty' }
+    });
+  }
+
+  if (!emailRE.test(req.body.email)) {
+    return res.status(400)
+    .send({
+      error: { message: 'Enter a valid email' }
     });
   }
 
@@ -61,29 +85,17 @@ const loginValidator = (req, res) => {
   return 'validated';
 };
 
-const responseErrorValidator = (res, error) => {
+const uniqueValidator = (res, error) => {
   if (error.errors[0].message === 'username must be unique') {
     return res.status(409).send({
-      error: { message: 'Username already exists' }
+      error: { message: 'Username already exists', status: 409 }
     });
   } else if (error.errors[0].message === 'email must be unique') {
     return res.status(409).send({
-      error: { message: 'Email already exists' }
-    });
-  } else if (error.errors[0].message === 'Validation isAlpha on firstname failed') {
-    return res.status(403).send({
-      error: { message: 'Firstname cannot contain digits' }
-    });
-  } else if (error.errors[0].message === 'Validation isAlpha on lastname failed') {
-    return res.status(403).send({
-      error: { message: 'Lastname cannot contain digits' }
-    });
-  } else if (error.errors[0].message === 'Validation isEmail on email failed') {
-    return res.status(403).send({
-      error: { message: 'Enter a valid email' }
+      error: { message: 'Email already exists', status: 409 }
     });
   }
   return 'validated';
 };
 
-export { signupValidator, loginValidator, responseErrorValidator };
+export { signupValidator, loginValidator, uniqueValidator };
