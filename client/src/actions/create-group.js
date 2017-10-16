@@ -9,13 +9,13 @@ export const onCreateGroupRequest = groupData => ({
 
 export const onCreateGroupSuccess = message => ({
   type: actionType.CREATE_GROUP_SUCCESS,
-  creataGroupIsLoading: false,
+  createGroupIsLoading: false,
   message
 });
 
 export const onCreateGroupFailure = message => ({
   type: actionType.CREATE_GROUP_FAILURE,
-  groupsIsLoading: false,
+  createGroupIsLoading: false,
   message
 });
 

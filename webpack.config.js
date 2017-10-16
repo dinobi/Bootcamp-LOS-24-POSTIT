@@ -11,7 +11,7 @@ module.exports = {
     // Silence WebpackDevServer's own logs since they're generally not useful.
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
-    contentBase: './client/public',
+    contentBase: './client',
     port: 3001,
     watchContentBase: true,
     hot: true,
@@ -99,7 +99,7 @@ module.exports = {
     ]
   },
   output: {
-    path: `${__dirname}/client/public/dist`,
+    path: `${__dirname}/client/dist`,
     filename: 'bundle.min.js',
     publicPath: '/dist/'
   },
@@ -122,7 +122,7 @@ module.exports = {
     new ModuleScopePlugin('client/src'),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'client/public/index.html',
+      template: 'client/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
