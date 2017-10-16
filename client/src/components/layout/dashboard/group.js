@@ -34,7 +34,8 @@ class Group extends React.Component {
   render() {
     const { messages, members } = this.props;
     const posts = messages;
-    const groupName = location.href.split('/')[location.href.split('/').length - 1];
+    const groupName =
+    location.href.split('/')[location.href.split('/').length - 1];
 
     const backToGroup = (
       <li>

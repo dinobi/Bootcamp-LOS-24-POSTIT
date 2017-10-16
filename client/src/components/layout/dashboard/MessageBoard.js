@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DashHeader, SideMenu, Copyright, MessageLog, MessageBox } from '../../views';
+import { DashHeader, SideMenu,
+  Copyright, MessageLog, MessageBox }
+from '../../views';
 import onSendMessage from '../../../actions/send-message';
 
 /**
- * MessageBoard layout component that provides access to a user's message board
- * 
- * 
+ * MessageBoard class
+ *
+ * @class MessageBoard
+ * @extends {React.Component}
  */
 class MessageBoard extends React.Component {
   /**
-   * @param {props} - props
-  */
+   * Creates an instance of MessageBoard.
+   * @param {any} props
+   * @memberof MessageBoard
+   */
   constructor(props) {
     super(props);
     this.state = {
