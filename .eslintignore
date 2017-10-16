@@ -1,0 +1,6 @@
+server/test/*
+server/coverage/*
+client/config/*
+client/scripts/*
+client/public/*
+

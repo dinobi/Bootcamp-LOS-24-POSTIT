@@ -1,0 +1,149 @@
+	.dashboard-ui {
+		width: 100%;
+        margin: 0 auto;
+		overflow: hidden;
+		background-color: #FFC107;
+		
+	}
+
+	/*--Dashboard Menu Setup--*/
+	.dashboard-menu {
+		text-align: left;
+		height: 85vh;
+		overflow: auto;
+		margin: 0 -0.75rem;
+		background-color: #212121!important;	
+	}
+	.dashboard-menu .menu-nav {
+		margin: 0;
+		padding: 0;
+		height: 70%;
+		overflow: auto;
+		overflow-x: hidden;
+	}
+	.dashboard-menu .my-tab {
+		height: 20%;
+		background-color: transparent;
+		font-weight: 700;
+		text-align: left;
+		padding: 20px;
+		padding: 2rem;
+		overflow: hidden;
+	}
+	.dashboard-menu .utility {
+		height: 10%;
+		background-color: transparent;
+		font-weight: 700;
+		text-align: left;
+		padding: 20px;
+		padding: 2rem;
+		overflow: hidden;
+	}
+	/**  Set hover effectfor my-tab and utility  **/
+	.dashboard-menu .my-tab:hover,  .dashboard-menu .utility:hover {
+		background-color: #000; 
+	}
+
+	.dashboard-menu .my-tab {
+		border-bottom: 1px solid #424242;
+	}
+	.dashboard-menu .my-tab:hover {
+		background-color: #000;
+		border-bottom: 1px solid #000;
+	}
+
+	.dashboard-menu .utility {
+		border-top: 1px solid #424242;
+	}
+	.dashboard-menu .utility:hover {
+		background-color: #000;
+		border-top: 1px solid #000;
+	}
+
+	/** set text size within my-tab and utility **/
+	.my-tab > h5, .utility > h5 {
+		font-weight: 900;
+		line-height: 2.4rem;
+		cursor: pointer;
+	}
+	.my-tab > h6, .utility > h6 {
+		font-size: 12px;
+		font-weight: 900;
+		line-height: 2.4rem;
+		color: #FFC107;
+		cursor: pointer;
+	}
+
+
+	.dashboard-menu li a {
+	    color: #fff;
+		text-decoration: none;
+		min-width: 200px;
+		padding: 10px 20px;
+		padding: 1rem 2rem;
+	    display: block;
+	    font-size: 14px;
+	}
+	.dashboard-menu li a:hover {
+	    color: #fff;
+	    background-color: #424242;	    
+	}
+	.dashboard-menu li a.active {
+		background: #FFC107;
+		background: linear-gradient(#FFC107, #FFA000);
+		background: -moz-linear-gradient(#FFC107, #FFA000);
+		background: -webkit-linear-gradient(#FFC107, #FFA000);
+	}
+	.dashboard-menu li a.active:hover {
+	    background: #FFC107;
+		background: linear-gradient(#FFC107, #FFA000);
+		background: -moz-linear-gradient(#FFC107, #FFA000);
+		background: -webkit-linear-gradient(#FFC107, #FFA000);
+	}
+			
+	/*--Dashboard Content Setup--*/
+	.dashboard-content {
+		text-align: left;
+		background-color: #fff;
+		color: #000;
+		height: 85vh;
+		overflow: hidden;
+		overflow-y: auto;
+		margin: 0 -0.75rem;
+	}
+	/** Dashboard content for messageboard **/
+	.group-gui {
+		overflow-y: hidden !important;
+	}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+    background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+    background: #757575;
+	-webkit-border-radius: 1ex;
+	border-radius: 1ex;
+}
+::-webkit-scrollbar-corner {
+    background: #757575;
+}	
+
+/** General Style for all dashboard card **/ 
+	.dashboard-ui .card {
+		overflow: hidden;
+	}
+	.dashboard-ui .card .card-title {
+		font-size: 24px;
+		font-size: 2.4rem;
+		font-weight: 400;
+	}
+	.dashboard-ui .card a, .card i {
+		color: #FFC107;
+	}
+	.dashboard-ui small {
+		margin: 0;
+	}
+	
+	

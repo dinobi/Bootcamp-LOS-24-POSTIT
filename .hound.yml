@@ -1,0 +1,7 @@
+eslint:
+  enabled: true
+  config_file: .eslintrc
+  ignore_file: .eslintignore
+  import/no-unresolved:
+    enbled: false,
+fail_on_violations: true

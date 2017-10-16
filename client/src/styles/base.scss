@@ -1,0 +1,86 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import "typography.css";
+@import "forms.css";
+@import "search-form.css";
+@import "buttons.css";
+@import "dashboard.css";
+@import "dashboard-myspace.css";
+@import "dashboard-group.css";
+@import "dashboard-messages.css";
+@import "nav.css";
+@import "alerts.scss";
+
+body {
+	background:#212121;
+	color: #fff;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+	
+main {
+    flex: 1 0 auto;
+}
+	.headline {
+		margin-top: 80px;
+		text-align: left;
+		z-index: 2;
+	}
+	.heading {
+		margin-bottom: 15px;
+	}
+	.brief {
+		margin-bottom: 30px;
+		color: #757575;
+	}
+	.quick-access p{
+		display: inline-block;
+		margin-left: 15px;
+		color: #757575;
+	}
+	.quick-access p > a {
+		text-decoration: none !important;
+	}
+	.quick-access p > a:hover {
+		text-decoration: underline !important;
+	}
+	.register {
+		color: #fff;
+	}
+#landing-image {
+		position: relative;
+		top: 20px;
+		right: -40px;
+	}
+	#landing-image img {
+		z-index: 0;
+		height: 50rem;
+	}
+@media (max-width:767px){
+	#landing-image img {
+		height: 50rem;
+	}
+	#landing-image {
+		position: relative;
+		top: 40px;
+		right: -20px;
+	}
+}
+@media (max-width:600px){
+	.headline {
+		text-align: center;
+	}
+	#landing-image {
+		display: none
+	}
+	#landing-image img {
+		display: none;
+	}
+}

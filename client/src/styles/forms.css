@@ -1,0 +1,191 @@
+/*======================================= LANDING SIGNUP FORM =========================================================*/
+	#signup-form {
+		margin-top: 120px;
+		padding: 0 0 0 60px;
+		color: #fff;
+	}
+@media (max-width:992px){
+	#signup-form {
+		margin-top: 60px;
+		padding: 0;
+	}
+}
+	#signup-form input {
+		color: #fff !important;
+	}
+	
+	#signup-form .input-field input[type=text] + label,
+	#signup-form .input-field input[type=email] + label,
+	#signup-form .input-field input[type=number] + label,
+	#signup-form .input-field input[type=password] + label {
+		color: #ffc107 !important;
+		font-size: 14px;	 
+	}
+	#signup-form .btn-create {
+		width: 100%;
+		font-size: 14px;
+	}
+
+	#auth-form {
+		padding:15px 40px;
+		background: #fff;
+		max-width: 480px;
+    min-height: 300px;
+		color: #212121;
+		border-radius: 1px;
+    margin: 60px auto 30px auto;
+		overflow: hidden;
+		text-align: center;
+	}
+@media (max-width:992px){
+	#auth-form {
+		padding: 30px;
+	}
+}
+	.external {
+		margin: 0 auto;
+		max-width: 400px;
+	}
+	.external a {
+		font-size: 12px;
+	}
+	.form-logo {
+		margin-bottom: 15px;
+	}
+	.form-brief {
+		color: #000;
+		margin-bottom: 40px;
+		font-size: 14px;
+		font-weight: 700;
+		font-family: "Open Sans", sans-serif;
+	}
+	#auth-form input {
+		display: block;
+		height: 60px;
+		font-family: "Open Sans", sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		color: #000 !important;
+		margin-bottom: 30px;
+	}
+	#auth-form .btn-login {
+		width: 100%;
+		font-size: 14px;
+	}
+	#auth-form .input-field input[type=email] + label,
+	#auth-form .input-field input[type=password] + label,
+	#auth-form .input-field input[type=text] + label {
+		color: #000 !important;
+		font-size: 14px;	 
+	}
+	
+	.google-auth, .facebook-auth {
+		color: #FFC107;
+		font-size: 24px;
+		cursor: pointer;
+	}
+	.google-auth:hover {
+		color: #F44336;
+	}
+	.facebook-auth:hover {
+		color: #01579B;
+	}
+
+/**Input field styling**/
+.input-field input:focus {
+	border-bottom: 1px solid #ffc107 !important;
+	box-shadow: 0 1px 0 0 #ffc107 !important;
+	color: #000;
+	font-size: 14px;
+}
+
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label {
+	color: #ffc107 !important;
+}
+
+
+/** Create Group Form **/
+#create-group-form {
+	border: 1px solid transparent;
+	margin: 0 15px;
+	padding: 1.5rem;
+}
+#create-group-form fieldset {
+	border: 1px solid transparent;
+	padding: 0;
+	margin-bottom: 30px;
+}
+  
+#create-group-form .input-field input {
+	margin-bottom: 30px;
+	width: 50%;
+}
+@media (max-width: 900px) {
+	#create-group-form .input-field input {
+		width: 96%;
+    }
+}
+#create-group-form .input-field input[type=text] {
+	border-bottom: 1px solid #ffc107 !important;
+	box-shadow: 0 1px 0 0 #ffc107 !important;
+	color: #000;
+	padding: 0 1rem;
+	font-size: 14px;
+}
+
+#create-group-form textarea {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  max-height: 300px;
+  min-height: 100px;
+  padding: .5rem 1rem;
+  overflow-y: auto;
+  color: #000;
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid #ffc107;
+  border-radius: 3px;
+  resize: none;
+}
+#create-group-form textarea:focus {
+	border-color: #ffc107;
+	outline: none;
+}
+
+/** Modal ***/
+.modal-cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 1040;
+  display: none;
+}
+
+.modal-cover.modal-cover-active {
+  display: block;
+}
+
+.modal-container {
+  z-index: 1050;
+  position: fixed;
+	border: 1px solid #ffc107;
+	padding: 30px;
+  border-radius: 6px;
+  background: white;
+  width: 600px;
+  min-height: 300px;
+  left: 50%;
+  top: 20%;
+  margin-left: -300px;
+  display: none;
+}
+
+.modal-container.modal-container-active {
+  display: block;
+}
