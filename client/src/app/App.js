@@ -3,8 +3,11 @@ import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import 'jquery';
 import '../components/helpers/main';
-import { IndexHome, Register, Login, RequestPassword, ResetPassword, Dashboard, Groups,
-  Group, Search, SearchWiki, AccountDetails, MessageBoard, Members, NewGroup
+import { 
+  IndexHome, Register, Login, RequestPassword,
+  ResetPassword, Dashboard, Groups,
+  Group, Search, SearchWiki, AccountDetails,
+  MessageBoard, Members, NewGroup
 } from '../components/layout';
 import { Features } from '../components/views';
 import '../styles/base.scss';

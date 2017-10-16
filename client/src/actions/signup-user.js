@@ -6,10 +6,10 @@ export const onSignupRequest = signupCreds => ({
   isLoading: true
 });
 
-export const onSignupSuccess = userData => ({
+export const onSignupSuccess = message => ({
   type: actionType.SIGNUP_SUCCESS,
   isLoading: false,
-  userData
+  message
 });
 
 export const onSignupFailure = message => ({
@@ -23,7 +23,7 @@ const onSignupUser = signupCreds =>
     dispatch(onSignupRequest(signupCreds));
     return axios.post('/api/user/signup', signupCreds)
     .then((signupRes) => {
-      dispatch(onSignupSuccess(signupRes.data.userData));
+      dispatch(onSignupSuccess(signupRes.data.message));
       localStorage.setItem('userAuth', signupRes.data.authToken);
       location.hash = '#dashboard';
     }).catch((signupRes) => {

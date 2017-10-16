@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import jwtDecode from 'jwt-decode';
 import onLogoutUser from '../../actions/logout-user';
 import onLoadGroups from '../../actions/load-groups';
 
@@ -10,8 +11,10 @@ class SideMenu extends React.Component {
 	}
 
   render() {
-		const { auth, active, back, onLogoutUser } = this.props;
-		const { email, username, phone } = auth.userData;
+		const { active, back, onLogoutUser } = this.props;
+		const userAuth = localStorage.getItem('userAuth');
+		const userData = jwtDecode(userAuth);
+		const { email, username, phone } = userData.data;
     return (
       <div className="dashboard-menu">
 
@@ -57,7 +60,6 @@ class SideMenu extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   search: state.search,
 });
 
