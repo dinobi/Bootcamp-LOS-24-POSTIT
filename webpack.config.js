@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
@@ -18,9 +17,7 @@ module.exports = {
     quiet: true,
   },
   devtool: 'source-map',
-  entry: [require.resolve('webpack-hot-middleware/client'),
-    path.join(__dirname, '/client/src/app/index.js')
-  ],
+  entry: path.join(__dirname, '/client/src/app/index.js'),
   module: {
     loaders: [
       // First, run the linter.
@@ -120,22 +117,6 @@ module.exports = {
     new CaseSensitivePathsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ModuleScopePlugin('client/src'),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: 'client/index.html',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-    }),
   ],
 };
 

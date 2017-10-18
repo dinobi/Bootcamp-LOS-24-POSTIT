@@ -25,9 +25,7 @@ roboto*
 /client/public/dist
 /.nyc_output
 /coverage
-
-# dependencies
-/node_modules
+package-lock.json
 
 # testing
 /coverage
