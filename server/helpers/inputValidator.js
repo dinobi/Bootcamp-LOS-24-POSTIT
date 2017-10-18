@@ -66,19 +66,23 @@ const responseErrorValidator = (res, error) => {
     return res.status(409).send({
       error: { message: 'Username already exists' }
     });
-  } else if (error.errors[0].message === 'email must be unique') {
+  } else if
+  (error.errors[0].message === 'email must be unique') {
     return res.status(409).send({
       error: { message: 'Email already exists' }
     });
-  } else if (error.errors[0].message === 'Validation isAlpha on firstname failed') {
+  } else if
+  (error.errors[0].message === 'Validation isAlpha on firstname failed') {
     return res.status(403).send({
       error: { message: 'Firstname cannot contain digits' }
     });
-  } else if (error.errors[0].message === 'Validation isAlpha on lastname failed') {
+  } else if
+  (error.errors[0].message === 'Validation isAlpha on lastname failed') {
     return res.status(403).send({
       error: { message: 'Lastname cannot contain digits' }
     });
-  } else if (error.errors[0].message === 'Validation isEmail on email failed') {
+  } else if
+  (error.errors[0].message === 'Validation isEmail on email failed') {
     return res.status(403).send({
       error: { message: 'Enter a valid email' }
     });

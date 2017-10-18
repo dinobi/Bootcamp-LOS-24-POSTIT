@@ -2,7 +2,6 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    console.log(req.body);
     if (!req.body.groupname || req.body.groupname.trim() === '') {
       return res.status(400).send({
         error: { message: 'A group name is required' }
@@ -20,7 +19,6 @@ export default {
       })
       .then((group) => {
         const user = req.decoded.data.username;
-        // Add user to the group
         models.UserGroup
         .create({
           username: user,
@@ -40,6 +38,7 @@ export default {
         }
       });
   },
+  // Delete Group
   delete(req, res) {
     if (!req.params.groupname || req.params.groupname.trim() === '') {
       return res.status(400).send({
@@ -101,7 +100,9 @@ export default {
       return;
     }
     if (!req.params.groupname || req.params.groupname.trim() === '') {
-      res.status(400).send({ message: 'Bad request, go to group you want to edit' });
+      res.status(400).send({
+        message: 'Bad request, go to group you want to edit'
+      });
       return;
     }
     return models.Group
@@ -133,7 +134,10 @@ export default {
                       groupname: req.params.groupname }
                   });
                   return res.status(200).send({
-                    message: `${req.body.username} was successfully removed from ${req.params.groupname}`
+                    message:
+                    `${req.body.username}
+                    was successfully removed from
+                    ${req.params.groupname}`
                   });
                 }
                 models.UserGroup.create({
@@ -141,7 +145,10 @@ export default {
                   groupname: req.params.groupname
                 });
                 return res.status(201).send({
-                  message: `${req.body.username} was successfully added to ${req.params.groupname}`
+                  message:
+                  `${req.body.username}
+                  was successfully added to
+                  ${req.params.groupname}`
                 });
               }).catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
