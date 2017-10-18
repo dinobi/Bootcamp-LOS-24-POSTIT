@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
 
 module.exports = {
   devServer: {
@@ -20,21 +19,6 @@ module.exports = {
   entry: path.join(__dirname, '/client/src/app/index.js'),
   module: {
     loaders: [
-      // First, run the linter.
-      // It's important to do this before Babel processes the JS.
-      {
-        test: /.js?$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: '/client/src',
-      },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change

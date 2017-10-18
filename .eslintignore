@@ -3,4 +3,5 @@ server/coverage/*
 client/config/*
 client/scripts/*
 client/public/*
+node_modules
 

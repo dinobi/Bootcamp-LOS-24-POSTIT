@@ -5,8 +5,8 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
-import routes from './server/routes';
-import config from './webpack.config';
+import routes from '../server/routes';
+import config from '../webpack.config';
 
 const path = require('path');
 
