@@ -11,7 +11,6 @@ import actionType from '../actionTypes';
 const authReducer = (state = {
   userIsLoading: false,
   userIsAuthenticated: false,
-  userData: {},
   message: ''
 }, action) => {
   switch (action.type) {
@@ -25,9 +24,7 @@ const authReducer = (state = {
     case actionType.SIGNUP_SUCCESS:
       return Object.assign({}, state, {
         userIsLoading: false,
-        userIsAuthenticated: true,
-        userData: action.userData,
-        message: action.message
+        userIsAuthenticated: true
       });
     case actionType.SIGNUP_FAILURE:
       return Object.assign({}, state, {
@@ -44,21 +41,17 @@ const authReducer = (state = {
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: true,
-        userData: action.userData,
         message: action.message
       });
     case actionType.LOGIN_FAILURE:
       return Object.assign({}, state, {
         userIsLoading: false,
         userIsAuthenticated: false,
-        userData: state.userData,
         message: action.message
       });
     case actionType.LOGOUT:
       return Object.assign({}, state, {
         userIsAuthenticated: false,
-        userData: action.userData,
-        message: action.message
       });
     default:
       return state;

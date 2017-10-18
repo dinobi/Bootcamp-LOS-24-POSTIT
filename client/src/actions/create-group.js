@@ -9,13 +9,13 @@ export const onCreateGroupRequest = groupData => ({
 
 export const onCreateGroupSuccess = message => ({
   type: actionType.CREATE_GROUP_SUCCESS,
-  creataGroupIsLoading: false,
+  createGroupIsLoading: false,
   message
 });
 
 export const onCreateGroupFailure = message => ({
   type: actionType.CREATE_GROUP_FAILURE,
-  groupsIsLoading: false,
+  createGroupIsLoading: false,
   message
 });
 
@@ -23,10 +23,11 @@ const onCreateGroup = groupData =>
 (dispatch) => {
   dispatch(onCreateGroupRequest(groupData));
   let headers;
-  apiHandler('/api/create-group', groupData, 'post', headers).then((groupRes) => {
-    dispatch(onCreateGroupSuccess(groupRes.data));
+  apiHandler('/api/create-group', groupData, 'post', headers)
+  .then((groupRes) => {
+    dispatch(onCreateGroupSuccess(groupRes.data.message));
   }).catch((groupRes) => {
-    dispatch(onCreateGroupFailure(groupRes.data));
+    dispatch(onCreateGroupFailure(groupRes.response.data.error.message));
   });
 };
 

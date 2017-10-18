@@ -8,7 +8,8 @@ import actionType from '../actionTypes';
  */
 const sendMessageReducer = (state = {
   messageIsLoading: false,
-  message: ''
+  message: {},
+  error: ''
 }, action) => {
   switch (action.type) {
     case actionType.SEND_MESSAGE_REQUEST:
@@ -23,7 +24,7 @@ const sendMessageReducer = (state = {
     case actionType.SEND_MESSAGE_FAILURE:
       return Object.assign({}, state, {
         messageIsLoading: false,
-        message: action.message
+        error: action.messageError
       });
     default:
       return state;

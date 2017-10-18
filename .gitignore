@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /client/node_modules
-/client/public/dist
+/client/dist
 
 # misc
 .DS_Store
@@ -25,9 +25,7 @@ roboto*
 /client/public/dist
 /.nyc_output
 /coverage
-
-# dependencies
-/node_modules
+package-lock.json
 
 # testing
 /coverage

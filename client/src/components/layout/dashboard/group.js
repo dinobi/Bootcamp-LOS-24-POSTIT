@@ -34,7 +34,8 @@ class Group extends React.Component {
   render() {
     const { messages, members } = this.props;
     const posts = messages;
-    const groupName = location.href.split('/')[location.href.split('/').length - 1];
+    const groupName =
+    location.href.split('/')[location.href.split('/').length - 1];
 
     const backToGroup = (
       <li>
@@ -63,7 +64,11 @@ class Group extends React.Component {
                       {
                         posts.length > 0 ?
                         <MessageBoard posts={ posts } /> :
-                        <h3 className="black-text">{ posts.message }</h3>
+                        <div>
+                          <h3 className="black-text">{ posts.message }</h3>
+                          <br/>
+                          <button className="btn btn-create">Compose</button>
+                        </div>
                       }
                     </div>
                     <div className="col s3 m3 members-list">
@@ -71,7 +76,10 @@ class Group extends React.Component {
                         <h5>Members</h5>
                       </div>
                       { members.map((member, index) =>
-                        <li key={index}><i className="fa fa-user"></i>&nbsp;&nbsp;{member.username}</li>
+                        <li key={index}>
+                          <i className="fa fa-user"></i>
+                          &nbsp;&nbsp;{member.username}
+                        </li>
                       )}
                     </div>
                   </div>

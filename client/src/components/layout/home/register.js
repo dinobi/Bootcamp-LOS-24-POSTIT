@@ -2,13 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { MainHeader, Footer } from '../../views';
-import { SignupForm } from '../../views';
+import { MainHeader, Footer, SignupForm } from '../../views';
 import onSignupUser from '../../../actions/signup-user';
 import onLoginUser from '../../../actions/login-user';
-
+/**
+ * Registers a new user
+ * @class Register
+ * @extends {React.Component}
+ */
 class Register extends React.Component {
-
+/**
+ * Renders a registration form
+ * @returns {*} - react component
+ * @memberof Register
+ */
   render() {
 		// const { onSignupUser, message } = this.props;
     return (

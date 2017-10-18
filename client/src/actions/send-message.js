@@ -1,21 +1,21 @@
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onSendMessageRequest = message => ({
+export const onSendMessageRequest = messageData => ({
   type: actionType.SEND_MESSAGE_REQUEST,
   messageIsLoading: true,
-  message
 });
 
-export const onSendMessageSuccess = () => ({
+export const onSendMessageSuccess = message => ({
   type: actionType.SEND_MESSAGE_SUCCESS,
   messageIsLoading: false,
+  message
 });
 
-export const onSendMessageFailure = message => ({
+export const onSendMessageFailure = messageError => ({
   type: actionType.SEND_MESSAGE_FAILURE,
   messageIsLoading: false,
-  message
+  messageError
 });
 
 const onSendMessage = message =>
@@ -27,7 +27,7 @@ const onSendMessage = message =>
   .then((messageRes) => {
     dispatch(onSendMessageSuccess(messageRes.data));
   }).catch((messageRes) => {
-    dispatch(onSendMessageSuccess(messageRes.data));
+    dispatch(onSendMessageFailure(messageRes.response.data.error.message));
   });
 };
 

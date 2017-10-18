@@ -1,17 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import jwtDecode from 'jwt-decode';
 import onLogoutUser from '../../actions/logout-user';
-import onLoadGroups from '../../actions/load-groups';
-
+/**
+ *
+ *
+ * @class SideMenu
+ * @extends {React.Component}
+ */
 class SideMenu extends React.Component {
-  constructor(props) {
-		super(props);
-	}
-
+	/**
+	 *
+	 *
+	 * @returns {*}
+	 * @memberof SideMenu
+	 */
   render() {
-		const { auth, active, back, onLogoutUser } = this.props;
-		const { email, username, phone } = auth.userData;
+		const { active, back } = this.props;
+		const userAuth = localStorage.getItem('userAuth');
+		const userData = jwtDecode(userAuth);
+		const { email, username, phone } = userData.data;
     return (
       <div className="dashboard-menu">
 
@@ -22,22 +31,46 @@ class SideMenu extends React.Component {
 					</section>
 					<ul className="menu-nav">
 						<li className="dashboard-menu-item">
-							<a href="#dashboard" className={ active === 'dashboard' ? 'active' : '' }><i className="fa fa-home"></i>&nbsp;&nbsp;My Space</a>
+							<a href="#dashboard"
+							className={ active === 'dashboard' ? 'active' : '' }
+							>
+								<i className="fa fa-home"></i>&nbsp;&nbsp;My Space
+							</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a href="#groups" className={ active === 'groups' ? 'active' : '' }><i className="fa fa-group"></i>&nbsp;&nbsp;My Groups</a>
+							<a href="#groups"
+							className={ active === 'groups' ? 'active' : '' }
+							>
+								<i className="fa fa-group"></i>&nbsp;&nbsp;My Groups
+							</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a href="#search" className={ active === 'search' ? 'active' : '' }><i className="fa fa-search"></i>&nbsp;&nbsp;Search PostIt</a>
+							<a href="#search"
+							className={ active === 'search' ? 'active' : '' }
+							>
+								<i className="fa fa-search"></i>&nbsp;&nbsp;Search PostIt
+							</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a href="#search-wiki" className={ active === 'search-wiki' ? 'active' : '' }><i className="fa fa-wikipedia-w"></i>&nbsp;&nbsp;Search Wikipedia</a>
+							<a href="#search-wiki"
+							className={ active === 'search-wiki' ? 'active' : '' }
+							>
+								<i className="fa fa-wikipedia-w"></i>
+								&nbsp;&nbsp;Search Wikipedia
+							</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a href="#account-details" className={ active === 'account-details' ? 'active' : '' }><i className="fa fa-cog"></i>&nbsp;&nbsp;Account Details</a>
+							<a href="#account-details"
+							className={ active === 'account-details' ? 'active' : '' }
+							>
+								<i className="fa fa-cog"></i>&nbsp;&nbsp;Account Details
+							</a>
 						</li>
 						<li className="dashboard-menu-item">
-							<a onClick = { onLogoutUser }><i className="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a>
+							<a onClick = { this.props.onLogoutUser }>
+								<i className="fa fa-sign-out"></i>
+								&nbsp;&nbsp;Logout
+							</a>
 						</li>
 						{ back }
 					</ul>
@@ -57,7 +90,6 @@ class SideMenu extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   search: state.search,
 });
 

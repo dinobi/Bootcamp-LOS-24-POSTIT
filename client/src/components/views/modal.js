@@ -8,18 +8,33 @@ class Modal extends React.Component {
     super(props);
     this.state = {
       modalOpened: false,
-      message: '',
       errorMessage: '',
+      message: ''
     };
     this.modalToggle = this.modalToggle.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
   }
+  /**
+   *
+   * @param {any} nextProps 
+   * @memberof Modal
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.message) {
+      this.setState({
+        message: nextProps.message
+      });
+    }
+  }
   modalToggle() {
     this.setState({ modalOpened: !this.state.modalOpened });
   }
   onFocus() {
-    this.setState({ errorMessage: '' });
+    this.setState({
+      errorMessage: '',
+      message: ''
+    });
   }
   /**
    * handleLogin()
@@ -54,7 +69,13 @@ class Modal extends React.Component {
 					{this.props.action}
 				</a>
         <div className={containerClass}>
-          <div className='modal-header'><h5 className="black-text">Create a new group</h5></div>
+          <div className='modal-header'>
+            <h5 className="black-text">
+              Create a new group
+            <i className="fa fa-times right" onClick={this.modalToggle}>
+            </i>
+            </h5>
+          </div>
           <div className='modal-body'>
             <form id="create-group-form" onSubmit = { this.handleCreate }>
               <fieldset className="input-field">
@@ -79,6 +100,12 @@ class Modal extends React.Component {
                     &nbsp;{this.state.errorMessage}
                   </p>
                 }
+                {this.state.message === '' ? '' :
+                  <p className="alert info-alert">
+                    <i className="fa fa-exclamation-triangle"></i>
+                    &nbsp;{this.state.message}
+                  </p>
+                }
               </fieldset>
               <button type="submit" className="btn btn-create">
                 Submit
@@ -94,7 +121,7 @@ class Modal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  message: state.message,
+  message: state.newGroup.message,
   // messages: state.messages
 });
 

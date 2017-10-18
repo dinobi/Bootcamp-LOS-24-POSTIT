@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   groups: groupsReducer,
   newGroup: createGroupReducer,
-  sendMessage: sendMessageReducer
+  newMessage: sendMessageReducer
 });
 
 export default rootReducer;

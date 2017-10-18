@@ -27,7 +27,7 @@ export default {
         message: req.body.message,
         fromUser: req.decoded.data.username,
         toGroup: req.params.groupname,
-        priority: req.body.priority
+        priority: req.body.priority.toLowerCase()
       })
       .then((message) => {
         res.status(201).send(message);

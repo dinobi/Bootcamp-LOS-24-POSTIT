@@ -28,12 +28,12 @@
 .post .avatar {
 	background: #ccc;
 	border-radius: 10%;
-	height: 60px;
-	width: 60px;
-	font-size: 50px;
+	height: 6rem;
+	width: 6rem;
+	font-size: 4rem;
 	font-weight: 900;
 	text-align: center;
-	vertical-align: middle;
+	margin-top: 1rem;
 }
 .post .post-message {
 	width: 80%;

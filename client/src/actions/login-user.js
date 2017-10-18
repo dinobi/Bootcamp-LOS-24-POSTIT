@@ -11,11 +11,11 @@ export const onLoginRequest = loginCreds => ({
 });
 
 // Login success action creator
-export const onLoginSuccess = userData => ({
+export const onLoginSuccess = (message) => ({
   type: actionType.LOGIN_SUCCESS,
   userIsLoading: false,
   userIsAuthenticated: true,
-  userData
+  message
 });
 
 // Login failure action creator
@@ -32,7 +32,7 @@ const onLoginUser = loginCreds =>
     return axios.post('/api/user/signin', loginCreds)
     .then((loginRes) => {
       localStorage.setItem('userAuth', loginRes.data.authToken);
-      dispatch(onLoginSuccess(loginRes.data.userData));
+      dispatch(onLoginSuccess(loginRes.data.message));
       location.hash = '#dashboard';
     }).catch((loginRes) => {
       dispatch(onLoginFailure(loginRes.response.data.error.message));

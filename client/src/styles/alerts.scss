@@ -1,5 +1,6 @@
 $success-alert: #4CAF50;
 $error-alert: #F44336;
+$info-alert: #eee;
 
 p.alert {
   color: #fff;
@@ -13,4 +14,8 @@ p.alert.error-alert {
 }
 p.alert.success-alert {
   background-color: $success-alert;
+}
+p.alert.info-alert {
+  background-color: $info-alert;
+  color: #000;
 }

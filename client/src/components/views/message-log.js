@@ -4,6 +4,7 @@ import React from 'react';
  * @returns {*} message.
  */
 const MessageLog = (props) => {
+  
 /**
  * Renders DOM elements.
  * @returns {*} message.
