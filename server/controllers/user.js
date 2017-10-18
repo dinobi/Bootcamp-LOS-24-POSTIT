@@ -43,30 +43,32 @@ export default {
         }
       });
   },
-  // A user can login into thier account
+  // User login
   authUser(req, res) {
     if (loginValidator(req, res) !== 'validated') {
       return;
     }
     const data = req.body.username;
-    // check if user is login in with email and resolve accordingly
+    // With email
     if (data.match(/@/) !== null) {
       return models.User
       .findOne({ where: { email: data } })
       .then((user) => {
         if (!user) {
           res.status(404).send({
-            error: { message: 'Authentication failed. Email is incorrect or does not exist' }
+            error: {
+              message:
+              'Authentication failed. Email is incorrect or does not exist'
+            }
           });
         } else if (user) {
-          // check if password matches
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
             res.status(404).send({
-              error: { message: 'Authentication failed. Incorrect password' } });
+              error: {
+                message:
+                'Authentication failed. Incorrect password' } });
           } else {
-            // User is found--password is correct--generate token
             const token = generateAuthToken(user);
-            // return success message including token in JSON format
             res.status(200).send({
               message: 'Authentication successful',
               userData: filterUser(user),
@@ -74,26 +76,28 @@ export default {
             });
           }
         }
-      }).catch(error => res.status(500).send({ error: error.message, status: 500 }));
+      }).catch(error =>
+        res.status(500).send({
+          error: error.message, status: 500
+        }));
     }
-    // Else user uses his username
+    // With username
     return models.User
       .findOne({ where: { username: data } })
       .then((user) => {
         if (!user) {
           res.status(404).send({ error:
-            { message: 'Authentication failed. Username is incorrect or does not exist' }
+          { message:
+            'Authentication failed. Username is incorrect or does not exist'
+          }
           });
         } else if (user) {
-          // check if password matches
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
             res.status(404).send({ error:
               { message: 'Authentication failed. Incorrect password' }
             });
           } else {
-            // User is found---password is correct---generate token
             const token = generateAuthToken(user);
-            // return success message including token in JSON format
             res.status(200).send({
               message: 'Authentication successful',
               userData: filterUser(user),
@@ -101,9 +105,11 @@ export default {
             });
           }
         }
-      }).catch(error => res.status(500).send({ error: error.message, status: 500 }));
+      }).catch(error => res.status(500).send({
+        error: error.message, status: 500
+      }));
   },
-  //Users can view all other users
+  // All Users
   fetchUsers(req, res) {
     return models.User
       .findAll({ attributes:
@@ -118,9 +124,8 @@ export default {
         }
       });
   },
-  //Users can search for other users or groups
+  // Search
   search(req, res) {
-    //make sure search context is specified
     if (!req.body.search || req.body.search.trim() === '') {
       return res.status(400).send({
         error: {
@@ -128,7 +133,11 @@ export default {
         }
       });
     }
-    if (!Object.keys(req.body)[1] || (req.body[Object.keys(req.body)[1]]).trim() === '') {
+    if (
+      !Object.keys(req.body)[1] ||
+      (req.body[Object.keys(req.body)[1]]).trim()
+      === ''
+    ) {
       return res.status(400).send({
         error: {
           message: 'Please specify a search term'
@@ -138,7 +147,10 @@ export default {
     let searchTerm;
     // if the search context is users, search the users database
     if (req.body.search === 'users') {
-      if (Object.keys(req.body)[1] === 'firstname' || 'lastname' || 'username' || 'email') {
+      if (
+        Object.keys(req.body)[1]
+        === 'firstname' || 'lastname' || 'username' || 'email'
+      ) {
         searchTerm = req.body[Object.keys(req.body)[1]];
         return models.User
           .findAll({
@@ -150,7 +162,8 @@ export default {
               res.status(400).send({
                 error: {
                   message:
-                  `${Object.keys(req.body)[1]}: ${searchTerm}, could not be found or does not exist`
+                  `${Object.keys(req.body)[1]}:
+                  ${searchTerm}, could not be found or does not exist`
                 }
               });
             } else { res.status(200).send(user); }
@@ -158,7 +171,8 @@ export default {
           .catch((error) => {
             if (error) {
               res.status(400).send({
-                error: { message: 'Bad request. Check for the correct search term' }
+                error:
+                { message: 'Bad request. Check for the correct search term' }
               });
             }
           });
@@ -191,14 +205,17 @@ export default {
       .catch((error) => {
         if (error) {
           res.status(400).send({
-            error: { message: 'Bad request. Check search term or make the right API call' }
+            error:
+            { message:
+              'Bad request. Check search term or make the right API call'
+            }
           });
         }
       });
     }
   },
   // Users can request for a new password
-  passwordRequest(req,res) {
+  passwordRequest(req, res) {
     if (!req.body.email || req.body.password.email.trim() === '') {
       return res.status(400).send({
         error: { message: 'Your postit associated email is required' }

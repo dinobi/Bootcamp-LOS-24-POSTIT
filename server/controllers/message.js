@@ -1,7 +1,7 @@
 import models from '../models';
 
 export default {
-  // Send a message to a group
+  // Send message to a group
   createMessage(req, res) {
     if (!req.body.message || req.body.message.trim() === '') {
       return res.status(400).send({
@@ -10,11 +10,16 @@ export default {
     }
     models.UserGroup
     .findOne({
-      where: { username: req.decoded.data.username, groupname: req.params.groupname }
+      where: {
+        username: req.decoded.data.username,
+        groupname: req.params.groupname
+      }
     }).then((userInGroup) => {
       if (!userInGroup) {
         return res.status(401).send({
-          error: { message: `User does not belong to group '${req.params.groupname}'` }
+          error: {
+            message: `User does not belong to group '${req.params.groupname}'`
+          }
         });
       }
       return models.Message
@@ -25,13 +30,15 @@ export default {
         priority: req.body.priority.toLowerCase()
       })
       .then((message) => {
-        console.log(req.decoded.data.username);
         res.status(201).send(message);
       }) // message created
-      .catch(error => res.status(500).send({ error: error.message })); // bad request
+      .catch(error => res.status(500).send({
+        error: error.message,
+        status: 500
+      }));
     });
   },
-  // Get all the messages from a group
+  // Group messages
   fetchMessages(req, res) {
     models.Group
     .findOne({
@@ -39,7 +46,10 @@ export default {
     }).then((group) => {
       if (!group) {
         return res.status(404).send({
-          error: { message: ` Group: ${req.params.groupname}, does not exist on postit.` }
+          error: {
+            message: ` Group: ${req.params.groupname},
+            does not exist on postit.`
+          }
         });
       }
       return models.Message
@@ -55,7 +65,9 @@ export default {
       })
       .then((message) => {
         if (message.length === 0) {
-          return res.status(200).send({ message: 'There are no new messages found at this time' });
+          return res.status(200).send({
+            message: 'There are no new messages found at this time'
+          });
         }
         return res.status(200).send(message);
       });
