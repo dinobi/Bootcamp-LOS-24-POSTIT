@@ -9,6 +9,10 @@ engines:
       - javascript
   fixme:
     enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
 ratings:
   paths:
   - "server/*.js"
