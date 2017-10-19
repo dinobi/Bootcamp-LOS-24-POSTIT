@@ -81,6 +81,16 @@
 	border-color: #FFA000;
 	outline: none;
 }
-.message-box .btn {
+.message-box .action-btn {
+	border-radius: 3px;
+	border: none;
+}
+.select {
 	width: 12%;
+	margin-right: 5px;
+	color: #fff;
+	background-color: #212121;
+}
+.send {
+	background-color: #FFA000;
 }

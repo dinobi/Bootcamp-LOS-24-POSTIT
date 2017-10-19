@@ -1,8 +1,8 @@
-import MainHeader from './main-header'
+import MainHeader from './main-header';
 import DashHeader from './dash-header';
 import SideMenu from './side-menu';
 import Footer from './footer';
-import SearchForm from './search-form';
+import SearchBox from './search-box';
 import SearchResult from './search-result';
 import Features from './features';
 import GroupCard from './group-card';
@@ -12,9 +12,10 @@ import SignupForm from './signup-form';
 import ToastMessage from './toast-message';
 import Copyright from './copyright';
 import Modal from './modal';
+import WelcomeCard from './WelcomeCard';
 
 export { MainHeader, DashHeader, SideMenu,
-  Footer, SearchForm, SearchResult, Features,
+  Footer, SearchBox, SearchResult, Features,
   GroupCard, MessageBox, MessageLog, SignupForm,
-  ToastMessage, Copyright, Modal
+  ToastMessage, Copyright, Modal, WelcomeCard
 };

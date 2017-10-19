@@ -17,7 +17,9 @@ module.exports = {
     quiet: true,
   },
   devtool: 'source-map',
-  entry: path.join(__dirname, '/client/src/app/index.js'),
+  entry: [require.resolve('webpack-hot-middleware/client'),
+    path.join(__dirname, '/client/src/app/index.js')
+  ],
   module: {
     loaders: [
       // First, run the linter.

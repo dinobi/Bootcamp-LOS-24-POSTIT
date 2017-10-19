@@ -26,7 +26,6 @@ class MessageBoard extends React.Component {
     };
     this.handleSend = this.handleSend.bind(this);
   }
-
   componentWillUpdate(nextProps) {
     if (nextProps.newMessage) {
       this.setState({
@@ -55,29 +54,29 @@ class MessageBoard extends React.Component {
               <MessageLog message={ post } key={index} />
             )
           }
-      </div>
+        </div>
 
-      <form ref="messageBox" className="message-box" id="send-message"
-        onSubmit = { this.handleSend }
-      >
-        <textarea
-          ref={(input) => { this.message = input; }}
-          className="compose"
-          placeholder="always be nice...">
-        </textarea>
-        <select id="priority"
-          ref={(input) => { this.priority = input; }}
-          className="btn btn-create"
+        <form ref="messageBox" className="message-box" id="send-message"
+          onSubmit = { this.handleSend }
         >
-          <option value="Normal">Normal</option>
-          <option value="Urgent">Urgent</option>
-          <option value="Critical">Critical</option>
-        </select>
-        <button type="submit" className="btn btn-create">
-        Submit
-      </button>
-    </form>
-  </div>
+          <textarea
+            ref={(input) => { this.message = input; }}
+            className="compose"
+            placeholder="always be nice...">
+          </textarea>
+          <select id="priority"
+            ref={(input) => { this.priority = input; }}
+            className="browser-default action-btn select"
+          >
+            <option value="Normal">Normal</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Critical">Critical</option>
+          </select>
+          <button type="submit" className="action-btn send" title="send">
+            <i className="fa fa-send"></i>
+          </button>
+        </form>
+      </div>
     );
   }
 }

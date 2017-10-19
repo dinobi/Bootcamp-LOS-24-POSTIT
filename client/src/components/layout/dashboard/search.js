@@ -2,11 +2,10 @@ import React from 'react';
 import {
   DashHeader,
   SideMenu,
-  SearchForm,
+  SearchBox,
   SearchResult,
   Copyright
 } from '../../views';
-import apiHandler from '../../helpers/api-handler';
 /**
  * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
  */
@@ -33,7 +32,7 @@ class Search extends React.Component {
       searchResult: []
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handlesearch = this.handleSearch.bind(this);
   }
 
   handleChange(e) {
@@ -42,9 +41,8 @@ class Search extends React.Component {
     });
   }
 
-  handleClick(e) {
+  handleSearch(e) {
     e.preventDefault();
-    //todo: make your search api call here
 
     const results = [];
     this.setState({
@@ -82,11 +80,11 @@ class Search extends React.Component {
                         <label htmlFor="groups">Groups</label>
                       </div>
                     </div>
-                    <SearchForm
+                    <SearchBox
                       searchContext="search-postit"
                       searchQuery={this.state.searchQuery}
                       handleChange={this.handleChange}
-                      handleClick={this.handleClick}
+                      handleSearch={this.handlesearch}
                     />
                   </fieldset>
                 </form>
