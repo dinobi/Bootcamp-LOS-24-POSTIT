@@ -9,7 +9,7 @@
   },
   "scripts": {
     "babel-version": "babel --version",
-    "build": "npm run remove-dist && webpack",
+    "build": "npm run remove-dist && webpack --config ./webpack.deployment.config.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "exec": "babel-node ./server/bin/www --exec babel-node app",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
@@ -17,7 +17,6 @@
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "start:dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js -w --progress --colors --inline --content-base client/",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
