@@ -23,7 +23,7 @@ class SearchWiki extends React.Component {
       searchQuery: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleChange(e) {
@@ -32,7 +32,7 @@ class SearchWiki extends React.Component {
     });
   }
 
-  handleClick(e) {
+  handleSearch(e) {
     e.preventDefault();
     $.ajax({
       type: 'GET',
@@ -84,7 +84,7 @@ class SearchWiki extends React.Component {
                       searchContext="search-wiki"
                       searchQuery={this.state.searchQuery}
                       handleChange={this.handleChange}
-                      handleClick={this.handleClick}
+                      handleSearch={this.handleSearch}
                     />
                   </fieldset>
                 </form>
