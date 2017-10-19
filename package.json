@@ -1,18 +1,24 @@
 {
   "name": "postit-app",
   "main": "index.js",
+  "version": "1.0.0",
   "description": "full stack web messaging application",
+  "engines": {
+    "node": "6.11.2",
+    "npm": "5.4.0"
+  },
   "scripts": {
     "babel-version": "babel --version",
     "build": "npm run remove-dist && webpack",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "exec": "babel-node ./server/bin/www --exec babel-node app",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
-    "start": "node ./server/bin/www --exec babel-node ./server/app",
+    "start": "nodemon ./server/bin/www --exec babel-node ./server/app",
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "start-dev": "webpack && webpack-dev-server"
+    "start:dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js -w --progress --colors --inline --content-base client/",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
