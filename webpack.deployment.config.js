@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
 
 module.exports = {
   devtool: 'source-map',
@@ -23,21 +22,6 @@ module.exports = {
             'transform-class-properties'
           ],
         }
-      },
-      // First, run the linter.
-      // It's important to do this before Babel processes the JS.
-      {
-        test: /.js?$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: '/client/src',
       },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
