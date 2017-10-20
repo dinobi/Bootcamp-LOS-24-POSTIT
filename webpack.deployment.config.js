@@ -2,6 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  devServer: {
+    inline: true,
+    // Silence WebpackDevServer's own logs since they're generally not useful.
+    // It will still show compile warnings and errors with this setting.
+    clientLogLevel: 'none',
+    contentBase: './client',
+    port: 3001,
+    watchContentBase: true,
+    hot: true,
+    quiet: true,
+  },
   devtool: 'source-map',
   entry: './client/src/app/index.js',
   output: {
@@ -11,18 +22,6 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules\//,
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: [
-            'react-html-attrs',
-            'transform-decorators-legacy',
-            'transform-class-properties'
-          ],
-        }
-      },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change
@@ -62,23 +61,27 @@ module.exports = {
           name: 'bundle.[ext]',
         },
       },
-      { test: /\.css$/,
-        loader: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'font-loader?format[]=truetype&format[]=woff&format[]=embedded-opentype'
-        ]
+      {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs', 'transform-decorators-legacy',
+            'transform-class-properties'],
+        }
       },
-      { test: /\.scss$/,
+      {
+        test: /\.scss/,
         loader: 'style-loader!css-loader!sass-loader'
       },
-      { test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=/fonts/[name].[ext]'
+      { test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?importLoaders=1',
+        ]
       },
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
