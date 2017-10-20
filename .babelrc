@@ -6,7 +6,13 @@
     // or is equal to "development" 
     "development": {
       "plugins": [
-        "transform-decorators-legacy"
+        "transform-decorators-legacy",
+        "transform-runtime"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-runtime"
       ]
     }
   }

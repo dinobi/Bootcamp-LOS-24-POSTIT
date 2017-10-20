@@ -29,6 +29,8 @@ if (env === 'development') {
 // Parse requests via middleware (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/api-docs',
+express.static(path.join(__dirname, './api-docs')));
 
 // serve favicon
 app.use(favicon(path.join(__dirname, '../client', 'favicon.ico')));
