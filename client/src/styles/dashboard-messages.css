@@ -39,6 +39,7 @@
 	width: 80%;
 	padding: 0 15px;
 	color: #000;
+	word-wrap: break-word;
 }
 .post-message h6 {
 	font-weight: 900;
@@ -69,8 +70,8 @@
 	overflow: hidden;
 	max-height: 200px;
 	overflow-y: auto;
-	min-height: 30px;
-	padding: .5rem 1rem;
+	min-height: 40px;
+	padding: .6rem 1rem;
 	border: 2px solid #FFA000;
 	margin-right: 10px;
 	border-radius: 5px;

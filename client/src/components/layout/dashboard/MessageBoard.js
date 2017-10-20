@@ -5,6 +5,7 @@ import { DashHeader, SideMenu,
   Copyright, MessageLog, MessageBox }
 from '../../views';
 import onSendMessage from '../../../actions/send-message';
+import loadGroupMessages from '../../../actions/load-group-messages';
 
 /**
  * MessageBoard class
@@ -29,7 +30,7 @@ class MessageBoard extends React.Component {
   componentWillUpdate(nextProps) {
     if (nextProps.newMessage) {
       this.setState({
-        posts: [...this.props.posts, this.props.newMessage]
+        posts: this.props.posts
       });
     }
   }
@@ -42,7 +43,7 @@ class MessageBoard extends React.Component {
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     this.refs.messageBox.reset();
-
+    this.props.loadGroupMessages();
 	}
   /** */
   render() {
@@ -87,7 +88,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ onSendMessage }, dispatch)
+  bindActionCreators({ onSendMessage, loadGroupMessages }, dispatch)
 );
 
 

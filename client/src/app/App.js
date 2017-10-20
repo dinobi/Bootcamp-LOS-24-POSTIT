@@ -2,7 +2,6 @@ import 'babel-polyfill';
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import 'jquery';
-import '../components/helpers/main';
 import { 
   IndexHome, Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,
