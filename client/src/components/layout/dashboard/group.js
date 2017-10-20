@@ -98,8 +98,11 @@ class Group extends React.Component {
                                 <option value="Urgent">Urgent</option>
                                 <option value="Critical">Critical</option>
                               </select>
-                              <button type="submit" className="browser-default action-btn send">
-                              Submit
+                              <button type="submit"
+                                className="browser-default action-btn send"
+                                title="send"
+                              >
+                              <i className="fa fa-send"></i>
                             </button>
                           </form>
                         </div>

@@ -1,14 +1,13 @@
 import express from 'express';
+import path from 'path';
 import logger from 'morgan';
 import favicon from 'serve-favicon';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
-import routes from '../server/routes';
+import routes from './routes';
 import config from '../webpack.config';
-
-const path = require('path');
 
 // Set express app
 const app = express();
@@ -32,15 +31,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // serve favicon
-app.use(favicon(path.join(__dirname, '/client', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '../client', 'favicon.ico')));
 
 // Serve index page on client
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 // Serve index page on dist
 app.get('/dist/*', (req, res) => {
-  res.sendFile(path.join(__dirname, `/client/${req.originalUrl}`));
+  res.sendFile(path.join(__dirname, `../client/${req.originalUrl}`));
 });
 
 // Default catch-all route that sends an error message on all incorrect req.

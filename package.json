@@ -1,19 +1,23 @@
 {
   "name": "postit-app",
   "main": "index.js",
+  "version": "1.0.0",
   "description": "full stack web messaging application",
+  "engines": {
+    "node": "6.11.2",
+    "npm": "5.4.0"
+  },
   "scripts": {
     "babel-version": "babel --version",
-    "build": "npm run remove-dist && webpack -p",
+    "build": "npm run remove-dist && webpack --config ./webpack.deployment.config.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "exec": "nodemon ./server/bin/www --exec babel-node app",
-    "heroku-postbuild": "npm run build",
+    "exec": "babel-node ./server/bin/www --exec babel-node app",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
-    "start": "babel-node ./server/bin/www --exec babel-node app",
+    "start": "nodemon ./server/bin/www --exec babel-node ./server/app",
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "start-dev": "webpack-dev-server && webpack-dev-server"
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -35,17 +39,18 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "coveralls": "^2.13.1",
-    "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-loader": "1.7.1",
     "eslint-plugin-flowtype": "2.34.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "^7.1.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.0.3",
     "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.6.1",
+    "webpack-hot-middleware": "^2.18.2"
   },
   "dependencies": {
     "autoprefixer": "7.1.1",
@@ -54,6 +59,8 @@
     "babel-core": "^6.25.0",
     "babel-jest": "20.0.3",
     "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -73,6 +80,8 @@
     "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "eslint": "^3.19.0",
+    "eslint-loader": "1.7.1",
     "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "0.11.2",
     "history": "^4.7.2",
