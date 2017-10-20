@@ -1,7 +1,5 @@
-const webpack = require('webpack');
 const path = require('path');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const webpack = require('webpack');
 
 module.exports = {
   devServer: {
@@ -16,9 +14,12 @@ module.exports = {
     quiet: true,
   },
   devtool: 'source-map',
-  entry: [require.resolve('webpack-hot-middleware/client'),
-    path.join(__dirname, '/client/src/app/index.js')
-  ],
+  entry: './client/src/app/index.js',
+  output: {
+    path: `${__dirname}/client/dist`,
+    filename: 'bundle.min.js',
+    publicPath: '/dist/'
+  },
   module: {
     loaders: [
       // ** ADDING/UPDATING LOADERS **
@@ -82,12 +83,13 @@ module.exports = {
       },
     ]
   },
-  output: {
-    path: `${__dirname}/client/dist`,
-    filename: 'bundle.min.js',
-    publicPath: '/dist/'
-  },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -96,14 +98,9 @@ module.exports = {
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
-    // This is necessary to emit hot updates (currently CSS only):
-    new webpack.HotModuleReplacementPlugin(),
-    // Watcher doesn't work well if you mistype casing in a path so we use
-    // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
-    new CaseSensitivePathsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new ModuleScopePlugin('client/src'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    }),
   ],
 };
-

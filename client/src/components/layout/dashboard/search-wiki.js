@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import { DashHeader, SideMenu, SearchForm, Copyright } from '../../views';
+import { DashHeader, SideMenu, SearchBox, Copyright } from '../../views';
 
 class SearchWiki extends React.Component {
 /**
@@ -23,7 +23,7 @@ class SearchWiki extends React.Component {
       searchQuery: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleChange(e) {
@@ -32,7 +32,7 @@ class SearchWiki extends React.Component {
     });
   }
 
-  handleClick(e) {
+  handleSearch(e) {
     e.preventDefault();
     $.ajax({
       type: 'GET',
@@ -80,11 +80,11 @@ class SearchWiki extends React.Component {
                 </div>
                 <form id="search-form">
                   <fieldset className="search-term">
-                    <SearchForm
+                    <SearchBox
                       searchContext="search-wiki"
                       searchQuery={this.state.searchQuery}
                       handleChange={this.handleChange}
-                      handleClick={this.handleClick}
+                      handleSearch={this.handleSearch}
                     />
                   </fieldset>
                 </form>

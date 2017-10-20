@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MessageBoard from './MessageBoard';
 import {
-  DashHeader, SideMenu, Copyright
+  DashHeader, SideMenu, WelcomeCard, Copyright
 } from '../../views';
 import loadGroupMessages from '../../../actions/load-group-messages';
 import loadGroupMembers from '../../../actions/load-group-members';
+import onSendMessage from '../../../actions/send-message';
 
 /**
  * @class {Group} - Group class component
@@ -20,6 +21,7 @@ class Group extends React.Component {
     this.state = {
       errorMessage: '',
     };
+    this.handleSend = this.handleSend.bind(this);
   }
   /**
    * @return {undefined} - Returns action creators.
@@ -28,6 +30,16 @@ class Group extends React.Component {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
   }
+  /** handleSend {e} */
+	handleSend(e) {
+		e.preventDefault();
+		let { message, priority } = this;
+    message = message.value.trim();
+    priority = priority.value.trim();
+    const messageData = { message, priority };
+    this.props.onSendMessage(messageData);
+    this.refs.messageBox.reset();
+	}
   /**
    * @return {undefined} - returns presentationals.
    * */
@@ -64,10 +76,35 @@ class Group extends React.Component {
                       {
                         posts.length > 0 ?
                         <MessageBoard posts={ posts } /> :
-                        <div>
-                          <h3 className="black-text">{ posts.message }</h3>
-                          <br/>
-                          <button className="btn btn-create">Compose</button>
+                        <div className="message-board">
+                          <div className="postlogs">
+                            <WelcomeCard
+                              emptyBoard={ posts.message }
+                            />
+                          </div>
+                            <form ref="messageBox" className="message-box" id="send-message"
+                              onSubmit = { this.handleSend }
+                            >
+                              <textarea
+                                ref={(input) => { this.message = input; }}
+                                className="compose"
+                                placeholder="always be nice...">
+                              </textarea>
+                              <select id="priority"
+                                ref={(input) => { this.priority = input; }}
+                                className="browser-default action-btn select"
+                              >
+                                <option value="Normal">Normal</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Critical">Critical</option>
+                              </select>
+                              <button type="submit"
+                                className="browser-default action-btn send"
+                                title="send"
+                              >
+                              <i className="fa fa-send"></i>
+                            </button>
+                          </form>
                         </div>
                       }
                     </div>
@@ -100,7 +137,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ loadGroupMessages, loadGroupMembers }, dispatch)
+  bindActionCreators({ loadGroupMessages, loadGroupMembers, onSendMessage }, dispatch)
 );
 
 

@@ -1,15 +1,15 @@
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onSearchRequest = searchTerm => ({
+export const onSearchRequest = searchQuery => ({
   type: actionType.SEARCH_REQUEST,
   searchIsLoading: true
 });
 
-export const onSearchSuccess = searchRes => ({
+export const onSearchSuccess = searchResult => ({
   type: actionType.SEARCH_SUCCESS,
   searchIsLoading: false,
-  searchRes
+  searchResult
 });
 
 export const onSearchFailure = message => ({
@@ -18,17 +18,16 @@ export const onSearchFailure = message => ({
   message
 });
 
-const onSearchPostit = () =>
+const onSearch = searchQuery =>
 (dispatch) => {
-  dispatch(onSearchRequest());
-  const headers = new Headers();
-  headers['x-access-token'] = localStorage.getItem('userAuth');
-  apiHandler('/api/groups', headers).then((searchRes) => {
+  dispatch(onSearchRequest(searchQuery));
+  let headers;
+  apiHandler('/api/search', searchQuery, 'post', headers).then((searchRes) => {
     console.log(searchRes.data);
     dispatch(onSearchSuccess(searchRes.data));
   }).catch((searchRes) => {
-    dispatch(onSearchFailure(searchRes.data.error.message));
+    dispatch(onSearchFailure(searchRes.response.data.error.message));
   });
 };
 
-export default onSearchPostit;
+export default onSearch;
