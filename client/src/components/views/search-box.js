@@ -1,17 +1,18 @@
 import React from 'react';
 
-const SearchBox = (props) => {
-	console.log(props.searchQuery);
-	return (
-		<div id="search-field" className={ props.searchContext }>
-			<input name="search" id={ props.searchContext }
+const SearchBox = props =>
+	<div id="search-field" className = { props.searchContext }>
+		<input name="search"
+			id={ props.searchContext }
+			onFocus = { props.onFocus }
 			type="search" placeholder="Start your search"
-			value={ props.searchQuery }
-			onChange={ props.handleChange }/>
+			value={ props.searchTerm }
+			onChange={ props.handleChange }
+		/>
+		<div className="center">
 			<button className="btn btn-create" onClick={ props.handleSearch }>Start search</button>
 		</div>
-	);
-};
+	</div>
 
 
 export default SearchBox;

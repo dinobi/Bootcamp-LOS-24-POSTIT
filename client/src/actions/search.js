@@ -23,7 +23,6 @@ const onSearch = searchQuery =>
   dispatch(onSearchRequest(searchQuery));
   let headers;
   apiHandler('/api/search', searchQuery, 'post', headers).then((searchRes) => {
-    console.log(searchRes.data);
     dispatch(onSearchSuccess(searchRes.data));
   }).catch((searchRes) => {
     dispatch(onSearchFailure(searchRes.response.data.error.message));

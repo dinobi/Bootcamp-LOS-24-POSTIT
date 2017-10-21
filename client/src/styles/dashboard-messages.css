@@ -89,8 +89,11 @@
 .select {
 	width: 12%;
 	margin-right: 5px;
-	color: #fff;
+	color: #FFA000;
 	background-color: #212121;
+}
+.search-term .select {
+	width: 100px !important;
 }
 .send {
 	background-color: #FFA000;

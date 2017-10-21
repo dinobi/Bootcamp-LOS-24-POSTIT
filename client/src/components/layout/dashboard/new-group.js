@@ -21,8 +21,8 @@ class NewGroup extends React.Component {
 		this.setState({ errorMessage: '' });
 	}
 	/** handleLogin {e} */
-	handleCreate(e) {
-		e.preventDefault();
+	handleCreate(event) {
+		event.preventDefault();
 		let { groupname, description } = this;
     groupname = groupname.value.trim();
     description = description.value.trim();
@@ -72,7 +72,8 @@ class NewGroup extends React.Component {
                         className="validate"
                         ref={(input) => { this.description = input; }}
                       />
-                      {this.state.errorMessage === '' ? '' :
+                      {
+                        this.state.errorMessage === '' ? '' :
                         <p className="alert error-alert">
                           <i className="fa fa-exclamation-triangle"></i>
                           &nbsp;{this.state.errorMessage}
