@@ -3,7 +3,8 @@ import apiHandler from '../components/helpers/api-handler';
 
 export const onSearchRequest = searchQuery => ({
   type: actionType.SEARCH_REQUEST,
-  searchIsLoading: true
+  searchIsLoading: true,
+  searchQuery
 });
 
 export const onSearchSuccess = searchResult => ({

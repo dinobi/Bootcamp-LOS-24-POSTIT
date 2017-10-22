@@ -5,6 +5,7 @@ import apiHandler from '../components/helpers/api-handler';
 export const onRemoveMemberRequest = member => ({
   type: actionType.REMOVE_MEMBER_REQUEST,
   RemoveMemberIsLoading: true,
+  member
 });
 
 export const onRemoveMemberSuccess = (member, message) => ({
@@ -23,13 +24,17 @@ export const onRemoveMemberFailure = message => ({
 const onRemoveMember = dataValue =>
 (dispatch) => {
   dispatch(onRemoveMemberRequest(dataValue));
-  const groupname = location.href.split('/')[location.href.split('/').length - 1];
+  const groupname =
+    location.href.split('/')[location.href.split('/').length - 1];
   let headers;
-  apiHandler(`/api/groups/${groupname}/remove-member`, dataValue, 'post', headers)
+  apiHandler(`/api/groups/${groupname}/remove-member`,
+    dataValue, 'post', headers)
   .then((RemoveMemberRes) => {
     dispatch(onRemoveMemberSuccess(RemoveMemberRes.data));
   }).catch((RemoveMemberRes) => {
-    dispatch(onRemoveMemberFailure(RemoveMemberRes.response.data.error.message));
+    dispatch(
+      onRemoveMemberFailure(RemoveMemberRes.response.data.error.message)
+    );
   });
 };
 

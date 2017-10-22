@@ -66,7 +66,7 @@ class Group extends React.Component {
 
   /**
    *
-   * @param {event} event 
+   * @param {event} event
    * @memberof Group
    * @returns {*} - react elements
    */

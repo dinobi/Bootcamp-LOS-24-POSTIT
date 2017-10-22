@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { DashHeader, Copyright, Features, SideMenu} from '../../views';
-import onLogoutUser from '../../../actions/logout-user';
-
-//import ToastMessageList from '../toast-message-list';
+import { onLogoutUser } from '../../../actions';
 
 /**
  * MySpace layout component that provides access to every feature on postit
@@ -12,18 +10,16 @@ import onLogoutUser from '../../../actions/logout-user';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
 /**
- * MySpace renders the following UI components
  * 
- * @component <DashHeader/> - The dashboard header navigation.
- * @component <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @component <Copyright/> - The dashboard footer copyright information.
+ * 
+ * @returns {*} - react elements
+ * @memberof Dashboard
  */
   render() {
-    const { username, firstname } = this.props;
     return (
       <div>
         <DashHeader />
@@ -43,12 +39,7 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  // groups: state.groups,
-  // search: state.search,
-  // messages: state.messages,
-  // users: state.users,
-  // members: state.members
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch =>
