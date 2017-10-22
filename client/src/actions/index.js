@@ -1,12 +1,17 @@
-import * as onLoginUser from './login-user';
-import * as onLogoutUser from './logout-user';
-import * as loadGroupMessages from './load-group-messages';
-import * as onLoadGroups from './load-groups';
-import * as onSignupUser from './signup-user';
-import * as onDiplayToast from './display-toast';
-import * as onSelectMember from './select-member';
-import * as onLoadMember from './load-member';
+import onAddMember from './addMember';
+import onCreateGroup from './create-group';
+import loadGroupMembers from './load-group-members';
+import loadGroupMessages from './load-group-messages';
+import onLoadGroups from './load-groups';
+import onLoginUser from './login-user';
+import onLogoutUser from './logout-user';
+import onRemoveMember from './removeMember';
+import onSearch from './search';
+import onSelectMember from './select-member';
+import onSendMessage from './send-message';
+import onSignupUser from './signup-user';
 
 export {
   onLoginUser, onLogoutUser, loadGroupMessages, onLoadGroups,
-  onSignupUser, onDiplayToast, onSelectMember, onLoadMember };
+  onSignupUser, onSelectMember, loadGroupMembers,
+  onCreateGroup, onAddMember, onRemoveMember, onSearch, onSendMessage };

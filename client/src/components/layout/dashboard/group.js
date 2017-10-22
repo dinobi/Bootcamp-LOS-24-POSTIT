@@ -3,25 +3,31 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MessageBoard from './MessageBoard';
 import {
-  DashHeader, SideMenu, WelcomeCard, Copyright
+  DashHeader, SideMenu, WelcomeCard, Copyright, ModalMain
 } from '../../views';
-import loadGroupMessages from '../../../actions/load-group-messages';
-import loadGroupMembers from '../../../actions/load-group-members';
-import onSendMessage from '../../../actions/send-message';
+import { loadGroupMessages, loadGroupMembers, onSendMessage,
+  onAddMember
+}
+from '../../../actions';
 
 /**
- * @class {Group} - Group class component
+ * Group class component
+ * @class Group
+ * @extends {React.Component}
  */
 class Group extends React.Component {
   /**
-   * @param {props} - class constructor props
-  */
+   * Creates an instance of Group.
+   * @param {any} props 
+   * @memberof Group
+   */
   constructor(props) {
     super(props);
     this.state = {
       errorMessage: '',
     };
     this.handleSend = this.handleSend.bind(this);
+    // this.handleAddMember = this.handleAddMember.bind(this);
   }
   /**
    * @return {undefined} - Returns action creators.
@@ -30,16 +36,51 @@ class Group extends React.Component {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
   }
-  /** handleSend {e} */
-	handleSend(e) {
-		e.preventDefault();
+  /**
+   *
+   * @param {any} nextProps
+   * @memberof Group
+   * @returns {newState} - new state
+   */
+  componentWillUpdate(nextProps) {
+    if (nextProps.members) {
+      return true;
+    }
+  }
+  /**
+   * Handles the sending of messages
+   * @param {any} event
+   * @memberof Group
+   * @return {*} - action
+   */
+	handleSend(event) {
+		event.preventDefault();
 		let { message, priority } = this;
     message = message.value.trim();
     priority = priority.value.trim();
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     this.refs.messageBox.reset();
-	}
+  }
+
+  /**
+   *
+   * @param {event} event 
+   * @memberof Group
+   * @returns {*} - react elements
+   */
+  // handleAddMember(event) {
+  //   event.preventDefault();
+  //   let { username } = this;
+  //   username = username.value.trim();
+  //   if (username === '') {
+  //     this.setState({
+  //       errorMessage: 'Error. All field are required to add member'
+  //     });
+  //   } else {
+  //     this.props.onAddMember(username);
+  //   }
+  // }
   /**
    * @return {undefined} - returns presentationals.
    * */
@@ -56,6 +97,12 @@ class Group extends React.Component {
         </a>
       </li>
     );
+    const addMemberModal = {
+      modalTitle: `Add New Member to ${groupName}`,
+      addMemberButton: <i className="fa fa-user-plus"></i>,
+      // handleAddMember: this.handleAddMember
+      onAddMember: this.props.onAddMember
+    };
     return (
       <div>
         <DashHeader />
@@ -67,8 +114,10 @@ class Group extends React.Component {
             <section className="col s12 m9 l10">
               <div className="dashboard-content group-gui">
                 <div className="bot-msg">
-                  <h3>{ groupName }</h3>
-                  <p>Message Board</p>
+                  <h3>
+                    <i className="fa fa-folder-open"></i>
+                    &nbsp;{ groupName } - Message Board
+                  </h3>
                 </div>
                 <div>
                   <div className="row">
@@ -82,8 +131,9 @@ class Group extends React.Component {
                               emptyBoard={ posts.message }
                             />
                           </div>
-                            <form ref="messageBox" className="message-box" id="send-message"
-                              onSubmit = { this.handleSend }
+                            <form
+                              ref="messageBox" className="message-box"
+                              id="send-message" onSubmit = { this.handleSend }
                             >
                               <textarea
                                 ref={(input) => { this.message = input; }}
@@ -110,12 +160,15 @@ class Group extends React.Component {
                     </div>
                     <div className="col s3 m3 members-list">
                       <div className="member-list-title">
-                        <h5>Members</h5>
+                        <h5>
+                          Members<ModalMain addMemberModal={addMemberModal} />
+                        </h5>
                       </div>
                       { members.map((member, index) =>
                         <li key={index}>
-                          <i className="fa fa-user"></i>
+                          <i className="fa fa-hashtag"></i>
                           &nbsp;&nbsp;{member.username}
+                          <i className="fa fa-user-times right"></i>
                         </li>
                       )}
                     </div>
@@ -137,7 +190,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ loadGroupMessages, loadGroupMembers, onSendMessage }, dispatch)
+  bindActionCreators({
+    loadGroupMessages,
+    loadGroupMembers,
+    onSendMessage,
+    onAddMember
+  }, dispatch)
 );
 
 

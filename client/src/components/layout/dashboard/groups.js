@@ -50,7 +50,10 @@ class Groups extends React.Component {
                           key = { index }
                           groupName = { group.groupname }
                           location = {
-                            <a href={`#groups/${group.groupname}`}>{ group.groupname }</a>
+                            <a href={`#groups/${group.groupname}`}>
+                              <i className="fa fa-folder"></i>
+                              &nbsp;{ group.groupname }
+                            </a>
                           }
                           criticalCount={ group.unreadCritical }
                           urgentCount={ group.unreadUrgent }
@@ -60,7 +63,7 @@ class Groups extends React.Component {
                       <div className="col s12 m4">
                       <div className="card">
                         <div className="card-content">
-                          <span className="card-title activator grey-text text-darken-4 truncate">
+                          <span className="card-title activator text-darken-4 truncate">
                             Pls join or create a group
                           </span>
                         </div>

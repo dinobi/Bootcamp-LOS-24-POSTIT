@@ -13,7 +13,7 @@ class GroupCard extends React.Component {
 				<div className="card">
 					<div className="card-content">
 						<span className="card-title activator grey-text text-darken-4 truncate">
-							{ location }
+						{ location }
 						</span>
 						<p className="notify-counter">
 							<span className="critical">{ criticalCount }</span>

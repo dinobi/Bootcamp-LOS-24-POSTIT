@@ -96,12 +96,18 @@ export default {
   // Add/Remove member from group
   editGroup(req, res) {
     if (!req.body.username || req.body.username.trim() === '') {
-      res.status(400).send({ message: 'Bad request, username is required' });
+      res.status(400).send({
+        error: {
+          message: 'Bad request, username is required'
+        }
+      });
       return;
     }
     if (!req.params.groupname || req.params.groupname.trim() === '') {
       res.status(400).send({
-        message: 'Bad request, go to group you want to edit'
+        error: {
+          message: 'Bad request, go to group you want to edit'
+        }
       });
       return;
     }
@@ -111,7 +117,9 @@ export default {
         // check if the group exists
         if (!group) {
           return res.status(404).send({
-            message: 'Group not found or has not been created'
+            error: {
+              message: 'Group not found or has not been created'
+            }
           });
         }
         return models.User
@@ -120,17 +128,23 @@ export default {
             // check if the username belongs to a registered user
             if (!user) {
               return res.status(404).send({
-                message: 'Username not found. User has no PostIt account.'
+                error: {
+                  message: 'Username not found. User has no PostIt account.'
+                }
               });
             }
             return models.UserGroup
               .findOne({
-                where: { username: req.body.username, groupname: req.params.groupname }
+                where: {
+                  username: req.body.username,
+                  groupname: req.params.groupname
+                }
               })
               .then((result) => {
                 if (result !== null) {
                   models.UserGroup.destroy({
-                    where: { username: req.body.username,
+                    where: {
+                      username: req.body.username,
                       groupname: req.params.groupname }
                   });
                   return res.status(200).send({
