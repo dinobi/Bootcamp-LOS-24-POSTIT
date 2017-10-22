@@ -25,7 +25,7 @@ const onAddMember = user =>
   dispatch(onAddMemberRequest(user));
   const groupname = location.href.split('/')[location.href.split('/').length - 1];
   let headers;
-  apiHandler(`/api/groups/${groupname}/user`, user, 'post', headers)
+  apiHandler(`/api/groups/${groupname}/add-member`, user, 'post', headers)
   .then((addMemberRes) => {
     dispatch(onAddMemberSuccess(addMemberRes.data));
   }).catch((addMemberRes) => {

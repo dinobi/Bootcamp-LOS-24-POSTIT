@@ -36,7 +36,10 @@ export default (app) => {
   app.get('/api/groups/me/', controllers.group.fetchMyGroups);
 
   // API route that allows users to add or remove group members
-  app.post('/api/groups/:groupname/user/', controllers.group.editGroup);
+  app.post('/api/groups/:groupname/add-member/', controllers.group.addMember);
+
+  // API route that allows users to add or remove group members
+  app.post('/api/groups/:groupname/remove-member/', controllers.group.removeMember);
 
   // API route to get list of all users in a group
   app.get('/api/groups/:groupname/members/', controllers.group.fetchMembers);

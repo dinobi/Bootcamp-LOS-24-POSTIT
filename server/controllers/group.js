@@ -93,8 +93,79 @@ export default {
         res.status(500).send({ error: error.message, status: 500 });
       });
   },
-  // Add/Remove member from group
-  editGroup(req, res) {
+  // Add member to group
+  addMember(req, res) {
+    if (!req.body.username || req.body.username.trim() === '') {
+      res.status(400).send({
+        error: {
+          message: 'Bad request, username is required'
+        }
+      });
+      return;
+    }
+    if (!req.params.groupname || req.params.groupname.trim() === '') {
+      res.status(400).send({
+        error: {
+          message: 'Bad request, go to group you want to edit'
+        }
+      });
+      return;
+    }
+    return models.Group
+      .findOne({ where: { groupname: req.params.groupname } })
+      .then((group) => {
+        // check if the group exists
+        if (!group) {
+          return res.status(404).send({
+            error: {
+              message: 'Group not found or has not been created'
+            }
+          });
+        }
+        return models.User
+          .findOne({ where: { username: req.body.username } })
+          .then((user) => {
+            // check if the username belongs to a registered user
+            if (!user) {
+              return res.status(404).send({
+                error: {
+                  message: 'Username not found. User has no PostIt account.'
+                }
+              });
+            }
+            return models.UserGroup
+              .findOne({
+                where: {
+                  username: req.body.username,
+                  groupname: req.params.groupname
+                }
+              })
+              .then((result) => {
+                if (result !== null) {
+                  return res.status(409).send({
+                    error: {
+                      message: 'User already belong to group'
+                    }
+                  });
+                }
+                models.UserGroup.create({
+                  username: req.body.username,
+                  groupname: req.params.groupname
+                });
+                return res.status(201).send({
+                  message:
+                  `${req.body.username}
+                  was successfully added to
+                  ${req.params.groupname}`
+                });
+              }).catch(error =>
+                res.status(500).send({ error: error.message, status: 500 }));
+          }).catch(error =>
+            res.status(500).send({ error: error.message, status: 500 }));
+      });
+  },
+  // remove member from group
+  removeMember(req, res) {
     if (!req.body.username || req.body.username.trim() === '') {
       res.status(400).send({
         error: {
@@ -154,16 +225,6 @@ export default {
                     ${req.params.groupname}`
                   });
                 }
-                models.UserGroup.create({
-                  username: req.body.username,
-                  groupname: req.params.groupname
-                });
-                return res.status(201).send({
-                  message:
-                  `${req.body.username}
-                  was successfully added to
-                  ${req.params.groupname}`
-                });
               }).catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
           }).catch(error =>

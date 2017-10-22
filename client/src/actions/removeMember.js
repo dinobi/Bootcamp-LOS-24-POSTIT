@@ -25,7 +25,7 @@ const onRemoveMember = dataValue =>
   dispatch(onRemoveMemberRequest(dataValue));
   const groupname = location.href.split('/')[location.href.split('/').length - 1];
   let headers;
-  apiHandler(`/api/groups/${groupname}/user`, dataValue, 'post', headers)
+  apiHandler(`/api/groups/${groupname}/remove-member`, dataValue, 'post', headers)
   .then((RemoveMemberRes) => {
     dispatch(onRemoveMemberSuccess(RemoveMemberRes.data));
   }).catch((RemoveMemberRes) => {

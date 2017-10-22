@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import jwtDecode from 'jwt-decode';
 import MessageBoard from './MessageBoard';
 import {
   DashHeader, SideMenu, WelcomeCard, Copyright, ModalMain
 } from '../../views';
 import { loadGroupMessages, loadGroupMembers, onSendMessage,
-  onAddMember
+  onAddMember, onRemoveMember
 }
 from '../../../actions';
 
@@ -81,10 +82,14 @@ class Group extends React.Component {
   //     this.props.onAddMember(username);
   //   }
   // }
+
   /**
    * @return {undefined} - returns presentationals.
    * */
   render() {
+    const authUser = localStorage.getItem('userAuth');
+    const userData = jwtDecode(authUser);
+    const { username } = userData.data;
     const { messages, members } = this.props;
     const posts = messages;
     const groupName =
@@ -121,7 +126,7 @@ class Group extends React.Component {
                 </div>
                 <div>
                   <div className="row">
-                    <div className="col s9 m9">
+                    <div className="col s12 m9">
                       {
                         posts.length > 0 ?
                         <MessageBoard posts={ posts } /> :
@@ -158,19 +163,40 @@ class Group extends React.Component {
                         </div>
                       }
                     </div>
-                    <div className="col s3 m3 members-list">
+                    <div className="col s12 m3 members-list hide-on-small-and-down">
                       <div className="member-list-title">
-                        <h5>
-                          Members<ModalMain addMemberModal={addMemberModal} />
-                        </h5>
+                        <h6>
+                          Members
+                          <span className="addButton">
+                            <ModalMain addMemberModal={addMemberModal} />
+                          </span>
+                        </h6>
                       </div>
-                      { members.map((member, index) =>
-                        <li key={index}>
-                          <i className="fa fa-hashtag"></i>
-                          &nbsp;&nbsp;{member.username}
-                          <i className="fa fa-user-times right"></i>
-                        </li>
-                      )}
+                      {
+                        members.map((member, index) => {
+                          return (
+                            members[0].username === username ?
+                              <li key={index}>
+                                <i className="fa fa-hashtag"></i>
+                                &nbsp;&nbsp;{member.username}
+                                <i
+                                  className="fa fa-user-times removeButton"
+                                  onClick={() =>
+                                  this.props.onRemoveMember({
+                                    username: member.username
+                                  })}
+                                  title="delete this member"
+                                >
+                                </i>
+                              </li>
+                              :
+                              <li key={index}>
+                              <i className="fa fa-hashtag"></i>
+                              &nbsp;&nbsp;{member.username}
+                            </li>
+                          );
+                        })
+                      }
                     </div>
                   </div>
                 </div>
@@ -194,7 +220,8 @@ const mapDispatchToProps = dispatch => (
     loadGroupMessages,
     loadGroupMembers,
     onSendMessage,
-    onAddMember
+    onAddMember,
+    onRemoveMember
   }, dispatch)
 );
 
