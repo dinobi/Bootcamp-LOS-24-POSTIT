@@ -22,7 +22,10 @@ export const logout = message => ({
 */
 const onLogoutUser = () =>
   (dispatch) => {
-    dispatch(logout('You signed out successfully'));
+    const Materialize = window.Materialize;
+    const logoutMessage = 'You signed out successfully';
+    dispatch(logout(logoutMessage));
+    Materialize.toast(logoutMessage, 2500, 'green');
     location.hash = '#login';
     localStorage.clear();
   };

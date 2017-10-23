@@ -21,14 +21,17 @@ export const loadGroupMessagesFailure = message => ({
 const loadGroupMessages = () =>
 (dispatch) => {
   dispatch(loadGroupMessagesRequest());
+  const Materialize = window.Materialize;
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
   let headers;
   apiHandler(`/api/groups/${groupname}/show-messages`, '', 'get', headers)
   .then((groupMessagesRes) => {
     dispatch(loadGroupMessagesSuccess(groupMessagesRes.data));
+    Materialize.toast(groupMessagesRes.data.message, 2500, 'green');
   }).catch((groupMessagesRes) => {
     dispatch(loadGroupMessagesFailure(groupMessagesRes));
+    Materialize.toast(groupMessagesRes.response.data.error.message, 2500, 'red');
   });
 };
 

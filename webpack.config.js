@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+// const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 
 module.exports = {
   devServer: {
@@ -103,7 +103,7 @@ module.exports = {
     // See https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new ModuleScopePlugin('client/src'),
+    // new ModuleScopePlugin('client/src'),
   ],
 };
 

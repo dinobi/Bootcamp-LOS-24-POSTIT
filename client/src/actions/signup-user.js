@@ -21,14 +21,17 @@ export const onSignupFailure = message => ({
 
 const onSignupUser = signupCreds =>
   (dispatch) => {
+    const Materialize = window.Materialize;
     dispatch(onSignupRequest(signupCreds));
     return axios.post('/api/user/signup', signupCreds)
     .then((signupRes) => {
       dispatch(onSignupSuccess(signupRes.data.message));
+      Materialize.toast(signupRes.data.message, 2500, 'green');
       localStorage.setItem('userAuth', signupRes.data.authToken);
       location.hash = '#dashboard';
     }).catch((signupRes) => {
       dispatch(onSignupFailure(signupRes.response.data.error.message));
+      Materialize.toast(signupRes.response.data.error.message, 2500, 'red');
     });
   };
 

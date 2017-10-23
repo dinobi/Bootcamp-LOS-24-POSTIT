@@ -23,6 +23,7 @@ export const onRemoveMemberFailure = message => ({
 
 const onRemoveMember = dataValue =>
 (dispatch) => {
+  const Materialize = window.Materialize;
   dispatch(onRemoveMemberRequest(dataValue));
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -31,9 +32,13 @@ const onRemoveMember = dataValue =>
     dataValue, 'post', headers)
   .then((RemoveMemberRes) => {
     dispatch(onRemoveMemberSuccess(RemoveMemberRes.data));
+    Materialize.toast(RemoveMemberRes.data.message, 2500, 'green');
   }).catch((RemoveMemberRes) => {
     dispatch(
       onRemoveMemberFailure(RemoveMemberRes.response.data.error.message)
+    );
+    Materialize.toast(
+      RemoveMemberRes.response.data.error.message, 2500, 'red'
     );
   });
 };

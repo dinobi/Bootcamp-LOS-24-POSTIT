@@ -19,14 +19,6 @@ class Login extends React.Component {
 		this.handleLogin = this.handleLogin.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.message) {
-			this.setState({
-				errorMessage: nextProps.message
-			});
-		}
-	}
-
 	onFocus() {
 		this.setState({ errorMessage: '' });
 	}
