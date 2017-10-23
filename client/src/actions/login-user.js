@@ -29,15 +29,19 @@ export const onLoginFailure = message => ({
 
 const onLoginUser = loginCreds =>
   (dispatch) => {
+    const Materialize = window.Materialize;
     dispatch(onLoginRequest(loginCreds));
     return axios.post('/api/user/signin', loginCreds)
     .then((loginRes) => {
       localStorage.setItem('userAuth', loginRes.data.authToken);
       dispatch(onLoginSuccess(loginRes.data.message));
+      Materialize.toast(loginRes.data.message, 2500, 'green');
       location.hash = '#dashboard';
     }).catch((loginRes) => {
       dispatch(onLoginFailure(loginRes.response.data.error.message));
+      Materialize.toast(loginRes.response.data.error.message, 2500, 'red');
     });
   };
 
 export default onLoginUser;
+
