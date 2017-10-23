@@ -1,14 +1,17 @@
-import React from "react";
-import { DashHeader, SideMenu, Copyright } from "../../views";
-
-class AccountDetails extends React.Component {
+import React from 'react';
+import { DashHeader, SideMenu, Copyright } from '../../views';
 /**
- * Dashboard layout component containing user account information.
- * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <Copyright/> - The dashboard footer copyright information.
+ *
+ * @class AccountDetails
+ * @extends {React.Component}
  */
+class AccountDetails extends React.Component {
+  /**
+   *
+   *
+   * @returns {*} - react elements
+   * @memberof AccountDetails
+   */
   render() {
     return (
       <div>

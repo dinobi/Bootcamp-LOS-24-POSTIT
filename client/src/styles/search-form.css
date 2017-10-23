@@ -17,7 +17,7 @@
 }
 
 .search-term input[type="checkbox"] + label{
-  font-size: 1.4rem;
+  font-size: 20px;
 }
 .amber:checked + label:before {
   border-right: 2px solid #FFA000;
@@ -52,14 +52,15 @@
   display: none;
 }
 
+.search-result {
+  padding: 0 30px;
+  background: #f5f5f5;
+}
+
 .search-result div {
   width: 100%;
-<<<<<<< HEAD
-=======
   margin-top: 5px;
   margin-bottom: 5px;
->>>>>>> d278e7235a2af234eeebac54cd5d9e74c4bba712
-  background: #f5f5f5;
   padding: 10px 30px;
   text-align: left;
 }
@@ -71,11 +72,7 @@
 
 .search-result p {
   width: 100%;
-<<<<<<< HEAD
-  padding: 0 30px;
-=======
   padding: 10px 30px;
->>>>>>> d278e7235a2af234eeebac54cd5d9e74c4bba712
   text-align: left;
 }
 .search-result em {

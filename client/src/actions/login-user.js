@@ -8,10 +8,11 @@ export const onLoginRequest = loginCreds => ({
   type: actionType.LOGIN_REQUEST,
   userIsLoading: true,
   userIsAuthenticated: false,
+  loginCreds
 });
 
 // Login success action creator
-export const onLoginSuccess = (message) => ({
+export const onLoginSuccess = message => ({
   type: actionType.LOGIN_SUCCESS,
   userIsLoading: false,
   userIsAuthenticated: true,

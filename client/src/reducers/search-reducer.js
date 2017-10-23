@@ -18,12 +18,13 @@ const searchReducer = (state = {
       });
     case actionType.SEARCH_SUCCESS:
       return Object.assign({}, state, {
-        saerchIsLoading: false,
+        searchIsLoading: false,
         searchResult: action.searchResult
       });
     case actionType.SEARCH_FAILURE:
       return Object.assign({}, state, {
         searchIsLoading: false,
+        searchResult: [],
         message: action.message
       });
     default:

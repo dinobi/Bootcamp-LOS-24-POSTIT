@@ -21,7 +21,8 @@ export const loadGroupMessagesFailure = message => ({
 const loadGroupMessages = () =>
 (dispatch) => {
   dispatch(loadGroupMessagesRequest());
-  const groupname = location.href.split('/')[location.href.split('/').length - 1];
+  const groupname =
+    location.href.split('/')[location.href.split('/').length - 1];
   let headers;
   apiHandler(`/api/groups/${groupname}/show-messages`, '', 'get', headers)
   .then((groupMessagesRes) => {

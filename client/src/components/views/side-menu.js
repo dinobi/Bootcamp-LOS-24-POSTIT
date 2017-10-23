@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import jwtDecode from 'jwt-decode';
-import onLogoutUser from '../../actions/logout-user';
+import { onLogoutUser } from '../../actions';
 /**
  *
  *
@@ -76,12 +76,10 @@ class SideMenu extends React.Component {
 					</ul>
 				{/* Todo: Add a quick actions window here */}
 				<section className="utility">
-				<a><i className="fa fa-plug"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a><i className="fa fa-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a><i className="fa fa-envelope-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#search"><i className="fa fa-search"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a><i className="fa fa-archive"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a><i className="fa fa-list"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a><i className="fa fa-group"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a><i className="fa fa-cubes"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#groups"><i className="fa fa-group"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</section>
 
 			</div>
