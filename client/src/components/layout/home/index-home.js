@@ -1,8 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { MainHeader, Footer } from '../../views';
-import * as actionCreators from '../../../actions';
 
 import LandingImg from '../../../images/postit-landing.png';
 
@@ -46,19 +43,4 @@ class IndexHome extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    authMessage: state.auth.message,
-    groups: state.groups,
-    search: state.search,
-    messages: state.messages,
-    users: state.users,
-    members: state.members
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IndexHome);
+export default IndexHome;

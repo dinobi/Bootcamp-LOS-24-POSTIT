@@ -1,0 +1,890 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>PostIt API Docs</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#signup-a-user" class="toc-h2 toc-link" data-title="Authentication">Signup a user</a>
+                  </li>
+                  <li>
+                    <a href="#login-a-user" class="toc-h2 toc-link" data-title="Authentication">Login a user</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#create-broadcast-group" class="toc-h1 toc-link" data-title="Create Broadcast Group">Create Broadcast Group</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#new-group" class="toc-h2 toc-link" data-title="Create Broadcast Group">New Group</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#add-member-to-group" class="toc-h1 toc-link" data-title="Add Member To Group">Add Member To Group</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-member" class="toc-h2 toc-link" data-title="Add Member To Group">Add Member</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#remove-member-from-group" class="toc-h1 toc-link" data-title="Remove Member From Group">Remove Member From Group</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#remove-member" class="toc-h2 toc-link" data-title="Remove Member From Group">Remove Member</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#post-messages-to-group" class="toc-h1 toc-link" data-title="Post Messages to Group">Post Messages to Group</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-message" class="toc-h2 toc-link" data-title="Post Messages to Group">Post Message</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#view-group-messages" class="toc-h1 toc-link" data-title="View Group Messages">View Group Messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#view-message" class="toc-h2 toc-link" data-title="View Group Messages">View Message</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#random-or-unknown-routes" class="toc-h1 toc-link" data-title="Random or Unknown Routes">Random or Unknown Routes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#unknown" class="toc-h2 toc-link" data-title="Random or Unknown Routes">Unknown</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/dinobi/Bootcamp-LOS-24-POSTIT'>Contribute to the PostIt App</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the PostIt API!</p>
+
+<p>This is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once. The application allows people create accounts, create groups and add registered users to the groups, and then send messages out to these groups whenever they want.</p>
+<h1 id='authentication'>Authentication</h1>
+<aside class="notice">This authentication section is made up of the routes that registers a new user and login a user to their account.</aside>
+<h2 id='signup-a-user'>Signup a user</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ Content-Type:application/json</p>
+
+<p>API Success Response:
+ 201</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User account successfully created."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"userData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxx@postit.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0805xxxxxxx"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImZpcnN0bmFtZSI6ImFtYXJhIiwibGFzdG5hbWUiOiJlbGVrd2FjaGkiLCJ1c2VybmFtZSI6ImFtYXJhIiwiZW1haWwiOiJhbWFyYUBwb3N0aXQuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkQnMzRW1RYUhEQkxjbnRyTmxOMU11dWtGM0pWdnVEOWVUb1loOGM2MTlkM2N5SUZ1aXJDNWkiLCJwaG9uZSI6IjA4MDU4NTczOTcyIiwidXBkYXRlZEF0IjoiMjAxNy0xMC0xN1QxODowMTo0Mi42MzBaIiwiY3JlYXRlZEF0IjoiMjAxNy0xMC0xN1QxODowMTo0Mi42MzBaIiwiaWQiOjEwLCJsYXN0U2VlbiI6bnVsbH0sImlhdCI6MTUwODI2MzMwMn0.lsudeLC5FjsW46Yb323RVb0r0AL1WMtaZQHwWLxUrPU"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 400, 409</p>
+</blockquote>
+
+<p>This endpoint creates a new user account on PostIt</p>
+
+<p></code><code>&#39;/api/user/signup/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/user/signup</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstname</td>
+<td>Required</td>
+<td>Firstname of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Required</td>
+<td>Lastname of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>Username of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Required</td>
+<td>Email of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+<td>Password of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>Required</td>
+<td>Phone number of the PostIt account creator.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Input validations such as name format and email have been put in place for better data collection
+</aside>
+<h2 id='login-a-user'>Login a user</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ Content-Type:application/json</p>
+
+<p>API Success Response:
+ 200</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication successful"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImZpcnN0bmFtZSI6ImRpbm9iaSIsImxhc3RuYW1lIjoia2Vua3dvIiwidXNlcm5hbWUiOiJkaW5vYmkiLCJlbWFpbCI6ImRpbm8ua2VubmV0Y29ycEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRiMjgzelNJNmk2SlhuS1BjYTBNM051MVE1aFVnQ3k1VnpLM2tOVUFMdXVWSThHM01ZQU5TRyIsInBob25lIjoiMDgwMzI5NTI5OTgiLCJsYXN0U2VlbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAxNy0xMC0xNVQyMjozNDoxMC45MDFaIiwidXBkYXRlZEF0IjoiMjAxNy0xMC0xNVQyMjozNDoxMC45MDFaIn0sImlhdCI6MTUwODI2Mjg3M30.AEZAxILfIjLE7VT6L99y4ZTtzK73-YcAi2vQj6jxR6I"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 404</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication failed. User does not exist"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint login a user to their PostIt account</p>
+
+<p></code><code>&#39;/api/user/signin/&#39;</code></p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/user/signin</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>Username of the PostIt account creator.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+<td>Password of the PostIt account creator.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Username can either be the username or email of the associated account
+</aside>
+<h1 id='create-broadcast-group'>Create Broadcast Group</h1>
+<aside class="notice">A page that allows registered users to create broadcast groups.</aside>
+<h2 id='new-group'>New Group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 201</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group - xxxxxxx, was created successfully"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 409</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group - groupxxxxx, Already Exist"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user create a new group</p>
+
+<p></code><code>&#39;/api/create-group/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/create-group</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupname</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Required</td>
+<td>Description of the broadcast group.</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+groupname is case sensitive and no two groups should have the same name
+</aside>
+<h1 id='add-member-to-group'>Add Member To Group</h1>
+<aside class="notice">Remove other registered users from groups.</aside>
+<h2 id='add-member'>Add Member</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 201</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxxxx was successfully added to groupxxxxxx"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 404</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username not found. User has no PostIt account."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group not found or has not been created"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user add members to their created group</p>
+
+<p></code><code>&#39;/api/groups/:groupname/user/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/groups/:groupname/user</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupname</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>username of the user to be added to group.</td>
+</tr>
+</tbody></table>
+<h1 id='remove-member-from-group'>Remove Member From Group</h1>
+<aside class="notice">Add other registered users to created groups.</aside>
+<h2 id='remove-member'>Remove Member</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 200</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxxx was successfully removed from groupxxxx"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 404</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username not found. User has no PostIt account."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group not found or has not been created"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows a group creator remove other group members from group</p>
+
+<p></code><code>&#39;/api/groups/:groupname/user/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/groups/:groupname/user</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupname</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>username of the user to be added to group.</td>
+</tr>
+</tbody></table>
+<h1 id='post-messages-to-group'>Post Messages to Group</h1>
+<aside class="notice">A registered user can post messages to all users in a group.</aside>
+<h2 id='post-message'>Post Message</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 201</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We made..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Groupxxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"critical"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 400, 401</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message body cannot be empty"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User does not belong to group 'groupxxxx'"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user post messages to a broadcast group</p>
+
+<p></code><code>&#39;/api/groups/:groupname/send-message/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/groups/:groupname/send-message</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>message</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>fromUser</td>
+<td>Required</td>
+<td>username of the post creator.</td>
+</tr>
+<tr>
+<td>toGroup</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+</tbody></table>
+<h1 id='view-group-messages'>View Group Messages</h1>
+<aside class="notice">A registered user can see messages that have been posted to groups they belong to.</aside>
+<h2 id='view-message'>View Message</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 200</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We made it..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groupxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"critical"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yayy!!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groupxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:47:04.722Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 404</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Group: groupxxxx, does not exist on postit."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user see messages posted to a groups they belong to</p>
+
+<p></code><code>&#39;/api/groups/:groupname/show-messages/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://postit-webapp.herokuapp.com/api/groups/:groupname/show-messages</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>message</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>fromUser</td>
+<td>Required</td>
+<td>username of the user to be added to group.</td>
+</tr>
+<tr>
+<td>toGroup</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Required</td>
+<td>Groupname of the broadcast group.</td>
+</tr>
+</tbody></table>
+<h1 id='random-or-unknown-routes'>Random or Unknown Routes</h1>
+<aside class="notice">Users see a 404 page for unknown or random route</aside>
+<h2 id='unknown'>Unknown</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 404</p>
+
+<p>The above response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Resource not found"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user know that the page they have requested is unknown</p>
+
+<p></code><code>&#39;/api/anyRandomLocation&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/anyRandomLocation</code></p>
+
+<p><code>GET https://postit-webapp.herokuapp.com/api/anyRandomLocation</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Random</td>
+<td>Not Required</td>
+<td>Any random request body or none at all</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">This contains all the error response status code of the attempt to understand and satisfy the request. These codes are briefly explained after the Reason-Phrase. The Reason-Phrase is intended to give a short textual description of the Status-Code. The Status-Code is intended for use by automata and the Reason-Phrase is intended for the human user. The client is not required to examine or display the Reason- Phrase.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK - The request has succeeded</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created - The request has been fulfilled and has resulted in one or more new resources being created.</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content - The server has successfully fulfilled the request and that there is no additional content to send in the response payload body.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request -- The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- The request has not been applied because it lacks valid authentication credentials for the target resource.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The server understood the request but refuses to authorize it.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests --</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- The server encountered an unexpected condition that prevented it from fulfilling the request.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
