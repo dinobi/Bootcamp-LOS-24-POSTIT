@@ -17,19 +17,19 @@ class Modal extends React.Component {
   }
   /**
    *
-   * @param {any} nextProps 
    * @memberof Modal
+   * @returns {Object} - new state
    */
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.message) {
-      this.setState({
-        message: nextProps.message
-      });
-    }
-  }
   modalToggle() {
-    this.setState({ modalOpened: !this.state.modalOpened });
+    this.setState({
+      modalOpened: !this.state.modalOpened
+    });
   }
+  /**
+   *
+   * @memberof Modal
+   * @returns {Object} - new state
+   */
   onFocus() {
     this.setState({
       errorMessage: '',

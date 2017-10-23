@@ -21,6 +21,7 @@ export const onSendMessageFailure = messageError => ({
 
 const onSendMessage = message =>
 (dispatch) => {
+  const Materialize = window.Materialize;
   dispatch(onSendMessageRequest(message));
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -28,8 +29,10 @@ const onSendMessage = message =>
   apiHandler(`/api/groups/${groupname}/send-message`, message, 'post', headers)
   .then((messageRes) => {
     dispatch(onSendMessageSuccess(messageRes.data));
+    Materialize.toast(messageRes.data.message, 2500, 'green');
   }).catch((messageRes) => {
     dispatch(onSendMessageFailure(messageRes.response.data.error.message));
+    Materialize.toast(messageRes.response.data.error.message, 2500, 'red');
   });
 };
 

@@ -23,6 +23,7 @@ export const onAddMemberFailure = message => ({
 
 const onAddMember = user =>
 (dispatch) => {
+  const Materialize = window.Materialize;
   dispatch(onAddMemberRequest(user));
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -30,8 +31,10 @@ const onAddMember = user =>
   apiHandler(`/api/groups/${groupname}/add-member`, user, 'post', headers)
   .then((addMemberRes) => {
     dispatch(onAddMemberSuccess(addMemberRes.data));
+    Materialize.toast(addMemberRes.data.message, 2500, 'green');
   }).catch((addMemberRes) => {
     dispatch(onAddMemberFailure(addMemberRes.response.data.error.message));
+    Materialize.toast(addMemberRes.response.data.error.message, 2500, 'red');
   });
 };
 

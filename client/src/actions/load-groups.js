@@ -21,11 +21,14 @@ export const onLoadGroupsFailure = message => ({
 const onLoadGroups = () =>
 (dispatch) => {
   dispatch(onLoadGroupsRequest());
+  const Materialize = window.Materialize;
   let headers;
   apiHandler('/api/groups/me', '', 'get', headers).then((loadGroupsRes) => {
     dispatch(onLoadGroupsSuccess(loadGroupsRes.data));
+    Materialize.toast(loadGroupsRes.data.message, 2500, 'green');
   }).catch((loadGroupsRes) => {
     dispatch(onLoadGroupsFailure(loadGroupsRes.data.error.message));
+    Materialize.toast(loadGroupsRes.data.error.message, 2500, 'red');
   });
 };
 
