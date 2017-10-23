@@ -82,7 +82,7 @@ class SearchWiki extends React.Component {
                   <fieldset className="search-term">
                     <SearchBox
                       searchContext="search-wiki"
-                      searchQuery={this.state.searchQuery}
+                      searchQuery={this.state.searchTerm}
                       handleChange={this.handleChange}
                       handleSearch={this.handleSearch}
                     />

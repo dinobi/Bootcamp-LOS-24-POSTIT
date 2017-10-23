@@ -82,3 +82,10 @@
 	color: #fff;
 	background: linear-gradient(#FFC107, #FFA000);;
 }
+.removeButton, .addButton {
+	position: absolute;
+	right: 20px;
+}
+.removeButton:hover, .addButton {
+	color: #000;
+}

@@ -4,6 +4,7 @@ import apiHandler from '../components/helpers/api-handler';
 export const onSendMessageRequest = messageData => ({
   type: actionType.SEND_MESSAGE_REQUEST,
   messageIsLoading: true,
+  messageData
 });
 
 export const onSendMessageSuccess = message => ({
@@ -21,7 +22,8 @@ export const onSendMessageFailure = messageError => ({
 const onSendMessage = message =>
 (dispatch) => {
   dispatch(onSendMessageRequest(message));
-  const groupname = location.href.split('/')[location.href.split('/').length - 1];
+  const groupname =
+    location.href.split('/')[location.href.split('/').length - 1];
   let headers;
   apiHandler(`/api/groups/${groupname}/send-message`, message, 'post', headers)
   .then((messageRes) => {

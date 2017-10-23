@@ -3,7 +3,8 @@ import actionType from '../actionTypes';
 
 export const onSignupRequest = signupCreds => ({
   type: actionType.SIGNUP_REQUEST,
-  isLoading: true
+  isLoading: true,
+  signupCreds
 });
 
 export const onSignupSuccess = message => ({

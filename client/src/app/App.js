@@ -1,18 +1,14 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import 'jquery';
-import { 
+import {
   IndexHome, Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,
   Group, Search, SearchWiki, AccountDetails,
-  MessageBoard, Members, NewGroup
+  NewGroup
 } from '../components/layout';
-import { Features } from '../components/views';
 import '../styles/base.scss';
 
-/** b cSting relationship between
- * all of the app layout components
- */
 const App = () =>
   (
     <Router>

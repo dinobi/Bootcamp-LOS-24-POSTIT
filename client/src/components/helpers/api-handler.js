@@ -4,7 +4,10 @@ import axios from 'axios';
 const apiHandler = (url, body, method, headers) => {
   headers = new Headers();
   // headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  if (localStorage.getItem('userAuth') === null && location.hash !== '#register') {
+  if (
+    localStorage.getItem('userAuth')
+    === null && location.hash !== '#register'
+  ) {
     location.hash = '#login';
     return;
   }

@@ -3,7 +3,8 @@ import apiHandler from '../components/helpers/api-handler';
 
 export const onSearchRequest = searchQuery => ({
   type: actionType.SEARCH_REQUEST,
-  searchIsLoading: true
+  searchIsLoading: true,
+  searchQuery
 });
 
 export const onSearchSuccess = searchResult => ({
@@ -23,7 +24,6 @@ const onSearch = searchQuery =>
   dispatch(onSearchRequest(searchQuery));
   let headers;
   apiHandler('/api/search', searchQuery, 'post', headers).then((searchRes) => {
-    console.log(searchRes.data);
     dispatch(onSearchSuccess(searchRes.data));
   }).catch((searchRes) => {
     dispatch(onSearchFailure(searchRes.response.data.error.message));

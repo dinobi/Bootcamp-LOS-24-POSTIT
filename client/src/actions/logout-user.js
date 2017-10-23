@@ -4,13 +4,11 @@
 * were calling the API to log the user out
 */
 export const LOGOUT = 'LOGOUT';
-
 /**
- * onLogoutRequest()
- * @return {object} - action-type, loading status
- * and authentication status properties for a
- * logout request
-*/
+ *
+ * @param {message} message
+ * @returns {Object} - new state
+ */
 export const logout = message => ({
   type: LOGOUT,
   userIsAuthenticated: false,

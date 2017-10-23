@@ -9,6 +9,6 @@ const smsHandler = (phone, message) => {
   nexmo.message.sendSms(
     '2348032952998', phone, message,
   );
-}
+};
 
 export default smsHandler;

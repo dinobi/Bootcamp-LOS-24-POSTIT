@@ -54,6 +54,7 @@
 
 	.dashboard-menu .utility {
 		border-top: 1px solid #424242;
+		text-align: center !important;
 	}
 	.dashboard-menu .utility:hover {
 		background-color: #000;

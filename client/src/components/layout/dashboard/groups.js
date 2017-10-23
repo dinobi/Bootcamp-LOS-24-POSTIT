@@ -5,8 +5,8 @@ import { DashHeader, SideMenu, GroupCard, Copyright } from '../../views';
 import
   onLoadGroups
   from '../../../actions/load-groups';
-import loadGroupMessages from '../../../actions/load-group-messages';
-import loadGroupMembers from '../../../actions/load-group-members';
+import { loadGroupMessages, loadGroupMembers }
+from '../../../actions';
 
 /**
  * 
@@ -50,7 +50,10 @@ class Groups extends React.Component {
                           key = { index }
                           groupName = { group.groupname }
                           location = {
-                            <a href={`#groups/${group.groupname}`}>{ group.groupname }</a>
+                            <a href={`#groups/${group.groupname}`}>
+                              <i className="fa fa-folder"></i>
+                              &nbsp;{ group.groupname }
+                            </a>
                           }
                           criticalCount={ group.unreadCritical }
                           urgentCount={ group.unreadUrgent }
@@ -60,25 +63,13 @@ class Groups extends React.Component {
                       <div className="col s12 m4">
                       <div className="card">
                         <div className="card-content">
-                          <span className="card-title activator grey-text text-darken-4 truncate">
+                          <span className="card-title activator text-darken-4">
                             Pls join or create a group
                           </span>
                         </div>
                       </div>
                     </div>
                     }
-                    <div className="col s12 m4">
-                      <div className="card">
-                        <div className="card-content">
-                          <a href="#create-group">
-                            <span className="card-title activator grey-text text-darken-4 truncate">
-                              Create Group
-                              <i className="material-icons right">add</i>
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>

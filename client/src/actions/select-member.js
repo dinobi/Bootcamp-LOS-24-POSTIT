@@ -1,13 +1,9 @@
 import actionType from '../actionTypes';
 
-const onMemberClick = (member) => {
-  console.log(`member: ${member['First Name']} was clicked`);
-  return (
-  {
+const onMemberClick = member =>
+  ({
     type: actionType.MEMBER_CLICKED,
     payload: member
-  }
-  );
-};
+  });
 
 export default onMemberClick;
