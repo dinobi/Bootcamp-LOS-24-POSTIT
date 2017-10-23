@@ -57,8 +57,8 @@ class ModalMain extends React.Component {
     return (
       <div>
         <a onClick={this.modalToggle}>
-					{addMemberButton}
-				</a>
+          {addMemberButton}
+        </a>
         <div className={containerClass}>
           <div className='modal-header'>
             <h5 className="black-text">

@@ -19,7 +19,7 @@ from '../../../actions';
 class Group extends React.Component {
   /**
    * Creates an instance of Group.
-   * @param {any} props 
+   * @param {any} props
    * @memberof Group
    */
   constructor(props) {
