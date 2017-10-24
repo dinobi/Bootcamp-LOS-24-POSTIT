@@ -96,7 +96,7 @@ class Login extends React.Component {
 					<section className="external">
 						<div className="row">
 							<div className="col s6 md6">
-								<a href="#reset-password">
+								<a href="#request-password">
 									<i className="material-icons">memory</i>Forgot your password?
 								</a>
 							</div>

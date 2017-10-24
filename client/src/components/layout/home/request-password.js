@@ -1,6 +1,9 @@
 import React from 'react';
-import Icon from "../../../images/postit-icon.png";
+import connect from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Icon from '../../../images/postit-icon.png';
 import { MainHeader, Footer } from '../../views';
+import { onRequestPassword } from '../../../actions';
 
 class RequestPassword extends React.Component {
 /**

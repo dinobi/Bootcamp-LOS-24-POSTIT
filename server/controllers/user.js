@@ -1,6 +1,8 @@
+/* eslint-disable no-useless-escape */
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
 import models from '../models';
 import { generateAuthToken } from '../helpers/authService';
 import filterUser from '../helpers/filterUser';
@@ -219,13 +221,140 @@ export default {
     }
   },
   // Users can request for a new password
-  passwordRequest(req, res) {
-    if (!req.body.email || req.body.password.email.trim() === '') {
+  requestPassword(req, res) {
+    const { email } = req.body;
+    if (!email || email.trim() === '') {
       return res.status(400).send({
         error: { message: 'Your postit associated email is required' }
       });
     }
-    const email = req.body.email;
-    const date = new Date();
+    const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (!emailRE.test(email)) {
+      return res.status(400)
+      .send({
+        error: { message: 'Enter a valid email' }
+      });
+    }
+    return models.User
+      .findOne({ where: { email }
+      }).then((user) => {
+        if (!user) {
+          res.status(404).send({
+            error: {
+              message:
+              'We do not have this email in our record'
+            }
+          });
+        }
+        const transporter = nodemailer.createTransport({
+          service: process.env.MAIL_SERVICE,
+          auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD
+          }
+        });
+        const secret = req.body.email;
+        const hash = crypto
+        .createHash('sha256', secret)
+        .update(Date.now().toString())
+        .digest('hex');
+        const date = new Date();
+        date.setHours(date.getHours() + 1);
+        const expiresIn =
+        `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
+        console.log('ExpiresIn:::::', date.toString());
+        user.update({
+          resetPassToken: hash,
+          expiry: expiresIn
+        }).then(() => {
+          const mailOptions = {
+            from: 'no-reply <no_reply@postit.com>',
+            to: email,
+            subject: 'Password Reset Link',
+            html: `Hello ${email}, <br/><br/>if you have requested
+            for a new password, please follow \n
+            <a href='${process.env.APP_URL}/#/
+            reset-password/${hash}'>this link</a>
+            to reset your password.`,
+            text: `Please follow please follow \n
+            <a href=
+            '${process.env.APP_URL}/#/
+            reset-password/${hash}'>this link</a>
+            to reset your password.`
+          };
+          models.PasswordReset
+            .findOne({
+              where: { email }
+            }).then((existRes) => {
+              if (existRes === null) {
+                models.PasswordReset
+                .create({
+                  email,
+                  expiresIn,
+                  hash
+                }).then(() => {
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      return res.status(503).send({
+                        error: {
+                          message: 'Unable to send email, something went wrong'
+                        }
+                      });
+                    }
+                    return res.status(200).send({
+                      info,
+                      message: 'Password reset link has been sent to your email'
+                    });
+                  });
+                });
+              } else {
+                existRes.update({
+                  hash,
+                  expiresIn
+                }).then(() => {
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      return res.status(503).send({
+                        error: {
+                          message: 'Unable to send email, something went wrong'
+                        }
+                      });
+                    }
+                    return res.status(200).send({
+                      info,
+                      message: 'Password reset link has been sent to your email'
+                    });
+                  });
+                });
+              }
+            });
+        });
+      });
+  },
+  resetPassword(req, res) {
+    const hashedPass = bcrypt.hashSync(req.body.password, salt, null);
+    models.PasswordReset
+    .findOne({
+      where: { hash: req.params.hash }
+    }).then((result) => {
+      const email = result.dataValues.email;
+      console.log('Email in db::::::', email);
+      const date = new Date();
+      const now =
+      `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
+      if (now > result.dataValues.expiresIn) {
+        res.status(200).send({
+          error: { message: 'This link is invalid or has expired' }
+        });
+        return;
+      }
+      return models.User
+        .update(
+          { password: hashedPass },
+          { where: { email } }
+        ).then(() =>
+          res.status(200).send({ message: 'Password Reset Successful' })
+        );
+    });
   },
 };
