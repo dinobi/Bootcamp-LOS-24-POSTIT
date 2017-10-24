@@ -7,6 +7,7 @@ import groupMembersReducer from './group-members-reducer';
 import createGroupReducer from './create-group-reducer';
 import sendMessageReducer from './send-message-reducer';
 import searchReducer from './search-reducer';
+import passwordReducer from './passwordReducer';
 
 const rootReducer = combineReducers({
   selectMember: selectMemberReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   groups: groupsReducer,
   newGroup: createGroupReducer,
   newMessage: sendMessageReducer,
-  searchResult: searchReducer
+  searchResult: searchReducer,
+  changePassword: passwordReducer
 });
 
 export default rootReducer;
