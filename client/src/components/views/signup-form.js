@@ -18,7 +18,6 @@ class SignupForm extends React.Component {
 
 	onSubmitClick(e) {
     e.preventDefault();
-    console.log(this.props);
 		let {
 			firstname, lastname, username,
 			email, password, phone

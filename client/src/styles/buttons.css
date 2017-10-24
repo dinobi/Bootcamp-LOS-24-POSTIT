@@ -1,5 +1,6 @@
 .btn-login {
   background: #FFC107;
+  vertical-align: middle;
 }
 .btn-login:hover {
 	background: #FFA000;
@@ -7,12 +8,18 @@
 .btn-login:focus {
 	background: #FFA000;
 }
+.btn-login p {
+  text-align: center;
+  margin-top: 1px;
+  font-weight: 900;
+  
+}
 
 .btn-create, .btn-large {
   text-decoration: none;
   font-weight: 700;
   min-width: 120px;
-  font-size: 1.4rem;
+  font-size: 1.4rem !important;
   font-weight: 900;
   color: #fff;
   background-color: #ff6f00;
