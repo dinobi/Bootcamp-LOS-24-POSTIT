@@ -17,7 +17,7 @@ const App = () =>
         <Route path='/register' component={ Register } />
         <Route path='/login' component={ Login } />
         <Route path='/request-password' component={ RequestPassword } />
-        <Route path='/reset-password' component={ ResetPassword } />
+        <Route path='/reset-password:hash' component={ ResetPassword } />
         <Route exact path='/dashboard' component={ Dashboard }/>
         <Route exact path='/groups' component={ Groups } />
         <Route path='/create-group' component={ NewGroup } />

@@ -46,6 +46,7 @@ class RequestPassword extends React.Component {
 
 	}
   render() {
+		const { loader } = this.props;
     return (
 			<div>
 				<MainHeader />
@@ -72,7 +73,13 @@ class RequestPassword extends React.Component {
 									&nbsp;{this.state.errorMessage}
 								</p>
 							}
-							<button type="submit" className="btn btn-login">Send reset link</button>
+							<button type="submit" className="btn btn-login" disabled={ loader }>
+								{
+									loader ?
+									<p>sending...</p> :
+									<p>Send reset link</p>
+								}
+							</button>
 						</form>
 					</section>
 				<Footer />
@@ -86,7 +93,7 @@ RequestPassword.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  message: state.changePassword.message
+  loader: state.changePassword.passwordRequestIsLoading
 });
 
 const mapDispatchToProps = dispatch =>
