@@ -20,6 +20,14 @@ class ResetPassword extends React.Component {
 		this.handleResetPassword = this.handleResetPassword.bind(this);
 	}
 	/**
+  * Reset app state on focus
+  * @memberof ResetPassword
+  * @returns {Object} - default state
+  */
+	onFocus() {
+		this.setState({ errorMessage: '' });
+	}
+	/**
 	 * 
 	 *
 	 * @param {any} event
@@ -30,7 +38,7 @@ class ResetPassword extends React.Component {
 		event.preventDefault();
 		let { password, confirmPassword } = this;
 		password = password.value.trim();
-		confirmPassword = passwordConfirm.value.trim();
+		confirmPassword = confirmPassword.value.trim();
 		if (password === '' || confirmPassword === '') {
 			return this.setState({
 				errorMessage: 'Error. All fields are required'
@@ -66,9 +74,10 @@ class ResetPassword extends React.Component {
 							<div className="input-field">
 								<input
 									onFocus = { this.onFocus }
-									type="text"
-									id="email"
-									placeholder="Enter your postit associated email"
+									type="password"
+									className="validate"
+									id="password"
+									placeholder="Enter new password"
 									ref={(input) => { this.password = input; }}
 								/>
 								<label className="active" htmlFor="password">Password:</label>
@@ -76,9 +85,10 @@ class ResetPassword extends React.Component {
               <div className="input-field">
 								<input
 									onFocus = { this.onFocus }
-									type="text"
-									id="email"
-									placeholder="Enter your postit associated email"
+									type="password"
+									className="validate"
+									id="confirm-password"
+									placeholder="Confirm password"
 									ref={(input) => { this.confirmPassword = input; }}
 								/>
 								<label className="active" htmlFor="confirm-password">Confirm password:</label>
@@ -106,7 +116,7 @@ class ResetPassword extends React.Component {
 }
 
 ResetPassword.propTypes = {
-  onRequestPassword: PropTypes.func.isRequired
+  onResetPassword: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

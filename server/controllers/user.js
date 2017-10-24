@@ -272,13 +272,13 @@ export default {
             subject: 'Password Reset Link',
             html: `Hello ${email}, <br/><br/>if you have requested
             for a new password, please follow \n
-            <a href='${process.env.APP_URL}/#/
-            reset-password/${hash}'>this link</a>
+            <a href='${process.env.APP_URL}/#/reset-password/${hash}'>
+              this link
+            </a>
             to reset your password.`,
             text: `Please follow please follow \n
             <a href=
-            '${process.env.APP_URL}/#/
-            reset-password/${hash}'>this link</a>
+            '${process.env.APP_URL}/#/reset-password/${hash}'> this link</a>
             to reset your password.`
           };
           models.PasswordReset

@@ -23,9 +23,8 @@ const onResetPassword = user =>
   (dispatch) => {
     const Materialize = window.Materialize;
     const hash = location.href.split('/')[location.href.split('/').length - 1];
-    console.log('this is the hash::::', hash);
     dispatch(resetPassword(user));
-    return axios.post('/api/user/reset-password/:hash', user)
+    return axios.post(`/api/user/reset-password/${hash}`, user)
     .then((passRes) => {
       dispatch(resetPasswordSuccess(passRes.data.message));
       Materialize.toast(passRes.data.message, 2500, 'green');
