@@ -28,6 +28,7 @@ const onResetPassword = user =>
     .then((passRes) => {
       dispatch(resetPasswordSuccess(passRes.data.message));
       Materialize.toast(passRes.data.message, 2500, 'green');
+      location.hash = '#login';
     }).catch((passRes) => {
       dispatch(resetPasswordFailure(passRes.response.data.error.message));
       Materialize.toast(passRes.response.data.error.message, 2500, 'red');

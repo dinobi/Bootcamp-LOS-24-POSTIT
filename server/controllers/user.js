@@ -258,10 +258,7 @@ export default {
         .createHash('sha256', secret)
         .update(Date.now().toString())
         .digest('hex');
-        const date = new Date();
-        date.setHours(date.getHours() + 1);
-        const expiresIn =
-        `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
+        const expiresIn = Date.now() + 40000;
         user.update({
           resetPassToken: hash,
           expiry: expiresIn
@@ -284,8 +281,8 @@ export default {
           models.PasswordReset
             .findOne({
               where: { email }
-            }).then((existRes) => {
-              if (existRes === null) {
+            }).then((emailExistRes) => {
+              if (emailExistRes === null) {
                 models.PasswordReset
                 .create({
                   email,
@@ -307,7 +304,7 @@ export default {
                   });
                 });
               } else {
-                existRes.update({
+                emailExistRes.update({
                   hash,
                   expiresIn
                 }).then(() => {
@@ -336,23 +333,28 @@ export default {
     .findOne({
       where: { hash: req.params.hash }
     }).then((result) => {
+      if (result === null) {
+        return res.status(400).send({
+          error: { message: 'The provided token does not exist' }
+        });
+      }
       const email = result.dataValues.email;
-      const date = new Date();
-      const now =
-      `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
+      const now = Date.now();
       if (now > result.dataValues.expiresIn) {
-        res.status(200).send({
+        return res.status(200).send({
           error: { message: 'This link is invalid or has expired' }
         });
-        return;
       }
-      return models.User
+      models.User
         .update(
           { password: hashedPass },
           { where: { email } }
         ).then(() =>
           res.status(200).send({ message: 'Password Reset Successful' })
         );
-    });
+      return result.destroy({ where: { email } });
+    }).catch(error => res.status(500).send({
+      error: error.message, status: 500
+    }));
   },
 };
