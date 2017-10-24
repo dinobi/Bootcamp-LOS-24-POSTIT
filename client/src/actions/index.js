@@ -10,8 +10,11 @@ import onSearch from './search';
 import onSelectMember from './select-member';
 import onSendMessage from './send-message';
 import onSignupUser from './signup-user';
+import onResetPassword from './onResetPassword';
+import onRequestPassword from './onRequestPassword';
 
 export {
   onLoginUser, onLogoutUser, loadGroupMessages, onLoadGroups,
   onSignupUser, onSelectMember, loadGroupMembers,
-  onCreateGroup, onAddMember, onRemoveMember, onSearch, onSendMessage };
+  onCreateGroup, onAddMember, onRemoveMember, onSearch,
+  onSendMessage, onResetPassword, onRequestPassword };

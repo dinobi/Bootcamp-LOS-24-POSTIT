@@ -23,17 +23,15 @@ const onRequestPassword = user =>
   (dispatch) => {
     const Materialize = window.Materialize;
     dispatch(requestPassword(user));
-    return axios.post('/api/user/signup', signupCreds)
-    .then((signupRes) => {
-      dispatch(onSignupSuccess(signupRes.data.message));
-      Materialize.toast(signupRes.data.message, 2500, 'green');
-      localStorage.setItem('userAuth', signupRes.data.authToken);
-      location.hash = '#dashboard';
-    }).catch((signupRes) => {
-      dispatch(onSignupFailure(signupRes.response.data.error.message));
-      Materialize.toast(signupRes.response.data.error.message, 2500, 'red');
+    return axios.post('/api/user/request-password', user)
+    .then((passRes) => {
+      dispatch(requestPasswordSuccess(passRes.data.message));
+      Materialize.toast(passRes.data.message, 2500, 'green');
+    }).catch((passRes) => {
+      dispatch(requestPasswordFailure(passRes.response.data.error.message));
+      Materialize.toast(passRes.response.data.error.message, 2500, 'red');
     });
   };
 
-export default onSignupUser;
+export default onRequestPassword;
 

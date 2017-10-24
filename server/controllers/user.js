@@ -262,7 +262,6 @@ export default {
         date.setHours(date.getHours() + 1);
         const expiresIn =
         `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
-        console.log('ExpiresIn:::::', date.toString());
         user.update({
           resetPassToken: hash,
           expiry: expiresIn
@@ -338,7 +337,6 @@ export default {
       where: { hash: req.params.hash }
     }).then((result) => {
       const email = result.dataValues.email;
-      console.log('Email in db::::::', email);
       const date = new Date();
       const now =
       `${date.toString().split(' ')[2]}:${date.toString().split(' ')[4]}`;
