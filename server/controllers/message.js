@@ -8,6 +8,11 @@ export default {
         error: { message: 'Message body cannot be empty' }
       });
     }
+    if (!req.body.priority || req.body.priority.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'Message priority cannot be empty' }
+      });
+    }
     models.UserGroup
     .findOne({
       where: {

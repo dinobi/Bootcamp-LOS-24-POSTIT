@@ -2,39 +2,36 @@
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onAddMemberRequest = user => ({
+export const onAddMemberRequest = () => ({
   type: actionType.ADD_MEMBER_REQUEST,
   addMemberIsLoading: true,
-  user
 });
 
-export const onAddMemberSuccess = (member, message) => ({
+export const onAddMemberSuccess = member => ({
   type: actionType.ADD_MEMBER_SUCCESS,
   messageIsLoading: false,
-  member,
-  message
+  member
 });
 
-export const onAddMemberFailure = message => ({
+export const onAddMemberFailure = () => ({
   type: actionType.SEND_MESSAGE_FAILURE,
-  messageIsLoading: false,
-  message
+  messageIsLoading: false
 });
 
 const onAddMember = user =>
 (dispatch) => {
   const Materialize = window.Materialize;
-  dispatch(onAddMemberRequest(user));
+  dispatch(onAddMemberRequest());
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
   let headers;
   apiHandler(`/api/groups/${groupname}/add-member`, user, 'post', headers)
-  .then((addMemberRes) => {
-    dispatch(onAddMemberSuccess(addMemberRes.data));
-    Materialize.toast(addMemberRes.data.message, 2500, 'green');
-  }).catch((addMemberRes) => {
-    dispatch(onAddMemberFailure(addMemberRes.response.data.error.message));
-    Materialize.toast(addMemberRes.response.data.error.message, 2500, 'red');
+  .then((addMemberResponse) => {
+    dispatch(onAddMemberSuccess(addMemberResponse.data.member));
+    Materialize.toast(addMemberResponse.data.message, 2500, 'green');
+  }).catch((errorResponse) => {
+    dispatch(onAddMemberFailure());
+    Materialize.toast(errorResponse.response.data.error.message, 2500, 'red');
   });
 };
 

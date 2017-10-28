@@ -4,42 +4,40 @@ import axios from 'axios';
 import actionType from '../actionTypes';
 
 // Login request action creator
-export const onLoginRequest = loginCreds => ({
+export const onLoginRequest = () => ({
   type: actionType.LOGIN_REQUEST,
   userIsLoading: true,
-  userIsAuthenticated: false,
-  loginCreds
+  userIsAuthenticated: false
 });
 
 // Login success action creator
-export const onLoginSuccess = message => ({
+export const onLoginSuccess = user => ({
   type: actionType.LOGIN_SUCCESS,
   userIsLoading: false,
   userIsAuthenticated: true,
-  message
+  user
 });
 
 // Login failure action creator
-export const onLoginFailure = message => ({
+export const onLoginFailure = () => ({
   type: actionType.LOGIN_FAILURE,
   userIsLoading: false,
-  userIsAuthenticated: false,
-  message
+  userIsAuthenticated: false
 });
 
-const onLoginUser = loginCreds =>
+const onLoginUser = loginData =>
   (dispatch) => {
     const Materialize = window.Materialize;
-    dispatch(onLoginRequest(loginCreds));
-    return axios.post('/api/user/signin', loginCreds)
-    .then((loginRes) => {
-      localStorage.setItem('userAuth', loginRes.data.authToken);
-      dispatch(onLoginSuccess(loginRes.data.message));
-      Materialize.toast(loginRes.data.message, 2500, 'green');
+    dispatch(onLoginRequest());
+    return axios.post('/api/user/signin', loginData)
+    .then((loginResponse) => {
+      localStorage.setItem('userAuth', loginResponse.data.authToken);
+      dispatch(onLoginSuccess(loginResponse.data.userData));
+      Materialize.toast(loginResponse.data.message, 2500, 'green');
       location.hash = '#dashboard';
-    }).catch((loginRes) => {
-      dispatch(onLoginFailure(loginRes.response.data.error.message));
-      Materialize.toast(loginRes.response.data.error.message, 2500, 'red');
+    }).catch((loginError) => {
+      dispatch(onLoginFailure());
+      Materialize.toast(loginError.response.data.error.message, 2500, 'red');
     });
   };
 

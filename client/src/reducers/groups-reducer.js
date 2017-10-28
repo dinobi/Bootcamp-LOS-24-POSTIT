@@ -1,4 +1,3 @@
-import { REHYDRATE } from 'redux-persist/constants';
 import actionType from '../actionTypes';
 /**
  * users reducer to return user data
@@ -11,8 +10,6 @@ const groupsReducer = (state = {
   groups: []
 }, action) => {
   switch (action.type) {
-    case 'REHYDRATE':
-      return { ...state, persistedState: action.groups };
     case actionType.LOAD_GROUPS_REQUEST:
       return Object.assign({}, state, {
         groupsIsLoading: true,

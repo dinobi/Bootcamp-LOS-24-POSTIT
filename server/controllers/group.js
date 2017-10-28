@@ -25,6 +25,10 @@ export default {
           groupname: req.body.groupname
         })
         .then(res.status(201).send({
+          groupData: {
+            groupname: req.body.groupname,
+            description: req.body.description,
+          },
           message: `Group - ${group.groupname}, was created successfully`,
         }));
       })
@@ -151,16 +155,22 @@ export default {
                 models.UserGroup.create({
                   username: req.body.username,
                   groupname: req.params.groupname
-                });
-                return res.status(201).send({
-                  message:
-                  `${req.body.username}
-                  was successfully added to
-                  ${req.params.groupname}`
-                });
-              }).catch(error =>
+                })
+                .then(member =>
+                  res.status(201).send({
+                    member,
+                    message:
+                    `${req.body.username} was added to ${req.params.groupname}`
+                  })
+                )
+                .catch(error =>
+                  res.status(500).send({ error: error.message, status: 500 })
+                );
+              })
+              .catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
-          }).catch(error =>
+          })
+          .catch(error =>
             res.status(500).send({ error: error.message, status: 500 }));
       });
   },
@@ -219,12 +229,16 @@ export default {
                       groupname: req.params.groupname }
                   });
                   return res.status(200).send({
+                    username: req.body.username,
                     message:
                     `${req.body.username}
                     was successfully removed from
                     ${req.params.groupname}`
                   });
                 }
+                return res.status(404).send({
+                  message: `No such user in ${req.params.groupname}`
+                });
               }).catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
           }).catch(error =>
@@ -244,7 +258,7 @@ export default {
           .findAll({ where: { groupname: req.params.groupname } })
           .then((result) => {
             if (result.length === 0) {
-              res.status(200).send({
+              res.status(201).send({
                 message: 'You have not added any members'
               });
             } else {

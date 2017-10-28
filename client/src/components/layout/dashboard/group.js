@@ -65,25 +65,6 @@ class Group extends React.Component {
   }
 
   /**
-   *
-   * @param {event} event
-   * @memberof Group
-   * @returns {*} - react elements
-   */
-  // handleAddMember(event) {
-  //   event.preventDefault();
-  //   let { username } = this;
-  //   username = username.value.trim();
-  //   if (username === '') {
-  //     this.setState({
-  //       errorMessage: 'Error. All field are required to add member'
-  //     });
-  //   } else {
-  //     this.props.onAddMember(username);
-  //   }
-  // }
-
-  /**
    * @return {undefined} - returns presentationals.
    * */
   render() {
@@ -185,7 +166,7 @@ class Group extends React.Component {
                                   this.props.onRemoveMember({
                                     username: member.username
                                   })}
-                                  title="delete this member"
+                                  title="remove this member"
                                 >
                                 </i>
                               </li>
@@ -212,7 +193,7 @@ class Group extends React.Component {
 
 const mapStateToProps = state => ({
   messages: state.messages.groupMessages,
-  members: state.members.groupMembers
+  members: state.members.groupMembers,
 });
 
 const mapDispatchToProps = dispatch => (

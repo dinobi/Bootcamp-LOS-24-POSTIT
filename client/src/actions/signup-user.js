@@ -1,37 +1,35 @@
 import axios from 'axios';
 import actionType from '../actionTypes';
 
-export const onSignupRequest = signupCreds => ({
+export const onSignupRequest = () => ({
   type: actionType.SIGNUP_REQUEST,
-  isLoading: true,
-  signupCreds
+  signupIsLoading: true,
 });
 
-export const onSignupSuccess = message => ({
+export const onSignupSuccess = user => ({
   type: actionType.SIGNUP_SUCCESS,
-  isLoading: false,
-  message
+  signupIsLoading: false,
+  user
 });
 
-export const onSignupFailure = message => ({
+export const onSignupFailure = () => ({
   type: actionType.SIGNUP_FAILURE,
-  isLoading: false,
-  message
+  signupIsLoading: false,
 });
 
-const onSignupUser = signupCreds =>
+const onSignupUser = signupCredentials =>
   (dispatch) => {
     const Materialize = window.Materialize;
-    dispatch(onSignupRequest(signupCreds));
-    return axios.post('/api/user/signup', signupCreds)
-    .then((signupRes) => {
-      dispatch(onSignupSuccess(signupRes.data.message));
-      Materialize.toast(signupRes.data.message, 2500, 'green');
-      localStorage.setItem('userAuth', signupRes.data.authToken);
+    dispatch(onSignupRequest(signupCredentials));
+    return axios.post('/api/user/signup', signupCredentials)
+    .then((signupResponse) => {
+      dispatch(onSignupSuccess(signupResponse.data.userData));
+      Materialize.toast(signupResponse.data.message, 2500, 'green');
+      localStorage.setItem('userAuth', signupResponse.data.authToken);
       location.hash = '#dashboard';
-    }).catch((signupRes) => {
-      dispatch(onSignupFailure(signupRes.response.data.error.message));
-      Materialize.toast(signupRes.response.data.error.message, 2500, 'red');
+    }).catch((errorResponse) => {
+      dispatch(onSignupFailure());
+      Materialize.toast(errorResponse.response.data.error.message, 2500, 'red');
     });
   };
 

@@ -15,7 +15,7 @@ export default (app) => {
   app.post('/api/user/request-password/',
   controllers.user.requestPassword);
 
-  // Api route for user to login to an account
+  // Api route for users to reset password
   app.post('/api/user/reset-password/:hash',
   controllers.user.resetPassword);
 
@@ -24,9 +24,6 @@ export default (app) => {
 
   // API route to get list of all users
   app.get('/api/users/', controllers.user.fetchUsers);
-
-  // API route to perform postit search
-  app.post('/api/search/', controllers.user.search);
 
   // API route to perform postit search
   app.post('/api/search/', controllers.user.search);
@@ -45,11 +42,11 @@ export default (app) => {
   // API route to get list of group a user belongs to
   app.get('/api/groups/me/', controllers.group.fetchMyGroups);
 
-  // API route that allows users to add or remove group members
+  // API route that allows users to add group members
   app.post('/api/groups/:groupname/add-member/',
   controllers.group.addMember);
 
-  // API route that allows users to add or remove group members
+  // API route that allows users to remove group members
   app.post('/api/groups/:groupname/remove-member/',
   controllers.group.removeMember);
 
