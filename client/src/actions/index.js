@@ -8,7 +8,7 @@ import onLogoutUser from './logout-user';
 import onRemoveMember from './removeMember';
 import onSearch from './search';
 import onSelectMember from './select-member';
-import onSendMessage from './send-message';
+import onSendMessage from './sendMessage';
 import onSignupUser from './signup-user';
 import onResetPassword from './onResetPassword';
 import onRequestPassword from './onRequestPassword';

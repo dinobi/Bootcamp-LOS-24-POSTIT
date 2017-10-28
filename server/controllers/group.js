@@ -22,7 +22,8 @@ export default {
         models.UserGroup
         .create({
           username: user,
-          groupname: req.body.groupname
+          groupname: req.body.groupname,
+          description: req.body.description
         })
         .then(res.status(201).send({
           groupData: {

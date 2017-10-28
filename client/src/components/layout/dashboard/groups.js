@@ -55,9 +55,7 @@ class Groups extends React.Component {
                               &nbsp;{ group.groupname }
                             </a>
                           }
-                          criticalCount={ group.unreadCritical }
-                          urgentCount={ group.unreadUrgent }
-                          normalCount={ group.unreadNormal }
+                          description={ group.description }
                         />
                       ) :
                       <div className="col s12 m4">

@@ -96,6 +96,7 @@
     "materialize-css": "^0.100.2",
     "md5": "^2.2.1",
     "mocha": "^3.4.2",
+    "moment": "^2.19.1",
     "morgan": "^1.8.2",
     "nexmo": "^2.0.2",
     "node-sass": "^4.5.3",

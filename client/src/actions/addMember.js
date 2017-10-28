@@ -14,7 +14,7 @@ export const onAddMemberSuccess = member => ({
 });
 
 export const onAddMemberFailure = () => ({
-  type: actionType.SEND_MESSAGE_FAILURE,
+  type: actionType.ADD_MEMBER_FAILURE,
   messageIsLoading: false
 });
 

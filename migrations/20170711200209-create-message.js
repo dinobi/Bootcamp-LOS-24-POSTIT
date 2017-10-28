@@ -1,24 +1,32 @@
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('UserGroups', {
+    queryInterface.createTable('Messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        allowNull: false,
+      fromUser: {
         type: Sequelize.STRING,
+        allowNull: false
       },
-      groupname: {
-        allowNull: false,
+      toGroup: {
         type: Sequelize.STRING,
+        allowNull: false
       },
-      description: {
+      message: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      priority: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING,
-        defaultValue: 'There is no description for this group'
+        defaultValue: 'normal',
+        validate: {
+          isIn: [['normal', 'urgent', 'critical']]
+        }
       },
       createdAt: {
         allowNull: false,
@@ -30,7 +38,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /* , Sequelize */) => {
-    queryInterface.dropTable('UserGroups');
+  down: (queryInterface /* , Sequelize*/) => {
+    queryInterface.dropTable('Messages');
   }
 };

@@ -7,9 +7,23 @@ import actionType from '../actionTypes';
  */
 const groupMessagesReducer = (state = {
   groupMessagesIsLoading: false,
+  sendMessageIsLoading: false,
   groupMessages: []
 }, action) => {
   switch (action.type) {
+    case actionType.SEND_MESSAGE_REQUEST:
+      return { ...state,
+        sendMessageIsLoading: true
+      };
+    case actionType.SEND_MESSAGE_SUCCESS:
+      return { ...state,
+        sendMessageIsLoading: false,
+        groupMessages: [...state.groupMessages, action.message]
+      };
+    case actionType.SEND_MESSAGE_FAILURE:
+      return { ...state,
+        sendMessageIsLoading: false
+      };
     case actionType.LOAD_GROUP_MESSAGES_REQUEST:
       return Object.assign({}, state, {
         groupsMessagesIsLoading: true,
@@ -21,8 +35,7 @@ const groupMessagesReducer = (state = {
       });
     case actionType.LOAD_GROUP_MESSAGES_FAILURE:
       return Object.assign({}, state, {
-        groupMessagesIsLoading: false,
-        message: action.message
+        groupMessagesIsLoading: false
       });
     default:
       return state;

@@ -1,24 +1,31 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('UserGroups', {
+    queryInterface.createTable('PasswordResets', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      email: {
         allowNull: false,
         type: Sequelize.STRING,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
-      groupname: {
+      expiresIn: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      hash: {
         allowNull: false,
         type: Sequelize.STRING,
-      },
-      description: {
-        allowNull: true,
-        type: Sequelize.STRING,
-        defaultValue: 'There is no description for this group'
+        unique: true,
+        validate: {
+          notEmpty: true
+        }
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +38,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* , Sequelize */) => {
-    queryInterface.dropTable('UserGroups');
+    queryInterface.dropTable('PasswordResets');
   }
 };

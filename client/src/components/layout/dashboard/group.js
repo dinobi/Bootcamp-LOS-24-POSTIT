@@ -28,7 +28,6 @@ class Group extends React.Component {
       errorMessage: '',
     };
     this.handleSend = this.handleSend.bind(this);
-    // this.handleAddMember = this.handleAddMember.bind(this);
   }
   /**
    * @return {undefined} - Returns action creators.
@@ -36,17 +35,6 @@ class Group extends React.Component {
   componentWillMount() {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
-  }
-  /**
-   *
-   * @param {any} nextProps
-   * @memberof Group
-   * @returns {newState} - new state
-   */
-  componentWillUpdate(nextProps) {
-    if (nextProps.members) {
-      return true;
-    }
   }
   /**
    * Handles the sending of messages
@@ -65,7 +53,7 @@ class Group extends React.Component {
   }
 
   /**
-   * @return {undefined} - returns presentationals.
+   * @return {undefined} - returns presentational components.
    * */
   render() {
     const authUser = localStorage.getItem('userAuth');

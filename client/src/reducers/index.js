@@ -5,7 +5,6 @@ import groupsReducer from './groups-reducer';
 import groupMessagesReducer from './groupMessagesReducer';
 import groupMembersReducer from './groupMembersReducer';
 import createGroupReducer from './create-group-reducer';
-import sendMessageReducer from './send-message-reducer';
 import searchReducer from './search-reducer';
 import passwordReducer from './passwordReducer';
 
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
   auth: authReducer,
   groups: groupsReducer,
   newGroup: createGroupReducer,
-  newMessage: sendMessageReducer,
   searchResult: searchReducer,
   changePassword: passwordReducer,
 });

@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import { DashHeader, SideMenu,
   Copyright, MessageLog, MessageBox }
 from '../../views';
-import onSendMessage from '../../../actions/send-message';
-import loadGroupMessages from '../../../actions/load-group-messages';
+import { onSendMessage } from '../../../actions';
 
 /**
  * MessageBoard class
@@ -23,27 +22,25 @@ class MessageBoard extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
-      posts: this.props.posts
+      // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
   }
-  componentWillUpdate(nextProps) {
-    if (nextProps.newMessage) {
-      this.setState({
-        posts: this.props.posts
-      });
-    }
-  }
-  /** handleSend {e} */
-	handleSend(e) {
-		e.preventDefault();
+  /**
+   *
+   *
+   * @param {any} event
+   * @memberof MessageBoard
+   * @return {function} - action creator
+   */
+	handleSend(event) {
+		event.preventDefault();
 		let { message, priority } = this;
     message = message.value.trim();
     priority = priority.value.trim();
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     this.refs.messageBox.reset();
-    this.props.loadGroupMessages();
 	}
   /** */
   render() {
@@ -51,7 +48,7 @@ class MessageBoard extends React.Component {
       <div className="message-board">
         <div className="postlogs">
           {
-            this.state.posts.map((post, index) =>
+            this.props.posts.map((post, index) =>
               <MessageLog message={ post } key={index} />
             )
           }
@@ -83,12 +80,11 @@ class MessageBoard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  newMessage: state.newMessage.message,
-  // messages: state.messages
+  messages: state.messages.groupMessages,
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ onSendMessage, loadGroupMessages }, dispatch)
+  bindActionCreators({ onSendMessage }, dispatch)
 );
 
 
