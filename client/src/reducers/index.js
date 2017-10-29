@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import selectMemberReducer from './select-member-reducer';
-import authReducer from './auth-reducer';
-import groupsReducer from './groups-reducer';
+import selectMemberReducer from './selectMemberReducer';
+import authReducer from './authReducer';
+import groupsReducer from './groupsReducer';
 import groupMessagesReducer from './groupMessagesReducer';
 import groupMembersReducer from './groupMembersReducer';
-import createGroupReducer from './create-group-reducer';
-import searchReducer from './search-reducer';
+import createGroupReducer from './createGroupReducer';
+import searchReducer from './searchReducer';
 import passwordReducer from './passwordReducer';
 
 const rootReducer = combineReducers({

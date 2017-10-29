@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../images/postit-logo.png'
-import Modal from './modal';
+import Modal from './Modal.jsx';
 
 class DashHeader extends React.Component {
 	constructor() {

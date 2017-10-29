@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { MainHeader, Footer, SignupForm } from '../../views';
-import onSignupUser from '../../../actions/signup-user';
-import onLoginUser from '../../../actions/login-user';
+import { onLoginUser, onSignupUser } from '../../../actions';
 /**
  * Registers a new user
  * @class Register

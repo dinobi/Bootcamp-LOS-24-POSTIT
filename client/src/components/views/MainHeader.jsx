@@ -1,13 +1,26 @@
 import React from 'react';
 import Logo from '../../images/postit-logo.png';
 
+/**
+ *
+ *
+ * @class MainHeader
+ * @extends {React.Component}
+ */
 class MainHeader extends React.Component {
 	constructor() {
 		super();
-		this.state = {}
+		this.state = {};
 		this.handleClick = this.handleClick.bind(this);
 	}
-  handleClick(e) {	
+	/**
+	 *
+	 *
+	 * @param {any} event
+	 * @memberof MainHeader
+	 * @returns {action} action - open and close navigation
+	 */
+  handleClick(event) {	
     const mobileNav = $('#mobile-nav');
     mobileNav.html($('.nav-list').html());
     if (mobileNav.hasClass('expanded')) {
@@ -18,6 +31,12 @@ class MainHeader extends React.Component {
       $('.nav-mobile').addClass('open');
     }
 	}
+	/**
+	 *
+	 *
+	 * @returns {*} jsx
+	 * @memberof MainHeader
+	 */
     render() {
 			const { active } = this.props;
       return (
@@ -45,7 +64,7 @@ class MainHeader extends React.Component {
 							</ul>
 						</div>
 						<div className="mobile-nav">
-							<div className="container" id="mobile-nav"></div>					
+							<div className="container" id="mobile-nav"></div>
 						</div>
 					</nav>
 				</header>

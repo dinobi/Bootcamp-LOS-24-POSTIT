@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { DashHeader, SideMenu, GroupCard, Copyright } from '../../views';
-import
-  onLoadGroups
-  from '../../../actions/load-groups';
-import { loadGroupMessages, loadGroupMembers }
+import { onLoadGroups, loadGroupMessages, loadGroupMembers }
 from '../../../actions';
 
 /**

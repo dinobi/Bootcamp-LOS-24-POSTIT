@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import 'jquery';
 import { Provider } from 'react-redux';
 import 'materialize-css';
-import store from '../store/configure-store';
-import App from './App';
+import store from '../store/configureStore';
+import App from './App.jsx';
 import '../styles/base.scss';
 
 const app = document.getElementById('app');

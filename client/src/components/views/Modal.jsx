@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import onCreateGroup from '../../actions/create-group';
+import { onCreateGroup } from '../../actions';
 
 class Modal extends React.Component {
   constructor(props) {

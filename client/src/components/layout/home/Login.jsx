@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { MainHeader, Footer } from '../../views';
-import onLoginUser from '../../../actions/login-user';
+import { onLoginUser } from '../../../actions';
 import Icon from '../../../images/postit-icon.png';
 
 /** Login {component} */
