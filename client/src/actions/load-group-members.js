@@ -20,7 +20,6 @@ export const loadGroupMembersFailure = message => ({
 
 const loadGroupMembers = () =>
 (dispatch) => {
-  const Materialize = window.Materialize;
   dispatch(loadGroupMembersRequest());
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -28,10 +27,8 @@ const loadGroupMembers = () =>
   apiHandler(`/api/groups/${groupname}/members`, '', 'get', headers)
   .then((groupMembersRes) => {
     dispatch(loadGroupMembersSuccess(groupMembersRes.data));
-    Materialize.toast(groupMembersRes.data.message, 2500, 'green');
   }).catch((groupMembersRes) => {
     dispatch(loadGroupMembersFailure(groupMembersRes));
-    Materialize.toast(groupMembersRes.response.data.error.message, 2500, 'red');
   });
 };
 

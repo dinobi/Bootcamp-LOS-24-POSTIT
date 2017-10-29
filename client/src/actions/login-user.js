@@ -1,6 +1,7 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 // There are three possible states for user login
-// seo we will need actions for each of them
+// so we will need actions for each of them
 import actionType from '../actionTypes';
 
 // Login request action creator
@@ -27,17 +28,19 @@ export const onLoginFailure = () => ({
 
 const onLoginUser = loginData =>
   (dispatch) => {
-    const Materialize = window.Materialize;
     dispatch(onLoginRequest());
     return axios.post('/api/user/signin', loginData)
     .then((loginResponse) => {
       localStorage.setItem('userAuth', loginResponse.data.authToken);
       dispatch(onLoginSuccess(loginResponse.data.userData));
-      Materialize.toast(loginResponse.data.message, 2500, 'green');
+      swal({
+        title: `Welcome back ${loginData.username}!`,
+        icon: 'success'
+      });
       location.hash = '#dashboard';
     }).catch((loginError) => {
       dispatch(onLoginFailure());
-      Materialize.toast(loginError.response.data.error.message, 2500, 'red');
+      swal(loginError.response.data.error.message);
     });
   };
 

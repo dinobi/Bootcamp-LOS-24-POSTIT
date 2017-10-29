@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
@@ -21,16 +22,21 @@ export const onCreateGroupFailure = message => ({
 
 const onCreateGroup = groupData =>
 (dispatch) => {
-  const Materialize = window.Materialize;
   dispatch(onCreateGroupRequest(groupData));
   let headers;
   apiHandler('/api/create-group', groupData, 'post', headers)
   .then((groupRes) => {
     dispatch(onCreateGroupSuccess(groupRes.data.message));
-    Materialize.toast(groupRes.data.message, 2500, 'green');
+    swal({
+      text: groupRes.data.message,
+      icon: 'success'
+    });
   }).catch((groupRes) => {
     dispatch(onCreateGroupFailure(groupRes.response.data.error.message));
-    Materialize.toast(groupRes.response.data.error.message, 2500, 'red');
+    swal({
+      text: groupRes.response.data.error.message,
+      icon: 'error'
+    });
   });
 };
 

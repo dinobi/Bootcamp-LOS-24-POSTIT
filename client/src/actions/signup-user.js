@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import axios from 'axios';
 import actionType from '../actionTypes';
 
@@ -19,17 +20,22 @@ export const onSignupFailure = () => ({
 
 const onSignupUser = signupCredentials =>
   (dispatch) => {
-    const Materialize = window.Materialize;
     dispatch(onSignupRequest(signupCredentials));
     return axios.post('/api/user/signup', signupCredentials)
     .then((signupResponse) => {
       dispatch(onSignupSuccess(signupResponse.data.userData));
-      Materialize.toast(signupResponse.data.message, 2500, 'green');
+      swal({
+        text: signupResponse.data.message,
+        icon: 'success'
+      });
       localStorage.setItem('userAuth', signupResponse.data.authToken);
       location.hash = '#dashboard';
     }).catch((errorResponse) => {
       dispatch(onSignupFailure());
-      Materialize.toast(errorResponse.response.data.error.message, 2500, 'red');
+      swal({
+        text: errorResponse.response.data.error.message,
+        icon: 'error'
+      });
     });
   };
 

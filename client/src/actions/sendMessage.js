@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
@@ -29,7 +30,10 @@ const onSendMessage = message =>
     dispatch(onSendMessageSuccess(messageResponse.data));
   }).catch((errorResponse) => {
     dispatch(onSendMessageFailure());
-    Materialize.toast(errorResponse.response.data.error.message, 2500, 'red');
+    swal({
+      text: errorResponse.response.data.error.message,
+      icon: 'warning'
+    });
   });
 };
 

@@ -1,4 +1,4 @@
-
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
@@ -20,7 +20,6 @@ export const onAddMemberFailure = () => ({
 
 const onAddMember = user =>
 (dispatch) => {
-  const Materialize = window.Materialize;
   dispatch(onAddMemberRequest());
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -28,10 +27,16 @@ const onAddMember = user =>
   apiHandler(`/api/groups/${groupname}/add-member`, user, 'post', headers)
   .then((addMemberResponse) => {
     dispatch(onAddMemberSuccess(addMemberResponse.data.member));
-    Materialize.toast(addMemberResponse.data.message, 2500, 'green');
+    swal({
+      text: addMemberResponse.data.message,
+      icon: 'success'
+    });
   }).catch((errorResponse) => {
     dispatch(onAddMemberFailure());
-    Materialize.toast(errorResponse.response.data.error.message, 2500, 'red');
+    swal({
+      text: errorResponse.response.data.error.message,
+      icon: 'error'
+    });
   });
 };
 

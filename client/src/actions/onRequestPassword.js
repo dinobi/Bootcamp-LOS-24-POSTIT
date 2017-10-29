@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 
 export const requestPassword = user => ({
@@ -21,15 +22,20 @@ export const requestPasswordFailure = message => ({
 
 const onRequestPassword = user =>
   (dispatch) => {
-    const Materialize = window.Materialize;
     dispatch(requestPassword(user));
     return axios.post('/api/user/request-password', user)
     .then((passRes) => {
       dispatch(requestPasswordSuccess(passRes.data.message));
-      Materialize.toast(passRes.data.message, 2500, 'green');
+      swal({
+        text: passRes.data.message,
+        icon: 'success'
+      });
     }).catch((passRes) => {
       dispatch(requestPasswordFailure(passRes.response.data.error.message));
-      Materialize.toast(passRes.response.data.error.message, 2500, 'red');
+      swal({
+        text: passRes.response.data.error.message,
+        icon: 'error'
+      });
     });
   };
 

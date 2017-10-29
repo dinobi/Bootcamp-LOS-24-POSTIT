@@ -128,6 +128,7 @@
     "shortid": "^2.2.8",
     "style-loader": "^0.18.2",
     "sw-precache-webpack-plugin": "0.11.3",
+    "sweetalert": "^2.0.8",
     "url-loader": "0.5.9",
     "webpack": "^3.4.1",
     "webpack-dev-middleware": "^1.12.0",

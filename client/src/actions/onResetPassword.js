@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 
 export const resetPassword = user => ({
@@ -21,17 +22,22 @@ export const resetPasswordFailure = message => ({
 
 const onResetPassword = user =>
   (dispatch) => {
-    const Materialize = window.Materialize;
     const hash = location.href.split('/')[location.href.split('/').length - 1];
     dispatch(resetPassword(user));
     return axios.post(`/api/user/reset-password/${hash}`, user)
     .then((passRes) => {
       dispatch(resetPasswordSuccess(passRes.data.message));
-      Materialize.toast(passRes.data.message, 2500, 'green');
+      swal({
+        text: passRes.data.message,
+        icon: 'success'
+      });
       location.hash = '#login';
     }).catch((passRes) => {
       dispatch(resetPasswordFailure(passRes.response.data.error.message));
-      Materialize.toast(passRes.response.data.error.message, 2500, 'red');
+      swal({
+        text: passRes.response.data.error.message,
+        icon: 'error'
+      });
     });
   };
 
