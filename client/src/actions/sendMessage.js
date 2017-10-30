@@ -1,10 +1,10 @@
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onSendMessageRequest = messageData => ({
+export const onSendMessageRequest = () => ({
   type: actionType.SEND_MESSAGE_REQUEST,
-  messageIsLoading: true,
-  messageData
+  messageIsLoading: true
 });
 
 export const onSendMessageSuccess = message => ({
@@ -13,26 +13,27 @@ export const onSendMessageSuccess = message => ({
   message
 });
 
-export const onSendMessageFailure = messageError => ({
+export const onSendMessageFailure = () => ({
   type: actionType.SEND_MESSAGE_FAILURE,
-  messageIsLoading: false,
-  messageError
+  messageIsLoading: false
 });
 
 const onSendMessage = message =>
 (dispatch) => {
   const Materialize = window.Materialize;
-  dispatch(onSendMessageRequest(message));
+  dispatch(onSendMessageRequest());
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
   let headers;
   apiHandler(`/api/groups/${groupname}/send-message`, message, 'post', headers)
-  .then((messageRes) => {
-    dispatch(onSendMessageSuccess(messageRes.data));
-    Materialize.toast(messageRes.data.message, 2500, 'green');
-  }).catch((messageRes) => {
-    dispatch(onSendMessageFailure(messageRes.response.data.error.message));
-    Materialize.toast(messageRes.response.data.error.message, 2500, 'red');
+  .then((messageResponse) => {
+    dispatch(onSendMessageSuccess(messageResponse.data));
+  }).catch((errorResponse) => {
+    dispatch(onSendMessageFailure());
+    swal({
+      text: errorResponse.response.data.error.message,
+      icon: 'warning'
+    });
   });
 };
 

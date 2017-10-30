@@ -1,21 +1,23 @@
-import MainHeader from './main-header';
-import DashHeader from './dash-header';
-import SideMenu from './side-menu';
-import Footer from './footer';
-import SearchBox from './search-box';
-import SearchResult from './search-result';
-import Features from './features';
-import GroupCard from './group-card';
-import MessageBox from './message-box';
-import MessageLog from './message-log';
-import SignupForm from './signup-form';
-import Copyright from './copyright';
-import Modal from './modal';
-import WelcomeCard from './WelcomeCard';
-import ModalMain from './ModalMain';
+import MainHeader from './MainHeader.jsx';
+import DashHeader from './DashHeader.jsx';
+import SideMenu from './SideMenu.jsx';
+import Footer from './Footer.jsx';
+import SearchBox from './SearchBox.jsx';
+import SearchResult from './SearchResult.jsx';
+import Features from './Features.jsx';
+import Form from './Form.jsx';
+import Card from './Card.jsx';
+import GroupCard from './GroupCard.jsx';
+import MessageBox from './MessageBox.jsx';
+import MessageLog from './MessageLog.jsx';
+import SignupForm from './SignupForm.jsx';
+import Copyright from './Copyright.jsx';
+import Modal from './Modal.jsx';
+import WelcomeCard from './WelcomeCard.jsx';
+import ModalMain from './ModalMain.jsx';
 
 export { MainHeader, DashHeader, SideMenu,
-  Footer, SearchBox, SearchResult, Features,
-  GroupCard, MessageBox, MessageLog, SignupForm,
+  Footer, SearchBox, SearchResult, Features, Form,
+  Card, GroupCard, MessageBox, MessageLog, SignupForm,
   Copyright, Modal, WelcomeCard, ModalMain
 };

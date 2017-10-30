@@ -1,24 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const port = process.env.PORT || 3001;
+const outputPath = `${__dirname}/client/dist`;
+
 module.exports = {
   devServer: {
     inline: true,
     // Silence WebpackDevServer's own logs since they're generally not useful.
     // It will still show compile warnings and errors with this setting.
     clientLogLevel: 'none',
-    contentBase: './client',
-    port: 3001,
-    watchContentBase: true,
+    port,
+    compress: true,
     hot: true,
     quiet: true,
   },
-  devtool: 'source-map',
-  entry: './client/src/app/index.js',
+  devtool: 'cheap-source-map',
+  entry: './client/src/app/index.jsx',
   output: {
-    path: `${__dirname}/client/dist`,
+    path: outputPath,
     filename: 'bundle.min.js',
     publicPath: '/dist/'
+  },
+  resolve: {
+    modules: ['node_modules', './src'],
+    extensions: ['.js', '.jsx'],
   },
   module: {
     loaders: [
@@ -62,14 +68,9 @@ module.exports = {
         },
       },
       {
-        test: /\.js?$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-decorators-legacy',
-            'transform-class-properties'],
-        }
       },
       {
         test: /\.scss/,
@@ -84,11 +85,23 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
+      sourceMap: true,
       compress: {
+        screw_ie8: true,
         warnings: false
-      }
+      },
+      output: {
+        comments: false,
+        screw_ie8: true
+      },
+    }),
+    new webpack.EnvironmentPlugin({ NODE_ENV: 'production' }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV':
+      JSON.stringify(process.env.NODE_ENV || 'production')
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -99,8 +112,5 @@ module.exports = {
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    }),
   ],
 };

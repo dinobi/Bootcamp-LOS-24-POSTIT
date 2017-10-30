@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import onRemoveMember from '../../actions/removeMember';
-import onAddMember from '../../actions/addMember';
+import { onRemoveMember, onAddMember } from '../../../actions';
 /**
  *
  *

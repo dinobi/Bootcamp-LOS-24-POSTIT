@@ -1,45 +1,53 @@
 
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onRemoveMemberRequest = member => ({
+export const onRemoveMemberRequest = () => ({
   type: actionType.REMOVE_MEMBER_REQUEST,
-  RemoveMemberIsLoading: true,
+  RemoveMemberIsLoading: true
+});
+
+export const onRemoveMemberSuccess = member => ({
+  type: actionType.REMOVE_MEMBER_SUCCESS,
+  messageIsLoading: false,
   member
 });
 
-export const onRemoveMemberSuccess = (member, message) => ({
-  type: actionType.REMOVE_MEMBER_SUCCESS,
-  messageIsLoading: false,
-  member,
-  message
-});
-
-export const onRemoveMemberFailure = message => ({
+export const onRemoveMemberFailure = () => ({
   type: actionType.SEND_MESSAGE_FAILURE,
-  messageIsLoading: false,
-  message
+  messageIsLoading: false
 });
 
 const onRemoveMember = dataValue =>
 (dispatch) => {
-  const Materialize = window.Materialize;
-  dispatch(onRemoveMemberRequest(dataValue));
-  const groupname =
-    location.href.split('/')[location.href.split('/').length - 1];
-  let headers;
-  apiHandler(`/api/groups/${groupname}/remove-member`,
-    dataValue, 'post', headers)
-  .then((RemoveMemberRes) => {
-    dispatch(onRemoveMemberSuccess(RemoveMemberRes.data));
-    Materialize.toast(RemoveMemberRes.data.message, 2500, 'green');
-  }).catch((RemoveMemberRes) => {
-    dispatch(
-      onRemoveMemberFailure(RemoveMemberRes.response.data.error.message)
-    );
-    Materialize.toast(
-      RemoveMemberRes.response.data.error.message, 2500, 'red'
-    );
+  swal({
+    text: `Are you sure you want to remove ${dataValue.username}?`,
+    icon: 'warning',
+    buttons: ['cancel', 'remove']
+  })
+  .then((remove) => {
+    if (remove) {
+      dispatch(onRemoveMemberRequest());
+      const groupname =
+        location.href.split('/')[location.href.split('/').length - 1];
+      let headers;
+      apiHandler(`/api/groups/${groupname}/remove-member`,
+        dataValue, 'post', headers)
+      .then((RemoveMemberResponse) => {
+        dispatch(onRemoveMemberSuccess(RemoveMemberResponse.data.username));
+        swal({
+          text: RemoveMemberResponse.data.message,
+          icon: 'success'
+        });
+      }).catch((errorResponse) => {
+        dispatch(onRemoveMemberFailure());
+        swal({
+          text: errorResponse.response.data.error.message,
+          icon: 'error'
+        });
+      });
+    }
   });
 };
 

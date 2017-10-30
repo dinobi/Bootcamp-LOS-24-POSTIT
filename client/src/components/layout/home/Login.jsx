@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { MainHeader, Footer } from '../../views';
-import onLoginUser from '../../../actions/login-user';
+import { onLoginUser } from '../../../actions';
 import Icon from '../../../images/postit-icon.png';
 
 /** Login {component} */
@@ -22,9 +22,9 @@ class Login extends React.Component {
 	onFocus() {
 		this.setState({ errorMessage: '' });
 	}
-	/** handleLogin {e} */
-	handleLogin(e) {
-		e.preventDefault();
+	/** handleLogin {event} */
+	handleLogin(event) {
+		event.preventDefault();
 		let { username, password } = this;
     username = username.value.trim();
     password = password.value.trim();

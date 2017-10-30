@@ -1,20 +1,22 @@
 import onAddMember from './addMember';
-import onCreateGroup from './create-group';
-import loadGroupMembers from './load-group-members';
-import loadGroupMessages from './load-group-messages';
-import onLoadGroups from './load-groups';
-import onLoginUser from './login-user';
-import onLogoutUser from './logout-user';
+import onCreateGroup from './createGroup';
+import onDeleteGroup from './deleteGroup';
+import loadGroupMembers from './loadGroupMembers';
+import loadGroupMessages from './loadGroupMessages';
+import onLoadGroups from './loadGroups';
+import onLoginUser from './loginUser';
+import onLogoutUser from './logoutUser';
 import onRemoveMember from './removeMember';
 import onSearch from './search';
-import onSelectMember from './select-member';
-import onSendMessage from './send-message';
-import onSignupUser from './signup-user';
+import onSelectMember from './selectMember';
+import onSendMessage from './sendMessage';
+import onSignupUser from './signupUser';
 import onResetPassword from './onResetPassword';
 import onRequestPassword from './onRequestPassword';
 
 export {
-  onLoginUser, onLogoutUser, loadGroupMessages, onLoadGroups,
-  onSignupUser, onSelectMember, loadGroupMembers,
-  onCreateGroup, onAddMember, onRemoveMember, onSearch,
+  onLoginUser, onLogoutUser, loadGroupMessages,
+  onLoadGroups, onSignupUser, onSelectMember,
+  loadGroupMembers, onCreateGroup, onDeleteGroup,
+  onAddMember, onRemoveMember, onSearch,
   onSendMessage, onResetPassword, onRequestPassword };

@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 /**
  * Since we are using JWTs, we just need to remove the token
 * from localStorage. These actions are more useful if we
@@ -22,10 +23,12 @@ export const logout = message => ({
 */
 const onLogoutUser = () =>
   (dispatch) => {
-    const Materialize = window.Materialize;
     const logoutMessage = 'You signed out successfully';
     dispatch(logout(logoutMessage));
-    Materialize.toast(logoutMessage, 2500, 'green');
+    swal({
+      text: logoutMessage,
+      icon: 'success'
+    });
     location.hash = '#login';
     localStorage.clear();
   };

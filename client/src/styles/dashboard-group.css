@@ -48,14 +48,37 @@
 .dashboard-group .card {
     height: 108px;
 }
+.dashboard-group .card.card-control {
+	height: 68px !important;
+	padding: 0 !important;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	margin-bottom: 30px;
+}
+.dashboard-group i {
+	font-size: 2.4rem;
+}
+.dashboard-group .card.card-control .input-field {
+	margin: 0 !important;
+}
+.dashboard-group .card-control i:hover {
+	color: #ff6f00 !important;
+}
+@media (max-width: 600px) {
+	.dashboard-group .card.card-control {
+		overflow-y: auto; 
+		width: 100%;
+	}
+}
+.dashboard-group .card i:hover, .dashboard-group .card-control i:hover {
+	color: #FFA000 !important;
+}
+
 .dashboard-group .right {
 	position: absolute;
 	right: 24px;
 	bottom: 24px;
-}
-
-.dashboard-group .card i:hover {
-    color: #ff6f00;
 }
 
 .member-list-title {

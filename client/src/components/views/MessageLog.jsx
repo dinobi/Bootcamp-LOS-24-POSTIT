@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 /**
  * MessageLog - displays message from a group member.
  * @returns {*} message.
@@ -10,7 +11,8 @@ const MessageLog = (props) => {
  * @returns {*} message.
  */
   const { message } = props;
-  const date = new Date(message.createdAt).toUTCString();
+  const messageDate = new Date(message.createdAt).toUTCString();
+  const date = moment(messageDate).fromNow();
   const priority = message.priority;
   return (
     <div className="post">

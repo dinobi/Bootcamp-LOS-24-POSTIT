@@ -5,7 +5,12 @@ export default {
   createMessage(req, res) {
     if (!req.body.message || req.body.message.trim() === '') {
       return res.status(400).send({
-        error: { message: 'Message body cannot be empty' }
+        error: { message: 'You forgot to include a message body' }
+      });
+    }
+    if (!req.body.priority || req.body.priority.trim() === '') {
+      return res.status(400).send({
+        error: { message: 'Message priority cannot be empty' }
       });
     }
     models.UserGroup

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import jwtDecode from 'jwt-decode';
-import MessageBoard from './MessageBoard';
+import MessageBoard from './MessageBoard.jsx';
 import {
   DashHeader, SideMenu, WelcomeCard, Copyright, ModalMain
 } from '../../views';
@@ -28,7 +28,6 @@ class Group extends React.Component {
       errorMessage: '',
     };
     this.handleSend = this.handleSend.bind(this);
-    // this.handleAddMember = this.handleAddMember.bind(this);
   }
   /**
    * @return {undefined} - Returns action creators.
@@ -36,17 +35,6 @@ class Group extends React.Component {
   componentWillMount() {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
-  }
-  /**
-   *
-   * @param {any} nextProps
-   * @memberof Group
-   * @returns {newState} - new state
-   */
-  componentWillUpdate(nextProps) {
-    if (nextProps.members) {
-      return true;
-    }
   }
   /**
    * Handles the sending of messages
@@ -65,26 +53,7 @@ class Group extends React.Component {
   }
 
   /**
-   *
-   * @param {event} event
-   * @memberof Group
-   * @returns {*} - react elements
-   */
-  // handleAddMember(event) {
-  //   event.preventDefault();
-  //   let { username } = this;
-  //   username = username.value.trim();
-  //   if (username === '') {
-  //     this.setState({
-  //       errorMessage: 'Error. All field are required to add member'
-  //     });
-  //   } else {
-  //     this.props.onAddMember(username);
-  //   }
-  // }
-
-  /**
-   * @return {undefined} - returns presentationals.
+   * @return {undefined} - returns presentational components.
    * */
   render() {
     const authUser = localStorage.getItem('userAuth');
@@ -185,7 +154,7 @@ class Group extends React.Component {
                                   this.props.onRemoveMember({
                                     username: member.username
                                   })}
-                                  title="delete this member"
+                                  title="remove this member"
                                 >
                                 </i>
                               </li>
@@ -212,7 +181,7 @@ class Group extends React.Component {
 
 const mapStateToProps = state => ({
   messages: state.messages.groupMessages,
-  members: state.members.groupMembers
+  members: state.members.groupMembers,
 });
 
 const mapDispatchToProps = dispatch => (

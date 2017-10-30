@@ -6,7 +6,7 @@ const WelcomeCard = (props) => {
     <h2 className="header">Horizontal Card</h2>
     <div className="card horizontal">
       <div className="card-image">
-        <img src="https://lorempixel.com/100/190/nature/6" />
+        <img src="" />
       </div>
       <div className="card-stacked">
         <div className="card-content">

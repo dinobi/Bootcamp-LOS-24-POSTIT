@@ -12,26 +12,33 @@ export default {
         error: { message: 'A group description is required' }
       });
     }
+    const groupname = req.body.groupname.toLowerCase();
+    const description = req.body.description;
     return models.Group
       .create({
-        groupname: req.body.groupname,
-        description: req.body.description,
+        groupname,
+        description,
       })
       .then((group) => {
         const user = req.decoded.data.username;
         models.UserGroup
         .create({
           username: user,
-          groupname: req.body.groupname
+          groupname,
+          description
         })
         .then(res.status(201).send({
-          message: `Group - ${group.groupname}, was created successfully`,
+          groupData: {
+            groupname,
+            description
+          },
+          message: `${group.groupname} was created successfully`,
         }));
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
           res.status(409).send({
-            error: { message: `Group - ${req.body.groupname}, Already Exist` }
+            error: { message: `${groupname} already exist` }
           });
         } else {
           res.status(500).send({ error: error.message, status: 500 });
@@ -40,23 +47,42 @@ export default {
   },
   // Delete Group
   delete(req, res) {
-    if (!req.params.groupname || req.params.groupname.trim() === '') {
+    if (!req.body.groupname || req.body.groupname.trim() === '') {
       return res.status(400).send({
-        error: { message: 'Go to group you want to delete' }
+        error: { message: 'Specify the group you want to archive' }
       });
     }
-    return models.Group
-      .findOne({ where: { groupname: req.params.groupname } })
+    const groupname = req.body.groupname.toLowerCase();
+    models.Group
+      .findOne({ where: { groupname } })
       .then((group) => {
         if (!group) {
           return res.status(404).send({
-            message: `Group - ${req.params.groupname}, does not exist`
+            error: {
+              message: `${groupname} does not exist`
+            }
           });
         }
-        models.Group.destroy({ where: { groupname: req.params.groupname } });
-        return res.status(200).send({
-          message: `Group - ${req.params.groupname}, has been deleted`
-        });
+        const user = req.decoded.data.username;
+        models.UserGroup
+          .findOne({ where: { groupname }, attributes: ['username'] })
+          .then((result) => {
+            if (result.dataValues.username !== user) {
+              return res.status(403).send({
+                error: {
+                  message: `You do not have permission to delete ${groupname}`
+                }
+              });
+            }
+            models.Group.destroy({ where: { groupname } });
+            models.UserGroup.destroy({ where: { groupname } });
+            return res.status(200).send({
+              group,
+              message: `${groupname} has been archived`
+            });
+          }).catch((error) => {
+            res.status(500).send({ error: error.message, status: 500 });
+          });
       });
   },
   // Display all created groups on postit
@@ -151,16 +177,22 @@ export default {
                 models.UserGroup.create({
                   username: req.body.username,
                   groupname: req.params.groupname
-                });
-                return res.status(201).send({
-                  message:
-                  `${req.body.username}
-                  was successfully added to
-                  ${req.params.groupname}`
-                });
-              }).catch(error =>
+                })
+                .then(member =>
+                  res.status(201).send({
+                    member,
+                    message:
+                    `${req.body.username} was added to ${req.params.groupname}`
+                  })
+                )
+                .catch(error =>
+                  res.status(500).send({ error: error.message, status: 500 })
+                );
+              })
+              .catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
-          }).catch(error =>
+          })
+          .catch(error =>
             res.status(500).send({ error: error.message, status: 500 }));
       });
   },
@@ -219,12 +251,16 @@ export default {
                       groupname: req.params.groupname }
                   });
                   return res.status(200).send({
+                    username: req.body.username,
                     message:
                     `${req.body.username}
                     was successfully removed from
                     ${req.params.groupname}`
                   });
                 }
+                return res.status(404).send({
+                  message: `No such user in ${req.params.groupname}`
+                });
               }).catch(error =>
                 res.status(500).send({ error: error.message, status: 500 }));
           }).catch(error =>
@@ -244,7 +280,7 @@ export default {
           .findAll({ where: { groupname: req.params.groupname } })
           .then((result) => {
             if (result.length === 0) {
-              res.status(200).send({
+              res.status(201).send({
                 message: 'You have not added any members'
               });
             } else {
