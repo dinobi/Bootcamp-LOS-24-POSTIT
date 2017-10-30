@@ -2,22 +2,20 @@ import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
-export const onCreateGroupRequest = groupData => ({
+export const onCreateGroupRequest = () => ({
   type: actionType.CREATE_GROUP_REQUEST,
-  createGroupIsLoading: true,
-  groupData
+  createGroupIsLoading: true
 });
 
-export const onCreateGroupSuccess = message => ({
+export const onCreateGroupSuccess = group => ({
   type: actionType.CREATE_GROUP_SUCCESS,
   createGroupIsLoading: false,
-  message
+  group
 });
 
-export const onCreateGroupFailure = message => ({
+export const onCreateGroupFailure = () => ({
   type: actionType.CREATE_GROUP_FAILURE,
-  createGroupIsLoading: false,
-  message
+  createGroupIsLoading: false
 });
 
 const onCreateGroup = groupData =>
@@ -26,7 +24,7 @@ const onCreateGroup = groupData =>
   let headers;
   apiHandler('/api/create-group', groupData, 'post', headers)
   .then((groupRes) => {
-    dispatch(onCreateGroupSuccess(groupRes.data.message));
+    dispatch(onCreateGroupSuccess(groupRes.data.groupData));
     swal({
       text: groupRes.data.message,
       icon: 'success'

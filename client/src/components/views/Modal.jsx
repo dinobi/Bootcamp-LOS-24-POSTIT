@@ -8,8 +8,7 @@ class Modal extends React.Component {
     super(props);
     this.state = {
       modalOpened: false,
-      errorMessage: '',
-      message: ''
+      errorMessage: ''
     };
     this.modalToggle = this.modalToggle.bind(this);
     this.onFocus = this.onFocus.bind(this);
@@ -100,12 +99,6 @@ class Modal extends React.Component {
                     &nbsp;{this.state.errorMessage}
                   </p>
                 }
-                {this.state.message === '' ? '' :
-                  <p className="alert info-alert">
-                    <i className="fa fa-exclamation-triangle"></i>
-                    &nbsp;{this.state.message}
-                  </p>
-                }
               </fieldset>
               <button type="submit" className="btn btn-create">
                 Submit
@@ -120,14 +113,9 @@ class Modal extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  message: state.newGroup.message,
-  // messages: state.messages
-});
-
 const mapDispatchToProps = dispatch => (
   bindActionCreators({ onCreateGroup }, dispatch)
 );
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(null, mapDispatchToProps)(Modal);

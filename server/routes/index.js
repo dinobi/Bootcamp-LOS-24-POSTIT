@@ -33,7 +33,7 @@ export default (app) => {
   controllers.group.create);
 
   // API route that allow users delete a broadcast group
-  app.post('/api/groups/:groupname/delete-group/',
+  app.post('/api/groups/delete-group/',
   controllers.group.delete);
 
   // API route to get list of all groups

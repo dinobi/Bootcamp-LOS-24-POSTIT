@@ -22,9 +22,9 @@ class Login extends React.Component {
 	onFocus() {
 		this.setState({ errorMessage: '' });
 	}
-	/** handleLogin {e} */
-	handleLogin(e) {
-		e.preventDefault();
+	/** handleLogin {event} */
+	handleLogin(event) {
+		event.preventDefault();
 		let { username, password } = this;
     username = username.value.trim();
     password = password.value.trim();

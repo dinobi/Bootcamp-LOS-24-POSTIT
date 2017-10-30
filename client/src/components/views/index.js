@@ -5,6 +5,8 @@ import Footer from './Footer.jsx';
 import SearchBox from './SearchBox.jsx';
 import SearchResult from './SearchResult.jsx';
 import Features from './Features.jsx';
+import Form from './Form.jsx';
+import Card from './Card.jsx';
 import GroupCard from './GroupCard.jsx';
 import MessageBox from './MessageBox.jsx';
 import MessageLog from './MessageLog.jsx';
@@ -15,7 +17,7 @@ import WelcomeCard from './WelcomeCard.jsx';
 import ModalMain from './ModalMain.jsx';
 
 export { MainHeader, DashHeader, SideMenu,
-  Footer, SearchBox, SearchResult, Features,
-  GroupCard, MessageBox, MessageLog, SignupForm,
+  Footer, SearchBox, SearchResult, Features, Form,
+  Card, GroupCard, MessageBox, MessageLog, SignupForm,
   Copyright, Modal, WelcomeCard, ModalMain
 };
