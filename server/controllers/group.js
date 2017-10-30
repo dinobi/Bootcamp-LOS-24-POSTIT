@@ -38,7 +38,7 @@ export default {
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
           res.status(409).send({
-            error: { message: `${req.body.groupname} Already Exist` }
+            error: { message: `${groupname} already exist` }
           });
         } else {
           res.status(500).send({ error: error.message, status: 500 });

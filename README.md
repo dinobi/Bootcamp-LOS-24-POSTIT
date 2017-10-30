@@ -45,7 +45,8 @@ I (Dinobi) took on the development of this project as part of the requirements t
 > - Setup Postgres
 > - setup your db with the settings in `server/config/config.json`
 > - Run `$ sequelize db:migrate`
-> - Run `npm start exec` to start server
+> - Run `npm start` to start server
 
 # Api Docs
-> - https://postit-webapp.herokuapp.com/#/api-docs
+The PostIt api documentation source is located in the server/api-docs directory, while the documentation site is:
+> - https://postit-webapp.herokuapp.com/api-docs
