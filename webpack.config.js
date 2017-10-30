@@ -17,8 +17,12 @@ module.exports = {
   },
   devtool: 'source-map',
   entry: [require.resolve('webpack-hot-middleware/client'),
-    path.join(__dirname, '/client/src/app/index.js')
+    path.join(__dirname, '/client/src/app/index.jsx')
   ],
+  resolve: {
+    modules: ['node_modules', './src'],
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     loaders: [
       // ** ADDING/UPDATING LOADERS **
@@ -61,14 +65,9 @@ module.exports = {
         },
       },
       {
-        test: /\.js?$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-decorators-legacy',
-            'transform-class-properties'],
-        }
       },
       {
         test: /\.scss/,
@@ -93,6 +92,11 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Hammer: 'hammerjs/hammer'
+    }),
+    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV':
+      JSON.stringify(process.env.NODE_ENV || 'development')
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
