@@ -74,10 +74,8 @@ export default {
                 }
               });
             }
-            models.Group.destroy({
-              where: { groupname },
-              cascade: true,
-              truncate: true });
+            models.Group.destroy({ where: { groupname } });
+            models.UserGroup.destroy({ where: { groupname } });
             return res.status(200).send({
               group,
               message: `${groupname} has been archived`
