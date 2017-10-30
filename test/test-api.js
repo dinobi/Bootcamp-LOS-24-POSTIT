@@ -426,7 +426,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(201);
           res.body.message.should.equal(
-            'Group - Test group, was created successfully'
+            'test group was created successfully'
           );
           done();
         });
@@ -477,7 +477,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(409);
           res.body.error.message.should.equal(
-            'Group - Test group, Already Exist'
+            'test group already exist'
           );
           done();
         });
@@ -495,7 +495,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(201);
           res.body.message.should.equal(
-            'Group - Test group2, was created successfully'
+            'test group2 was created successfully'
           );
           done();
         });

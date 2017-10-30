@@ -9,17 +9,17 @@
   },
   "scripts": {
     "babel-version": "babel --version",
-    "migration": "heroku run sequelize db:migrate",
-    "undo:migration": "heroku run sequelize db:migrate:undo:all",
     "build": "npm run remove-dist && webpack --config ./webpack.config.production.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "exec": "babel-node ./server/bin/www",
+    "migration": "heroku run sequelize db:migrate",
+    "start": "babel-node ./server/bin/www",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
-    "start": "nodemon ./server/bin/www --exec babel-node ./server/app",
+    "exec": "nodemon ./server/bin/www --exec babel-node ./server/app",
     "test_": "nyc mocha --compilers js:babel-core/register --timeout 10000",
     "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
     "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "undo:migration": "heroku run sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
