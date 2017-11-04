@@ -1,4 +1,4 @@
-server/test/*
+test/*
 server/coverage/*
 client/config/*
 client/scripts/*

@@ -3,12 +3,15 @@ import models from '../models';
 export default {
   // Send message to a group
   createMessage(req, res) {
-    if (!req.body.message || req.body.message.trim() === '') {
+    const message = req.body.message;
+    const priority = req.body.priority;
+    const groupname = req.params.groupname;
+    if (!message || message.trim() === '') {
       return res.status(400).send({
         error: { message: 'You forgot to include a message body' }
       });
     }
-    if (!req.body.priority || req.body.priority.trim() === '') {
+    if (!priority || priority.trim() === '') {
       return res.status(400).send({
         error: { message: 'Message priority cannot be empty' }
       });
@@ -17,7 +20,7 @@ export default {
     .findOne({
       where: {
         username: req.decoded.data.username,
-        groupname: req.params.groupname
+        groupname
       }
     }).then((userInGroup) => {
       if (!userInGroup) {
@@ -29,13 +32,13 @@ export default {
       }
       return models.Message
       .create({
-        message: req.body.message,
+        message,
         fromUser: req.decoded.data.username,
-        toGroup: req.params.groupname,
-        priority: req.body.priority.toLowerCase()
+        toGroup: groupname,
+        priority: priority.toLowerCase()
       })
-      .then((message) => {
-        res.status(201).send(message);
+      .then((newMessage) => {
+        res.status(201).send(newMessage);
       }) // message created
       .catch(error => res.status(500).send({
         error: error.message,

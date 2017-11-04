@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.createTable('Messages', {
@@ -38,7 +39,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface /* , Sequelize*/) => {
+  down: (queryInterface /* , Sequelize */) => {
     queryInterface.dropTable('Messages');
   }
 };
