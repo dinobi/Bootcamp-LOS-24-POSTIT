@@ -18,8 +18,6 @@ export default {
     }
     return models.User
       .create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
         username: req.body.username.trim().toLowerCase(),
         email: req.body.email.trim().toLowerCase(),
         password: bcrypt.hashSync(req.body.password, salt, null),
@@ -115,9 +113,12 @@ export default {
   fetchUsers(req, res) {
     return models.User
       .findAll({ attributes:
-        ['firstname', 'lastname', 'username', 'email', 'phone']
+        ['username', 'email', 'phone']
       })
-      .then(users => res.status(200).send(users))
+      .then(users => res.status(200).send({
+        message: 'success',
+        users
+      }))
       .catch((error) => {
         if (error) {
           res.status(500).send({

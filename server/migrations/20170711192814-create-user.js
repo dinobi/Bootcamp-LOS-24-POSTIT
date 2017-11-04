@@ -6,20 +6,6 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER
       },
-      firstname: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          isAlpha: true
-        }
-      },
-      lastname: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          isAplha: true
-        }
-      },
       username: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -40,13 +26,10 @@ module.exports = {
       },
       phone: {
         type: Sequelize.STRING,
-        validate: {
-          len: [11, 13],
-        }
       },
       lastSeen: {
         allowNull: true,
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

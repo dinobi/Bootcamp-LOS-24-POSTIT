@@ -3,32 +3,6 @@
 const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
 const signupValidator = (req, res) => {
-  if (!req.body.firstname || req.body.firstname.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'firstname field cannot be empty' }
-    });
-  }
-  if (!/^[a-zA-Z]*$/.test(req.body.firstname)) {
-    return res.status(400)
-    .send({
-      error: { message: 'Firstname cannot contain digits' }
-    });
-  }
-  if (!req.body.lastname || req.body.lastname.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'lastname field cannot be empty' }
-    });
-  }
-
-  if (!/^[a-zA-Z]*$/.test(req.body.lastname)) {
-    return res.status(400)
-    .send({
-      error: { message: 'Lastname cannot contain digits' }
-    });
-  }
-
   if (!req.body.username || req.body.username.trim() === '') {
     return res.status(400)
     .send({
@@ -63,6 +37,13 @@ const signupValidator = (req, res) => {
       error: { message: 'phone field cannot be empty' }
     });
   }
+  const nigeriaCode = /^(\+|\+234)/;
+  if (!nigeriaCode.test(req.body.phone)) {
+    return res.status(400)
+    .send({
+      error: { message: 'enter your country code, example: +234' }
+    });
+  }
 
   return 'validated';
 };
@@ -86,32 +67,23 @@ const loginValidator = (req, res) => {
 };
 
 const uniqueValidator = (res, error) => {
-  if (error.errors[0].message === 'username must be unique') {
-    return res.status(409).send({
-      error: { message: 'Username already exists', status: 409 }
-    });
-  } else if
-  (error.errors[0].message === 'email must be unique') {
-    return res.status(409).send({
-      error: { message: 'Email already exists', status: 409 }
-    });
-  } else if
-  (error.errors[0].message === 'Validation isAlpha on firstname failed') {
-    return res.status(403).send({
-      error: { message: 'Firstname cannot contain digits', status: 400 }
-    });
-  } else if
-  (error.errors[0].message === 'Validation isAlpha on lastname failed') {
-    return res.status(403).send({
-      error: { message: 'Lastname cannot contain digits', status: 400 }
-    });
-  } else if
-  (error.errors[0].message === 'Validation isEmail on email failed') {
-    return res.status(403).send({
-      error: { message: 'Enter a valid email', status: 400 }
-    });
+  const uniqueError = error.errors[0].message;
+  switch (uniqueError) {
+    case 'username must be unique':
+      return res.status(409).send({
+        error: { message: 'Username already exists', status: 409 }
+      });
+    case 'email must be unique':
+      return res.status(409).send({
+        error: { message: 'Email already exists', status: 409 }
+      });
+    case 'Validation isEmail on email failed':
+      return res.status(403).send({
+        error: { message: 'Enter a valid email', status: 400 }
+      });
+    default:
+      return 'validated';
   }
-  return 'validated';
 };
 
 export { signupValidator, loginValidator, uniqueValidator };
