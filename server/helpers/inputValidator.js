@@ -37,14 +37,6 @@ const signupValidator = (req, res) => {
       error: { message: 'phone field cannot be empty' }
     });
   }
-  const nigeriaCode = /^(\+|\+234)/;
-  if (!nigeriaCode.test(req.body.phone)) {
-    return res.status(400)
-    .send({
-      error: { message: 'enter your country code, example: +234' }
-    });
-  }
-
   return 'validated';
 };
 

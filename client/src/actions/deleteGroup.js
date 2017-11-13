@@ -20,21 +20,26 @@ export const onDeleteGroupFailure = () => ({
 
 const onDeleteGroup = groupData =>
 (dispatch) => {
-  dispatch(onDeleteGroupRequest(groupData));
-  let headers;
-  apiHandler('/api/groups/delete-group', groupData, 'post', headers)
-  .then((groupResponse) => {
-    dispatch(onDeleteGroupSuccess(groupResponse.data.group));
-    swal({
-      text: groupResponse.data.message,
-      icon: 'success'
-    });
-  }).catch((errorResponse) => {
-    dispatch(onDeleteGroupFailure(errorResponse.response.data.error.message));
-    swal({
-      text: errorResponse.response.data.error.message,
-      icon: 'error'
-    });
+  swal({
+    text: `Are you sure you want to archive ${groupData.groupname}?`,
+    icon: 'warning',
+    buttons: ['cancel', 'archive']
+  })
+  .then((remove) => {
+    if (remove) {
+      dispatch(onDeleteGroupRequest(groupData));
+      let headers;
+      apiHandler('/api/groups/delete-group', groupData, 'post', headers)
+      .then((groupResponse) => {
+        dispatch(onDeleteGroupSuccess(groupResponse.data.group));
+      }).catch((errorResponse) => {
+        dispatch(onDeleteGroupFailure(errorResponse.response.data.error.message));
+        swal({
+          text: errorResponse.response.data.error.message,
+          icon: 'error'
+        });
+      });
+    }
   });
 };
 

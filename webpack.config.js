@@ -96,7 +96,7 @@ module.exports = {
     new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV':
-      JSON.stringify(process.env.NODE_ENV || 'development')
+      JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

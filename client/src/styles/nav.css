@@ -34,13 +34,13 @@ nav .dashboard-logo {
   height: 2.5rem;
 }
 nav ul a {
-  font-size: 1.8rem;
+	font-size: 1.4rem;
+	font-weight: 900;
 }
 nav ul a:hover {
   color: #fff;
 }
 nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
-  margin-top: -2px;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -109,7 +109,7 @@ nav ul.left {
 	#mobile-nav .nav-item a, #mobile-nav .dashboard-menu-item a {
 		display: block;
 		font-size: 18px;
-		font-weight: 400;
+		font-weight: 900;
 		transition: all .2s ease;
 		-moz-transition: all .2s ease;
 		-webkit-transition: all .2s ease;
@@ -127,8 +127,8 @@ nav ul.left {
 		display: block;
 		margin-top: 15px;
 		width: 100%;
-		font-size: 14px;
-		font-weight: 400;
+		font-size: 18px;
+		font-weight: 900;
 	}
 
 	

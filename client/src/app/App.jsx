@@ -1,18 +1,20 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { Switch, HashRouter as Router, Route } from 'react-router-dom';
 import 'jquery';
 import {
-  IndexHome, Register, Login, RequestPassword,
+  Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,
   Group, Search, SearchWiki, AccountDetails,
   NewGroup
 } from '../components/layout';
+import IndexHome from '../components/layout/home/IndexHome.jsx';
+import NotFound from '../components/layout/home/NotFound.jsx';
 import '../styles/base.scss';
 
 const App = () =>
   (
     <Router>
-      <div>
+      <Switch>
         <Route exact path='/' component={ IndexHome } />
         <Route path='/register' component={ Register } />
         <Route path='/login' component={ Login } />
@@ -25,7 +27,8 @@ const App = () =>
         <Route path='/search' component={ Search } />
         <Route path='/search-wiki' component={ SearchWiki } />
         <Route path='/account-details' component={ AccountDetails } />
-      </div>
+        <Route component={ NotFound } />
+      </Switch>
     </Router>
   );
 
