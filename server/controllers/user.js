@@ -3,11 +3,14 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import models from '../models';
 import { generateAuthToken } from '../helpers/authService';
 import filterUser from '../helpers/filterUser';
 import { loginValidator, signupValidator, uniqueValidator }
-from '../helpers/inputValidator';
+  from '../helpers/inputValidator';
+
+dotenv.config();
 
 const salt = bcrypt.genSaltSync(8);
 export default {
@@ -25,17 +28,17 @@ export default {
       })
       .then((user) => {
         user.save()
-        .then((savedUser) => {
-          const token = generateAuthToken(savedUser);
-          res.status(201)
-          .send({
-            message: 'User account successfully created.',
-            userData: filterUser(user),
-            authToken: token
-          });
-        })
-        .catch(error =>
-          res.status(500).send({ error: error.message, status: 500 }));
+          .then((savedUser) => {
+            const token = generateAuthToken(savedUser);
+            res.status(201)
+              .send({
+                message: 'User account successfully created.',
+                userData: filterUser(user),
+                authToken: token
+              });
+          })
+          .catch(error =>
+            res.status(500).send({ error: error.message, status: 500 }));
       })
       .catch((error) => {
         if (uniqueValidator(res, error) !== 'validated') {
@@ -52,48 +55,53 @@ export default {
     // With email
     if (data.match(/@/) !== null) {
       return models.User
-      .findOne({ where: { email: data } })
-      .then((user) => {
-        if (!user) {
-          res.status(404).send({
-            error: {
-              message:
-              'Authentication failed. Email is incorrect or does not exist'
-            }
-          });
-        } else if (user) {
-          if (!(bcrypt.compareSync(req.body.password, user.password))) {
+        .findOne({ where: { email: data } })
+        .then((user) => {
+          if (!user) {
             res.status(404).send({
               error: {
                 message:
-                'Authentication failed. Incorrect password' } });
-          } else {
-            const token = generateAuthToken(user);
-            res.status(200).send({
-              message: 'Authentication successful',
-              userData: filterUser(user),
-              authToken: token
+                'Authentication failed. Email is incorrect or does not exist'
+              }
             });
+          } else if (user) {
+            if (!(bcrypt.compareSync(req.body.password, user.password))) {
+              res.status(404).send({
+                error: {
+                  message:
+                  'Authentication failed. Incorrect password'
+                }
+              });
+            } else {
+              const token = generateAuthToken(user);
+              res.status(200).send({
+                message: 'Authentication successful',
+                userData: filterUser(user),
+                authToken: token
+              });
+            }
           }
-        }
-      }).catch(error =>
-        res.status(500).send({
-          error: error.message, status: 500
-        }));
+        }).catch(error =>
+          res.status(500).send({
+            error: error.message, status: 500
+          }));
     }
     // With username
     return models.User
       .findOne({ where: { username: data } })
       .then((user) => {
         if (!user) {
-          res.status(404).send({ error:
-          { message:
-            'Authentication failed. Username is incorrect or does not exist'
-          }
+          res.status(404).send({
+            error:
+            {
+              message:
+              'Authentication failed. Username is incorrect or does not exist'
+            }
           });
         } else if (user) {
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
-            res.status(404).send({ error:
+            res.status(404).send({
+              error:
               { message: 'Authentication failed. Incorrect password' }
             });
           } else {
@@ -112,7 +120,8 @@ export default {
   // All Users
   fetchUsers(req, res) {
     return models.User
-      .findAll({ attributes:
+      .findAll({
+        attributes:
         ['username', 'email', 'phone']
       })
       .then(users => res.status(200).send({
@@ -232,12 +241,13 @@ export default {
     const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
     if (!emailRE.test(email)) {
       return res.status(400)
-      .send({
-        error: { message: 'Enter a valid email' }
-      });
+        .send({
+          error: { message: 'Enter a valid email' }
+        });
     }
     return models.User
-      .findOne({ where: { email }
+      .findOne({
+        where: { email }
       }).then((user) => {
         if (!user) {
           res.status(404).send({
@@ -247,6 +257,7 @@ export default {
             }
           });
         }
+
         const transporter = nodemailer.createTransport({
           service: process.env.MAIL_SERVICE,
           auth: {
@@ -256,16 +267,16 @@ export default {
         });
         const secret = req.body.email;
         const hash = crypto
-        .createHash('sha256', secret)
-        .update(Date.now().toString())
-        .digest('hex');
-        const expiresIn = Date.now() + 40000;
+          .createHash('sha256', secret)
+          .update(Date.now().toString())
+          .digest('hex');
+        const expiresIn = Date.now() + 3600000;
         user.update({
           resetPassToken: hash,
           expiry: expiresIn
         }).then(() => {
           const mailOptions = {
-            from: 'no-reply <no_reply@postit.com>',
+            from: 'no-reply<no_reply@postit.com>',
             to: email,
             subject: 'Password Reset Link',
             html: `Hello ${email}, <br/><br/>if you have requested
@@ -273,11 +284,11 @@ export default {
             <a href='${process.env.APP_URL}/#/reset-password/${hash}'>
               this link
             </a>
-            to reset your password.`,
+            to reset your PostIt password.`,
             text: `Please follow please follow \n
             <a href=
             '${process.env.APP_URL}/#/reset-password/${hash}'> this link</a>
-            to reset your password.`
+            to reset your PostIt password.`
           };
           models.PasswordReset
             .findOne({
@@ -285,25 +296,25 @@ export default {
             }).then((emailExistRes) => {
               if (emailExistRes === null) {
                 models.PasswordReset
-                .create({
-                  email,
-                  expiresIn,
-                  hash
-                }).then(() => {
-                  transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                      return res.status(503).send({
-                        error: {
-                          message: 'Unable to send email, something went wrong'
-                        }
+                  .create({
+                    email,
+                    expiresIn,
+                    hash
+                  }).then(() => {
+                    transporter.sendMail(mailOptions, (error, info) => {
+                      if (error) {
+                        return res.status(503).send({
+                          error: {
+                            message: 'Unable to send email, something went wrong'
+                          }
+                        });
+                      }
+                      return res.status(200).send({
+                        info,
+                        message: 'Password reset link has been sent to your email'
                       });
-                    }
-                    return res.status(200).send({
-                      info,
-                      message: 'Password reset link has been sent to your email'
                     });
                   });
-                });
               } else {
                 emailExistRes.update({
                   hash,
@@ -331,31 +342,32 @@ export default {
   resetPassword(req, res) {
     const hashedPass = bcrypt.hashSync(req.body.password, salt, null);
     models.PasswordReset
-    .findOne({
-      where: { hash: req.params.hash }
-    }).then((result) => {
-      if (result === null) {
-        return res.status(400).send({
-          error: { message: 'The provided token does not exist' }
-        });
-      }
-      const email = result.dataValues.email;
-      const now = Date.now();
-      if (now > result.dataValues.expiresIn) {
-        return res.status(200).send({
-          error: { message: 'This link is invalid or has expired' }
-        });
-      }
-      models.User
-        .update(
-          { password: hashedPass },
+      .findOne({
+        where: { hash: req.params.hash }
+      }).then((result) => {
+        if (result === null) {
+          return res.status(404).send({
+            error: { message: 'The provided token does not exist or has been used' }
+          });
+        }
+        const email = result.dataValues.email;
+        const now = Date.now();
+        if (now > result.dataValues.expiresIn) {
+          return res.status(400).send({
+            error: { message: 'This link is invalid or has expired' }
+          });
+        }
+        models.User
+        .update({ password: hashedPass },
           { where: { email } }
-        ).then(() =>
-          res.status(200).send({ message: 'Password Reset Successful' })
-        );
-      return result.destroy({ where: { email } });
-    }).catch(error => res.status(500).send({
-      error: error.message, status: 500
-    }));
+          ).then(() =>
+            res.status(200).send({ message: 'Password Reset Successful' })
+          ).catch(error => res.status(500).send({
+            error: error.message, status: 500
+          }));
+        return result.destroy({ where: { email } });
+      }).catch(error => res.status(500).send({
+        error: error.message, status: 500
+      }));
   },
 };

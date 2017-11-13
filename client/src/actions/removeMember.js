@@ -36,10 +36,6 @@ const onRemoveMember = dataValue =>
         dataValue, 'post', headers)
       .then((RemoveMemberResponse) => {
         dispatch(onRemoveMemberSuccess(RemoveMemberResponse.data.username));
-        swal({
-          text: RemoveMemberResponse.data.message,
-          icon: 'success'
-        });
       }).catch((errorResponse) => {
         dispatch(onRemoveMemberFailure());
         swal({
@@ -48,6 +44,11 @@ const onRemoveMember = dataValue =>
         });
       });
     }
+  })
+  .catch((error) => {
+    swal({
+      text: error.repsonse.data.message,
+    });
   });
 };
 

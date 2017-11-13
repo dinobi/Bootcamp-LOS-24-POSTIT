@@ -37,7 +37,7 @@ I (Dinobi) took on the development of this project as part of the requirements t
 - Search for colleagues, friends or family who are on the platform
 - Quickly create a group or add new members to your broadcast group
 - Post messages with added advantage of using wikipedia search right from you dashboard
-- Get messages on different medium based on message priority level
+- Get notification on different medium based on message priority level
 - Have fun.
 
 # Installation and Dependencies

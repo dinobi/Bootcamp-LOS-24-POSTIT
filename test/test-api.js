@@ -191,25 +191,6 @@ describe('PostIt Api Tests: ', () => {
           done();
         });
     });
-    it('does not allow phone without country code',
-    (done) => {
-      chai.request(app)
-        .post('/api/user/signup/')
-        .type('form')
-        .send({
-          username: users[1].username,
-          email: users[1].email,
-          password: users[1].password,
-          phone: '08032952998'
-        })
-        .end((error, res) => {
-          res.should.have.status(400);
-          res.body.error.message.should.equal(
-            'enter your country code, example: +234'
-          );
-          done();
-        });
-    });
   });
   // Authenticate a user account
   // Correct status code and message responses

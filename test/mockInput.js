@@ -3,19 +3,19 @@ export const users = [
     username: 'jerraw',
     email: 'jerraw@gmail.com',
     password: 'afterMath123',
-    phone: '+2348032952998'
+    phone: '8032952998'
   },
   {
     username: 'amara',
     email: 'amaraKen@gmail.com',
     password: 'oPenWaiver123',
-    phone: '+23408032952998'
+    phone: '08032952998'
   },
   {
     username: 'starter',
     email: 'start@postit.com',
     password: 'starting123',
-    phone: '+23408032952998'
+    phone: '08032952998'
   }
 ];
 
