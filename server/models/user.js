@@ -1,19 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstname: {
-      type: DataTypes.STRING,
-      allowNull: false, //  dont write to db if data is not supplied
-      validate: {
-        isAlpha: true //  will only allow letters
-      }
-    },
-    lastname: {
-      type: DataTypes.STRING,
-      allowNull: false, //  dont write to db if data is not supplied
-      validate: {
-        isAlpha: true //  will only allow letters
-      }
-    },
     username: {
       type: DataTypes.STRING,
       unique: true,
@@ -35,13 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     phone: {
       type: DataTypes.STRING,
       allowNull: false, //  dont write to db if data is not supplied
-      validate: {
-        len: [11, 13]
-      }
     },
     lastSeen: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.DATE
     }
   });
   User.associate = (models) => {

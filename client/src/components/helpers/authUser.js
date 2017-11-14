@@ -1,28 +1,33 @@
 import React from 'react';
 import jwtDecode from 'jwt-decode';
 import connect from 'react-redux';
+import swal from 'sweetalert';
 
 class AuthUser extends React.Component {
-  componentDidMount() {
-    const { isLoggedIn } = this.props;
-    if (!isLoggedIn) {
-      location.hash = '#login';
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
+    componentWillMount() {
+      if (localStorage.getItem('userAuth') === null) {
+        location.hash = '#login';
+        return;
+      }
+      return 'hasAuth';
+    }
+    componentDidMount() {
+      if (this.props.message === 'Authentication failed. Invalid access token') {
+        swal({
+          text: 'Reauthenticate',
+          icon: 'error'
+        });
+      }
+    }
 
-  render() {
-    const user = localStorage.getItem('authToken');
-    if (this.props.isLoggedIn) {
-      const decoded = jwtDecode(user);
-      return this.props.children;
-    } else {
-      return null;
-    }
-  }
 }
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.userIsAuthenticated
+    message: state.auth.message
   };
 }
 
