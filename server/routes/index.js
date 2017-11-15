@@ -26,7 +26,7 @@ export default (app) => {
   app.get('/api/users/', controllers.user.fetchUsers);
 
   // API route to perform postit search
-  app.post('/api/search/', controllers.user.search);
+  app.get('/api/search/:groupname/:searchTerm/:page', controllers.user.search);
 
   // API route that allow users create broadcast groups
   app.post('/api/create-group/',

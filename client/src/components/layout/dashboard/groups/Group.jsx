@@ -75,7 +75,7 @@ class Group extends React.Component {
       />;
 
     const addMemberModal = {
-      modalTitle: `Add New Member to ${groupName}`,
+      modalTitle: `Search and add new member to ${groupName}`,
       addMemberButton: <IconButton
         iconClass="fa fa-user-plus tooltipped"
         dataPosition="top"

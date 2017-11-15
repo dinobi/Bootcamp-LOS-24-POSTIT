@@ -19,11 +19,16 @@ export const onSearchFailure = message => ({
   message
 });
 
-const onSearch = searchQuery =>
+const onSearch = (searchTerm, page) =>
 (dispatch) => {
-  dispatch(onSearchRequest(searchQuery));
+  dispatch(onSearchRequest(searchTerm));
+  const groupname =
+    location.href.split('/')[location.href.split('/').length - 1];
   let headers;
-  apiHandler('/api/search', searchQuery, 'post', headers).then((searchRes) => {
+  apiHandler(
+    `/api/search/${groupname}/${searchTerm}/${page}`,
+    '', 'get', headers
+  ).then((searchRes) => {
     dispatch(onSearchSuccess(searchRes.data));
   }).catch((searchRes) => {
     dispatch(onSearchFailure(searchRes.response.data.error.message));

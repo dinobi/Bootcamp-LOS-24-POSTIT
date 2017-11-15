@@ -12,6 +12,7 @@
     "build": "npm run remove-dist && webpack --config ./webpack.config.production.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "migration": "heroku run sequelize db:migrate",
+    "undo-migration": "heroku run sequelize db:migrate:undo:all",
     "start": "babel-node ./server/bin/www",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
     "exec": "nodemon ./server/bin/www --exec babel-node ./server/app",

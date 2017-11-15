@@ -138,97 +138,56 @@ export default {
   },
   // Search
   search(req, res) {
-    let searchField;
-    let searchTerm;
-    if (!req.body.search || req.body.search.trim() === '') {
+    const searchTerm = req.params.searchTerm;
+    if (!searchTerm || searchTerm.trim() === '') {
       return res.status(400).send({
-        error: {
-          message: 'Please specify a search context'
-        }
+        error: { message: 'please specify a search term' }
       });
     }
-    searchField = Object.keys(req.body)[1];
-    if (
-      !searchField || req.body[searchField].trim()
-      === ''
-    ) {
-      return res.status(400).send({
-        error: {
-          message: 'Please specify a search option'
+    return models.User
+    .findAll({
+      limit: 10,
+      offset: req.params.page * 10,
+      where: {
+        username: {
+          $iLike: `%${searchTerm}%`,
+          $ne: req.decoded.data.username
         }
+      },
+      attributes: ['username', 'email']
+    })
+    .then((users) => {
+      const existingUsers = [];
+      const newUsers = [];
+      if (users.length === 0) {
+        return res.status(200).send({
+          userData: newUsers,
+          message: `No search result for ${searchTerm}`
+        });
+      }
+      let n = 0;
+      users.map((user) => {
+        return models.UserGroup
+        .find({
+          where: { username: user.username, groupname: req.params.groupname },
+          attributes: ['username']
+        }).then((result) => {
+          n += 1;
+          if (result !== null) {
+            existingUsers.push(user);
+          } else {
+            newUsers.push(user);
+          }
+          if (n === users.length) {
+            return res.status(200).send({ userData: newUsers });
+          }
+        }).catch(error => res.status(503).send({
+          error: error.message, status: 503
+        }));
       });
-    }
-    // if the search context is users, search the users database
-    if (req.body.search === 'users') {
-      if (
-        searchField === 'firstname' || 'lastname' || 'username' || 'email'
-      ) {
-        searchTerm = req.body[searchField];
-        models.User
-          .findAll({
-            where: { [searchField]: { $iLike: `%${searchTerm}%` } },
-            attributes: ['firstname', 'lastname', 'username', 'email']
-          })
-          .then((returnedUser) => {
-            if (returnedUser.length === 0) {
-              res.status(400).send({
-                error: {
-                  message:
-                  `No result for ${searchField}, ${searchTerm}`
-                }
-              });
-            } else {
-              const result = returnedUser.filter(user =>
-                user.username !== req.decoded.data.username
-              );
-              res.status(200).send(result);
-            }
-          })
-          .catch((error) => {
-            if (error) {
-              res.status(400).send({
-                error:
-                { message: 'Bad request. Check for the correct search term' }
-              });
-            }
-          });
-      } else {
-        searchField = 'username';
-      }
-    }
-    // if the search context is groups, search the groups database
-    if (req.body.search === 'groups') {
-      if (
-        searchField === 'groupname' || 'description'
-      ) {
-        searchTerm = req.body[searchField];
-        models.Group
-          .findAll({
-            where: { [searchField]: { $iLike: `%${searchTerm}%` } },
-            attributes: ['groupname', 'description']
-          })
-          .then((returnedGroup) => {
-            if (returnedGroup.length === 0) {
-              res.status(400).send({
-                error: {
-                  message:
-                  `No result for ${searchField}, ${searchTerm}`
-                }
-              });
-            } else {
-              res.status(200).send(returnedGroup);
-            }
-          })
-          .catch((error) => {
-            if (error) {
-              res.status(400).send({
-                error:
-                { message: 'Bad request. Check for the correct search term' }
-              });
-            }
-          });
-      }
-    }
+    }).catch(error => res.status(500).send({
+      error: error.message, status: 500
+    }));
   },
   // Users can request for a new password
   requestPassword(req, res) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ListItem = ({ onClick, listClass, anchorClass, url, iconClass, name }) =>
-  <li className={listClass}>
+const ListItem = ({ onClick, listClass, index, anchorClass, url, iconClass, name }) =>
+  <li className={listClass} key={index}>
     <a href={url}
       onClick={onClick}
       className={anchorClass}
