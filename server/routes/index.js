@@ -1,5 +1,6 @@
 import controllers from '../controllers';
 import { authUser } from '../helpers/authService';
+import { verifyUser, verifyGroup } from '../helpers/verify';
 
 export default (app) => {
   app.all('/api', (req, res) => res.status(200).send({
@@ -55,7 +56,7 @@ export default (app) => {
   controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
-  app.post('/api/groups/:groupname/send-message/',
+  app.post('/api/groups/:groupname/send-message/', verifyGroup,
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group

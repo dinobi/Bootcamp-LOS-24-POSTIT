@@ -2,13 +2,13 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import models from '../models';
 import { generateAuthToken } from '../helpers/authService';
 import filterUser from '../helpers/filterUser';
 import { loginValidator, signupValidator, uniqueValidator }
   from '../helpers/inputValidator';
+import { sendMail } from '../helpers/emailHandler';
 
 dotenv.config();
 
@@ -191,6 +191,7 @@ export default {
   },
   // Users can request for a new password
   requestPassword(req, res) {
+    const mailType = 'reset';
     const { email } = req.body;
     if (!email || email.trim() === '') {
       return res.status(400).send({
@@ -216,14 +217,6 @@ export default {
             }
           });
         }
-
-        const transporter = nodemailer.createTransport({
-          service: process.env.MAIL_SERVICE,
-          auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASSWORD
-          }
-        });
         const secret = req.body.email;
         const hash = crypto
           .createHash('sha256', secret)
@@ -234,21 +227,12 @@ export default {
           resetPassToken: hash,
           expiry: expiresIn
         }).then(() => {
-          const mailOptions = {
-            from: 'no-reply<no_reply@postit.com>',
-            to: email,
-            subject: 'Password Reset Link',
-            html: `Hello ${email}, <br/><br/>if you have requested
-            for a new password, please follow \n
-            <a href='${process.env.APP_URL}/#/reset-password/${hash}'>
-              this link
-            </a>
-            to reset your PostIt password.`,
-            text: `Please follow please follow \n
-            <a href=
-            '${process.env.APP_URL}/#/reset-password/${hash}'> this link</a>
-            to reset your PostIt password.`
-          };
+          const message = `Hello ${email}, <br/><br/>if you have requested
+          for a new password to your PostIt account, please follow  \n
+          <a href='${process.env.APP_URL}/#/reset-password/${hash}'>
+            this link
+          </a>
+          to reset your password.`;
           models.PasswordReset
             .findOne({
               where: { email }
@@ -260,39 +244,23 @@ export default {
                     expiresIn,
                     hash
                   }).then(() => {
-                    transporter.sendMail(mailOptions, (error, info) => {
-                      if (error) {
-                        return res.status(503).send({
-                          error: {
-                            message: 'Unable to send email, something went wrong'
-                          }
-                        });
-                      }
-                      return res.status(200).send({
-                        info,
-                        message: 'Password reset link has been sent to your email'
-                      });
-                    });
-                  });
+                    sendMail(req, res, mailType, email,
+                      { subject: 'Password Reset Link', message }
+                    );
+                  }).catch(error => res.status(500).send({
+                    error: error.message, status: 500
+                  }));
               } else {
                 emailExistRes.update({
                   hash,
                   expiresIn
                 }).then(() => {
-                  transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                      return res.status(503).send({
-                        error: {
-                          message: 'Unable to send email, something went wrong'
-                        }
-                      });
-                    }
-                    return res.status(200).send({
-                      info,
-                      message: 'Password reset link has been sent to your email'
-                    });
-                  });
-                });
+                  sendMail(req, res, mailType, email,
+                    { subject: 'Password Reset Link', message }
+                  );
+                }).catch(error => res.status(500).send({
+                  error: error.message, status: 500
+                }));
               }
             });
         });
@@ -306,7 +274,9 @@ export default {
       }).then((result) => {
         if (result === null) {
           return res.status(404).send({
-            error: { message: 'The provided token does not exist or has been used' }
+            error: { message:
+              'The provided token does not exist or has been used'
+            }
           });
         }
         const email = result.dataValues.email;

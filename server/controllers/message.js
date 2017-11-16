@@ -1,4 +1,6 @@
 import models from '../models';
+import { messageValidator } from '../helpers/inputValidator';
+import { sendMail, getMembersEmail } from '../helpers/emailHandler';
 
 export default {
   // Send message to a group
@@ -6,15 +8,11 @@ export default {
     const message = req.body.message;
     const priority = req.body.priority;
     const groupname = req.params.groupname;
-    if (!message || message.trim() === '') {
-      return res.status(400).send({
-        error: { message: 'You forgot to include a message body' }
-      });
-    }
-    if (!priority || priority.trim() === '') {
-      return res.status(400).send({
-        error: { message: 'Message priority cannot be empty' }
-      });
+    const username = req.decoded.data.username;
+    if (messageValidator(
+        message, priority, groupname, req, res
+      ) !== 'validated') {
+      return;
     }
     models.UserGroup
     .findOne({
@@ -26,19 +24,62 @@ export default {
       if (!userInGroup) {
         return res.status(401).send({
           error: {
-            message: `User does not belong to group '${req.params.groupname}'`
+            message: `User does not belong to group '${req.params.groupname}'`,
+            status: 401
           }
         });
       }
       return models.Message
       .create({
         message,
-        fromUser: req.decoded.data.username,
+        fromUser: username,
         toGroup: groupname,
         priority: priority.toLowerCase()
       })
       .then((newMessage) => {
         res.status(201).send(newMessage);
+        const mailType = 'notification';
+        const notification = `Hello, <br><br>You have a new message marked as
+          ${priority} on ${groupname}<br><br>${newMessage.message}<br><br>
+          <${username}><br><br> click on
+          <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
+        </a> to view more`;
+        const subject = `POSTIT: New ${priority} message`;
+        switch (priority.toLowerCase()) {
+          case 'critical':
+            // send email
+            getMembersEmail(groupname, username).then((members) => {
+              if (members.length > 0) {
+                members.map(member =>
+                  sendMail(req, res, mailType, member.email,
+                    { subject, notification }
+                  )
+                );
+              }
+              return '';
+            }).catch(error => res.status(500).send({
+              error: error.message,
+              status: 500
+            }));
+            break;
+          case 'urgent':
+            getMembersEmail(groupname, username).then((members) => {
+              if (members.length > 0) {
+                members.map(member =>
+                  sendMail(req, res, mailType, member.email,
+                    { subject, notification }
+                  )
+                );
+              }
+              return '';
+            }).catch(error => res.status(500).send({
+              error: error.message,
+              status: 500
+            }));
+            break;
+          default:
+            return '';
+        }
       }) // message created
       .catch(error => res.status(500).send({
         error: error.message,
@@ -48,19 +89,7 @@ export default {
   },
   // Group messages
   fetchMessages(req, res) {
-    models.Group
-    .findOne({
-      where: { groupname: req.params.groupname }
-    }).then((group) => {
-      if (!group) {
-        return res.status(404).send({
-          error: {
-            message: ` Group: ${req.params.groupname},
-            does not exist on postit.`
-          }
-        });
-      }
-      return models.Message
+    return models.Message
       .findAll({
         where: { toGroup: req.params.groupname },
         attributes: [
@@ -78,11 +107,10 @@ export default {
           });
         }
         return res.status(200).send(message);
+      }).catch((error) => {
+        if (error) {
+          res.status(500).send({ error: error.message });
+        }
       });
-    }).catch((error) => {
-      if (error) {
-        res.status(500).send({ error: error.message });
-      }
-    });
   }
 };

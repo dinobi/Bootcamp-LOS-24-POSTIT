@@ -20,7 +20,6 @@ export const onSendMessageFailure = () => ({
 
 const onSendMessage = message =>
 (dispatch) => {
-  const Materialize = window.Materialize;
   dispatch(onSendMessageRequest());
   const groupname =
     location.href.split('/')[location.href.split('/').length - 1];
@@ -32,7 +31,9 @@ const onSendMessage = message =>
     dispatch(onSendMessageFailure());
     swal({
       text: errorResponse.response.data.error.message,
-      icon: 'warning'
+      icon: 'warning',
+      buttons: false,
+      timer: 2000,
     });
   });
 };
