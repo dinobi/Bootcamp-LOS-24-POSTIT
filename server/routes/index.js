@@ -60,7 +60,7 @@ export default (app) => {
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:groupname/show-messages/',
+  app.get('/api/groups/:groupname/show-messages/', verifyGroup,
   controllers.message.fetchMessages);
 
   // API route to serve error page
