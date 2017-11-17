@@ -90,6 +90,11 @@ const messageValidator = (message, priority, groupname, req, res) => {
       error: { message: 'You forgot to include a message body' }
     });
   }
+  if (!priority || priority === '') {
+    return res.status(400).send({
+      error: { message: 'Invalid priority level', status: 400 }
+    });
+  }
   if (priority !== undefined &&
     priority.toLowerCase() !== 'urgent'
     && priority.toLowerCase() !== 'critical'

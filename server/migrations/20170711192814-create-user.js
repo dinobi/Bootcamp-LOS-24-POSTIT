@@ -10,22 +10,33 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true,
-        primaryKey: true
+        primaryKey: true,
+        validate: {
+          notEmpty: true
+        }
       },
       email: {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true,
         validate: {
-          isEmail: true
+          isEmail: true,
+          notEmpty: true
         }
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          notEmpty: true
+        }
       },
       phone: {
+        allowNull: false,
         type: Sequelize.STRING,
+        validate: {
+          not: ['[a-z]', 'i']
+        }
       },
       lastSeen: {
         allowNull: true,

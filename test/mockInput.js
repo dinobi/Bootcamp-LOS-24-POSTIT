@@ -45,11 +45,11 @@ export const groups = [
 export const messages = [
   {
     message: 'The very first message on ALC board.',
-    priority: 'urgent'
+    priority: 'normal'
   },
   {
     message: 'The very first message on ALC board.',
-    priority: 'urgent'
+    priority: 'normal'
   },
 ];
 

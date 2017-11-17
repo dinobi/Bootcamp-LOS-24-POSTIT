@@ -1,9 +1,11 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
+import dotenv from 'dotenv';
 import app from '../server/app';
 import models from '../server/models';
 import { users, groups, messages } from './mockInput';
 
+dotenv.config();
 process.env.NODE_ENV = 'test';
 const should = chai.should();
 chai.use(chaiHttp);
@@ -476,23 +478,6 @@ describe('PostIt Api Tests: ', () => {
 
   // Archive a user created group
   describe('Archive an existing group', () => {
-    it('responds with status 401 if user is not authenticated',
-    (done) => {
-      chai.request(app)
-        .post('/api/groups/delete-group/')
-        .set('x-access-token', '')
-        .type('form')
-        .send({
-          groupname: ''
-        })
-        .end((error, res) => {
-          res.should.have.status(401);
-          res.body.error.message.should.equal(
-            'Unauthorized: No access token provided'
-          );
-          done();
-        });
-    });
     it('responds with status 400 if groupname is not supplied',
     (done) => {
       chai.request(app)
@@ -514,11 +499,11 @@ describe('PostIt Api Tests: ', () => {
         .set('x-access-token', token)
         .type('form')
         .send({
-          groupname: 'TestGroup'
+          groupname: 'testgroup'
         })
         .end((error, res) => {
           res.should.have.status(404);
-          res.body.error.message.should.equal('testgroup does not exist')
+          res.body.error.message.should.equal('testgroup does not exist on PostIt')
           done();
         });
     });
@@ -628,7 +613,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(400);
           res.body.error.message.should.equal(
-            'Bad request, go to group you want to add member'
+            'Bad request, groupname is required'
           )
           done();
         });
@@ -662,7 +647,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(404);
           res.body.error.message.should.equal(
-            'Group not found or has not been created'
+            'TestGroup does not exist on PostIt'
           )
           done();
         });
@@ -720,20 +705,7 @@ describe('PostIt Api Tests: ', () => {
     });
   });
   describe('View group members', () => {
-    it('responds with status 401 if user is not authenticated',
-    (done) => {
-      chai.request(app)
-        .get(`/api/groups/${groups[0].groupname}/members`)
-        .set('x-access-token', '')
-        .end((error, res) => {
-          res.should.have.status(401);
-          res.body.error.message.should.equal(
-            'Unauthorized: No access token provided'
-          )
-          done();
-        });
-    });
-    it('responds with status 400 if no group is specified',
+    it('responds with status 400 if group is not specified',
     (done) => {
       chai.request(app)
         .get(`/api/groups/ /members`)
@@ -741,33 +713,20 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(400);
           res.body.error.message.should.equal(
-            'Bad request, go to group you want to view its member'
+            'Bad request, groupname is required'
           )
           done();
         });
     });
-    it('responds with status 400 if group does not exist',
+    it('responds with status 404 if group does not exist',
     (done) => {
       chai.request(app)
         .get(`/api/groups/${groups[2].groupname}/members`)
         .set('x-access-token', token)
         .end((error, res) => {
-          res.should.have.status(400);
+          res.should.have.status(404);
           res.body.error.message.should.equal(
-            `Group - ${groups[2].groupname} does not exist`
-          )
-          done();
-        });
-    });
-    it('responds with status 400 if group does not exist',
-    (done) => {
-      chai.request(app)
-        .get(`/api/groups/${groups[2].groupname}/members`)
-        .set('x-access-token', token)
-        .end((error, res) => {
-          res.should.have.status(400);
-          res.body.error.message.should.equal(
-            `Group - ${groups[2].groupname} does not exist`
+            `${groups[2].groupname} does not exist on PostIt`
           )
           done();
         });
@@ -784,20 +743,6 @@ describe('PostIt Api Tests: ', () => {
     });
   });
   describe('Remove member from group', () => {
-    it('responds with status 401 if user is not authenticated',
-    (done) => {
-      chai.request(app)
-        .post(`/api/groups/${groups[1].groupname}/remove-member`)
-        .set('x-access-token', '')
-        .type('form')
-        .send({
-          username: users[1].username
-        })
-        .end((error, res) => {
-          res.should.have.status(401);
-          done();
-        });
-    });
     it('responds with status 400 if groupname is not supplied',
     (done) => {
       chai.request(app)
@@ -810,7 +755,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(400);
           res.body.error.message.should.equal(
-            'Bad request, go to group you want to remove member'
+            'Bad request, groupname is required'
           )
           done();
         });
@@ -844,7 +789,7 @@ describe('PostIt Api Tests: ', () => {
         .end((error, res) => {
           res.should.have.status(404);
           res.body.error.message.should.equal(
-            'Group not found or has not been created'
+            `${groups[2].groupname} does not exist on PostIt`
           )
           done();
         });

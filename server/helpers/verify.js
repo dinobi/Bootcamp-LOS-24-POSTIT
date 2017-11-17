@@ -1,42 +1,57 @@
 import models from '../models';
+import errorResponse from '../helpers/errorResponse';
 
-const verifyUser = (req, res, next) => {
-  const { username } = req.decoded.data.username;
+// Autheticated user
+const verifyAuthUser = (req, res, next) => {
+  const { username } = req.decoded.data;
   models.User.findOne({ where: { username } })
-  .then((user) => {
-    // check if the username belongs to a registered user
-    if (!user) {
-      return res.status(404).send({
-        error: {
-          message: 'User not found. User has no PostIt account'
-        }
-      }).catch((error) => {
-        res.status(500).send({ error: error.message, status: 500 });
-      });
-    }
-    req.body = user;
-    next();
-  });
+    .then((user) => {
+      // check if the username belongs to a registered user
+      if (!user) {
+        const message = 'User not found. User has no PostIt account';
+        return errorResponse(res, 404, message, null);
+      }
+      req.body.user = user;
+      next();
+    }).catch(error => errorResponse(res, 500, null, error));
 };
-
+// user
+const verifyUser = (req, res, next) => {
+  const { username } = req.body;
+  if (!username || username.trim() === '') {
+    const message = 'Bad request, username is required';
+    return errorResponse(res, 400, message, null);
+  }
+  models.User.findOne({ where: { username } })
+    .then((user) => {
+      // check if the username belongs to a registered user
+      if (!user) {
+        const message = 'User not found. User has no PostIt account';
+        return errorResponse(res, 404, message, null);
+      }
+      req.body.user = user;
+      next();
+    }).catch(error => errorResponse(res, 500, null, error));
+};
+// group
 const verifyGroup = (req, res, next) => {
-  const { groupname } = req.params;
+  let groupname;
+  /* eslint-disable no-unused-expressions */
+  req.params.groupname ? { groupname } = req.params :
+    { groupname } = req.body;
+  if (!groupname || groupname.trim() === '') {
+    const message = 'Bad request, groupname is required';
+    return errorResponse(res, 400, message, null);
+  }
   models.Group.findOne({ where: { groupname } })
-  .then((group) => {
-    // check if the username belongs to a registered user
-    if (!group) {
-      return res.status(404).send({
-        error: {
-          message: ` Group: ${req.params.groupname},
-          does not exist on postit.`,
-          status: 404
-        }
-      });
-    }
-    next();
-  }).catch((error) => {
-    res.status(500).send({ error: error.message, status: 500 });
-  });
+    .then((group) => {
+      if (!group) {
+        const message = `${groupname} does not exist on PostIt`;
+        return errorResponse(res, 404, message, null);
+      }
+      req.body.group = group;
+      next();
+    }).catch(error => errorResponse(res, 500, null, error));
 };
 
-export { verifyUser, verifyGroup };
+export { verifyUser, verifyAuthUser, verifyGroup };

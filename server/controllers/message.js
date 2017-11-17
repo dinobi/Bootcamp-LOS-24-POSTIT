@@ -1,91 +1,75 @@
 import models from '../models';
 import { messageValidator } from '../helpers/inputValidator';
 import { sendMail, getMembersEmail } from '../helpers/emailHandler';
+import errorResponse from '../helpers/errorResponse';
 
 export default {
   // Send message to a group
   createMessage(req, res) {
+    const { user, group } = req.body;
     const message = req.body.message;
     const priority = req.body.priority;
-    const groupname = req.params.groupname;
-    const username = req.decoded.data.username;
+    const groupname = group.groupname;
+    const username = user.username;
     if (messageValidator(
-        message, priority, groupname, req, res
-      ) !== 'validated') {
+      message, priority, groupname, req, res
+    ) !== 'validated') {
       return;
     }
-    models.UserGroup
-    .findOne({
-      where: {
-        username: req.decoded.data.username,
-        groupname
-      }
-    }).then((userInGroup) => {
-      if (!userInGroup) {
-        return res.status(401).send({
-          error: {
-            message: `User does not belong to group '${req.params.groupname}'`,
-            status: 401
-          }
-        });
-      }
-      return models.Message
-      .create({
-        message,
-        fromUser: username,
-        toGroup: groupname,
-        priority: priority.toLowerCase()
-      })
-      .then((newMessage) => {
-        res.status(201).send(newMessage);
-        const mailType = 'notification';
-        const notification = `Hello, <br><br>You have a new message marked as
+    group.hasUser(user)
+      .then((userInGroup) => {
+        if (!userInGroup) {
+          const errorMessage =
+            `User does not belong to group '${req.params.groupname}'`;
+          return errorResponse(res, 401, errorMessage, null);
+        }
+        return models.Message
+          .create({
+            message,
+            fromUser: username,
+            toGroup: groupname,
+            priority: priority.toLowerCase()
+          })
+          .then((newMessage) => {
+            res.status(201).send(newMessage);
+            const mailType = 'notification';
+            const notification = `Hello, <br><br>You have a new message marked as
           ${priority} on ${groupname}<br><br>${newMessage.message}<br><br>
-          <${username}><br><br> click on
+          FROM: ${username}<br><br> click on
           <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
         </a> to view more`;
-        const subject = `POSTIT: New ${priority} message`;
-        switch (priority.toLowerCase()) {
-          case 'critical':
-            // send email
-            getMembersEmail(groupname, username).then((members) => {
-              if (members.length > 0) {
-                members.map(member =>
-                  sendMail(req, res, mailType, member.email,
-                    { subject, notification }
-                  )
-                );
-              }
-              return '';
-            }).catch(error => res.status(500).send({
-              error: error.message,
-              status: 500
-            }));
-            break;
-          case 'urgent':
-            getMembersEmail(groupname, username).then((members) => {
-              if (members.length > 0) {
-                members.map(member =>
-                  sendMail(req, res, mailType, member.email,
-                    { subject, notification }
-                  )
-                );
-              }
-              return '';
-            }).catch(error => res.status(500).send({
-              error: error.message,
-              status: 500
-            }));
-            break;
-          default:
-            return '';
-        }
-      }) // message created
-      .catch(error => res.status(500).send({
-        error: error.message,
-        status: 500
-      }));
-    });
+            const subject = `PostIt: New ${priority} message`;
+            switch (priority.toLowerCase()) {
+              case 'critical':
+                // send email
+                getMembersEmail(groupname, username).then((members) => {
+                  if (members.length > 0) {
+                    members.map(member =>
+                      sendMail(req, res, mailType, member.email,
+                        { subject, notification }
+                      )
+                    );
+                  }
+                  return '';
+                }).catch(error => errorResponse(res, 500, null, error));
+                break;
+              case 'urgent':
+                getMembersEmail(groupname, username).then((members) => {
+                  if (members.length > 0) {
+                    members.map(member =>
+                      sendMail(req, res, mailType, member.email,
+                        { subject, notification }
+                      )
+                    );
+                  }
+                  return '';
+                }).catch(error => errorResponse(res, 500, null, error));
+                break;
+              default:
+                return '';
+            }
+          }).catch(error => errorResponse(res, 500, null, error));
+      });
   },
   // Group messages
   fetchMessages(req, res) {
@@ -107,10 +91,6 @@ export default {
           });
         }
         return res.status(200).send(message);
-      }).catch((error) => {
-        if (error) {
-          res.status(500).send({ error: error.message });
-        }
-      });
+      }).catch(error => errorResponse(res, 500, null, error));
   }
 };
