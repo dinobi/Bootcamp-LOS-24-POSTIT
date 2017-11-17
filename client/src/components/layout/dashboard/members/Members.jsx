@@ -8,7 +8,7 @@ const Members = props =>
         return (
           props.members[0].username === props.user.username ?
             <li key={index}>
-              <i className="fa fa-hashtag"></i>
+              <i className="fa fa-circle"></i>
               &nbsp;&nbsp;{member.username}
               <IconButton
                 iconClass="fa fa-user-times removeButton tooltipped"
@@ -23,7 +23,7 @@ const Members = props =>
             </li>
             :
             <li key={index}>
-            <i className="fa fa-hashtag"></i>
+            <i className="fa fa-circle"></i>
             &nbsp;&nbsp;{member.username}
           </li>
         );

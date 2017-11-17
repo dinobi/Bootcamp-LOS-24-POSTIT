@@ -12,21 +12,11 @@ import {
  * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
  */
 class Search extends React.Component {
-/**
- * SearchWiki Sets up a constructor and renders the following UI components.
- * 
- * @constructor -initial state - setup initial state of the value of searchQuery and searchResult.
- * @function handleChange - Listener for changes to search query.
- * @function handleClick - Listener for click event on search button in order to send search query.
- * 
- * @component <DashHeader/> - The dashboard header navigation.
- * @component <SearchForm> - Search form gui for user to perform search request.
- * @component <SearchResult> - Search result gui for user to view and act on search result.
- * @component <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @component <FeatureCard/> - Card that contains quick link to post features.
- * @component <Copyright/> - The dashboard footer copyright information.
- */
-
+  /**
+   * Creates an instance of Search.
+   * @param {*} props - class properties
+   * @memberof Search
+   */
   constructor(props) {
     super(props);
     this.state = {

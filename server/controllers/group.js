@@ -1,5 +1,6 @@
 import models from '../models';
 import lengthCheck from '../helpers/lengthCheck';
+import { verifyUser } from '../helpers/verify';
 
 export default {
   create(req, res) {
@@ -27,12 +28,13 @@ export default {
       })
       .then((group) => {
         const user = req.decoded.data.username;
-        models.UserGroup
-        .create({
-          username: user,
-          groupname,
-          description
-        })
+        group.addUser(user)
+        // models.UserGroup
+        // .create({
+        //   username: user,
+        //   groupname,
+        //   description
+        // })
         .then(res.status(201).send({
           groupData: {
             groupname,
@@ -113,9 +115,18 @@ export default {
   },
   // Users can see all the groups that they belong to
   fetchMyGroups(req, res) {
-    const user = req.decoded.data.username;
-    return models.UserGroup
-      .findAll({ where: { username: user } })
+    const username = req.decoded.data.username;
+    models.User.findOne({ where: { username } })
+    .then((user) => {
+      // check if the username belongs to a registered user
+      if (!user) {
+        return res.status(404).send({
+          error: {
+            message: 'User not found. User has no PostIt account'
+          }
+        });
+      }
+      user.getGroup()
       .then((groups) => {
         if (groups.length === 0) {
           res.status(204).send({ message: 'You have no group yet' });
@@ -125,6 +136,7 @@ export default {
       }).catch((error) => {
         res.status(500).send({ error: error.message, status: 500 });
       });
+    });
   },
   // Add member to group
   addMember(req, res) {

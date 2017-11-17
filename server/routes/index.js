@@ -1,5 +1,6 @@
 import controllers from '../controllers';
 import { authUser } from '../helpers/authService';
+import { verifyUser, verifyGroup } from '../helpers/verify';
 
 export default (app) => {
   app.all('/api', (req, res) => res.status(200).send({
@@ -26,7 +27,7 @@ export default (app) => {
   app.get('/api/users/', controllers.user.fetchUsers);
 
   // API route to perform postit search
-  app.post('/api/search/', controllers.user.search);
+  app.get('/api/search/:groupname/:searchTerm/:page', controllers.user.search);
 
   // API route that allow users create broadcast groups
   app.post('/api/create-group/',
@@ -55,11 +56,11 @@ export default (app) => {
   controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
-  app.post('/api/groups/:groupname/send-message/',
+  app.post('/api/groups/:groupname/send-message/', verifyGroup,
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:groupname/show-messages/',
+  app.get('/api/groups/:groupname/show-messages/', verifyGroup,
   controllers.message.fetchMessages);
 
   // API route to serve error page

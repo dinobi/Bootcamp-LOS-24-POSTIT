@@ -78,4 +78,27 @@ const uniqueValidator = (res, error) => {
   }
 };
 
-export { signupValidator, loginValidator, uniqueValidator };
+const messageValidator = (message, priority, groupname, req, res) => {
+  if (!groupname || groupname.trim() === '') {
+    return res.status(400).send({
+      error: { message: 'You must specify a group to send message' }
+    });
+  }
+
+  if (!message || message.trim() === '') {
+    return res.status(400).send({
+      error: { message: 'You forgot to include a message body' }
+    });
+  }
+  if (priority !== undefined &&
+    priority.toLowerCase() !== 'urgent'
+    && priority.toLowerCase() !== 'critical'
+    && priority.toLowerCase() !== 'normal') {
+    return res.status(400).send({
+      error: { message: 'Invalid priority level', status: 400 }
+    });
+  }
+  return 'validated';
+};
+
+export { signupValidator, loginValidator, uniqueValidator, messageValidator };

@@ -4,7 +4,7 @@ import 'jquery';
 import {
   Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,
-  Group, Search, SearchWiki, AccountDetails,
+  Group, SearchWiki, AccountDetails,
   NewGroup
 } from '../components/layout';
 import IndexHome from '../components/layout/home/IndexHome.jsx';
@@ -24,7 +24,6 @@ const App = () =>
         <Route exact path='/groups' component={ Groups } />
         <Route path='/create-group' component={ NewGroup } />
         <Route path='/groups/:groupname' component={ Group } />
-        <Route path='/search' component={ Search } />
         <Route path='/search-wiki' component={ SearchWiki } />
         <Route path='/account-details' component={ AccountDetails } />
         <Route component={ NotFound } />

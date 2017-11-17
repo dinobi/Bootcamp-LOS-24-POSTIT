@@ -940,7 +940,7 @@ describe('PostIt Api Tests: ', () => {
         })
         .end((error, res) => {
           res.should.have.status(400);
-          res.body.error.message.should.equal('Message priority cannot be empty')
+          res.body.error.message.should.equal('Invalid priority level')
           done();
         });
     });

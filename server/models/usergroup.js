@@ -16,15 +16,6 @@ export default (sequelize, DataTypes) => {
         key: 'groupname'
       }
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true, //  dont write to db if data is not supplied
-      defaultValue: 'There is no description for this group.',
-      refrences: {
-        model: 'Group',
-        key: 'description'
-      }
-    }
   });
   return UserGroup;
 };
