@@ -1,21 +1,21 @@
 language: node_js
 node_js:
-    - "6.11.0"
+    - "9"
 install:
     - npm install
 branches:
   only:
     - develop
     - api-test
-    - frontend_app
-script: npm test
+    - staging
 services:
   - postgresql
 env:
   - NODE_ENV=test
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - createdb travis_ci_test -U postgres
   - sequelize db:migrate
+script: npm test
 after_success:
   - npm run coveralls
 after_script:
