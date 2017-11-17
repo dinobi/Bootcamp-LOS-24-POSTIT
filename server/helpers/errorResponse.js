@@ -8,6 +8,14 @@ const errorResponse = (res, statusCode, message, error) => {
         }
       });
       break;
+    case 401:
+      res.status(401).send({
+        error: {
+          message,
+          status: 401
+        }
+      });
+      break;
     case 403:
       res.status(403).send({
         error: {
@@ -43,7 +51,9 @@ const errorResponse = (res, statusCode, message, error) => {
       });
       break;
     default:
-      break;
+      return res.status(500).send({
+        error, status: 500
+      });
   }
 };
 

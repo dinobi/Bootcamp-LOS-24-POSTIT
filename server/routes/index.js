@@ -56,7 +56,7 @@ export default (app) => {
   controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
-  app.post('/api/groups/:groupname/send-message/', verifyGroup,
+  app.post('/api/groups/:groupname/send-message/', verifyAuthUser, verifyGroup,
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
