@@ -835,7 +835,6 @@ describe('PostIt Api Tests: ', () => {
           username: users[1].username
         })
         .end((error, res) => {
-          console.log('>>>>> ERROR >>>>>>>', res.body);
           res.should.have.status(404);
           res.body.error.message.should.equal(`No such user in ${groups[1].groupname}`)
           done();
