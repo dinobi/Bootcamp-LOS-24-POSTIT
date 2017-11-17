@@ -1,6 +1,7 @@
 import models from '../models';
 import { messageValidator } from '../helpers/inputValidator';
 import { sendMail, getMembersEmail } from '../helpers/emailHandler';
+import errorResponse from '../helpers/errorResponse';
 
 export default {
   // Send message to a group
@@ -22,12 +23,9 @@ export default {
       }
     }).then((userInGroup) => {
       if (!userInGroup) {
-        return res.status(401).send({
-          error: {
-            message: `User does not belong to group '${req.params.groupname}'`,
-            status: 401
-          }
-        });
+        const errorMessage =
+        `User does not belong to group '${req.params.groupname}'`;
+        return errorResponse(res, 401, errorMessage, null);
       }
       return models.Message
       .create({
@@ -41,10 +39,10 @@ export default {
         const mailType = 'notification';
         const notification = `Hello, <br><br>You have a new message marked as
           ${priority} on ${groupname}<br><br>${newMessage.message}<br><br>
-          <${username}><br><br> click on
+          FROM: ${username}<br><br> click on
           <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
         </a> to view more`;
-        const subject = `POSTIT: New ${priority} message`;
+        const subject = `PostIt: New ${priority} message`;
         switch (priority.toLowerCase()) {
           case 'critical':
             // send email
@@ -57,10 +55,7 @@ export default {
                 );
               }
               return '';
-            }).catch(error => res.status(500).send({
-              error: error.message,
-              status: 500
-            }));
+            }).catch(error => errorResponse(res, 500, null, error));
             break;
           case 'urgent':
             getMembersEmail(groupname, username).then((members) => {
@@ -72,19 +67,12 @@ export default {
                 );
               }
               return '';
-            }).catch(error => res.status(500).send({
-              error: error.message,
-              status: 500
-            }));
+            }).catch(error => errorResponse(res, 500, null, error));
             break;
           default:
             return '';
         }
-      }) // message created
-      .catch(error => res.status(500).send({
-        error: error.message,
-        status: 500
-      }));
+      }).catch(error => errorResponse(res, 500, null, error));
     });
   },
   // Group messages
@@ -107,10 +95,6 @@ export default {
           });
         }
         return res.status(200).send(message);
-      }).catch((error) => {
-        if (error) {
-          res.status(500).send({ error: error.message });
-        }
-      });
+      }).catch(error => errorResponse(res, 500, null, error));
   }
 };

@@ -10,6 +10,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         primaryKey: true,
+        validate: {
+          notEmpty: true
+        }
       },
       description: {
         allowNull: true,

@@ -65,7 +65,7 @@ class Login extends React.Component {
 							id="username"
 							placeholder="Enter your username or email"
 							inputRef={(input) => { this.username = input; }}
-							label="Username"
+							label="Username or Email"
 						/>
 						<InputField
 							inputClass="input-field"

@@ -12,12 +12,16 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
         validate: {
-          isEmail: true
+          isEmail: true,
+          notEmpty: true
         }
       },
       expiresIn: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          notEmpty: true
+        }
       },
       hash: {
         allowNull: false,

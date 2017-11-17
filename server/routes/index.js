@@ -1,6 +1,6 @@
 import controllers from '../controllers';
 import { authUser } from '../helpers/authService';
-import { verifyUser, verifyGroup } from '../helpers/verify';
+import { verifyUser, verifyAuthUser, verifyGroup } from '../helpers/verify';
 
 export default (app) => {
   app.all('/api', (req, res) => res.status(200).send({
@@ -34,25 +34,25 @@ export default (app) => {
   controllers.group.create);
 
   // API route that allow users delete a broadcast group
-  app.post('/api/groups/delete-group/',
+  app.post('/api/groups/delete-group/', verifyAuthUser, verifyGroup,
   controllers.group.delete);
 
   // API route to get list of all groups
   app.get('/api/groups/', controllers.group.fetchAllGroups);
 
   // API route to get list of group a user belongs to
-  app.get('/api/groups/me/', controllers.group.fetchMyGroups);
+  app.get('/api/groups/me/', verifyAuthUser, controllers.group.fetchMyGroups);
 
   // API route that allows users to add group members
-  app.post('/api/groups/:groupname/add-member/',
+  app.post('/api/groups/:groupname/add-member/', verifyUser, verifyGroup,
   controllers.group.addMember);
 
   // API route that allows users to remove group members
-  app.post('/api/groups/:groupname/remove-member/',
+  app.post('/api/groups/:groupname/remove-member/', verifyUser, verifyGroup,
   controllers.group.removeMember);
 
   // API route to get list of all users in a group
-  app.get('/api/groups/:groupname/members/',
+  app.get('/api/groups/:groupname/members/', verifyGroup,
   controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
@@ -60,7 +60,7 @@ export default (app) => {
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:groupname/show-messages/',
+  app.get('/api/groups/:groupname/show-messages/', verifyGroup,
   controllers.message.fetchMessages);
 
   // API route to serve error page
