@@ -131,13 +131,7 @@ export default {
       }
       group.getUser({ attribute: ['username', 'email'] })
       .then((result) => {
-        if (result.length === 0) {
-          res.status(204).send({
-            message: 'You have not added any members'
-          });
-        } else {
-          res.status(200).send(result);
-        }
+        return res.status(200).send(result);
       }).catch(error => errorResponse(res, 500, null, error));
     }).catch(error => errorResponse(res, 500, null, error));
   }

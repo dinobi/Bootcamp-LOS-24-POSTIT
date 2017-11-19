@@ -38,11 +38,9 @@ describe('groupsControllersTest ', () => {
     it('responds with status 401 if token is not supplied', () => {
       chai.request(app)
       .post('/api/create-group/')
-      .set('x-access-token', token)
+      .set('x-access-token', '')
       .type('form')
-      .send({
-        description: mockData.string
-      })
+      .send(mockData.staticGroups[1])
       .end((err, res) => {
         res.should.have.status(401);
       });
@@ -53,7 +51,7 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        description: mockData.string
+        description: mockData.staticGroups[1].description
       })
       .end((err, res) => {
         res.should.have.status(400);
@@ -66,7 +64,7 @@ describe('groupsControllersTest ', () => {
       .type('form')
       .send({
         groupname: '   ',
-        description: mockData.string
+        description: mockData.staticGroups[1].description
       })
       .end((err, res) => {
         res.should.have.status(400);
@@ -78,7 +76,7 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        groupname: mockData.string
+        groupname: mockData.staticGroups[1].groupname
       })
       .end((err, res) => {
         res.should.have.status(400);
@@ -90,7 +88,7 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        groupname: mockData.string,
+        groupname: mockData.staticGroups[1].groupname,
         description: '  '
       })
       .end((err, res) => {
@@ -103,8 +101,8 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        groupname: mockData.longString,
-        description: mockData.string
+        groupname: mockData.longString[0],
+        description: mockData.staticGroups[0].description
       })
       .end((err, res) => {
         res.should.have.status(413);
@@ -116,8 +114,8 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        groupname: mockData.string,
-        description: mockData.longString
+        groupname: mockData.staticGroups[1].groupname,
+        description: mockData.longString[1]
       })
       .end((err, res) => {
         res.should.have.status(413);
@@ -165,7 +163,7 @@ describe('groupsControllersTest ', () => {
       .type('form')
       .set('x-access-token', token)
       .send({
-        username: mockData.randomUser.username
+        username: mockData.staticUser[3].username
       })
       .end((err, res) => {
         res.should.have.status(404);
@@ -188,8 +186,9 @@ describe('groupsControllersTest ', () => {
       });
     });
     it('responds with status 404 if groupname does not exist', (done) => {
+      const groupname = mockData.staticGroups[3].groupname;
       chai.request(app)
-      .post(`/api/groups/${mockData.string}/add-member/`)
+      .post(`/api/groups/${groupname}/add-member/`)
       .type('form')
       .set('x-access-token', token)
       .send({
@@ -197,7 +196,7 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(404);
-        expect(res.body.error.message).to.eql(`${mockData.string} does not exist on PostIt`);
+        expect(res.body.error.message).to.eql(`${groupname} does not exist on PostIt`);
         done();
       });
     });
@@ -232,9 +231,6 @@ describe('groupsControllersTest ', () => {
     });
   });
 
-  describe('When a user hit the route POST /api/groups/me/', () => {
-  });
-
   describe('When a user hit the route POST /api/groups/:groupname/remove-member/', () => {
     it('responds with status 400 if username is not supplied', (done) => {
       chai.request(app)
@@ -256,7 +252,7 @@ describe('groupsControllersTest ', () => {
       .type('form')
       .set('x-access-token', token)
       .send({
-        username: mockData.randomUser.username
+        username: mockData.staticUser[3].username
       })
       .end((err, res) => {
         res.should.have.status(404);
@@ -279,8 +275,9 @@ describe('groupsControllersTest ', () => {
       });
     });
     it('responds with status 404 if groupname does not exist', (done) => {
+      const groupname = mockData.staticGroups[3].groupname
       chai.request(app)
-      .post(`/api/groups/${mockData.string}/remove-member/`)
+      .post(`/api/groups/${groupname}/remove-member/`)
       .type('form')
       .set('x-access-token', token)
       .send({
@@ -288,13 +285,14 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(404);
-        expect(res.body.error.message).to.eql(`${mockData.string} does not exist on PostIt`);
+        expect(res.body.error.message).to.eql(`${groupname} does not exist on PostIt`);
         done();
       });
     });
     it('successfully removes a member and responds with status 200', (done) => {
+      const groupname = mockData.staticGroups[1].groupname;
       chai.request(app)
-      .post(`/api/groups/${mockData.staticGroups[1].groupname}/remove-member/`)
+      .post(`/api/groups/${groupname}/remove-member/`)
       .type('form')
       .set('x-access-token', token)
       .send({
@@ -302,7 +300,7 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(200);
-        expect(res.body.message).to.eql('john_doe was successfully removed from lfc');
+        expect(res.body.message).to.eql(`john_doe was successfully removed from ${groupname}`);
         done();
       });
     });
@@ -336,13 +334,14 @@ describe('groupsControllersTest ', () => {
       });
     });
     it('responds with status 404 if group does not exist', (done) => {
+      const { groupname } = mockData.staticGroups[3];
       chai.request(app)
-      .get(`/api/groups/${mockData.string}/members`)
+      .get(`/api/groups/${groupname}/members`)
       .set('x-access-token', token)
       .end((error, res) => {
         res.should.have.status(404);
         res.body.error.message.should.equal(
-          `${mockData.string} does not exist on PostIt`
+          `${groupname} does not exist on PostIt`
         )
         done();
       });
@@ -357,6 +356,27 @@ describe('groupsControllersTest ', () => {
         done();
       });
     });
+    it('responds with status 200 if group exist',
+    (done) => {
+      chai.request(app)
+      .get(`/api/groups/${mockData.staticGroups[1].groupname}/members`)
+      .set('x-access-token', token)
+      .end((error, res) => {
+        console.log('<>>>>>>RES BODY>>>>', res.body)
+        res.should.have.status(200);
+        done();
+      });
+    });
+    it('responds with status 401 if user does not belong to group',
+    (done) => {
+      chai.request(app)
+      .get(`/api/groups/${mockData.staticGroups[1].groupname}/members`)
+      .set('x-access-token', token2)
+      .end((error, res) => {
+        res.should.have.status(401);
+        done();
+      });
+    });
   });
   describe('When a user hits the route POST /api/groups/delete-group/', () => {
     it('responds with status 401 if token is not supplied', () => {
@@ -365,7 +385,7 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', '')
       .type('form')
       .send({
-        groupname: mockData.string
+        groupname: mockData.staticGroups[1].groupname
       })
       .end((err, res) => {
         res.should.have.status(401);
@@ -400,7 +420,7 @@ describe('groupsControllersTest ', () => {
       .set('x-access-token', token)
       .type('form')
       .send({
-        groupname: mockData.string
+        groupname: mockData.staticGroups[3].groupname
       })
       .end((err, res) => {
         res.should.have.status(404);
@@ -442,7 +462,6 @@ describe('groupsControllersTest ', () => {
       .send()
       .end((error, res) => {
         res.should.have.status(200);
-        console.log('>>>>>>RESPONSE>>>>>', res.body);
         // expect(res.body.message).to.eql('You have no group yet')
         done();
       });
@@ -469,7 +488,7 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'critical'
         })
         .end((error, res) => {
@@ -480,8 +499,9 @@ describe('groupsControllersTest ', () => {
     });
     it('responds with status 404 group does not exist',
     (done) => {
+      const groupname = mockData.staticGroups[3].groupname;
       chai.request(app)
-        .post(`/api/groups/${mockData.string}/send-message`)
+        .post(`/api/groups/${groupname}/send-message`)
         .set('x-access-token', token2)
         .type('form')
         .send({
@@ -490,7 +510,7 @@ describe('groupsControllersTest ', () => {
         })
         .end((error, res) => {
           res.should.have.status(404);
-          expect(res.body.error.message).to.eql(`${mockData.string} does not exist on PostIt`)
+          expect(res.body.error.message).to.eql(`${groupname} does not exist on PostIt`)
           done();
         });
     });
@@ -533,7 +553,7 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString
+          message: mockData.longString[0]
         })
         .end((error, res) => {
           res.should.have.status(400);
@@ -548,7 +568,7 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: ''
         })
         .end((error, res) => {
@@ -564,7 +584,7 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'important'
         })
         .end((error, res) => {
@@ -580,7 +600,7 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'normal'
         })
         .end((error, res) => {
@@ -597,12 +617,12 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'normal'
         })
         .end((error, res) => {
           res.should.have.status(201);
-          expect(res.body.message).to.eql(mockData.longString);
+          expect(res.body.message).to.eql(mockData.longString[0]);
           expect(res.body.toGroup).to.eql(`${mockData.staticGroups[0].groupname}`);
           expect(res.body.priority).to.eql('normal');
           done();
@@ -615,12 +635,12 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'urgent'
         })
         .end((error, res) => {
           res.should.have.status(201);
-          expect(res.body.message).to.eql(mockData.longString);
+          expect(res.body.message).to.eql(mockData.longString[0]);
           expect(res.body.toGroup).to.eql(`${mockData.staticGroups[0].groupname}`);
           expect(res.body.priority).to.eql('urgent');
           done();
@@ -633,12 +653,12 @@ describe('groupsControllersTest ', () => {
         .set('x-access-token', token2)
         .type('form')
         .send({
-          message: mockData.longString,
+          message: mockData.longString[0],
           priority: 'critical'
         })
         .end((error, res) => {
           res.should.have.status(201);
-          expect(res.body.message).to.eql(mockData.longString);
+          expect(res.body.message).to.eql(mockData.longString[0]);
           expect(res.body.toGroup).to.eql(`${mockData.staticGroups[0].groupname}`);
           expect(res.body.priority).to.eql('critical');
           done();
@@ -660,7 +680,7 @@ describe('groupsControllersTest ', () => {
     it('responds with status 404 if group does not exist',
     (done) => {
       chai.request(app)
-        .get(`/api/groups/${mockData.string}/show-messages`)
+        .get(`/api/groups/${mockData.staticGroups[3].groupname}/show-messages`)
         .set('x-access-token', token2)
         .end((error, res) => {
           res.should.have.status(404);

@@ -183,7 +183,7 @@ describe('usersControllersTest ', () => {
         .type('form')
         .send({
           username: mockData.staticUser[0].username,
-          email: mockData.string,
+          email: mockData.staticUser[3].email,
           password: mockData.staticUser[0].password,
           phone: mockData.staticUser[0].phone
         })
@@ -199,9 +199,9 @@ describe('usersControllersTest ', () => {
         .type('form')
         .send({
           username: mockData.staticUser[0].username,
-          email: mockData.randomUser.email,
-          password: mockData.staticUser[0].password,
-          phone: mockData.staticUser[0].phone
+          email: mockData.staticUser[1].email,
+          password: mockData.staticUser[1].password,
+          phone: mockData.staticUser[1].phone
         })
         .end((error, res) => {
           res.should.have.status(409);
@@ -214,7 +214,7 @@ describe('usersControllersTest ', () => {
         .post('/api/user/signup/')
         .type('form')
         .send({
-          username: mockData.randomUser.username,
+          username: mockData.staticUser[1].username,
           email: mockData.staticUser[0].email,
           password: mockData.staticUser[0].password,
           phone: mockData.staticUser[0].phone
@@ -225,13 +225,28 @@ describe('usersControllersTest ', () => {
           done();
         });
     });
-    it('returns 201 because it does require a unique password and phone', (done) => {
+    // it('responds with status 500 for invalid phone number', (done) => {
+    //   chai.request(app)
+    //     .post('/api/user/signup/')
+    //     .type('form')
+    //     .send({
+    //       username: mockData.staticUser[1].username,
+    //       email: mockData.staticUser[1].email,
+    //       password: mockData.staticUser[1].password,
+    //       phone: mockData.staticUser[4].phone
+    //     })
+    //     .end((error, res) => {
+    //       res.should.have.status(500);
+    //       done();
+    //     });
+    // });
+    it('returns 201 because it does not require a unique password and phone', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
         .type('form')
         .send({
-          username: mockData.randomUser.username,
-          email: mockData.randomUser.email,
+          username: mockData.staticUser[4].username,
+          email: mockData.staticUser[4].email,
           password: mockData.staticUser[0].password,
           phone: mockData.staticUser[0].phone
         })
@@ -337,8 +352,8 @@ describe('usersControllersTest ', () => {
       .post('/api/user/signin/')
       .type('form')
       .send({
-        username: mockData.randomUser.username,
-        password: mockData.staticUser[0].password
+        username: mockData.staticUser[1].username,
+        password: mockData.staticUser[1].password
       })
       .end((error, res) => {
         res.should.have.status(404);
@@ -353,8 +368,8 @@ describe('usersControllersTest ', () => {
       .post('/api/user/signin/')
       .type('form')
       .send({
-        username: mockData.randomUser.email,
-        password: mockData.staticUser[0].password
+        username: mockData.staticUser[1].email,
+        password: mockData.staticUser[1].password
       })
       .end((error, res) => {
         res.should.have.status(404);
@@ -370,7 +385,7 @@ describe('usersControllersTest ', () => {
       .type('form')
       .send({
         username: mockData.staticUser[0].username,
-        password: mockData.randomUser.password
+        password: mockData.staticUser[1].password
       })
       .end((error, res) => {
         res.should.have.status(401);
@@ -440,7 +455,7 @@ describe('usersControllersTest ', () => {
         .post('/api/user/request-password')
         .type('form')
         .send({
-          email: mockData.string
+          email: mockData.staticUser[3].email
         })
         .end((err, res) => {
           res.should.have.status(400);
@@ -454,7 +469,7 @@ describe('usersControllersTest ', () => {
         .post('/api/user/request-password')
         .type('form')
         .send({
-          email: mockData.randomUser.email
+          email: mockData.staticUser[1].email
         })
         .end((err, res) => {
           res.should.have.status(404);
@@ -550,10 +565,10 @@ describe('usersControllersTest ', () => {
         .post('/api/user/signup')
         .type('form')
         .send({
-          username: mockData.username,
-          email: mockData.randomUser.email,
-          password: mockData.randomUser.password,
-          phone: mockData.randomUser.phone
+          username: mockData.staticUser[2].username,
+          email: mockData.staticUser[2].email,
+          password: mockData.staticUser[2].password,
+          phone: mockData.staticUser[2].phone
         })
         .end(() => {
           chai.request(app)
@@ -567,12 +582,12 @@ describe('usersControllersTest ', () => {
             .type('form')
             .set('x-access-token', token)
             .send({
-              username: mockData.username,
+              username: mockData.staticUser[2].username,
             })
             .end(() => {
               const { groupname } = mockData.staticGroups[0];
               chai.request(app)
-              .get(`/api/search/${groupname}/mockData.username/0`)
+              .get(`/api/search/${groupname}/mockData.staticUser[2].username/0`)
               .set('x-access-token', token)
               .type('form')
               .send()
@@ -584,38 +599,38 @@ describe('usersControllersTest ', () => {
           });
         });
     });
-    // it('responds with status 200 if all parameters are provided', (done) => {
-    //   chai.request(app).keepOpen()
-    //     Promise.all([
-    //       app.post('/api/user/signup')
-    //       .type('form')
-    //       .send({
-    //         username: mockData.username,
-    //         email: mockData.randomUser.email,
-    //         password: mockData.randomUser.password,
-    //         phone: mockData.randomUser.phone
-    //       }),
-    //       app.post('/api/create-group/')
-    //       .set('x-access-token', token)
-    //       .type('form')
-    //       .send(mockData.staticGroups[0]),
-    //       app.post(`/api/groups/${mockData.staticGroups[0].groupname}/add-member/`)
-    //       .type('form')
-    //       .set('x-access-token', token)
-    //       .send({
-    //         username: mockData.username,
-    //       }),
-    //       app.get(`/api/search/${mockData.staticGroups[0].groupname}/mockData.username/0`)
-    //       .set('x-access-token', token)
-    //       .type('form')
-    //       .send()
-    //     ])
-    //     .end((err, res) => {
-    //       res.should.have.status(200);
-    //       done();
-    //     })
-    //     .then(() => app.close());
-    // });
+  //   // it('responds with status 200 if all parameters are provided', (done) => {
+  //   //   chai.request(app).keepOpen()
+  //   //     Promise.all([
+  //   //       app.post('/api/user/signup')
+  //   //       .type('form')
+  //   //       .send({
+  //   //         username: mockData.username,
+  //   //         email: mockData.randomUser.email,
+  //   //         password: mockData.randomUser.password,
+  //   //         phone: mockData.randomUser.phone
+  //   //       }),
+  //   //       app.post('/api/create-group/')
+  //   //       .set('x-access-token', token)
+  //   //       .type('form')
+  //   //       .send(mockData.staticGroups[0]),
+  //   //       app.post(`/api/groups/${mockData.staticGroups[0].groupname}/add-member/`)
+  //   //       .type('form')
+  //   //       .set('x-access-token', token)
+  //   //       .send({
+  //   //         username: mockData.username,
+  //   //       }),
+  //   //       app.get(`/api/search/${mockData.staticGroups[0].groupname}/mockData.username/0`)
+  //   //       .set('x-access-token', token)
+  //   //       .type('form')
+  //   //       .send()
+  //   //     ])
+  //   //     .end((err, res) => {
+  //   //       res.should.have.status(200);
+  //   //       done();
+  //   //     })
+  //   //     .then(() => app.close());
+  //   // });
     it('responds with status 401 if user no access token is provided', (done) => {
       const { groupname } = mockData.staticGroups[0];
       chai.request(app)
@@ -658,7 +673,7 @@ describe('usersControllersTest ', () => {
     });
     it('responds with status 200 for all search result', (done) => {
       const { groupname } = mockData.staticGroups[0];
-      const { username } = mockData.randomUser;
+      const { username } = mockData.staticUser[2];
       chai.request(app)
       .get(`/api/search/${groupname}/${username}/0`)
       .set('x-access-token', token)
@@ -670,7 +685,7 @@ describe('usersControllersTest ', () => {
       });
     });
     it('responds with status 400 if groupname is not supplied', (done) => {
-      const { username } = mockData.randomUser;
+      const { username } = mockData.staticUser[0];
       chai.request(app)
       .get(`/api/search/${mockData.emptyString}/${username}/0`)
       .set('x-access-token', token)
@@ -696,20 +711,22 @@ describe('usersControllersTest ', () => {
       });
     });
     it('responds with status 404 if group does not exist', (done) => {
+      const groupname = mockData.staticGroups[1].groupname;
       chai.request(app)
-      .get(`/api/search/${mockData.string}/${mockData.username}/0`)
+      .get(`/api/search/${groupname}/${mockData.staticUser[2].username}/0`)
       .set('x-access-token', token)
       .type('form')
       .send()
       .end((err, res) => {
         res.should.have.status(404);
-        res.body.error.message.should.equal(`${mockData.string} does not exist on PostIt`);
+        res.body.error.message.should.equal
+        (`${groupname} does not exist on PostIt`);
         done();
       });
     });
     it('responds with status 400 if search page is negative', (done) => {
       const { groupname } = mockData.staticGroups[0];
-      const { username } = mockData.randomUser;
+      const { username } = mockData.staticUser[2];
       chai.request(app)
       .get(`/api/search/${groupname}/${username}/-1`)
       .set('x-access-token', token)

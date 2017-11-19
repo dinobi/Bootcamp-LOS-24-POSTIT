@@ -1,5 +1,5 @@
 import sinon from 'sinon';
-import faker from 'faker';
+// import faker from 'faker';
 
 export default {
   func: sinon.spy(),
@@ -9,15 +9,21 @@ export default {
   emptyArray: [],
   emptyObject: {},
   emptyString: '   ', 
-  groupsArray: [{ groupname: faker.lorem.word(), description: faker.lorem.words() }],
   match: { params: { id: 1 } },
   matchHash: { params: { id: 1, hash: '' } },
-  messageObject: { id: 1,
-    fromUser: faker.lorem.word(),
-    priority: faker.lorem.word(),
-    message: faker.lorem.words() },
-  string: faker.lorem.word(),
-  longString: faker.lorem.sentences(),
+  // messageObject: { id: 1,
+  //   fromUser: faker.lorem.word(),
+  //   priority: faker.lorem.word(),
+  //   message: faker.lorem.words() },
+  string: [
+    'troy', 'tray', 'fantasy',
+    'learning', 'community',
+    'testing purpose'
+  ],
+  longString: [
+    'wake me up when september ends',
+    'once upon a time in little china, a place we once called home'
+  ],
   number: 1,
   buttonText: 'Okay',
   createGroupString: 'create-group',
@@ -26,12 +32,13 @@ export default {
   activeString: 'active',
   user: { message: [] },
   username: 'searchAgent',
-  randomUser: {
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    phone: faker.phone.phoneNumber(),
-  },
+  email: 'searchAgent@postit.com',
+  // randomUser: {
+  //   username: faker.internet.userName(),
+  //   email: faker.internet.email(),
+  //   password: faker.internet.password(),
+  //   phone: faker.phone.phoneNumber(),
+  // },
   staticUser: [
     {
       username: 'john_doe',
@@ -44,7 +51,26 @@ export default {
       email: 'a_einstein@postit.com',
       password: 's_ReLaTiViTy',
       phone: '08032952998'
+    },
+    {
+      username: 'isaac',
+      email: 'issac@postit.com',
+      password: 'boomerang',
+      phone: '08032952998'
+    },
+    {
+      username: 'invalid_guy',
+      email: 'issac@postit',
+      password: 'wthit',
+      phone: '08032952998'
+    },
+    {
+      username: 'invalid_guy2',
+      email: 'tsunamu@postit.com',
+      password: 'hellYa',
+      phone: '08032952998abc'
     }
+
   ],
   staticGroups: [
     {
@@ -57,6 +83,10 @@ export default {
     },
     {
       groupname: 'LFC',
+      description: 'liverpool football club'
+    },
+    {
+      groupname: 'fictitio',
       description: 'liverpool football club'
     }
   ]
