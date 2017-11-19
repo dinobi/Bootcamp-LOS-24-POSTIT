@@ -54,7 +54,7 @@ describe('User Model', () => {
     };
     models.User.create(newUser)
     .catch((error) => {
-      expect(error.errors[0].message).to.equal('Usesr.phone cannot be null');
+      expect(error.errors[0].message).to.equal('User.phone cannot be null');
       done();
     });
   });
