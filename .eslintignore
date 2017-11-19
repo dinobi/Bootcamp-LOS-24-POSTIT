@@ -1,7 +1,7 @@
 test/*
 server/coverage/*
-client/config/*
-client/scripts/*
-client/public/*
+.nyc_output
+coverage
+client/src/spec/*
 node_modules
 

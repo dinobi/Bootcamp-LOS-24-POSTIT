@@ -79,12 +79,6 @@ const uniqueValidator = (res, error) => {
 };
 
 const messageValidator = (message, priority, groupname, req, res) => {
-  if (!groupname || groupname.trim() === '') {
-    return res.status(400).send({
-      error: { message: 'You must specify a group to send message' }
-    });
-  }
-
   if (!message || message.trim() === '') {
     return res.status(400).send({
       error: { message: 'You forgot to include a message body' }
@@ -92,7 +86,7 @@ const messageValidator = (message, priority, groupname, req, res) => {
   }
   if (!priority || priority === '') {
     return res.status(400).send({
-      error: { message: 'Invalid priority level', status: 400 }
+      error: { message: 'Priority level is required', status: 400 }
     });
   }
   if (priority !== undefined &&

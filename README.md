@@ -4,7 +4,7 @@ I (Dinobi) took on the development of this project as part of the requirements t
 ![postit-landing](https://user-images.githubusercontent.com/13672476/29314076-3ff95124-81b4-11e7-824c-d2757e27d5a4.png)
 
 # PostIt
-
+[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT.svg?branch=develop)](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT) [![Coverage Status](https://coveralls.io/repos/github/dinobi/Bootcamp-LOS-24-POSTIT/badge.svg?branch=develop)](https://coveralls.io/github/dinobi/Bootcamp-LOS-24-POSTIT?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3de5caa7a72272b8098a/maintainability)](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT/maintainability) [![dependencies Status](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT/status.svg)](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT)
 
 **Communicate Group Messages Instantly**

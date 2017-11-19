@@ -23,22 +23,17 @@ export default (app) => {
   // Middleware to protect the following API routes
   app.use(authUser);
 
-  // API route to get list of all users
-  app.get('/api/users/', controllers.user.fetchUsers);
-
   // API route to perform postit search
-  app.get('/api/search/:groupname/:searchTerm/:page', controllers.user.search);
+  app.get('/api/search/:groupname/:searchTerm/:page', verifyGroup,
+  controllers.user.search);
 
   // API route that allow users create broadcast groups
-  app.post('/api/create-group/',
+  app.post('/api/create-group/', verifyAuthUser,
   controllers.group.create);
 
   // API route that allow users delete a broadcast group
   app.post('/api/groups/delete-group/', verifyAuthUser, verifyGroup,
   controllers.group.delete);
-
-  // API route to get list of all groups
-  app.get('/api/groups/', controllers.group.fetchAllGroups);
 
   // API route to get list of group a user belongs to
   app.get('/api/groups/me/', verifyAuthUser, controllers.group.fetchMyGroups);
@@ -52,7 +47,7 @@ export default (app) => {
   controllers.group.removeMember);
 
   // API route to get list of all users in a group
-  app.get('/api/groups/:groupname/members/', verifyGroup,
+  app.get('/api/groups/:groupname/members/', verifyAuthUser, verifyGroup,
   controllers.group.fetchMembers);
 
   // API route that allows a logged in user post messages to created groups
@@ -60,7 +55,7 @@ export default (app) => {
   controllers.message.createMessage);
 
   // API route that allows a logged in user retrieve messages from group
-  app.get('/api/groups/:groupname/show-messages/', verifyGroup,
+  app.get('/api/groups/:groupname/show-messages/', verifyAuthUser, verifyGroup,
   controllers.message.fetchMessages);
 
   // API route to serve error page

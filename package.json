@@ -14,9 +14,9 @@
     "migration": "heroku run sequelize db:migrate",
     "start": "babel-node ./server/bin/www",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
-    "exec": "nodemon ./server/bin/www --exec babel-node ./server/app",
-    "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register",
-    "test-dev": "mocha --compilers js:babel-core/register --timeout 10000",
+    "exec": "NODE_ENV=development nodemon ./server/bin/www --exec babel-node ./server/app",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha test/index --compilers js:babel-register --timeout 10000",
+    "test-dev": "NODE_ENV=test mocha test/index --compilers js:babel-core/register --timeout 10000",
     "test-migration": "export NODE_ENV=test && sequelize db:migrate",
     "test-undo-migration": "export NODE_ENV=test && sequelize db:migrate:undo:all",
     "heroku-postbuild": "npm run build",
@@ -87,6 +87,7 @@
     "eslint-loader": "1.7.1",
     "express": "^4.15.3",
     "extract-text-webpack-plugin": "2.1.2",
+    "faker": "^4.1.0",
     "file-loader": "0.11.2",
     "history": "^4.7.2",
     "html-webpack-plugin": "^2.29.0",
@@ -130,6 +131,7 @@
     "sequelize-cli": "^2.7.0",
     "serve-favicon": "^2.4.5",
     "shortid": "^2.2.8",
+    "sinon": "^4.1.2",
     "style-loader": "^0.18.2",
     "sw-precache-webpack-plugin": "0.11.3",
     "sweetalert": "^2.0.8",
@@ -142,6 +144,13 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
+    ]
+  },
+  "nyc": {
+    "extension": [
+      ".jsx",
+      ".es6",
+      ".spec.js"
     ]
   }
 }

@@ -40,6 +40,14 @@ const errorResponse = (res, statusCode, message, error) => {
         }
       });
       break;
+    case 413:
+      res.status(413).send({
+        error: {
+          message,
+          status: 413
+        }
+      });
+      break;
     case 500:
       res.status(500).send({
         error: error.message, status: 500
