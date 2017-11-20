@@ -22,7 +22,7 @@ describe('Group Model', () => {
     .catch((error) => {
       expect(error.errors[0].message).to
       // .equal('groupname cannot be null');
-      .equal('Group.name cannot be null');
+      .equal('Group.groupname cannot be null');
       done();
     });
   });
