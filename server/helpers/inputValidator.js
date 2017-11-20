@@ -1,58 +1,54 @@
 /* eslint-disable no-useless-escape */
+import errorResponse from './errorResponse';
 
 const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
 const signupValidator = (req, res) => {
-  if (!req.body.username || req.body.username.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'username field cannot be empty' }
-    });
-  }
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  const phone = req.body.phone;
+  let message;
 
-  if (!req.body.email || req.body.email.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'email field cannot be empty' }
-    });
+  if (!username || username.trim() === '') {
+    message = 'username field cannot be empty';
+    return errorResponse(res, 400, message, null);
   }
-
-  if (!emailRE.test(req.body.email)) {
-    return res.status(400)
-    .send({
-      error: { message: 'Enter a valid email' }
-    });
+  if (username.length > 18) {
+    message = 'username should not exceed 18 characters';
+    return errorResponse(res, 413, message, null);
   }
-
-  if (!req.body.password || req.body.password.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'password field cannot be empty' }
-    });
+  if (!email || email.trim() === '') {
+    message = 'email field cannot be empty';
+    return errorResponse(res, 400, message, null);
   }
-
-  if (!req.body.phone || req.body.phone.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'phone field cannot be empty' }
-    });
+  if (!emailRE.test(email)) {
+    message = 'Enter a valid email';
+    return errorResponse(res, 400, message, null);
+  }
+  if (!password || password.trim() === '') {
+    message = 'password field cannot be empty';
+    return errorResponse(res, 400, message, null);
+  }
+  if (!phone || phone.trim() === '') {
+    message = 'phone field cannot be empty';
+    return errorResponse(res, 400, message, null);
   }
   return 'validated';
 };
 
 const loginValidator = (req, res) => {
-  if (!req.body.username || req.body.username.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'username field cannot be empty' }
-    });
+  const username = req.body.username;
+  const password = req.body.password;
+  let message;
+  if (!username || username.trim() === '') {
+    message = 'username field cannot be empty';
+    return errorResponse(res, 400, message, null);
   }
 
-  if (!req.body.password || req.body.password.trim() === '') {
-    return res.status(400)
-    .send({
-      error: { message: 'password field cannot be empty' }
-    });
+  if (!password || password.trim() === '') {
+    message = 'password field cannot be empty';
+    return errorResponse(res, 400, message, null);
   }
 
   return 'validated';
@@ -60,42 +56,41 @@ const loginValidator = (req, res) => {
 
 const uniqueValidator = (res, error) => {
   const uniqueError = error.errors[0].message;
+  let message;
   switch (uniqueError) {
     case 'username must be unique':
-      return res.status(409).send({
-        error: { message: 'Username already exists', status: 409 }
-      });
+      message = 'Username already exists';
+      return errorResponse(res, 409, message, null);
     case 'email must be unique':
-      return res.status(409).send({
-        error: { message: 'Email already exists', status: 409 }
-      });
+      message = 'Email already exists';
+      return errorResponse(res, 409, message, null);
     case 'Validation isEmail on email failed':
-      return res.status(403).send({
-        error: { message: 'Enter a valid email', status: 400 }
-      });
+      message = 'Enter a valid email';
+      return errorResponse(res, 400, message, null);
+    case 'Validation not on phone failed':
+      message = 'Enter a valid phone';
+      return errorResponse(res, 400, message, null);
     default:
       return 'validated';
   }
 };
 
 const messageValidator = (message, priority, groupname, req, res) => {
+  let errorMessage;
   if (!message || message.trim() === '') {
-    return res.status(400).send({
-      error: { message: 'You forgot to include a message body' }
-    });
+    errorMessage = 'You forgot to include a message body';
+    return errorResponse(res, 400, errorMessage, null);
   }
   if (!priority || priority === '') {
-    return res.status(400).send({
-      error: { message: 'Priority level is required', status: 400 }
-    });
+    errorMessage = 'Priority level is required';
+    return errorResponse(res, 400, errorMessage, null);
   }
   if (priority !== undefined &&
     priority.toLowerCase() !== 'urgent'
     && priority.toLowerCase() !== 'critical'
     && priority.toLowerCase() !== 'normal') {
-    return res.status(400).send({
-      error: { message: 'Invalid priority level', status: 400 }
-    });
+    errorMessage = 'Invalid priority level';
+    return errorResponse(res, 400, errorMessage, null);
   }
   return 'validated';
 };

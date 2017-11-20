@@ -22,7 +22,8 @@ export default {
   ],
   longString: [
     'wake me up when september ends',
-    'once upon a time in little china, a place we once called home'
+    'once upon a time in little china, a place we once called home',
+    'thisIsOneVeryLongUsername',
   ],
   number: 1,
   buttonText: 'Okay',

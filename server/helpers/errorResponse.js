@@ -48,11 +48,6 @@ const errorResponse = (res, statusCode, message, error) => {
         }
       });
       break;
-    case 500:
-      res.status(500).send({
-        error: error.message, status: 500
-      });
-      break;
     case 503:
       res.status(503).send({
         error: error.message, status: 503
@@ -60,7 +55,7 @@ const errorResponse = (res, statusCode, message, error) => {
       break;
     default:
       return res.status(500).send({
-        error, status: 500
+        error: error.message, status: 500
       });
   }
 };

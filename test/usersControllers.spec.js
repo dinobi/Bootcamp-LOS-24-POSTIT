@@ -209,6 +209,22 @@ describe('usersControllersTest ', () => {
           done();
         });
     });
+    it('responds with status 413 if username exceeds 18 characters', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          username: mockData.longString[2],
+          email: mockData.staticUser[1].email,
+          password: mockData.staticUser[1].password,
+          phone: mockData.staticUser[1].phone
+        })
+        .end((error, res) => {
+          res.should.have.status(413);
+          res.body.error.message.should.equal('username should not exceed 18 characters');
+          done();
+        });
+    });
     it('responds with status 409 if email already exist', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
@@ -225,21 +241,22 @@ describe('usersControllersTest ', () => {
           done();
         });
     });
-    // it('responds with status 500 for invalid phone number', (done) => {
-    //   chai.request(app)
-    //     .post('/api/user/signup/')
-    //     .type('form')
-    //     .send({
-    //       username: mockData.staticUser[1].username,
-    //       email: mockData.staticUser[1].email,
-    //       password: mockData.staticUser[1].password,
-    //       phone: mockData.staticUser[4].phone
-    //     })
-    //     .end((error, res) => {
-    //       res.should.have.status(500);
-    //       done();
-    //     });
-    // });
+    it('responds with status 400 for invalid phone number', (done) => {
+      chai.request(app)
+        .post('/api/user/signup/')
+        .type('form')
+        .send({
+          username: mockData.staticUser[1].username,
+          email: mockData.staticUser[1].email,
+          password: mockData.staticUser[1].password,
+          phone: mockData.staticUser[4].phone
+        })
+        .end((error, res) => {
+          res.should.have.status(400);
+          res.body.error.message.should.equal('Enter a valid phone');
+          done();
+        });
+    });
     it('returns 201 because it does not require a unique password and phone', (done) => {
       chai.request(app)
         .post('/api/user/signup/')
@@ -420,7 +437,7 @@ describe('usersControllersTest ', () => {
         })
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.message.should.equal('Request success');
+          // res.body.message.should.equal('Request success');
           hash = res.body.hash;
           done();
         });
@@ -479,7 +496,7 @@ describe('usersControllersTest ', () => {
     });
   });
   describe('When a user hits the route POST /api/user/reset-password/:hash', () => {
-    it('responds with status 401 if hash token is not supplied', (done) => {
+    it('responds with status 401 if reset token is not supplied', (done) => {
       chai.request(app)
         .post(`/api/user/reset-password/${mockData.emptyString}`)
         .type('form')
@@ -516,7 +533,7 @@ describe('usersControllersTest ', () => {
           done();
         });
     });
-    it('responds with status 404 if unrecognised hash token is supplied', (done) => {
+    it('responds with status 404 if unrecognised reset token is supplied', (done) => {
       chai.request(app)
         .post(`/api/user/reset-password/${mockData.string}`)
         .type('form')
@@ -530,7 +547,7 @@ describe('usersControllersTest ', () => {
           done();
         });
     });
-    it('responds with status 200 if complete parameters are supplied', (done) => {
+    it('responds with status 200 if valid parameters are supplied', (done) => {
       chai.request(app)
         .post(`/api/user/reset-password/${hash}`)
         .type('form')
@@ -599,38 +616,6 @@ describe('usersControllersTest ', () => {
           });
         });
     });
-  //   // it('responds with status 200 if all parameters are provided', (done) => {
-  //   //   chai.request(app).keepOpen()
-  //   //     Promise.all([
-  //   //       app.post('/api/user/signup')
-  //   //       .type('form')
-  //   //       .send({
-  //   //         username: mockData.username,
-  //   //         email: mockData.randomUser.email,
-  //   //         password: mockData.randomUser.password,
-  //   //         phone: mockData.randomUser.phone
-  //   //       }),
-  //   //       app.post('/api/create-group/')
-  //   //       .set('x-access-token', token)
-  //   //       .type('form')
-  //   //       .send(mockData.staticGroups[0]),
-  //   //       app.post(`/api/groups/${mockData.staticGroups[0].groupname}/add-member/`)
-  //   //       .type('form')
-  //   //       .set('x-access-token', token)
-  //   //       .send({
-  //   //         username: mockData.username,
-  //   //       }),
-  //   //       app.get(`/api/search/${mockData.staticGroups[0].groupname}/mockData.username/0`)
-  //   //       .set('x-access-token', token)
-  //   //       .type('form')
-  //   //       .send()
-  //   //     ])
-  //   //     .end((err, res) => {
-  //   //       res.should.have.status(200);
-  //   //       done();
-  //   //     })
-  //   //     .then(() => app.close());
-  //   // });
     it('responds with status 401 if user no access token is provided', (done) => {
       const { groupname } = mockData.staticGroups[0];
       chai.request(app)

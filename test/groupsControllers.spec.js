@@ -362,7 +362,6 @@ describe('groupsControllersTest ', () => {
       .get(`/api/groups/${mockData.staticGroups[1].groupname}/members`)
       .set('x-access-token', token)
       .end((error, res) => {
-        console.log('<>>>>>>RES BODY>>>>', res.body)
         res.should.have.status(200);
         done();
       });
@@ -528,7 +527,6 @@ describe('groupsControllersTest ', () => {
           expect(res.body.error.message).to.eql('You forgot to include a message body')
           done();
         });
-        
     });
     it('responds with status 400 if message body is not provided',
     (done) => {
