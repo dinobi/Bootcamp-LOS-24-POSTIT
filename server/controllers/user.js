@@ -198,16 +198,16 @@ export default {
                     expiresIn,
                     hash
                   }).then(() => {
-                    return sendMail(req, res, mailType, email,
+                    sendMail(req, res, mailType, email,
                       { subject: 'Password Reset Link', notification }
                     );
                   }).catch(error => errorResponse(res, 500, null, error));
               } else {
-                return emailExist.update({
+                emailExist.update({
                   hash,
                   expiresIn
                 }).then(() => {
-                  return sendMail(req, res, mailType, email,
+                  sendMail(req, res, mailType, email,
                     { subject: 'Password Reset Link', notification }
                   );
                 }).catch(error => errorResponse(res, 500, null, error));

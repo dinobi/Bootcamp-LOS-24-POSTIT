@@ -424,24 +424,25 @@ describe('usersControllersTest ', () => {
         })
         .end((err, res) => {
           res.should.have.status(200);
-          done();
-        });
-    });
-
-    it('responds with status 200 when request is remade', (done) => {
-      chai.request(app)
-        .post('/api/user/request-password')
-        .type('form')
-        .send({
-          email: mockData.staticUser[0].email
-        })
-        .end((err, res) => {
-          res.should.have.status(200);
-          // res.body.message.should.equal('Request success');
           hash = res.body.hash;
           done();
         });
     });
+
+    // it('responds with status 200 when request is remade', (done) => {
+    //   chai.request(app)
+    //     .post('/api/user/request-password')
+    //     .type('form')
+    //     .send({
+    //       email: mockData.staticUser[0].email
+    //     })
+    //     .end((err, res) => {
+    //       res.should.have.status(200);
+    //       res.body.message.should.equal('Request success');
+    //       hash = res.body.hash;
+    //       done();
+    //     });
+    // });
     it('responds with status 400 if email field is omitted', (done) => {
       chai.request(app)
         .post('/api/user/request-password')
