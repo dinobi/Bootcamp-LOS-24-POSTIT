@@ -64,7 +64,7 @@ export default {
           } else if (user) {
             if (!(bcrypt.compareSync(req.body.password, user.password))) {
               const message = 'Authentication failed. Incorrect password';
-              errorResponse(res, 404, message, null);
+              errorResponse(res, 401, message, null);
             } else {
               const token = generateAuthToken(user);
               return res.status(200).send({
@@ -87,7 +87,7 @@ export default {
         } else if (user) {
           if (!(bcrypt.compareSync(req.body.password, user.password))) {
             const message = 'Authentication failed. Incorrect password';
-            errorResponse(res, 404, message, null);
+            errorResponse(res, 401, message, null);
           } else {
             const token = generateAuthToken(user);
             return res.status(200).send({
@@ -99,24 +99,15 @@ export default {
         }
       }).catch(error => errorResponse(res, 500, null, error));
   },
-  // All Users
-  fetchUsers(req, res) {
-    return models.User
-      .findAll({
-        attributes:
-        ['username', 'email', 'phone']
-      })
-      .then(users => res.status(200).send({
-        message: 'success',
-        users
-      }))
-      .catch(error => errorResponse(res, 500, null, error));
-  },
   // Search
   search(req, res) {
     const searchTerm = req.params.searchTerm;
     if (!searchTerm || searchTerm.trim() === '') {
-      const message = 'please specify a search term';
+      const message = 'Please specify a search term';
+      return errorResponse(res, 400, message, null);
+    }
+    if (req.params.page < 0) {
+      const message = 'Page must be a positive integer';
       return errorResponse(res, 400, message, null);
     }
     return models.User
@@ -181,9 +172,8 @@ export default {
           const message = 'We do not have this email in our record';
           return errorResponse(res, 404, message, null);
         }
-        const secret = req.body.email;
         const hash = crypto
-          .createHash('sha256', secret)
+          .createHash('sha256', process.env.HASH_SECRET)
           .update(Date.now().toString())
           .digest('hex');
         const expiresIn = Date.now() + 3600000;
@@ -200,8 +190,8 @@ export default {
           models.PasswordReset
             .findOne({
               where: { email }
-            }).then((emailExistRes) => {
-              if (emailExistRes === null) {
+            }).then((emailExist) => {
+              if (emailExist === null) {
                 models.PasswordReset
                   .create({
                     email,
@@ -213,7 +203,7 @@ export default {
                     );
                   }).catch(error => errorResponse(res, 500, null, error));
               } else {
-                emailExistRes.update({
+                emailExist.update({
                   hash,
                   expiresIn
                 }).then(() => {
@@ -222,15 +212,31 @@ export default {
                   );
                 }).catch(error => errorResponse(res, 500, null, error));
               }
+              if (process.env.NODE_ENV === 'test') {
+                return res.status(200)
+                .send({ message: 'Request success', hash, status: 200 });
+              }
+              return res.status(200)
+              .send({ message: 'Request success', status: 200 });
             });
         });
       });
   },
   resetPassword(req, res) {
-    const hashedPass = bcrypt.hashSync(req.body.password, salt, null);
+    const password = req.body.password;
+    const hash = req.params.hash;
+    if (!password || password.trim() === '') {
+      const message = 'Password field is required';
+      return errorResponse(res, 400, message, null);
+    }
+    if (!hash || hash.trim() === '') {
+      const message = 'You do not have a reset token';
+      return errorResponse(res, 401, message, null);
+    }
+    const hashedPass = bcrypt.hashSync(password, salt, null);
     models.PasswordReset
       .findOne({
-        where: { hash: req.params.hash }
+        where: { hash }
       }).then((result) => {
         if (result === null) {
           const message = 'The provided token does not exist or has been used';

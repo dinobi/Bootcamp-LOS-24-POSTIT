@@ -73,7 +73,16 @@ export default {
   },
   // Group messages
   fetchMessages(req, res) {
-    return models.Message
+    const { user, group } = req.body;
+    const groupname = group.groupname;
+    group.hasUser(user)
+    .then((userInGroup) => {
+      if (!userInGroup) {
+        const errorMessage =
+        `User does not belong to group '${groupname}'`;
+        return errorResponse(res, 401, errorMessage, null);
+      }
+      return models.Message
       .findAll({
         where: { toGroup: req.params.groupname },
         attributes: [
@@ -92,5 +101,6 @@ export default {
         }
         return res.status(200).send(message);
       }).catch(error => errorResponse(res, 500, null, error));
+    }).catch(error => errorResponse(res, 500, null, error));
   }
 };

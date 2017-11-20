@@ -29,7 +29,8 @@ const getMembersEmail = (groupname, username) => {
  * @param {string} email
  * @param {object} param1
  */
-const sendMail = (req, res, mailType, email, { subject, notification: html }) => {
+const sendMail = (req, res, mailType, email,
+  { subject, notification: html }) => {
   const transporter = nodemailer.createTransport({
     service: process.env.MAIL_SERVICE,
     auth: {

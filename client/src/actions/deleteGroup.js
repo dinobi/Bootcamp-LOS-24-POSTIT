@@ -32,6 +32,10 @@ const onDeleteGroup = groupData =>
       apiHandler('/api/groups/delete-group', groupData, 'post', headers)
       .then((groupResponse) => {
         dispatch(onDeleteGroupSuccess(groupResponse.data.group));
+        swal(groupResponse.data.message, {
+          buttons: false,
+          timer: 1000,
+        });
       }).catch((errorResponse) => {
         dispatch(onDeleteGroupFailure(errorResponse.response.data.error.message));
         swal({
