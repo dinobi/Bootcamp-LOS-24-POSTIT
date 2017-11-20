@@ -9,7 +9,8 @@
         "react-html-attrs",
         "transform-decorators-legacy",
         "transform-class-properties",
-        "transform-runtime"
+        "transform-runtime",
+        "transform-es2015-destructuring"
       ]
     },
     "production": {
