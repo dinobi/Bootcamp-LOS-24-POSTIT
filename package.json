@@ -21,8 +21,7 @@
     "test-undo-migration": "export NODE_ENV=test && sequelize db:migrate:undo:all",
     "heroku-postbuild": "npm run build",
     "undo:migration": "heroku run sequelize db:migrate:undo:all",
-    "test:watch": "jest client/ --watch --no-cache",
-    "test:coverage": "jest client --coverage"
+    "client-test": "jest --coverage --watch --no-cache"
   },
   "repository": {
     "type": "git",
@@ -156,8 +155,20 @@
       "./client/src/spec/jestsetup.js"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "client/src/**/*.{js,jsx}"
     ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest"
     },

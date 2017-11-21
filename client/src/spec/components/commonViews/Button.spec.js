@@ -6,15 +6,17 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import mockData from '../../mocks/mockData';
-import Header from '../../../components/commonViews/Header';
+import Button from '../../../components/commonViews/Button';
 
-describe('Given Header component is mounted', () => {
-  it('should render self without crashing', () => {
+jest.mock('react-router-dom');
+
+describe('Component: When button component is mounted', () => {
+  it('should render without crashing', () => {
     const props = {
-      handleClick: mockData.func
-    }
-    const wrapper = shallow(<Header {...props} />);
+      onClick: mockData.func,
+    };
+    const wrapper = shallow(<Button {...props}/>);
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('header').exists()).toBe(true);
+    expect(wrapper.find('button').exists()).toBe(true);
   });
 });
