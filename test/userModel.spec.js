@@ -28,8 +28,8 @@ describe('User Model', () => {
     };
     models.User.create(newUser)
     .catch((error) => {
-      expect(error.errors[0].message).to.equal('username cannot be null');
-      // expect(error.errors[0].message).to.equal('User.username cannot be null');
+      // expect(error.errors[0].message).to.equal('username cannot be null');
+      expect(error.errors[0].message).to.equal('User.username cannot be null');
       done();
     });
   });
@@ -42,8 +42,8 @@ describe('User Model', () => {
     };
     models.User.create(newUser)
     .catch((error) => {
-      expect(error.errors[0].message).to.equal('email cannot be null');
-      // expect(error.errors[0].message).to.equal('User.email cannot be null');
+      // expect(error.errors[0].message).to.equal('email cannot be null');
+      expect(error.errors[0].message).to.equal('User.email cannot be null');
       done();
     });
   });
@@ -56,8 +56,8 @@ describe('User Model', () => {
     };
     models.User.create(newUser)
     .catch((error) => {
-      expect(error.errors[0].message).to.equal('phone cannot be null');
-      // expect(error.errors[0].message).to.equal('User.phone cannot be null');
+      // expect(error.errors[0].message).to.equal('phone cannot be null');
+      expect(error.errors[0].message).to.equal('User.phone cannot be null');
       done();
     });
   });
@@ -70,8 +70,8 @@ describe('User Model', () => {
     };
     models.User.create(newUser)
     .catch((error) => {
-      expect(error.errors[0].message).to.equal('password cannot be null');
-      // expect(error.errors[0].message).to.equal('User.password cannot be null');
+      // expect(error.errors[0].message).to.equal('password cannot be null');
+      expect(error.errors[0].message).to.equal('User.password cannot be null');
       done();
     });
   });

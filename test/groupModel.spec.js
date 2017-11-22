@@ -21,8 +21,8 @@ describe('Group Model', () => {
     models.Group.create(newGroup)
     .catch((error) => {
       expect(error.errors[0].message).to
-      .equal('groupname cannot be null');
-      // .equal('Group.groupname cannot be null');
+      // .equal('groupname cannot be null');
+      .equal('Group.groupname cannot be null');
       done();
     });
   });
