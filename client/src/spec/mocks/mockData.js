@@ -89,6 +89,10 @@ export default {
     {
       groupname: 'fictitio',
       description: 'liverpool football club'
+    },
+    {
+      groupname: 'Yo',
+      description: 'Yours trully'
     }
   ]
   

@@ -95,7 +95,22 @@ describe('groupsControllersTest ', () => {
         res.should.have.status(400);
       });
     });
-    it('responds with status 413 if groupname is more than 18 characters', () => {
+    it('responds with status 400 if groupname is less than 3 characters', () => {
+      chai.request(app)
+      .post('/api/create-group/')
+      .set('x-access-token', token)
+      .type('form')
+      .send({
+        groupname: mockData.staticGroups[4].groupname,
+        description: mockData.staticGroups[0].description
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        expect(res.body.error.message).to.equal
+        ('group name is too short. minimum of 3 characters is allowed');
+      });
+    });
+    it('responds with status 413 if groupname is more than 15 characters', () => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -106,9 +121,27 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(413);
+        expect(res.body.error.message).to.equal
+        ('group name is too long. max of 15 characters is allowed');
       });
     });
-    it('responds with status 413 if description is more than 40 characters', () => {
+    it('responds with status 400 if description is less than 15 characters', (done) => {
+      chai.request(app)
+      .post('/api/create-group/')
+      .set('x-access-token', token)
+      .type('form')
+      .send({
+        groupname: mockData.staticGroups[1].groupname,
+        description: mockData.staticGroups[4].description
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        expect(res.body.error.message).to.equal
+        ('description is too short. minimum of 15 characters is allowed');
+        done();
+      });
+    });
+    it('responds with status 413 if description is more than 45 characters', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -119,9 +152,12 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(413);
+        expect(res.body.error.message).to.equal
+        ('description is too long. max of 45 characters is allowed');
+        done();
       });
     });
-    it('responds with status 201 and creates a new group if supplied correct parameters', () => {
+    it('responds with status 201 and creates a new group if supplied correct parameters', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -129,16 +165,28 @@ describe('groupsControllersTest ', () => {
       .send(mockData.staticGroups[1])
       .end((err, res) => {
         res.should.have.status(201);
+        done();
       });
     });
-    it('is case insensitive and responds with status 409 for similar groupnames', () => {
+    it('adds group creator to group on successful group creation', (done) => {
+      //fetch my groups
+      chai.request(app)
+      .get(`/api/groups/me`)
+      .set('x-access-token', token)
+      .end((error, res) => {
+        res.should.have.status(200);
+        done();
+      });
+    });
+    it('is case insensitive and responds with status 409 for similar groupnames', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
       .type('form')
-      .send(mockData.staticGroups[2])
+      .send(mockData.staticGroups[1])
       .end((err, res) => {
         res.should.have.status(409);
+        done()
       });
     });
   });
@@ -290,17 +338,17 @@ describe('groupsControllersTest ', () => {
       });
     });
     it('successfully removes a member and responds with status 200', (done) => {
-      const groupname = mockData.staticGroups[1].groupname;
+      const { groupname } = mockData.staticGroups[1];
+      const { username } = mockData.staticUser[0];
       chai.request(app)
       .post(`/api/groups/${groupname}/remove-member/`)
       .type('form')
       .set('x-access-token', token)
-      .send({
-        username: mockData.staticUser[0].username
-      })
+      .send({ username })
       .end((err, res) => {
         res.should.have.status(200);
-        expect(res.body.message).to.eql(`john_doe was successfully removed from ${groupname}`);
+        expect(res.body.message).to.eql
+        (`${username} was successfully removed from ${groupname}`);
         done();
       });
     });
@@ -318,7 +366,7 @@ describe('groupsControllersTest ', () => {
         expect(res.body.error.message).to.eql(`No such user in ${groupname}`);
         done();
       });
-    });
+    });   
   });
   describe('When a user hit the route POST /api/groups/:groupname/members/', () => {
     it('responds with status 400 if group is not specified', (done) => {
@@ -356,7 +404,7 @@ describe('groupsControllersTest ', () => {
         done();
       });
     });
-    it('responds with status 200 if group exist',
+    it('responds with status 200 if user belongs to group',
     (done) => {
       chai.request(app)
       .get(`/api/groups/${mockData.staticGroups[1].groupname}/members`)

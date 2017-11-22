@@ -5,15 +5,10 @@ import errorResponse from '../helpers/errorResponse';
 const verifyAuthUser = (req, res, next) => {
   const { username } = req.decoded.data;
   models.User.findOne({ where: { username } })
-    .then((user) => {
-      // check if the username belongs to a registered user
-      if (!user) {
-        const message = 'User not found. User has no PostIt account';
-        return errorResponse(res, 404, message, null);
-      }
-      req.body.user = user;
-      next();
-    }).catch(error => errorResponse(res, 500, null, error));
+  .then((user) => {
+    req.body.user = user;
+    next();
+  }).catch(error => errorResponse(res, 500, null, error));
 };
 // user
 const verifyUser = (req, res, next) => {
