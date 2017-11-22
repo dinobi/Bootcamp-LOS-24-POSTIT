@@ -69,6 +69,7 @@ class Group extends React.Component {
 
     const backToGroup =
       <ListItem
+        listClass="dashboard-menu-item"
         url="#groups"
         iconClass="fa fa-chevron-left"
         name="Back"
@@ -147,7 +148,7 @@ class Group extends React.Component {
                   </div>
                   <div className="col s12 m3 hide-on-small-and-down">
                     <div className="member-list-title">
-                      <h6>
+                      <h6 className="white-text">
                         Members
                         <span className="addButton">
                           <AddMemberModal addMemberModal={addMemberModal} />
@@ -164,7 +165,6 @@ class Group extends React.Component {
               </DashboardContent>
             </section>
           </div>
-          <Copyright />
         </main>
       </div>
     );

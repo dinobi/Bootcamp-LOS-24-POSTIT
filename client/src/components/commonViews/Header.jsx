@@ -14,7 +14,7 @@ const Header = ({ children, handleClick, headerClass, container, logoClass }) =>
       </a>
       {children}
     </div>
-    <div className="mobile-nav">
+    <div className="mobile-nav-wrapper">
       <div className="container" id="mobile-nav"></div>
     </div>
   </nav>

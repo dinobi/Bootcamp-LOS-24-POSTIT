@@ -12,7 +12,7 @@
     "build": "npm run remove-dist && webpack --config ./webpack.config.production.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "migration": "heroku run sequelize db:migrate",
-    "start": "babel-node ./server/bin/www",
+    "start": "NODE_ENV=production babel-node ./server/bin/www",
     "remove-dist": "node_modules/.bin/rimraf ./client/dist",
     "exec": "NODE_ENV=development nodemon ./server/bin/www --exec babel-node ./server/app",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha test/index --compilers js:babel-register --timeout 10000",
@@ -175,11 +175,7 @@
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/src/spec/mocks/assetTransformer.js"
-    },
-    "moduleFileExtensions": [
-      "jsx",
-      "js"
-    ]
+    }
   },
   "nyc": {
     "extension": [
