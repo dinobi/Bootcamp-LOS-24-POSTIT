@@ -120,7 +120,7 @@ export default {
           $ne: req.decoded.data.username
         }
       },
-      attributes: ['username', 'email']
+      attributes: ['id', 'username', 'email']
     })
     .then((users) => {
       const existingUsers = [];
@@ -216,8 +216,6 @@ export default {
                 return res.status(200)
                 .send({ message: 'Request success', hash, status: 200 });
               }
-              return res.status(200)
-              .send({ message: 'Request success', status: 200 });
             });
         });
       });

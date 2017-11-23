@@ -1,9 +1,16 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import {
-  Card, Button, DashboardContent
+  Card, Button, DashboardContent // eslint-disable-line no-unused-vars
 } from '../../../commonViews';
 import cardIcons from '../../../../images/cardStuff.png';
 
+/**
+ * Features Component
+ *
+ * @method Features
+ * @returns {Object} JSX
+ * @param {Object} props
+ */
 const Features = () =>
   <section className="col s12 m9 l10">
     <DashboardContent
@@ -17,18 +24,22 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
                     src={cardIcons}
                     alt="write post illustration"
                   />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     Write Post
                     <i className="material-icons right"
-                  >
-                    more_vert
+                    >
+                      more_vert
                     </i>
                   </span>
                 </div>
@@ -39,7 +50,9 @@ const Features = () =>
                       close
                     </i>
                   </span>
-                  <p>Compose a message and send as broadcast to group members.</p>
+                  <p>
+                    Compose a message and send as broadcast to group members.
+                  </p>
                 </div>
               </div>
             </Card>
@@ -47,14 +60,18 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
                     src={cardIcons}
                     alt="create group illustration"
                   />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     Create Group
                     <i className="material-icons right">
                       more_vert
@@ -76,14 +93,18 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
-                  src={cardIcons}
-                  alt="add member illustration"
-                />
+                    src={cardIcons}
+                    alt="add member illustration"
+                  />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     Add Member
                     <i className="material-icons right">
                       more_vert
@@ -98,8 +119,8 @@ const Features = () =>
                     </i>
                   </span>
                   <p>
-                    Add a new member to your created group for them to start sending
-                    and receiving posts within the group.
+                    Add a new member to your created group for them
+                    to start sending and receiving posts within the group.
                   </p>
                 </div>
               </div>
@@ -111,14 +132,18 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
                     src={cardIcons}
                     alt="view messages illustration"
                   />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     View Messages
                     <i className="material-icons right">
                       more_vert
@@ -132,7 +157,10 @@ const Features = () =>
                       close
                     </i>
                   </span>
-                  <p>View what your group members are writing about and stay in the know.</p>
+                  <p>
+                    View what your group members are writing about
+                    and stay in the know.
+                  </p>
                 </div>
               </div>
             </Card>
@@ -140,14 +168,18 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
                     src={cardIcons}
                     alt="postit search illustration"
                   />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     Search Member
                     <i className="material-icons right">
                       more_vert
@@ -172,14 +204,18 @@ const Features = () =>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
-                <div className="card-image waves-effect waves-block waves-light">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
                   <img className="activator"
                     src={cardIcons}
                     alt="wikipedia search illustration"
                   />
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
                     Search Wikipedia
                     <i className="material-icons right">
                       more_vert

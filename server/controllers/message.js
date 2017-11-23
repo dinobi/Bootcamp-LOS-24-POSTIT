@@ -86,6 +86,7 @@ export default {
       .findAll({
         where: { toGroup: req.params.groupname },
         attributes: [
+          'id',
           'message',
           'fromUser',
           'toGroup',

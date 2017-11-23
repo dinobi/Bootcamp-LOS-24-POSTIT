@@ -1,11 +1,26 @@
 import React from 'react';
 import apiHandler from '../../../../components/helpers/api-handler';
-import SearchResult from '../search/SearchResult.jsx';
+import SearchResult // eslint-disable-line no-unused-vars
+  from '../search/SearchResult.jsx';
 import {
-  Modal, Form, InputField, ErrorAlert
+  Modal, Form, // eslint-disable-line no-unused-vars
+  InputField, ErrorAlert // eslint-disable-line no-unused-vars
 } from '../../../commonViews';
 
+/**
+ * AddMemberModal
+ * Displays a modal for searching and adding
+ * new group members
+ *
+ * @class AddMemberModal
+ * @extends {React.Component}
+ */
 class AddMemberModal extends React.Component {
+  /**
+   * Creates an instance of AddMemberModal.
+   * @param {any} props
+   * @memberof AddMemberModal
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,17 +34,32 @@ class AddMemberModal extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.handlePageNav = this.handlePageNav.bind(this);
   }
-
+  /**
+   * onFocus()
+   * This method is called when the user focuses on an input field,
+   * which clear any error messages afterwards.
+   *
+   * @memberof AddMemberModal
+   * @returns {void}
+   */
   onFocus() {
     this.setState({ message: '' });
   }
-
+  /**
+   * handleSearch()
+   * This method performs search for users
+   * according to usrername
+   *
+   * @returns {array} array of found users
+   * @param {any} [page=this.state.prevPage + 1]
+   * @memberof AddMemberModal
+   */
   handleSearch(page = this.state.prevPage + 1) {
     this.setState({ foundUsers: [], message: '' });
     const searchTerm = this.searchTerm.value.trim();
     let headers;
     const groupname =
-    location.href.split('/')[location.href.split('/').length - 1];
+      location.href.split('/')[location.href.split('/').length - 1];
     if (searchTerm !== '') {
       apiHandler(`/api/search/${groupname}/${searchTerm}/${page - 1}`,
         '', 'GET', headers).then(
@@ -38,13 +68,25 @@ class AddMemberModal extends React.Component {
           if (users.data.userData.length > 0) {
             this.setState({ foundUsers: userData, message: '' });
           } else {
-            this.setState({ message: `No username with *${searchTerm}* was found` });
+            this.setState({
+              message: `No username with *${searchTerm}* was found`
+            });
           }
         }
-      );
+        );
     }
   }
-
+  /**
+   * handlePageNav
+   *
+   * This method is called when a user hits the
+   * next or previous page button and it performs
+   * returns result for that page
+   *
+   * @returns {array} array of users
+   * @param {any} page
+   * @memberof AddMemberModal
+   */
   handlePageNav(page) {
     if (this.searchTerm.value.trim() !== '') {
       if (page === 'prev') {
@@ -61,9 +103,11 @@ class AddMemberModal extends React.Component {
     }
   }
   /**
+   * handleAddMember()
+   * This method is called when a user
+   * hits the add member button
    *
-   *
-   * @param {Object} selectedUser - user object
+   * @param {Object} selectedUser - selected user object
    * @memberof AddMemberModal
    *
    * @returns {Object} new state
@@ -79,7 +123,7 @@ class AddMemberModal extends React.Component {
   /**
    *
    *
-   * @returns {jsx} jsx 
+   * @returns {jsx} jsx of AddMemberModal
    * @memberof AddMemberModal
    */
   render() {
@@ -94,7 +138,7 @@ class AddMemberModal extends React.Component {
             placeholder="Enter a username"
             id="search"
             type="text"
-            onChange={ () => this.handleSearch() }
+            onChange={() => this.handleSearch()}
             inputRef={(input) => { this.searchTerm = input; }}
           />
           {
@@ -105,28 +149,27 @@ class AddMemberModal extends React.Component {
             foundUsers={this.state.foundUsers}
             handleAddMember={this.handleAddMember}
           />
-            <div class="search-pages">
-              <span onClick={() =>
-                this.handlePageNav('prev')}
-                className="search-prev"
-              >
-                <i className="fa fa-chevron-left"></i>
-              </span>
-              <span>
-                {this.state.prevPage + 1}/{this.state.nextPage}
-              </span>
-              <span onClick={() =>
-                this.handlePageNav('next')}
-                className="search-next"
-              >
+          <div class="search-pages">
+            <span onClick={() =>
+              this.handlePageNav('prev')}
+              className="search-prev"
+            >
+              <i className="fa fa-chevron-left"></i>
+            </span>
+            <span>
+              {this.state.prevPage + 1}/{this.state.nextPage}
+            </span>
+            <span onClick={() =>
+              this.handlePageNav('next')}
+              className="search-next"
+            >
               <i className="fa fa-chevron-right"></i>
-              </span>
-            </div>
+            </span>
+          </div>
         </Form>
       </Modal>
     );
   }
 }
-
 
 export default AddMemberModal;

@@ -1,8 +1,14 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 import moment from 'moment';
+
 /**
- * MessageLog - displays message from a group member.
- * @returns {*} message.
+ * MessageLog Component
+ * Displays a message when a component has errored
+ *
+ * @method MessageLog
+ * @returns {Object} JSX
+ * @param {Object} props
  */
 const MessageLog = ({ message }) => {
   const messageDate = new Date(message.createdAt).toUTCString();
@@ -10,7 +16,9 @@ const MessageLog = ({ message }) => {
   const priority = message.priority;
   return (
     <div className="post">
-      <aside className="avatar">{ message.fromUser.substr(0, 1).toUpperCase() }</aside>
+      <aside className="avatar">
+        { message.fromUser.substr(0, 1).toUpperCase() }
+      </aside>
       <section className="post-message">
         <div className="message-details">
           <h6 className="sender">{ message.fromUser }</h6> &nbsp;
@@ -29,6 +37,13 @@ const MessageLog = ({ message }) => {
       </section>
     </div>
   );
+};
+
+MessageLog.defaultProps = {
+  message: {},
+};
+MessageLog.propTypes = {
+  message: PropTypes.object.isRequired
 };
 
 export default MessageLog;

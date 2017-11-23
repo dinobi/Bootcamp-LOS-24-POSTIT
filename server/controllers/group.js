@@ -138,7 +138,7 @@ export default {
           `User does not belong to group '${req.params.groupname}'`;
         return errorResponse(res, 401, errorMessage, null);
       }
-      group.getUser({ attribute: ['username', 'email'] })
+      group.getUser({ attributes: ['id', 'username', 'email', 'createdAt'] })
       .then(result => res.status(200).send(result))
       .catch(error => errorResponse(res, 500, null, error));
     }).catch(error => errorResponse(res, 500, null, error));
