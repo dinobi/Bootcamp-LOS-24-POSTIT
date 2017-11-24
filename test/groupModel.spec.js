@@ -8,10 +8,10 @@ describe('Group Model', () => {
   it('should create new group', (done) => {
     const newGroup = mockData.staticGroups[3];
     models.Group.create(newGroup)
-    .then((group) => {
-      expect(group.name).to.equal(newGroup.name);
-      done();
-    });
+      .then((group) => {
+        expect(group.name).to.equal(newGroup.name);
+        done();
+      });
   });
 
   it('should fail if groupname is not provided', (done) => {
@@ -19,11 +19,11 @@ describe('Group Model', () => {
       description: mockData.staticGroups[0].description,
     };
     models.Group.create(newGroup)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      // .equal('groupname cannot be null');
-      .equal('Group.groupname cannot be null');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          // .equal('groupname cannot be null');
+          .equal('Group.groupname cannot be null');
+        done();
+      });
   });
 });

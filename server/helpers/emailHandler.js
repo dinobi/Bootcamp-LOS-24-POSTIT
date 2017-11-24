@@ -5,9 +5,13 @@ import models from '../models';
 dotenv.config();
 
 /**
+ * getMembersEmail helper
+ * helps to aggregate email addresses of group members
+ * except the message creator
+ *
  * @param {groupname} groupname
  * @param {username} username of sender
- * @returns {Array} Array - array of members email addresses
+ * @returns {promise} Array - array of members email addresses
  */
 const getMembersEmail = (groupname, username) => {
   return new Promise((resolve, reject) => {
@@ -25,9 +29,16 @@ const getMembersEmail = (groupname, username) => {
 };
 
 /**
+ * sendMail helper
+ * Sends out email based on supplied addresses and request
+ *
+ * @return {object} returns a response object
  * @return {string} error | info
- * @param {string} email
- * @param {object} param1
+ * @param  {object} req - request object parameter
+ * @param  {object} res - response object paramter
+ * @param {string} mailType - password reset or notification check
+ * @param {string} email - email address of recipient
+ * @param {object} param1 - mail content
  */
 const sendMail = (req, res, mailType, email,
   { subject, notification: html }) => {

@@ -1,16 +1,37 @@
 import models from '../models';
 import errorResponse from '../helpers/errorResponse';
 
-// Autheticated user
+/**
+ * verifyAuthUser
+ * extracts username of currently logged in user from
+ * a decoded token and save for future request
+ *
+ * @returns {next} next - next middleware to handle request
+ * @returns {object} res - response when user cannot be found
+ * @param {object} req - response object
+ * @param {object} res - response object
+ * @param {next} next - function
+ */
 const verifyAuthUser = (req, res, next) => {
   const { username } = req.decoded.data;
   models.User.findOne({ where: { username } })
-  .then((user) => {
-    req.body.user = user;
-    next();
-  }).catch(error => errorResponse(res, 500, null, error));
+    .then((user) => {
+      req.body.user = user;
+      next();
+    }).catch(error => errorResponse(res, 500, null, error));
 };
-// user
+
+/**
+ * verifyUser
+ * verifies that a user exist and extracts user
+ * for future request
+ *
+ * @returns {next} next - next middleware to handle request
+ * @returns {object} res - response when user cannot be found
+ * @param {object} req - response object
+ * @param {object} res - response object
+ * @param {next} next - function
+ */
 const verifyUser = (req, res, next) => {
   const { username } = req.body;
   if (!username || username.trim() === '') {
@@ -28,7 +49,18 @@ const verifyUser = (req, res, next) => {
       next();
     }).catch(error => errorResponse(res, 500, null, error));
 };
-// group
+
+/**
+ * verifyGroup
+ * verifies that a group exist and extracts group
+ * for future use
+ *
+ * @returns {next} next - next middleware to handle request
+ * @returns {object} res - response when user cannot be found
+ * @param {object} req - response object
+ * @param {object} res - response object
+ * @param {next} next - function
+ */
 const verifyGroup = (req, res, next) => {
   let groupname;
   /* eslint-disable no-unused-expressions */

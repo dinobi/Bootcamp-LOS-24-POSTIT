@@ -4,7 +4,16 @@ import { sendMail, getMembersEmail } from '../helpers/emailHandler';
 import errorResponse from '../helpers/errorResponse';
 
 export default {
-  // Send message to a group
+  /**
+  * creatMessage controller
+  * Allows users create a new message
+  *
+  * Route: POST: /api/groups/:groupname/send-message/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   createMessage(req, res) {
     const { user, group } = req.body;
     const message = req.body.message;
@@ -12,7 +21,7 @@ export default {
     const groupname = group.groupname;
     const username = user.username;
     if (messageValidator(
-      message, priority, groupname, req, res
+      message, priority, req, res
     ) !== 'validated') {
       return;
     }
@@ -35,9 +44,9 @@ export default {
             const mailType = 'notification';
             const notification = `Hello, <br><br>You have a new message
             marked as ${priority} on ${groupname}<br><br>
-            ${newMessage.message}<br><br>FROM: ${username}<br><br> click on
-            <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
-            </a> to view more`;
+            MESSAGE: ${newMessage.message}<br><br>FROM: ${username}<br><br>
+            click on <a href='${process.env.APP_URL}/#/groups/rainier team'>
+            this link</a> to view more`;
             const subject = `PostIt: New ${priority} message`;
             switch (priority.toLowerCase()) {
               case 'critical':
@@ -71,7 +80,17 @@ export default {
           }).catch(error => errorResponse(res, 500, null, error));
       });
   },
-  // Group messages
+  /**
+  * fetchMessages controller
+  * Allows users view all the messages that has been
+  * sent to groups that they belong
+  *
+  * Route: POST: /api/groups/:groupname/show-message/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   fetchMessages(req, res) {
     const { user, group } = req.body;
     const groupname = group.groupname;

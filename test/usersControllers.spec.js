@@ -414,34 +414,6 @@ describe('usersControllersTest ', () => {
   });
 
   describe('When a user hits the route POST /api/user/request-password/', () => {
-    it('requests a new password and responds with status 200 when supplied valid parameters',
-    (done) => {
-      chai.request(app)
-        .post('/api/user/request-password')
-        .type('form')
-        .send({
-          email: mockData.staticUser[0].email
-        })
-        .end((err, res) => {
-          res.should.have.status(200);
-          hash = res.body.hash;
-          done();
-        });
-    });
-    it('responds with status 200 when request is remade', (done) => {
-      chai.request(app)
-        .post('/api/user/request-password')
-        .type('form')
-        .send({
-          email: mockData.staticUser[0].email
-        })
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.message.should.equal('Request success');
-          hash = res.body.hash;
-          done();
-        });
-    });
     it('responds with status 400 if email field is omitted', (done) => {
       chai.request(app)
         .post('/api/user/request-password')
@@ -491,6 +463,34 @@ describe('usersControllersTest ', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.error.message.should.equal('We do not have this email in our record');
+          done();
+        });
+    });
+    it('requests a new password and responds with status 200 when supplied valid parameters',
+    (done) => {
+      chai.request(app)
+        .post('/api/user/request-password')
+        .type('form')
+        .send({
+          email: mockData.staticUser[0].email
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          hash = res.body.hash;
+          done();
+        });
+    });
+    it('responds with status 200 when request is remade', (done) => {
+      chai.request(app)
+        .post('/api/user/request-password')
+        .type('form')
+        .send({
+          email: mockData.staticUser[0].email
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.equal('Request success');
+          hash = res.body.hash;
           done();
         });
     });
