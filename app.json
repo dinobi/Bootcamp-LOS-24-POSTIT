@@ -1,0 +1,42 @@
+{
+  "name": "Bootcamp-LOS-24-POSTIT",
+  "description": "postit-review",
+  "scripts": {
+  },
+  "env": {
+    "APP_URL": {
+      "required": true
+    },
+    "HASH_SECRET": {
+      "required": true
+    },
+    "HEROKU_POSTGRESQL_SILVER_URL": {
+      "required": true
+    },
+    "JWT_EXPIRY_TIME": {
+      "required": true
+    },
+    "JWT_SECRET": {
+      "required": true
+    },
+    "MAIL_PASSWORD": {
+      "required": true
+    },
+    "MAIL_SERVICE": {
+      "required": true
+    },
+    "MAIL_USER": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

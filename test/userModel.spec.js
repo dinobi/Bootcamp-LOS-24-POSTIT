@@ -13,11 +13,11 @@ describe('User Model', () => {
   };
   it('should create new user', (done) => {
     models.User.create(newUser)
-    .then((user) => {
-      expect(user.username).to.equal(newUser.username);
-      expect(user.email).to.equal(newUser.email);
-      done();
-    });
+      .then((user) => {
+        expect(user.username).to.equal(newUser.username);
+        expect(user.email).to.equal(newUser.email);
+        done();
+      });
   });
 
   it('should fail if username is not provided', (done) => {
@@ -27,11 +27,11 @@ describe('User Model', () => {
       phone: mockData.staticUser[3].phone
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to.equal('username cannot be null');
-      // expect(error.errors[0].message).to.equal('User.username cannot be null');
-      done();
-    });
+      .catch((error) => {
+        // expect(error.errors[0].message).to.equal('username cannot be null');
+        expect(error.errors[0].message).to.equal('User.username cannot be null');
+        done();
+      });
   });
 
   it('should fail if email is not provided', (done) => {
@@ -41,11 +41,11 @@ describe('User Model', () => {
       phone: mockData.staticUser[2].phone
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to.equal('email cannot be null');
-      // expect(error.errors[0].message).to.equal('User.email cannot be null');
-      done();
-    });
+      .catch((error) => {
+        // expect(error.errors[0].message).to.equal('email cannot be null');
+        expect(error.errors[0].message).to.equal('User.email cannot be null');
+        done();
+      });
   });
 
   it('should fail if phone is not provided', (done) => {
@@ -55,11 +55,11 @@ describe('User Model', () => {
       password: mockData.staticUser[2].password,
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to.equal('phone cannot be null');
-      // expect(error.errors[0].message).to.equal('User.phone cannot be null');
-      done();
-    });
+      .catch((error) => {
+        // expect(error.errors[0].message).to.equal('phone cannot be null');
+        expect(error.errors[0].message).to.equal('User.phone cannot be null');
+        done();
+      });
   });
 
   it('should fail if password is not provided', (done) => {
@@ -69,11 +69,11 @@ describe('User Model', () => {
       phone: mockData.staticUser[2].phone
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to.equal('password cannot be null');
-      // expect(error.errors[0].message).to.equal('User.password cannot be null');
-      done();
-    });
+      .catch((error) => {
+        // expect(error.errors[0].message).to.equal('password cannot be null');
+        expect(error.errors[0].message).to.equal('User.password cannot be null');
+        done();
+      });
   });
 
   it('should fail if email is invalid', (done) => {
@@ -84,11 +84,11 @@ describe('User Model', () => {
       password: mockData.staticUser[0].password
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('Validation isEmail on email failed');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          .equal('Validation isEmail on email failed');
+        done();
+      });
   });
   it('should fail if phone is invalid', (done) => {
     const newUser = {
@@ -98,11 +98,11 @@ describe('User Model', () => {
       password: mockData.staticUser[0].password
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('Validation not on phone failed');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          .equal('Validation not on phone failed');
+        done();
+      });
   });
   it('should fail if username already exists', (done) => {
     const newUser = {
@@ -112,11 +112,11 @@ describe('User Model', () => {
       password: mockData.staticUser[0].password
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('username must be unique');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          .equal('username must be unique');
+        done();
+      });
   });
   it('should fail if email already exists', (done) => {
     const newUser = {
@@ -126,10 +126,10 @@ describe('User Model', () => {
       password: mockData.staticUser[2].password
     };
     models.User.create(newUser)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('email must be unique');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          .equal('email must be unique');
+        done();
+      });
   });
 });

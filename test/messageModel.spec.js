@@ -13,10 +13,10 @@ describe('Message Model', () => {
       toGroup: mockData.staticGroups[0].groupname
     };
     models.Message.create(newMessage)
-    .then((message) => {
-      expect(message.message).to.equal(newMessage.message);
-      done();
-    });
+      .then((message) => {
+        expect(message.message).to.equal(newMessage.message);
+        done();
+      });
   });
 
   it('should fail if message is not given', (done) => {
@@ -26,12 +26,12 @@ describe('Message Model', () => {
       toGroup: mockData.staticGroups[0].groupname
     };
     models.Message.create(newMessage)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('message cannot be null');
-      // .equal('Message.message cannot be null');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          //  .equal('message cannot be null');
+          .equal('Message.message cannot be null');
+        done();
+      });
   });
 
   it('should fail if fromUser is not given', (done) => {
@@ -41,12 +41,21 @@ describe('Message Model', () => {
       toGroup: mockData.staticGroups[0].groupname
     };
     models.Message.create(newMessage)
+<<<<<<< HEAD
     .catch((error) => {
       expect(error.errors[0].message).to
       .equal('fromUser cannot be null');
       // .equal('Message.fromUser cannot be null');
       done();
     });
+=======
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          // .equal('fromUser cannot be null');
+          .equal('Message.fromUser cannot be null');
+        done();
+      });
+>>>>>>> 553931c00e96d409b1763120542f6adaecb27be3
   });
 
   it('should fail if toGroup is not given', (done) => {
@@ -56,12 +65,21 @@ describe('Message Model', () => {
       fromUser: mockData.staticUser[0].username
     };
     models.Message.create(newMessage)
+<<<<<<< HEAD
     .catch((error) => {
       expect(error.errors[0].message).to
       .equal('toGroup cannot be null');
       // .equal('Message.toGroup cannot be null');
       done();
     });
+=======
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          // .equal('toGroup cannot be null');
+          .equal('Message.toGroup cannot be null');
+        done();
+      });
+>>>>>>> 553931c00e96d409b1763120542f6adaecb27be3
   });
 
   it('should fail if wrong priority is given', (done) => {
@@ -72,10 +90,10 @@ describe('Message Model', () => {
       toGroup: mockData.staticGroups[0].groupname
     };
     models.Message.create(newMessage)
-    .catch((error) => {
-      expect(error.errors[0].message).to
-      .equal('Validation isIn on priority failed');
-      done();
-    });
+      .catch((error) => {
+        expect(error.errors[0].message).to
+          .equal('Validation isIn on priority failed');
+        done();
+      });
   });
 });
