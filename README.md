@@ -24,18 +24,20 @@ PostIt is an open source web application built to allow family, friends and coll
 ## Technology Stack (PERN)
 
 #### Client Side: 
-    - Front End Organization in `React` and `Redux`
-    - Uses `SASS` for styling and `Webpack` for bundling
+    - Front End Organization in **React** and **Redux**
+    - Uses **SASS** for styling and **Webpack** for bundling
 
 #### Serve Side:
-    - Back end implementation is built on `Node`, using `Express` as the server and `Sequelize` as the `ORM` for communicating with the `Postgres Database`.
+    - Back end implementation is built on **Node**, using
+    **Express** as the server and **Sequelize** as the **ORM** for
+    communicating with the **Postgres Database**.
 
 #### Authentication and Code Base Organization
-    - Written in `es6` and uses `Babel` for transpiling down to es5 and `JWT`
-    for authentication.  
+    - Written in **es6** and uses **Babel** for transpiling down
+    to **es5** and **JWT** for authentication.  
     
 #### Style Checking and Best Practices
-    - Uses `Eslint` which was configured to use `Airbnb-base` rules for style checking
+    - Uses **Eslint** which was configured to use **Airbnb-base** rules for style checking
 
 ## Usage
 
@@ -45,7 +47,7 @@ PostIt is an open source web application built to allow family, friends and coll
 
 2. Install [`postgres`](https://www.postgresql.org/download/)
 
-3. Clone the repo
+3. Clone the repo and cd into it
 
     ```
     git clone https://github.com/dinobi/Bootcamp-LOS-24-POSTIT.git
@@ -61,7 +63,8 @@ PostIt is an open source web application built to allow family, friends and coll
 5. Configure Postgres
 
     ```
-    In the application root directory, use the config settings in `server/config/config.js` to setup your postgres db
+    In the application root directory, use the config settings in
+    `server/config/config.js` to setup your postgres db
     ```
 
 6. Run database migrations
@@ -79,7 +82,8 @@ PostIt is an open source web application built to allow family, friends and coll
 
 ## Testing
 
-The app uses `Mocha/Chai` and `Chai-Http` for backend testing, and `Jest` for frontend testing
+The app uses `Mocha/Chai` and `Chai-Http` for backend testing, and `Jest` for
+frontend testing
 
 - install `Mocha`, `nyc` and `jest-cli` globally: `npm i mocha nyc jest-cli -g`
 > - `npm test-dev` - run the unit test suite 
@@ -87,7 +91,8 @@ The app uses `Mocha/Chai` and `Chai-Http` for backend testing, and `Jest` for fr
 > - `client-test` - run the unit test for frontend and display code coverage result
 
 ## Api Docs
-The PostIt api documentation source is located in the `server/api-docs` directory, while the documentation site is:
+The PostIt api documentation source is located in the `server/api-docs`
+directory, while the documentation site is:
 - [api-docs](https://postit-webapp.herokuapp.com/api-docs)
 
 
@@ -102,26 +107,28 @@ Check the [contributing](contributing.md) file, it contains everything you need 
 ## FAQ
 #### Is this an Open-Source Application?
 
-    ```
-    Yes it is, and contributing to the development of this application is by raising PRs
-    ```
+
+    Yes it is, and contributing to the development of this
+    application is by raising PRs
+    
 
 #### Who can contribute?
 
-    ```
-    Anyone!. This application is open to all those who want to contribute to open-source development and are willing to follow set standards for contributing.
-    ```
+    Anyone!. This application is open to all those who want to
+    contribute to open-source development and are willing to follow
+    set standards for contributing.
+    
 #### Is there a set standard for PRs to this repository?
 
-    ```
-    Yes, there are set conventions for PRs to this repository and can be found in the project [wiki](https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/wiki)
-    ```
+    Yes, there are set conventions for PRs to this repository and can be found
+    in the project wiki.
+    
 #### What language was used to develop this application?
 
-    ```
     This project is a full stack Javascript application
-    ```
+    
 #### Can I clone this application for personal use?
-    ```
-    Yes!. This application is licensed under MIT, and is open for whatever you may choose to use it for.
-    ```
+
+    Yes!. This application is licensed under MIT, and is open for
+    whatever you may choose to use it for.
+    
