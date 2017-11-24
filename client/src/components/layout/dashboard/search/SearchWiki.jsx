@@ -97,7 +97,6 @@ class SearchWiki extends React.Component {
               </div>
             </section>
           </div>
-          <Copyright />
         </main>
       </div>
     );

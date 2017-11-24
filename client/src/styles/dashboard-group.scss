@@ -1,0 +1,107 @@
+
+$urgent: #2196F3;
+$normal: #4CAF50;
+$critical: #F44336;
+.tag {
+	float: right;
+  padding: 1px 8px;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 900;
+}
+@media (max-width: 600px) {
+	.tag {
+		float: none;
+		display: inline-block;
+		position: relative;
+		right: 0;
+		top: 0;
+		
+	}
+}
+.normal-tag {
+	background: $normal;
+}
+.urgent-tag {
+	background: $urgent;
+}
+.critical-tag {
+	background: $critical;
+}
+
+.dashboard-group {
+	i {
+		font-size: 2.4rem;
+	}
+	.card {
+		height: 108px;
+		.card-control {
+			height: 68px !important;
+			padding: 0 !important;
+			margin-left: auto;
+			margin-right: auto;
+			width: 80%;
+			margin-bottom: 30px;
+			.input-field {
+				margin: 0 !important;
+			}
+			i:hover {
+				color: $primary-color !important;
+			}
+		}
+	}
+}
+@media (max-width: 600px) {
+	.dashboard-group .card.card-control {
+		overflow-y: auto; 
+		width: 100%;
+	}
+}
+.dashboard-group .card i:hover, .dashboard-group .card-control i:hover {
+	color: $primary-color-hover !important;
+}
+
+.dashboard-group .right {
+	position: absolute;
+	right: 24px;
+	bottom: 24px;
+}
+
+.members-list {
+	height: 60vh;
+	overflow-y: auto;
+}
+.tooltipped {
+	position: relative !important;
+	float: right;
+	margin-top: 3px;
+}
+.member-list-title {
+	background: #212121;
+	padding: 5px 10px;
+	font-weight: 900 !important;
+	h5 {
+		font-weight: 900 !important;
+	}
+}
+
+.members-list > li {
+	cursor: pointer;
+	list-style: none;
+	font-weight: 900;
+	padding: 10px;
+	&:hover, &:active, &:focus {
+		border-radius: 3px;
+		color: $white;
+		background: linear-gradient($primary-color, $primary-color-hover);
+	}
+}
+.removeButton, .addButton {
+	position: absolute;
+	right: 20px;
+}
+.removeButton:hover, .addButton {
+	color: #000;
+}

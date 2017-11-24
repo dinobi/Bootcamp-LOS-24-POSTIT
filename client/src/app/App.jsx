@@ -9,7 +9,7 @@ import {
 } from '../components/layout';
 import IndexHome from '../components/layout/home/IndexHome.jsx';
 import NotFound from '../components/layout/home/NotFound.jsx';
-import '../styles/base.scss';
+import '../styles/index.scss';
 
 const App = () =>
   (

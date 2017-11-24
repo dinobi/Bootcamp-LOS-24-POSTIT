@@ -16,7 +16,6 @@ const Dashboard = () =>
         </aside>
         <Features/>
       </div>
-      <Copyright />
     </main>
   </div>;
 

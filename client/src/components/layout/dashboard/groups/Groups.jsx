@@ -173,7 +173,6 @@ class Groups extends React.Component {
               </DashboardContent>
             </section>
           </div>
-          <Copyright />
         </main>
       </div>
     );

@@ -83,7 +83,7 @@ class MessageBoard extends React.Component {
           </Select>
           <Button
             type="submit"
-            btnClass="browser-default action-btn send"
+            btnClass="browser-default send"
             name={
               <IconButton
                 iconClass="fa fa-send tooltipped"
