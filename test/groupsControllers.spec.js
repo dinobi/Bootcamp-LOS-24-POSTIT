@@ -34,8 +34,8 @@ describe('groupsControllersTest ', () => {
     });
   });
 
-  describe('When a user hits the route POST /api/create-group/', () => {
-    it('responds with status 401 if token is not supplied', () => {
+  describe('When a user hits the route POST /api/create-group/', (done) => {
+    it('responds with status 401 if token is not supplied', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', '')
@@ -43,9 +43,10 @@ describe('groupsControllersTest ', () => {
       .send(mockData.staticGroups[1])
       .end((err, res) => {
         res.should.have.status(401);
+        done();
       });
     });
-    it('responds with status 400 if groupname is omitted', () => {
+    it('responds with status 400 if groupname is omitted', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -55,9 +56,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done();
       });
     });
-    it('responds with status 400 if groupname is not provided', () => {
+    it('responds with status 400 if groupname is not provided', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -68,9 +70,26 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done();
       });
     });
-    it('responds with status 400 if description is omitted', () => {
+    it('responds with status 400 if groupname is not valid', (done) => {
+      chai.request(app)
+      .post('/api/create-group/')
+      .set('x-access-token', token)
+      .type('form')
+      .send({
+        groupname: 'foo000@bar',
+        description: mockData.staticGroups[0].description
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        expect(res.body.error.message).to.eql
+        ('groupname can contain only alphabets, numbers, dash and underscore');
+        done();
+      });
+    });
+    it('responds with status 400 if description is omitted', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -80,9 +99,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done();
       });
     });
-    it('responds with status 400 if description is not provided', () => {
+    it('responds with status 400 if description is not provided', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -93,9 +113,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done();
       });
     });
-    it('responds with status 400 if groupname is less than 3 characters', () => {
+    it('responds with status 400 if groupname is less than 3 characters', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -108,9 +129,10 @@ describe('groupsControllersTest ', () => {
         res.should.have.status(400);
         expect(res.body.error.message).to.equal
         ('group name is too short. minimum of 3 characters is allowed');
+        done();
       });
     });
-    it('responds with status 413 if groupname is more than 15 characters', () => {
+    it('responds with status 413 if groupname is more than 15 characters', (done) => {
       chai.request(app)
       .post('/api/create-group/')
       .set('x-access-token', token)
@@ -186,7 +208,7 @@ describe('groupsControllersTest ', () => {
       .send(mockData.staticGroups[1])
       .end((err, res) => {
         res.should.have.status(409);
-        done()
+        done();
       });
     });
   });
@@ -426,7 +448,7 @@ describe('groupsControllersTest ', () => {
     });
   });
   describe('When a user hits the route POST /api/groups/delete-group/', () => {
-    it('responds with status 401 if token is not supplied', () => {
+    it('responds with status 401 if token is not supplied', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group')
       .set('x-access-token', '')
@@ -436,9 +458,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(401);
+        done()
       });
     });
-    it('responds with status 400 if groupname is omitted', () => {
+    it('responds with status 400 if groupname is omitted', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group/')
       .set('x-access-token', token)
@@ -447,9 +470,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done();
       });
     });
-    it('responds with status 400 if groupname is not provided', () => {
+    it('responds with status 400 if groupname is not provided', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group/')
       .set('x-access-token', token)
@@ -459,9 +483,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(400);
+        done()
       });
     });
-    it('responds with status 404 if group does not exist', () => {
+    it('responds with status 404 if group does not exist', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group/')
       .set('x-access-token', token)
@@ -471,9 +496,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(404);
+        done();
       });
     });
-    it('responds with status 403 if user is not the group creator or admin', () => {
+    it('responds with status 403 if user is not the group creator or admin', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group/')
       .set('x-access-token', token)
@@ -483,9 +509,10 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(403);
+        done();
       });
     });
-    it('responds with status 200 if group was successfully archived', () => {
+    it('responds with status 200 if group was successfully archived', (done) => {
       chai.request(app)
       .post('/api/groups/delete-group/')
       .set('x-access-token', token)
@@ -495,6 +522,7 @@ describe('groupsControllersTest ', () => {
       })
       .end((err, res) => {
         res.should.have.status(200);
+        done();
       });
     });
   });
