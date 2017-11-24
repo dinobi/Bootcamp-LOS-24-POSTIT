@@ -8,7 +8,7 @@ I (Dinobi) took on the development of this project as part of the requirements t
 [![Build Status](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT.svg?branch=develop)](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT) [![Coverage Status](https://coveralls.io/repos/github/dinobi/Bootcamp-LOS-24-POSTIT/badge.svg?branch=develop)](https://coveralls.io/github/dinobi/Bootcamp-LOS-24-POSTIT?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3de5caa7a72272b8098a/maintainability)](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT/maintainability) [![dependencies Status](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT/status.svg)](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT)
 
 ## About
-**Communicate Group Messages Instantly**
+#### Communicate Group Messages Instantly
 PostIt is an open source web application built to allow family, friends and colleagues share prioritized messages as broadcast in a fun way anytime.
 
 #### Features
@@ -19,25 +19,25 @@ PostIt is an open source web application built to allow family, friends and coll
 - Get email notification for prioritized messages.
 - Have fun.
 
-> - https://postit-webapp.herokuapp.com/
+    Access [PostIt](https://postit-webapp.herokuapp.com/)
 
 ## Technology Stack (PERN)
 
 #### Client Side: 
-    - Front End Organization in **React** and **Redux**
-    - Uses **SASS** for styling and **Webpack** for bundling
+    - Front End Organization in REACT and REDUX
+    - Uses SASS for styling and WEBPACK for bundling
 
 #### Serve Side:
-    - Back end implementation is built on **Node**, using
-    **Express** as the server and **Sequelize** as the **ORM** for
-    communicating with the **Postgres Database**.
+    - Back end implementation is built on NODE, using
+    EXPRESS as the server and SEQUELIZE as the ORM for
+    communicating with the POSTGRES DB.
 
 #### Authentication and Code Base Organization
-    - Written in **es6** and uses **Babel** for transpiling down
-    to **es5** and **JWT** for authentication.  
+    - Written in ES6 and uses BABEL for transpiling down
+    to ES5 and JWT for authentication.  
     
 #### Style Checking and Best Practices
-    - Uses **Eslint** which was configured to use **Airbnb-base** rules for style checking
+    - Uses ESLINT which was configured to use Airbnb-base rules for style checking
 
 ## Usage
 
