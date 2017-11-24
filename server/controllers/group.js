@@ -15,6 +15,7 @@ export default {
   */
   createGroup(req, res) {
     const { user } = req.body;
+    const alphanumeric = /^[a-zA-Z0-9_-]*$/;
     let groupname = req.body.groupname;
     let description = req.body.description;
     if (!groupname || groupname.trim() === '') {
@@ -23,6 +24,11 @@ export default {
     }
     if (!description || description.trim() === '') {
       const message = 'A group description is required';
+      return errorResponse(res, 400, message, null);
+    }
+    if (groupname.match(alphanumeric) === null) {
+      const message =
+      'groupname can contain only alphabets, numbers, dash and underscore';
       return errorResponse(res, 400, message, null);
     }
     groupname = req.body.groupname.toLowerCase();

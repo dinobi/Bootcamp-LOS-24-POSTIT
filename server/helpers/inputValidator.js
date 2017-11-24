@@ -2,6 +2,7 @@
 import errorResponse from './errorResponse';
 
 const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+const alphanumeric = /^[a-zA-Z0-9_]*$/;
 
 /**
  * signupValidator
@@ -23,9 +24,17 @@ const signupValidator = (req, res) => {
     message = 'username field cannot be empty';
     return errorResponse(res, 400, message, null);
   }
+  if (username.length < 3) {
+    message = 'username should be atleast 3 characters long';
+    return errorResponse(res, 400, message, null);
+  }
   if (username.length > 18) {
     message = 'username should not exceed 18 characters';
     return errorResponse(res, 413, message, null);
+  }
+  if (!alphanumeric.test(username)) {
+    message = 'username can contain only alphabets, numbers, and underscore';
+    return errorResponse(res, 400, message, null);
   }
   if (!email || email.trim() === '') {
     message = 'email field cannot be empty';
@@ -37,6 +46,10 @@ const signupValidator = (req, res) => {
   }
   if (!password || password.trim() === '') {
     message = 'password field cannot be empty';
+    return errorResponse(res, 400, message, null);
+  }
+  if (password.length < 6) {
+    message = 'password should be up to 6 characters long';
     return errorResponse(res, 400, message, null);
   }
   if (!phone || phone.trim() === '') {
