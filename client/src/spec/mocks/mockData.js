@@ -21,7 +21,7 @@ export default {
     'testing purpose'
   ],
   longString: [
-    'wake me up when september ends',
+    'wakeMeUpWhenSeptemberEnds',
     'once upon a time in little china, a place we once called home',
     'thisIsOneVeryLongUsername',
   ],
