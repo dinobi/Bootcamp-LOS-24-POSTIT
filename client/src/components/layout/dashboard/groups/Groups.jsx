@@ -1,21 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import requireAuth from '../../../helpers/requireAuth';
-import GroupCard from './GroupCard.jsx';
+import GroupCard from './GroupCard.jsx'; // eslint-disable-line no-unused-vars
+import DashHeader // eslint-disable-line no-unused-vars
+  from '../DashHeader.jsx';
 import {
-  DashHeader, SideMenu, Card, Form,
-  Copyright, InputField, IconButton,
-  DashboardContent
+  SideMenu, Card, Form, // eslint-disable-line no-unused-vars
+  Copyright, InputField, // eslint-disable-line no-unused-vars
+  IconButton, DashboardContent // eslint-disable-line no-unused-vars
 } from '../../../commonViews';
 import {
   onCreateGroup, onLoadGroups,
-  loadGroupMessages, loadGroupMembers,
-  onDeleteGroup
+  onArchiveGroup
 } from '../../../../actions';
 
 /**
+ * Groups class component
  *
+ * This displays all group a user has created
+ * or belong to
  *
  * @class Groups
  * @extends {React.Component}
@@ -36,9 +40,12 @@ class Groups extends React.Component {
     this.onFocus = this.onFocus.bind(this);
   }
   /**
+   * onFocus()
+   * This method is called when the user focuses on an input field,
+   * which clear any error messages afterwards.
    *
    * @memberof Groups
-   * @returns {Object} - new state
+   * @returns {void}
    */
   onFocus() {
     this.setState({
@@ -46,8 +53,11 @@ class Groups extends React.Component {
     });
   }
   /**
-   * handleLogin()
-   * @returns {Object} - new group
+   * handleCreate()
+   * This method is called when a user hit the
+   * create group button
+   *
+   * @returns {void}
    */
   handleCreate() {
     let { groupname, description } = this;
@@ -60,30 +70,31 @@ class Groups extends React.Component {
     this.props.onCreateGroup(groupData);
   }
   /**
-   *
+   * handleArchive()
+   * This method is called when a user hits
+   * the archive group button
    *
    * @param {string} groupname
    * @returns {object} actionCreator
    * @memberof Groups
    */
-  handleDelete(groupname) {
+  handleArchive(groupname) {
     groupname = groupname.trim();
     if (groupname === '') {
       return '';
     }
     const groupData = { groupname };
-    this.props.onDeleteGroup(groupData);
+    this.props.onArchiveGroup(groupData);
   }
 
   /**
-   * @return {undefined} - Returns action creators.
+   * @return {void}
    * */
   componentWillMount() {
-    requireAuth();
     this.props.onLoadGroups();
   }
   /**
-   * @return {presentationals} - some presentational components
+   * @return {jsx} -  of groups components
    */
   render() {
     let { groups } = this.props;
@@ -151,11 +162,13 @@ class Groups extends React.Component {
                           description={group.description}
                           archive={
                             <IconButton
-                              iconClass="fa fa-archive fa-1x grey-text right tooltipped"
+                              iconClass=
+                              "fa fa-archive fa-1x grey-text right tooltipped"
                               dataPosition="bottom"
                               dataDelay="50"
                               dataTooltip={`Archive ${group.groupname}`}
-                              onClick={() => this.handleDelete(group.groupname)}
+                              onClick=
+                              {() => this.handleArchive(group.groupname)}
                             />
                           }
                         />
@@ -179,18 +192,29 @@ class Groups extends React.Component {
   }
 }
 
+Groups.defaultProps = {
+  groups: {},
+  onCreateGroup: () => { },
+  onLoadGroup: () => { },
+  onArchiveGroup: () => { }
+};
+
+Groups.propTypes = {
+  groups: PropTypes.object.isRequired,
+  onCreateGroup: PropTypes.func.isRequired,
+  onLoadGroups: PropTypes.func.isRequired,
+  onArchiveGroup: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
-  groups: state.groups,
-  // messages: state.messages
+  groups: state.groups
 });
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     onCreateGroup,
     onLoadGroups,
-    loadGroupMessages,
-    loadGroupMembers,
-    onDeleteGroup,
+    onArchiveGroup,
   }, dispatch)
 );
 

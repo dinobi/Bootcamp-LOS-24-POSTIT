@@ -1,20 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import jwtDecode from 'jwt-decode';
-import { onCreateGroup } from '../../actions';
-import Logo from '../../images/postit-logo.png';
+import { onCreateGroup } from '../../../actions';
 import {
-  Header, Button, InputField, Modal,
-  Form, Textarea, ErrorAlert
-} from './';
+  Header, Button, // eslint-disable-line no-unused-vars
+  InputField, Modal, // eslint-disable-line no-unused-vars
+  Form, Textarea, // eslint-disable-line no-unused-vars
+  ErrorAlert // eslint-disable-line no-unused-vars
+} from '../../commonViews';
 
 /**
+ * DashboardHeader Component
+ *
  * @class DashHeader
  * @extends {React.Component}
  */
 class DashHeader extends React.Component {
   /**
+   * Creates an instance of DashboardHeader
+   *
+   * @param {any} props
    * @memberof DashHeader
    */
   constructor(props) {
@@ -26,9 +33,11 @@ class DashHeader extends React.Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.onFocus = this.onFocus.bind(this);
   }
-
+  /**
+   * @returns {void}
+   * @memberof DashHeader
+   */
   componentWillMount() {
-    
     const token = localStorage.getItem('userAuth');
     if (token === null) {
       location.hash = '#login';
@@ -40,16 +49,33 @@ class DashHeader extends React.Component {
       location.hash = '#login';
     }
   }
+  /**
+   * @returns {void}
+   * @memberof React
+   */
   componentDidMount() {
     $('.tooltipped').tooltip({ delay: 50 });
   }
 
-  onFocus(event) {
-    event.preventDefault();
+  /**
+   * This method is called when DOM element is on focus eg: input field,
+   * if the state of the field has errored, the error is cleared.
+   *
+   * @returns {void}
+   */
+  onFocus() {
     this.setState({
       errorMessage: ''
     });
   }
+  /**
+   * handleClick()
+   * This method is called when the user clicks on the "Menu Icon"
+   * It displays a dropdown of menu items
+   *
+   * @returns {void}
+   * @memberof DashHeader
+   */
   handleClick() {
     const mobileNav = $('#mobile-nav');
     mobileNav.html($('.menu-nav').html());
@@ -62,24 +88,29 @@ class DashHeader extends React.Component {
     }
   }
   /**
- * handleCreate()
- * @param {event} event
- * @return {void}
- */
+   * handleCreate()
+   * This method is called when the user clicks on the "Create group"
+   * It displays makes an api call that handles group creation
+   *
+   * @param {event} event
+   * @return {void}
+   */
   handleCreate(event) {
     event.preventDefault();
     let { groupname, description } = this;
     groupname = groupname.value.trim();
     description = description.value.trim();
     if (groupname === '' || description === '') {
-      this.setState({ errorMessage: 'Error. All field are required to create a new group' });
+      this.setState({
+        errorMessage: 'Error. All field are required to create a new group'
+      });
     } else {
       const groupData = { groupname, description };
       this.props.onCreateGroup(groupData);
     }
   }
   /**
-   * @returns {JSX} JSX
+   * @returns {jsx} jsx component for dashboad header
    * @memberof DashHeader
    */
   render() {
@@ -133,6 +164,10 @@ class DashHeader extends React.Component {
     );
   }
 }
+
+DashHeader.propTypes = {
+  onCreateGroup: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({ onCreateGroup }, dispatch)

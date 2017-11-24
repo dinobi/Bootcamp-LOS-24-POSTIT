@@ -43,15 +43,24 @@ main {
 .brief {
 	margin-bottom: 30px;
 	color: $smoke;
+	&:hover {
+		color: $white;
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
 }
-.quick-access p {
-	display: inline-block;
-	margin-left: $margin;
-	color: &smoke;
-	a {
-		text-decoration: none !important;
-		&:hover {
-			text-decoration: underline !important;
+.quick-access {
+	p {
+		display: inline-block;
+		margin-left: $margin;
+		color: &smoke;
+		a {
+			text-decoration: none !important;
+			color: $primary-color;
+			&:hover {
+				text-decoration: underline !important;
+			}
 		}
 	}
 }

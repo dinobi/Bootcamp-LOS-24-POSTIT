@@ -1,9 +1,15 @@
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Icon from '../../../../images/postit-icon.png';
-import { MainHeader, InputField, Button, Footer, Form } from '../../../commonViews';
+import MainHeader // eslint-disable-line no-unused-vars
+from '../MainHeader.jsx';
+import {
+	InputField, // eslint-disable-line no-unused-vars
+	Button, Footer, Form // eslint-disable-line no-unused-vars
+} from '../../../commonViews';
 import { onResetPassword } from '../../../../actions';
 /**
  *
@@ -11,54 +17,59 @@ import { onResetPassword } from '../../../../actions';
  * @extends {React.Component}
  */
 class ResetPassword extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			errorMessage: '',
-		};
-		this.onFocus = this.onFocus.bind(this);
-		this.handleResetPassword = this.handleResetPassword.bind(this);
-	}
 	/**
-  * Reset app state on focus
-  * @memberof ResetPassword
-  * @returns {Object} - default state
-  */
-	onFocus() {
-		this.setState({ errorMessage: '' });
-	}
+	 * Creates an instance of ResetPassword.
+	 * @param {props} props - class properties
+	 * @memberof ResetPassword
+	 */
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorMessage: '',
+    };
+    this.onFocus = this.onFocus.bind(this);
+    this.handleResetPassword = this.handleResetPassword.bind(this);
+  }
 	/**
-	 * 
-	 *
+   * onFocus()
+   * This method is called when the user focuses on an input field,
+   * which clear any error messages afterwards.
+   *
+   * @memberof ResetPassword
+   * @returns {void}
+   */
+  onFocus() {
+    this.setState({ errorMessage: '' });
+  }
+	/**
 	 * @param {any} event
 	 * @memberof ResetPassword
-	 * @returns {*} - New State object and actions
+	 * @returns {*} - New State object and actions creators
 	 */
-	handleResetPassword(event) {
-		event.preventDefault();
-		let { password, confirmPassword } = this;
-		password = password.value.trim();
-		confirmPassword = confirmPassword.value.trim();
-		if (password === '' || confirmPassword === '') {
-			return this.setState({
-				errorMessage: 'Error. All fields are required'
-			});
-		}
-		else if (password !== confirmPassword) {
-			this.setState({
-				errorMessage: 'Error. Password do not match'
-			});
-		} else {
-			this.props.onResetPassword({ password });
-		}
-	}
+  handleResetPassword(event) {
+    event.preventDefault();
+    let { password, confirmPassword } = this;
+    password = password.value.trim();
+    confirmPassword = confirmPassword.value.trim();
+    if (password === '' || confirmPassword === '') {
+      return this.setState({
+        errorMessage: 'Error. All fields are required'
+      });
+    }		else if (password !== confirmPassword) {
+      this.setState({
+        errorMessage: 'Error. Password do not match'
+      });
+    } else {
+      this.props.onResetPassword({ password });
+    }
+  }
 	/**
 	 *
 	 * @memberof ResetPassword
 	 * @returns {*} react elements
 	 */
   render() {
-		const { loader } = this.props;
+    const { loader } = this.props;
     return (
 			<div>
 				<MainHeader />
@@ -116,7 +127,8 @@ class ResetPassword extends React.Component {
 }
 
 ResetPassword.propTypes = {
-  onResetPassword: PropTypes.func.isRequired
+  onResetPassword: PropTypes.func.isRequired,
+  loader: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

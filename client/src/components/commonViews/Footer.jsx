@@ -1,14 +1,21 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
+/**
+ * Footer Component
+ * Displays page footer where required
+ *
+ * @method Footer
+ * @returns {Object} JSX
+ */
 const Footer = () =>
-	<footer className="container page-footer">				
+	<footer className="container page-footer">
 		<div className="divider"></div>
 		<ul className="right">
 			<li>
 				<a>
 					<i className="fa fa-google-plus"></i>
 				</a>
-			</li>					
+			</li>
 			<li>
 				<a href="https://github.com/dinobi/Bootcamp-LOS-24-POSTIT">
 					<i className="fa fa-github"></i>
@@ -31,4 +38,3 @@ const Footer = () =>
 	</footer>;
 
 export default Footer;
-

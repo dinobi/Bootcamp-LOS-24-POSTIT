@@ -95,8 +95,17 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV':
-      JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        APP_URL: JSON.stringify(process.env.APP_URL),
+        POSTIT_DATABASE_URL: JSON.stringify(process.env.POSTIT_DATABASE_URL),
+        JWT_EXPIRY_TIME: JSON.stringify(process.env.JWT_EXPIRY_TIME),
+        JWT_SECRET: JSON.stringify(process.env.JWT_SECRET),
+        MAIL_PASSWORD: JSON.stringify(process.env.MAIL_PASSWORD),
+        MAIL_SERVICE: JSON.stringify(process.env.MAIL_SERVICE),
+        MAIL_USER: JSON.stringify(process.env.MAIL_USER),
+        HASH_SECRET: JSON.stringify(process.env.HASH_SECRET)
+      }
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

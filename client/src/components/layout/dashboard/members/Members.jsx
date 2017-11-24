@@ -1,13 +1,23 @@
-import React from 'react';
-import { IconButton } from '../../../commonViews';
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+import { IconButton } // eslint-disable-line no-unused-vars
+from '../../../commonViews';
 
+/**
+ * Members Component
+ * Displays a list of group members
+ *
+ * @method Members
+ * @returns {Object} JSX
+ * @param {Object} props
+ */
 const Members = ({ members, user, onRemoveMember }) =>
   <div className="members-list">
     {
-      members.map((member, index) => {
+      members.map((member) => {
         return (
           members[0].username === user.username ?
-            <li key={index}>
+            <li key={member.id}>
               <i className="fa fa-circle"></i>
               &nbsp;&nbsp;{member.username}
               <IconButton
@@ -23,7 +33,7 @@ const Members = ({ members, user, onRemoveMember }) =>
               />
             </li>
             :
-            <li key={index}>
+            <li key={member.id}>
             <i className="fa fa-circle"></i>
             &nbsp;&nbsp;{member.username}
           </li>
@@ -31,6 +41,17 @@ const Members = ({ members, user, onRemoveMember }) =>
       })
     }
   </div>;
+
+Members.defaultProps = {
+  members: [],
+  user: {},
+  onRemoveMember: () => { }
+};
+Members.propTypes = {
+  members: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+  onRemoveMember: PropTypes.func.isRequired
+};
 
 export default Members;
 

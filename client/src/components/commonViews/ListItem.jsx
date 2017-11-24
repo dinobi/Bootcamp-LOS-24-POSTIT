@@ -1,13 +1,41 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
-const ListItem = ({ onClick, listClass, index, anchorClass, url, iconClass, name }) =>
-  <li className={listClass} key={index}>
-    <a href={url}
-      onClick={onClick}
-      className={anchorClass}
-    >
-      <i className={iconClass}></i>&nbsp;&nbsp;{name}
-    </a>
-  </li>;
+/**
+ * ListItem Component
+ * Displays a single list item and an additional icon where
+ * required
+ *
+ * @method ListItem
+ * @returns {Object} JSX
+ * @param {Object} props
+ */
+const ListItem =
+  ({ onClick, listClass, index, anchorClass, url, iconClass, name }) =>
+    <li className={listClass} key={index}>
+      <a href={url}
+        onClick={onClick}
+        className={anchorClass}
+      >
+        <i className={iconClass}></i>&nbsp;&nbsp;{name}
+      </a>
+    </li>;
+
+ListItem.defaultProps = {
+  listClass: '',
+  onClick: () => { },
+  anchorClass: '',
+  iconClass: '',
+  url: '',
+  name: ''
+};
+ListItem.propTypes = {
+  listClass: PropTypes.string.isRequired,
+  index: PropTypes.number,
+  onClick: PropTypes.func,
+  anchorClass: PropTypes.string.isRequired,
+  iconClass: PropTypes.string,
+  name: PropTypes.string.isRequired,
+};
 
 export default ListItem;

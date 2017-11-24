@@ -29,11 +29,11 @@ export default (app) => {
 
   // API route that allow users create broadcast groups
   app.post('/api/create-group/', verifyAuthUser,
-  controllers.group.create);
+  controllers.group.createGroup);
 
   // API route that allow users delete a broadcast group
   app.post('/api/groups/delete-group/', verifyAuthUser, verifyGroup,
-  controllers.group.delete);
+  controllers.group.deleteGroup);
 
   // API route to get list of group a user belongs to
   app.get('/api/groups/me/', verifyAuthUser, controllers.group.fetchMyGroups);

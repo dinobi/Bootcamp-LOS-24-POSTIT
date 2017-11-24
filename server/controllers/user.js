@@ -15,7 +15,16 @@ dotenv.config();
 
 const salt = bcrypt.genSaltSync(8);
 export default {
-  // A visitor can create a new account
+  /**
+  * createNewUser controller
+  * Allows users create a new account
+  *
+  * Route: POST: /api/user/signup/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   createNewUser(req, res) {
     if (signupValidator(req, res) !== 'validated') {
       return;
@@ -46,7 +55,16 @@ export default {
         }
       });
   },
-  // User login
+  /**
+  * authUser controller
+  * Authenticates a user with their Username or email
+  *
+  * Route: POST: /api/user/signin/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   authUser(req, res) {
     if (loginValidator(req, res) !== 'validated') {
       return;
@@ -99,7 +117,16 @@ export default {
         }
       }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Search
+  /**
+  * search controller
+  * Search for users by their username
+  *
+  * Route: GET: /api/search/:groupname/:searchTerm/:page/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   search(req, res) {
     const searchTerm = req.params.searchTerm;
     if (!searchTerm || searchTerm.trim() === '') {
@@ -120,7 +147,7 @@ export default {
           $ne: req.decoded.data.username
         }
       },
-      attributes: ['username', 'email']
+      attributes: ['id', 'username', 'email']
     })
     .then((users) => {
       const existingUsers = [];
@@ -151,7 +178,16 @@ export default {
       });
     }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Users can request for a new password
+  /**
+  * requestPassword controller
+  * Allows users request password changes
+  *
+  * Route: POST: /api/user/request-password/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   requestPassword(req, res) {
     const mailType = 'reset';
     const { email } = req.body;
@@ -216,12 +252,20 @@ export default {
                 return res.status(200)
                 .send({ message: 'Request success', hash, status: 200 });
               }
-              return res.status(200)
-              .send({ message: 'Request success', status: 200 });
             });
         });
       });
   },
+  /**
+  * resetPassword controller
+  * Allows users reset password after request has been made
+  *
+  * Route: POST: /api/user/request-password/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   resetPassword(req, res) {
     const password = req.body.password;
     const hash = req.params.hash;

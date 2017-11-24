@@ -4,6 +4,15 @@ import errorResponse from './errorResponse';
 const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 const alphanumeric = /^[a-zA-Z0-9_]*$/;
 
+/**
+ * signupValidator
+ * validates users input during signup process
+ *
+ * @returns {object} res - response object when check fails
+ * @returns {string} validated - value when check passes
+ * @param {object} req - response object
+ * @param {object} res - response object
+ */
 const signupValidator = (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
@@ -50,6 +59,15 @@ const signupValidator = (req, res) => {
   return 'validated';
 };
 
+/**
+ * loginValidator
+ * validates users input during signin process
+ *
+ * @returns {object} res - response object when check fails
+ * @returns {string} validated - value when check passes
+ * @param {object} req - response object
+ * @param {object} res - response object
+ */
 const loginValidator = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -67,6 +85,16 @@ const loginValidator = (req, res) => {
   return 'validated';
 };
 
+/**
+ * loginValidator
+ * validates users input for uniqueness and validity
+ * during signup process
+ *
+ * @returns {object} res - response object when check fails
+ * @returns {string} validated - value when check passes
+ * @param {object} res - response object
+ * @param {object} error - error response object
+ */
 const uniqueValidator = (res, error) => {
   const uniqueError = error.errors[0].message;
   let message;
@@ -88,7 +116,18 @@ const uniqueValidator = (res, error) => {
   }
 };
 
-const messageValidator = (message, priority, groupname, req, res) => {
+/**
+ * messageValidator
+ * validates user created messages
+ *
+ * @returns {object} res - response object when check fails
+ * @returns {string} validated - value when check passes
+ * @param {string} message - user created message
+ * @param {object} priority - user selected priority
+ * @param {object} req - response object
+ * @param {object} res - response object
+ */
+const messageValidator = (message, priority, req, res) => {
   let errorMessage;
   if (!message || message.trim() === '') {
     errorMessage = 'You forgot to include a message body';

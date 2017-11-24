@@ -3,7 +3,17 @@ import groupLengthCheck from '../helpers/groupLengthCheck';
 import errorResponse from '../helpers/errorResponse';
 
 export default {
-  create(req, res) {
+  /**
+  * createGroup controller
+  * Allows users create new group
+  *
+  * Route: POST: /api/create-group/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  createGroup(req, res) {
     const { user } = req.body;
     const alphanumeric = /^[a-zA-Z0-9_-]*$/;
     let groupname = req.body.groupname;
@@ -50,8 +60,17 @@ export default {
         }
       });
   },
-  // Delete Group
-  delete(req, res) {
+  /**
+  * deleteGroup controller
+  * Allows users delete their created groups
+  *
+  * Route: POST: /api/delete-group/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  deleteGroup(req, res) {
     const { group, user } = req.body;
     const { username } = user;
     let { groupname } = group;
@@ -75,7 +94,17 @@ export default {
         ).catch(error => errorResponse(res, 500, null, error));
       }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Users can see all the groups that they belong to
+  /**
+  * fetchMyGroups controller
+  * Allows authenticated users view the groups
+  * they belong to
+  *
+  * Route: GET: /api/groups/me
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   fetchMyGroups(req, res) {
     const { user } = req.body;
     user.getGroup()
@@ -87,7 +116,16 @@ export default {
       }
     }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Add member to group
+  /**
+  * addMember controller
+  * Allows a user add other users to a group
+  *
+  * Route: POST: /api/groups/:groupname/add-member/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   addMember(req, res) {
     const { group, user, username } = req.body;
     const { groupname } = group;
@@ -108,7 +146,17 @@ export default {
         ).catch(error => errorResponse(res, 500, null, error));
       }).catch(error => errorResponse(res, 500, null, error));
   },
-  // remove member from group
+  /**
+  * removeMember controller
+  * Allows a user who acts as the group admin
+  * to remove other group member
+  *
+  * Route: POST: /api/groups/:groupname/remove-member/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   removeMember(req, res) {
     const { user, group, username } = req.body;
     const { groupname } = group;
@@ -134,7 +182,16 @@ export default {
         }).catch(error => errorResponse(res, 500, null, error));
       }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Get List of group members
+  /**
+  * fetchMembers controller
+  * Allows a see all the members of the group they belong
+  *
+  * Route: GET: /api/groups/:groupname/members/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   fetchMembers(req, res) {
     const { group, user } = req.body;
     group.hasUser(user)
@@ -144,7 +201,7 @@ export default {
           `User does not belong to group '${req.params.groupname}'`;
         return errorResponse(res, 401, errorMessage, null);
       }
-      group.getUser({ attribute: ['username', 'email'] })
+      group.getUser({ attributes: ['id', 'username', 'email', 'createdAt'] })
       .then(result => res.status(200).send(result))
       .catch(error => errorResponse(res, 500, null, error));
     }).catch(error => errorResponse(res, 500, null, error));

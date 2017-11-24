@@ -1,23 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
 import AddMemberModal from '../members/AddMemberModal.jsx';
+import DashHeader from '../DashHeader.jsx';
 import {
-  DashHeader, SideMenu, Button,
+  SideMenu, Button, IconButton,
   Copyright, ListItem, Textarea,
-  Select, Form, DashboardContent,
-  IconButton
+  Select, Form, DashboardContent
 } from '../../../commonViews';
-import { loadGroupMessages, loadGroupMembers, onSendMessage,
+import {
+  loadGroupMessages, loadGroupMembers, onSendMessage,
   onAddMember, onRemoveMember
 }
-from '../../../../actions';
+  from '../../../../actions';
 
 /**
  * Group class component
+ *
  * @class Group
  * @extends {React.Component}
  */
@@ -35,17 +38,20 @@ class Group extends React.Component {
     this.handleSend = this.handleSend.bind(this);
   }
   /**
-   * @return {undefined} - Returns action creators.
+   * @return {void} - Returns action creators.
    * */
   componentWillMount() {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
   }
   /**
-   * Handles the sending of messages
+   * handleSend()
+   *
+   * This method is called when the user clicks
+   * the "send" button for messages
    * @param {any} event
    * @memberof Group
-   * @return {*} - action
+   * @return {void}
    */
   handleSend(event) {
     event.preventDefault();
@@ -58,14 +64,14 @@ class Group extends React.Component {
   }
 
   /**
-   * @return {undefined} - returns presentational components.
-   * */
+   * @returns {JSX} for Group component
+   */
   render() {
     const { user } = this.props;
     const { messages, members } = this.props;
     const posts = messages;
     const groupName =
-    location.href.split('/')[location.href.split('/').length - 1];
+      location.href.split('/')[location.href.split('/').length - 1];
 
     const backToGroup =
       <ListItem
@@ -83,7 +89,6 @@ class Group extends React.Component {
         dataDelay="50"
         dataTooltip="add member"
       />,
-      // handleAddMember: this.handleAddMember
       onAddMember: this.props.onAddMember
     };
 
@@ -93,57 +98,57 @@ class Group extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu back={ backToGroup } active="groups"/>
+              <SideMenu back={backToGroup} active="groups" />
             </aside>
             <section className="col s12 m9 l10">
               <DashboardContent
                 wrapperClass="dashboard-content group-gui"
                 iconClass="fa fa-folder-open"
-                title={ `${groupName} - message Board` }
+                title={`${groupName} - message Board`}
               >
                 <div className="row">
                   <div className="col s12 m9">
                     {
                       posts.length > 0 ?
-                      <MessageBoard posts={ posts } /> :
-                      <div className="message-board">
-                        <div className="postlogs">
-                          <WelcomeCard
-                            emptyBoard={ posts.message }
-                          />
-                        </div>
-                        <Form
-                          formClass="message-box"
-                          id="send-message"
-                          onSubmit={this.handleSend}
-                        >
-                          <Textarea
-                            textRef={(input) => { this.message = input; }}
-                            textClass="compose"
-                            placeholder="always be nice..."
-                          />
-                          <Select
-                            id="priority"
-                            selectRef={(input) => { this.priority = input; }}
-                            selectClass="browser-default action-btn select"
+                        <MessageBoard posts={posts} /> :
+                        <div className="message-board">
+                          <div className="postlogs">
+                            <WelcomeCard
+                              emptyBoard={posts.message}
+                            />
+                          </div>
+                          <Form
+                            formClass="message-box"
+                            id="send-message"
+                            onSubmit={this.handleSend}
                           >
-                            <option value="Normal">Normal</option>
-                            <option value="Urgent">Urgent</option>
-                            <option value="Critical">Critical</option>
-                          </Select>
-                          <Button
-                            type="submit"
-                            btnClass="browser-default action-btn send"
-                            name={
-                              <IconButton
-                                iconClass="fa fa-send tooltipped"
-                                dataPosition="top"
-                                dataDelay="50"
-                                dataTooltip="send message"
-                              />}
-                          />
-                        </Form>
-                      </div>
+                            <Textarea
+                              textRef={(input) => { this.message = input; }}
+                              textClass="compose"
+                              placeholder="always be nice..."
+                            />
+                            <Select
+                              id="priority"
+                              selectRef={(input) => { this.priority = input; }}
+                              selectClass="browser-default action-btn select"
+                            >
+                              <option value="Normal">Normal</option>
+                              <option value="Urgent">Urgent</option>
+                              <option value="Critical">Critical</option>
+                            </Select>
+                            <Button
+                              type="submit"
+                              btnClass="browser-default action-btn send"
+                              name={
+                                <IconButton
+                                  iconClass="fa fa-send tooltipped"
+                                  dataPosition="top"
+                                  dataDelay="50"
+                                  dataTooltip="send message"
+                                />}
+                            />
+                          </Form>
+                        </div>
                     }
                   </div>
                   <div className="col s12 m3 hide-on-small-and-down">
@@ -155,11 +160,11 @@ class Group extends React.Component {
                         </span>
                       </h6>
                     </div>
-                      <Members
-                        members={members}
-                        onRemoveMember={this.props.onRemoveMember}
-                        user={user}
-                      />
+                    <Members
+                      members={members}
+                      onRemoveMember={this.props.onRemoveMember}
+                      user={user}
+                    />
                   </div>
                 </div>
               </DashboardContent>
@@ -170,6 +175,28 @@ class Group extends React.Component {
     );
   }
 }
+
+Group.defaultProps = {
+  user: {},
+  messages: [],
+  members: [],
+  description: 'No description',
+  loadGroupMessages: () => { },
+  loadGroupMembers: () => { },
+  onSendMessage: () => { },
+  onAddMember: () => { },
+  onRemoveMember: () => { },
+};
+
+Group.propTypes = {
+  user: PropTypes.object,
+  members: PropTypes.array,
+  loadGroupMessages: PropTypes.func.isRequired,
+  loadGroupMembers: PropTypes.func.isRequired,
+  onSendMessage: PropTypes.func.isRequired,
+  onAddMember: PropTypes.func.isRequired,
+  onRemoveMember: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.auth.user,

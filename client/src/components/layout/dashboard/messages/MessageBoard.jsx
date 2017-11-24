@@ -1,17 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageLog from './MessageLog.jsx';
+import MessageLog // eslint-disable-line no-unused-vars
+  from './MessageLog.jsx';
 import {
-  DashHeader, SideMenu, Copyright,
-  Select, Button, Form, Textarea,
-  IconButton
+  DashHeader, SideMenu, // eslint-disable-line no-unused-vars
+  Copyright, IconButton, // eslint-disable-line no-unused-vars
+  Select, Button, // eslint-disable-line no-unused-vars
+  Form, Textarea // eslint-disable-line no-unused-vars
 }
-from '../../../commonViews';
+  from '../../../commonViews';
 import { onSendMessage } from '../../../../actions';
 
 /**
  * MessageBoard class
+ * Displays a message board of messages in a group
  *
  * @class MessageBoard
  * @extends {React.Component}
@@ -31,11 +35,14 @@ class MessageBoard extends React.Component {
     this.handleSend = this.handleSend.bind(this);
   }
   /**
+   * handleSend()
    *
+   * This method is called when a user hits
+   * the send message button
    *
    * @param {any} event
    * @memberof MessageBoard
-   * @return {function} - action creator
+   * @return {void}
    */
   handleSend(event) {
     event.preventDefault();
@@ -49,7 +56,7 @@ class MessageBoard extends React.Component {
   /**
    *
    *
-   * @returns {jsx} react component
+   * @returns {jsx} jsx component for message board
    * @memberof MessageBoard
    */
   render() {
@@ -57,8 +64,8 @@ class MessageBoard extends React.Component {
       <div className="message-board">
         <div className="postlogs">
           {
-            this.props.posts.map((post, index) =>
-              <MessageLog message={ post } key={index} />
+            this.props.posts.map(post =>
+              <MessageLog message={post} key={post.id} />
             )
           }
         </div>
@@ -97,6 +104,15 @@ class MessageBoard extends React.Component {
     );
   }
 }
+
+MessageBoard.defaultProps = {
+  onSendMessage: () => { },
+  posts: []
+};
+MessageBoard.propTypes = {
+  posts: PropTypes.array.isRequired,
+  onSendMessage: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   messages: state.messages.groupMessages,
