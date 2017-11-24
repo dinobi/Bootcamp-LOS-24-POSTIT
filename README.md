@@ -7,46 +7,121 @@ I (Dinobi) took on the development of this project as part of the requirements t
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT.svg?branch=develop)](https://travis-ci.org/dinobi/Bootcamp-LOS-24-POSTIT) [![Coverage Status](https://coveralls.io/repos/github/dinobi/Bootcamp-LOS-24-POSTIT/badge.svg?branch=develop)](https://coveralls.io/github/dinobi/Bootcamp-LOS-24-POSTIT?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3de5caa7a72272b8098a/maintainability)](https://codeclimate.com/github/dinobi/Bootcamp-LOS-24-POSTIT/maintainability) [![dependencies Status](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT/status.svg)](https://david-dm.org/dinobi/Bootcamp-LOS-24-POSTIT)
 
+## About
 **Communicate Group Messages Instantly**
-> - PostIt is a simple web application built to allow family, friends and colleagues share message broadcast in a fun way anytime.
+PostIt is an open source web application built to allow family, friends and colleagues share prioritized messages as broadcast in a fun way anytime.
+
+#### Features
+- Personalized dashboard UI for users with access
+- Holistic view of every feature of the app from a welcome screen
+- Create group, search and add family/friends/colleagues who already have an account to your broadcast group
+- Post messages with added advantage of using wikipedia search right from you dashboard
+- Get email notification for prioritized messages.
+- Have fun.
 
 > - https://postit-webapp.herokuapp.com/
 
-> - This project is strictly for learning purposes as instructed by Andela and not a commercial product.
+## Technology Stack (PERN)
 
-**Project Stack**
-> - UI Template:
-    - Front End Implementation in HTML/CSS
+#### Client Side: 
+    - Front End Organization in `React` and `Redux`
+    - Uses `SASS` for styling and `Webpack` for bundling
 
-> - Client Side: 
-    - Front End Organization in React/Redux + SASS
+#### Serve Side:
+    - Back end implementation is built on `Node`, using `Express` as the server and `Sequelize` as the `ORM` for communicating with the `Postgres Database`.
 
-> - Serve Side:
-    - Back End Implementation in Node/Express (Server) + Sequelize/Postgres (Database and ORM)
-
-> - Authentication and Code Base Organization
-    - JWT, es6, Babel, Webpack
+#### Authentication and Code Base Organization
+    - Written in `es6` and uses `Babel` for transpiling down to es5 and `JWT`
+    for authentication.  
     
-> - Testing and Best Practices
-    - eslint, Airbnb JavaScript Style Guide, Mocha/Chai + chai-http
+#### Style Checking and Best Practices
+    - Uses `Eslint` which was configured to use `Airbnb-base` rules for style checking
 
-# Features
-- Personalized dashboard UI for users with access
-- Holistic view of every feature of the app from a welcome screen
-- Quickly view all notifications based on group card UI
-- Search for colleagues, friends or family who are on the platform
-- Quickly create a group or add new members to your broadcast group
-- Post messages with added advantage of using wikipedia search right from you dashboard
-- Get notification on different medium based on message priority level
-- Have fun.
+## Usage
 
-# Installation and Dependencies
-> - Run `npm install` to install dependencies/dev-dependencies
-> - Setup Postgres
-> - setup your db with the settings in `server/config/config.json`
-> - Run `$ sequelize db:migrate`
-> - Run `npm start` to start server
+#### Installation and Dependencies
 
-# Api Docs
-The PostIt api documentation source is located in the server/api-docs directory, while the documentation site is:
-> - https://postit-webapp.herokuapp.com/api-docs
+1. Install [`node`](https://nodejs.org/en/download/), version 5 or greater is required
+
+2. Install [`postgres`](https://www.postgresql.org/download/)
+
+3. Clone the repo
+
+    ```
+    git clone https://github.com/dinobi/Bootcamp-LOS-24-POSTIT.git
+    cd Bootcamp-LOS-24-POSTIT
+    ```
+
+4. Install dependencies
+
+    ```
+    npm install
+    ```
+
+5. Configure Postgres
+
+    ```
+    In the application root directory, use the config settings in `server/config/config.js` to setup your postgres db
+    ```
+
+6. Run database migrations
+
+    ```
+    $ sequelize db:migrate
+    ```
+
+7. Build the assets and start the app
+
+    ```
+    - npm run build
+    - npm start
+    ```
+
+## Testing
+
+The app uses `Mocha/Chai` and `Chai-Http` for backend testing, and `Jest` for frontend testing
+
+- install `Mocha`, `nyc` and `jest-cli` globally: `npm i mocha nyc jest-cli -g`
+> - `npm test-dev` - run the unit test suite 
+> - `npm test` - run the unit test for backend and display code coverage result
+> - `client-test` - run the unit test for frontend and display code coverage result
+
+## Api Docs
+The PostIt api documentation source is located in the `server/api-docs` directory, while the documentation site is:
+- [api-docs](https://postit-webapp.herokuapp.com/api-docs)
+
+
+## Contributing
+Check the [contributing](contributing.md) file, it contains everything you need to know.
+
+## Credits
+
+## License
+[MIT](https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/blob/develop/LICENSE)
+
+## FAQ
+#### Is this an Open-Source Application?
+
+    ```
+    Yes it is, and contributing to the development of this application is by raising PRs
+    ```
+
+#### Who can contribute?
+
+    ```
+    Anyone!. This application is open to all those who want to contribute to open-source development and are willing to follow set standards for contributing.
+    ```
+#### Is there a set standard for PRs to this repository?
+
+    ```
+    Yes, there are set conventions for PRs to this repository and can be found in the project [wiki](https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/wiki)
+    ```
+#### What language was used to develop this application?
+
+    ```
+    This project is a full stack Javascript application
+    ```
+#### Can I clone this application for personal use?
+    ```
+    Yes!. This application is licensed under MIT, and is open for whatever you may choose to use it for.
+    ```
