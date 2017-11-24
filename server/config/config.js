@@ -17,12 +17,4 @@ module.exports = {
     use_env_variable: 'POSTIT_DATABASE_URL',
     dialect: 'postgres'
   }
-  // production: {
-  //   username: 'fixckoxwlujbjy',
-  //   password: 'd8fefc83d9b0565d4dc9cbc94ad22a13883bd0e2e4de317e5b03bcc57d494d57',
-  //   database: 'd3h76lbv286nah',
-  //   host: 'ec2-23-21-169-238.compute-1.amazonaws.com',
-  //   dialect: 'postgres',
-  //   port: 5432
-  // }
 };
