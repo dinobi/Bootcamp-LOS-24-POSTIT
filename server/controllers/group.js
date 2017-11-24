@@ -1,5 +1,5 @@
 import models from '../models';
-import lengthCheck from '../helpers/lengthCheck';
+import groupLengthCheck from '../helpers/groupLengthCheck';
 import errorResponse from '../helpers/errorResponse';
 
 export default {
@@ -23,7 +23,7 @@ export default {
     }
     groupname = req.body.groupname.toLowerCase();
     description = req.body.description;
-    if (lengthCheck(res, groupname, description) !== 'validLength') {
+    if (groupLengthCheck(res, groupname, description) !== 'validLength') {
       return;
     }
     return models.Group
@@ -65,6 +65,7 @@ export default {
           return errorResponse(res, 403, message, null);
         }
         models.UserGroup.destroy({ where: { groupname } });
+        models.Message.destroy({ where: { toGroup: groupname } });
         group.destroy()
         .then(() =>
           res.status(200).send({
@@ -112,17 +113,25 @@ export default {
     const { user, group, username } = req.body;
     const { groupname } = group;
     group.hasUser(user)
-      .then((result) => {
-        if (result) {
-          group.removeUser(user);
-          return res.status(200).send({
+      .then((userInGroup) => {
+        if (!userInGroup) {
+          const message = `No such user in ${groupname}`;
+          return errorResponse(res, 404, message, null);
+        }
+        group.removeUser(user);
+        group.getUser({ attribute: ['username'] })
+        .then((result) => {
+          if (result.length < 1) {
+            models.UserGroup.destroy({ where: { groupname } });
+            models.Message.destroy({ where: { toGroup: groupname } });
+            group.destroy();
+          }
+          res.status(200).send({
             username,
             message:
             `${username} was successfully removed from ${groupname}`
           });
-        }
-        const message = `No such user in ${groupname}`;
-        return errorResponse(res, 404, message, null);
+        }).catch(error => errorResponse(res, 500, null, error));
       }).catch(error => errorResponse(res, 500, null, error));
   },
   // Get List of group members
@@ -136,9 +145,8 @@ export default {
         return errorResponse(res, 401, errorMessage, null);
       }
       group.getUser({ attribute: ['username', 'email'] })
-      .then((result) => {
-        return res.status(200).send(result);
-      }).catch(error => errorResponse(res, 500, null, error));
+      .then(result => res.status(200).send(result))
+      .catch(error => errorResponse(res, 500, null, error));
     }).catch(error => errorResponse(res, 500, null, error));
   }
 };

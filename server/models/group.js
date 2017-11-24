@@ -19,7 +19,8 @@ export default (sequelize, DataTypes) => {
     Group.belongsToMany(models.User, {
       through: 'UserGroup',
       as: 'User',
-      foreignKey: 'groupname'
+      foreignKey: 'groupname',
+      onDelete: 'CASCADE'
     });
   };
   return Group;

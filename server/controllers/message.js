@@ -33,11 +33,11 @@ export default {
           .then((newMessage) => {
             res.status(201).send(newMessage);
             const mailType = 'notification';
-            const notification = `Hello, <br><br>You have a new message marked as
-          ${priority} on ${groupname}<br><br>${newMessage.message}<br><br>
-          FROM: ${username}<br><br> click on
-          <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
-        </a> to view more`;
+            const notification = `Hello, <br><br>You have a new message
+            marked as ${priority} on ${groupname}<br><br>
+            ${newMessage.message}<br><br>FROM: ${username}<br><br> click on
+            <a href='${process.env.APP_URL}/#/groups/rainier team'>this link
+            </a> to view more`;
             const subject = `PostIt: New ${priority} message`;
             switch (priority.toLowerCase()) {
               case 'critical':

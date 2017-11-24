@@ -43,7 +43,7 @@ export default (app) => {
   controllers.group.addMember);
 
   // API route that allows users to remove group members
-  app.post('/api/groups/:groupname/remove-member/', verifyUser, verifyGroup,
+  app.post('/api/groups/:groupname/remove-member/', verifyGroup, verifyUser,
   controllers.group.removeMember);
 
   // API route to get list of all users in a group

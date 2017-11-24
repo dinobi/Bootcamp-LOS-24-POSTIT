@@ -1,12 +1,12 @@
 import React from 'react';
 import { IconButton } from '../../../commonViews';
 
-const Members = props =>
+const Members = ({ members, user, onRemoveMember }) =>
   <div className="members-list">
     {
-      props.members.map((member, index) => {
+      members.map((member, index) => {
         return (
-          props.members[0].username === props.user.username ?
+          members[0].username === user.username ?
             <li key={index}>
               <i className="fa fa-circle"></i>
               &nbsp;&nbsp;{member.username}
@@ -16,7 +16,8 @@ const Members = props =>
                 dataDelay="50"
                 dataTooltip={`remove ${member.username}`}
                 onClick= {() =>
-                props.onRemoveMember({
+                onRemoveMember({
+                  authUser: members[0].username,
                   username: member.username
                 })}
               />
