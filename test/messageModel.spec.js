@@ -28,8 +28,8 @@ describe('Message Model', () => {
     models.Message.create(newMessage)
       .catch((error) => {
         expect(error.errors[0].message).to
-          .equal('message cannot be null');
-        // .equal('Message.message cannot be null');
+          //  .equal('message cannot be null');
+          .equal('Message.message cannot be null');
         done();
       });
   });
@@ -43,8 +43,8 @@ describe('Message Model', () => {
     models.Message.create(newMessage)
       .catch((error) => {
         expect(error.errors[0].message).to
-          .equal('fromUser cannot be null');
-        // .equal('Message.fromUser cannot be null');
+          // .equal('fromUser cannot be null');
+          .equal('Message.fromUser cannot be null');
         done();
       });
   });
@@ -58,8 +58,8 @@ describe('Message Model', () => {
     models.Message.create(newMessage)
       .catch((error) => {
         expect(error.errors[0].message).to
-          .equal('toGroup cannot be null');
-        // .equal('Message.toGroup cannot be null');
+          // .equal('toGroup cannot be null');
+          .equal('Message.toGroup cannot be null');
         done();
       });
   });
