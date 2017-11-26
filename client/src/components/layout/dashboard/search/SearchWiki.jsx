@@ -1,27 +1,25 @@
 import React from 'react';
 import $ from 'jquery';
-import requireAuth from '../../../helpers/requireAuth';
-import SearchBox from './SearchBox.jsx';
+import SearchBox // eslint-disable-line no-unused-vars
+  from './SearchBox.jsx';
+import DashHeader // eslint-disable-line no-unused-vars
+  from '../DashHeader.jsx';
 import {
-  DashHeader, InputField,
-  SideMenu, Form, Copyright
+  InputField, SideMenu, // eslint-disable-line no-unused-vars
+  Form, Copyright // eslint-disable-line no-unused-vars
 } from '../../../commonViews';
-
-class SearchWiki extends React.Component {
 /**
- * SearchWiki layout component that enables a user search wikipedia right from the dashboard.
- * 
- * @constructor
- * @param {object} state - Handle state of the value of search query.
- * @param {function} handleChange - Listener for changes to search query.
- * @param {function} handleClick - Listener for click event on search button in order to send search query.
- * 
- * @param {component} <DashHeader/> - The dashboard header navigation.
- * @param {component} <SearchForm> - Search form gui for user to perform search request.
- * @param {component} <SideMenu/> - The dashboard side menu for navigation to other dashboard gui.
- * @param {component} <FeatureCard/> - Card that contains quick link to post features.
- * @param {component} <Copyright/> - The dashboard footer copyright information.
+ * SearchWiki Page
+ * Enables a user search wikipedia
+ *
+ * @class SearchWiki
+ * @extends {React.Component}
  */
+class SearchWiki extends React.Component {
+  /**
+   * Creates an instance of SearchWiki.
+   * @memberof SearchWiki
+   */
   constructor() {
     super();
     this.state = {
@@ -31,14 +29,30 @@ class SearchWiki extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleChange(e) {
+  /**
+   * handleChange()
+   * This method changes component state based on
+   * occuring onChange events
+   * @param {event} event - change event
+   * @return {void}
+   */
+  handleChange(event) {
     this.setState({
-      searchQuery: e.target.value
+      searchQuery: event.target.value
     });
   }
-
-  handleSearch(e) {
-    e.preventDefault();
+  /**
+   * handleSearch()
+   *
+   * This method is called when a user
+   * hits the search button
+   *
+   * @returns {jsx} jsx for search result
+   * @param {any} event
+   * @memberof SearchWiki
+   */
+  handleSearch(event) {
+    event.preventDefault();
     $.ajax({
       type: 'GET',
       url: `https://en.wikipedia.org/w/api.php?action=opensearch&search=
@@ -67,7 +81,10 @@ class SearchWiki extends React.Component {
       }
     });
   }
-
+  /**
+   * @returns {jsx} jsx for search component
+   * @memberof SearchWiki
+   */
   render() {
     return (
       <div>
@@ -75,7 +92,7 @@ class SearchWiki extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu active="search-wiki"/>
+              <SideMenu active="search-wiki" />
             </aside>
             <section className="col s12 m9 l10">
               <div className="dashboard-content dashboard-search">
@@ -97,7 +114,6 @@ class SearchWiki extends React.Component {
               </div>
             </section>
           </div>
-          <Copyright />
         </main>
       </div>
     );

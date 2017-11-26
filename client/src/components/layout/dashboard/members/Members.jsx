@@ -1,14 +1,24 @@
-import React from 'react';
-import { IconButton } from '../../../commonViews';
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+import { IconButton } // eslint-disable-line no-unused-vars
+from '../../../commonViews';
 
-const Members = props =>
+/**
+ * Members Component
+ * Displays a list of group members
+ *
+ * @method Members
+ * @returns {Object} JSX
+ * @param {Object} props
+ */
+const Members = ({ members, user, onRemoveMember }) =>
   <div className="members-list">
     {
-      props.members.map((member, index) => {
+      members.map((member) => {
         return (
-          props.members[0].username === props.user.username ?
-            <li key={index}>
-              <i className="fa fa-hashtag"></i>
+          members[0].username === user.username ?
+            <li key={member.id}>
+              <i className="fa fa-circle"></i>
               &nbsp;&nbsp;{member.username}
               <IconButton
                 iconClass="fa fa-user-times removeButton tooltipped"
@@ -16,20 +26,32 @@ const Members = props =>
                 dataDelay="50"
                 dataTooltip={`remove ${member.username}`}
                 onClick= {() =>
-                props.onRemoveMember({
+                onRemoveMember({
+                  authUser: members[0].username,
                   username: member.username
                 })}
               />
             </li>
             :
-            <li key={index}>
-            <i className="fa fa-hashtag"></i>
+            <li key={member.id}>
+            <i className="fa fa-circle"></i>
             &nbsp;&nbsp;{member.username}
           </li>
         );
       })
     }
   </div>;
+
+Members.defaultProps = {
+  members: [],
+  user: {},
+  onRemoveMember: () => { }
+};
+Members.propTypes = {
+  members: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+  onRemoveMember: PropTypes.func.isRequired
+};
 
 export default Members;
 

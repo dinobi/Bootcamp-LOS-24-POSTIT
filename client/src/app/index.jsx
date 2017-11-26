@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import 'materialize-css';
 import store from '../store/configureStore';
 import App from './App.jsx';
-import '../styles/base.scss';
+import '../styles/index.scss';
 
 const app = document.getElementById('app');
 

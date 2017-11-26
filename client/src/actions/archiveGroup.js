@@ -18,7 +18,7 @@ export const onDeleteGroupFailure = () => ({
   deleteGroupIsLoading: false
 });
 
-const onDeleteGroup = groupData =>
+const onArchiveGroup = groupData =>
 (dispatch) => {
   swal({
     text: `Are you sure you want to archive ${groupData.groupname}?`,
@@ -32,8 +32,14 @@ const onDeleteGroup = groupData =>
       apiHandler('/api/groups/delete-group', groupData, 'post', headers)
       .then((groupResponse) => {
         dispatch(onDeleteGroupSuccess(groupResponse.data.group));
+        swal(groupResponse.data.message, {
+          buttons: false,
+          timer: 1000,
+        });
       }).catch((errorResponse) => {
-        dispatch(onDeleteGroupFailure(errorResponse.response.data.error.message));
+        dispatch(
+          onDeleteGroupFailure(errorResponse.response.data.error.message)
+        );
         swal({
           text: errorResponse.response.data.error.message,
           icon: 'error'
@@ -43,4 +49,4 @@ const onDeleteGroup = groupData =>
   });
 };
 
-export default onDeleteGroup;
+export default onArchiveGroup;

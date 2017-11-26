@@ -20,21 +20,21 @@
   font-size: 20px;
 }
 .amber:checked + label:before {
-  border-right: 2px solid #FFA000;
-  border-bottom: 2px solid #FFA000;
+  border-right: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
  }
 
 #search-field input[type="search"] {
   display: block;
   -webkit-box-sizing: border-box;
-		  box-sizing: border-box;
+	box-sizing: border-box;
   margin: 20px auto;
   width: 100%;
   padding: 20px;
   color: #000;
   font-size: 14px;
   background-color: transparent;
-  border: 2px solid #FFA000;
+  border: 2px solid $primary-color;
   border-radius: 3px;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
@@ -42,7 +42,7 @@
 }
 
 #search-field input[type="search"]:focus, #search-field input[type="search"]:hover {
-  box-shadow: 0 0 5px #FFC107;
+  box-shadow: 0 0 5px $primary-color;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
@@ -53,28 +53,40 @@
 }
 
 .search-result {
-  padding: 0 30px;
-  background: #f5f5f5;
-}
-
-.search-result div {
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
   padding: 10px 30px;
-  text-align: left;
+  div {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 30px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  li {
+    list-style: none;
+    display: inline-block;
+  }
+  p {
+    width: 100%;
+    padding: 10px 30px;
+    text-align: left;
+  }
+  em {
+    font-weight: 700;
+  }
 }
-
-.search-result h5 {
+.search-result h5, .search-result li > a  {
   color: #000;
   text-align: left;
 }
-
-.search-result p {
-  width: 100%;
-  padding: 10px 30px;
-  text-align: left;
+.search-pages {
+  margin-top: 20px;
+  text-align: center;
+  span {
+    padding: 3px 15px;
+    color: $primary-color;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+  }
 }
-.search-result em {
-	font-weight: 700;
-} 

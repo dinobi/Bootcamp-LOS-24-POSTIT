@@ -29,7 +29,7 @@ const onSignupUser = signupCredentials =>
         icon: 'success'
       });
       localStorage.setItem('userAuth', signupResponse.data.authToken);
-      location.hash = '#dashboard';
+      location.hash = '#';
     }).catch((errorResponse) => {
       dispatch(onSignupFailure());
       swal({

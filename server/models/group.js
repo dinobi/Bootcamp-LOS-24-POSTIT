@@ -4,7 +4,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
-      allowNull: false  //  dont write to db if data is not supplied
+      allowNull: false,  //  dont write to db if data is not supplied
+      validate: {
+        notEmpty: true
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -16,7 +19,8 @@ export default (sequelize, DataTypes) => {
     Group.belongsToMany(models.User, {
       through: 'UserGroup',
       as: 'User',
-      foreignKey: 'groupname'
+      foreignKey: 'groupname',
+      onDelete: 'CASCADE'
     });
   };
   return Group;

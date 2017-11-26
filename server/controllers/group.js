@@ -1,23 +1,39 @@
 import models from '../models';
-import lengthCheck from '../helpers/lengthCheck';
+import groupLengthCheck from '../helpers/groupLengthCheck';
+import errorResponse from '../helpers/errorResponse';
 
 export default {
-  create(req, res) {
+  /**
+  * createGroup controller
+  * Allows users create new group
+  *
+  * Route: POST: /api/create-group/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  createGroup(req, res) {
+    const { user } = req.body;
+    const alphanumeric = /^[a-zA-Z0-9_-]*$/;
     let groupname = req.body.groupname;
     let description = req.body.description;
     if (!groupname || groupname.trim() === '') {
-      return res.status(400).send({
-        error: { message: 'A group name is required' }
-      });
+      const message = 'A group name is required';
+      return errorResponse(res, 400, message, null);
     }
     if (!description || description.trim() === '') {
-      return res.status(400).send({
-        error: { message: 'A group description is required' }
-      });
+      const message = 'A group description is required';
+      return errorResponse(res, 400, message, null);
+    }
+    if (groupname.match(alphanumeric) === null) {
+      const message =
+      'groupname can contain only alphabets, numbers, dash and underscore';
+      return errorResponse(res, 400, message, null);
     }
     groupname = req.body.groupname.toLowerCase();
     description = req.body.description;
-    if (lengthCheck(res, groupname, description) !== 'validLength') {
+    if (groupLengthCheck(res, groupname, description) !== 'validLength') {
       return;
     }
     return models.Group
@@ -26,14 +42,8 @@ export default {
         description,
       })
       .then((group) => {
-        const user = req.decoded.data.username;
-        models.UserGroup
-        .create({
-          username: user,
-          groupname,
-          description
-        })
-        .then(res.status(201).send({
+        group.addUser(user)
+        .then(() => res.status(201).send({
           groupData: {
             groupname,
             description
@@ -43,272 +53,157 @@ export default {
       })
       .catch((error) => {
         if (error.errors[0].message === 'groupname must be unique') {
-          res.status(409).send({
-            error: { message: `${groupname} already exist` }
-          });
+          const message = `${groupname} already exist`;
+          errorResponse(res, 409, message, null);
         } else {
-          res.status(500).send({ error: error.message, status: 500 });
+          return errorResponse(res, 500, null, error);
         }
       });
   },
-  // Delete Group
-  delete(req, res) {
-    let groupname = req.body.groupname;
-    if (!groupname || groupname.trim() === '') {
-      return res.status(400).send({
-        error: { message: 'Specify the group you want to archive' }
-      });
-    }
-    groupname = req.body.groupname.toLowerCase();
-    models.Group
-      .findOne({ where: { groupname } })
-      .then((group) => {
-        if (!group) {
-          return res.status(404).send({
-            error: {
-              message: `${groupname} does not exist`
-            }
-          });
+  /**
+  * deleteGroup controller
+  * Allows users delete their created groups
+  *
+  * Route: POST: /api/delete-group/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  deleteGroup(req, res) {
+    const { group, user } = req.body;
+    const { username } = user;
+    let { groupname } = group;
+    groupname = groupname.toLowerCase();
+    models.UserGroup
+      .findOne({ where: { groupname }, attributes: ['username'] })
+      .then((result) => {
+        if (result.dataValues.username !== username) {
+          const message =
+            `You do not have permission to delete ${groupname}`;
+          return errorResponse(res, 403, message, null);
         }
-        const user = req.decoded.data.username;
-        models.UserGroup
-          .findOne({ where: { groupname }, attributes: ['username'] })
-          .then((result) => {
-            if (result.dataValues.username !== user) {
-              return res.status(403).send({
-                error: {
-                  message: `You do not have permission to delete ${groupname}`
-                }
-              });
-            }
-            models.Group.destroy({ where: { groupname } });
-            models.UserGroup.destroy({ where: { groupname } });
-            return res.status(200).send({
-              group,
-              message: `${groupname} has been archived`
-            });
-          }).catch((error) => {
-            res.status(500).send({ error: error.message, status: 500 });
-          });
-      });
-  },
-  // Display all created groups on postit
-  fetchAllGroups(req, res) {
-    return models.Group
-      .findAll({ attributes:
-        ['groupname', 'description']
-      })
-      .then((groups) => {
-        if (groups.length === 0) {
-          res.status(204).send({ message: 'You have not created any group' });
-        } else {
-          return res.status(200).send(groups);
-        }
-      })
-      .catch((error) => {
-        res.status(500).send({
-          error: error.message, status: 500
-        });
-      });
-  },
-  // Users can see all the groups that they belong to
-  fetchMyGroups(req, res) {
-    const user = req.decoded.data.username;
-    return models.UserGroup
-      .findAll({ where: { username: user } })
-      .then((groups) => {
-        if (groups.length === 0) {
-          res.status(204).send({ message: 'You have no group yet' });
-        } else {
-          return res.status(200).send(groups);
-        }
-      }).catch((error) => {
-        res.status(500).send({ error: error.message, status: 500 });
-      });
-  },
-  // Add member to group
-  addMember(req, res) {
-    const groupname = req.params.groupname;
-    const username = req.body.username;
-    if (!groupname || groupname.trim() === '') {
-      res.status(400).send({
-        error: {
-          message: 'Bad request, go to group you want to add member'
-        }
-      });
-      return;
-    }
-    if (!username || username.trim() === '') {
-      res.status(400).send({
-        error: {
-          message: 'Bad request, username is required'
-        }
-      });
-      return;
-    }
-    return models.Group
-      .findOne({ where: { groupname } })
-      .then((group) => {
-        // check if the group exists
-        if (!group) {
-          return res.status(404).send({
-            error: {
-              message: 'Group not found or has not been created'
-            }
-          });
-        }
-        return models.User
-          .findOne({ where: { username } })
-          .then((user) => {
-            // check if the username belongs to a registered user
-            if (!user) {
-              return res.status(404).send({
-                error: {
-                  message: 'User not found. User has no PostIt account'
-                }
-              });
-            }
-            return models.UserGroup
-              .findOne({
-                where: {
-                  username,
-                  groupname
-                }
-              })
-              .then((result) => {
-                if (result !== null) {
-                  return res.status(409).send({
-                    error: {
-                      message: 'User already belong to group'
-                    }
-                  });
-                }
-                models.UserGroup.create({
-                  username,
-                  groupname
-                })
-                .then(member =>
-                  res.status(201).send({
-                    member,
-                    message:
-                    `${username} was added to ${groupname}`
-                  })
-                )
-                .catch(error =>
-                  res.status(500).send({ error: error.message, status: 500 })
-                );
-              })
-              .catch(error =>
-                res.status(500).send({ error: error.message, status: 500 }));
+        models.UserGroup.destroy({ where: { groupname } });
+        models.Message.destroy({ where: { toGroup: groupname } });
+        group.destroy()
+        .then(() =>
+          res.status(200).send({
+            group,
+            message: `${groupname} has been archived`
           })
-          .catch(error =>
-            res.status(500).send({ error: error.message, status: 500 }));
-      });
+        ).catch(error => errorResponse(res, 500, null, error));
+      }).catch(error => errorResponse(res, 500, null, error));
   },
-  // remove member from group
+  /**
+  * fetchMyGroups controller
+  * Allows authenticated users view the groups
+  * they belong to
+  *
+  * Route: GET: /api/groups/me
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  fetchMyGroups(req, res) {
+    const { user } = req.body;
+    user.getGroup()
+    .then((groups) => {
+      if (groups.length === 0) {
+        res.status(200).send({ message: 'You have no group yet' });
+      } else {
+        return res.status(200).send(groups);
+      }
+    }).catch(error => errorResponse(res, 500, null, error));
+  },
+  /**
+  * addMember controller
+  * Allows a user add other users to a group
+  *
+  * Route: POST: /api/groups/:groupname/add-member/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
+  addMember(req, res) {
+    const { group, user, username } = req.body;
+    const { groupname } = group;
+    group.hasUser(user)
+      .then((result) => {
+        if (result) {
+          const message = 'User already belong to group';
+          return errorResponse(res, 409, message, null);
+        }
+        group.addUser(user)
+        .then(member =>
+          res.status(201).send({
+            member: member[0][0],
+            message:
+            `${username} was added to ${groupname}`,
+            status: 201
+          })
+        ).catch(error => errorResponse(res, 500, null, error));
+      }).catch(error => errorResponse(res, 500, null, error));
+  },
+  /**
+  * removeMember controller
+  * Allows a user who acts as the group admin
+  * to remove other group member
+  *
+  * Route: POST: /api/groups/:groupname/remove-member/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   removeMember(req, res) {
-    const username = req.body.username;
-    const groupname = req.params.groupname;
-    if (!groupname || groupname.trim() === '') {
-      res.status(400).send({
-        error: {
-          message: 'Bad request, go to group you want to remove member'
+    const { user, group, username } = req.body;
+    const { groupname } = group;
+    group.hasUser(user)
+      .then((userInGroup) => {
+        if (!userInGroup) {
+          const message = `No such user in ${groupname}`;
+          return errorResponse(res, 404, message, null);
         }
-      });
-      return;
-    }
-    if (!username || username.trim() === '') {
-      res.status(400).send({
-        error: {
-          message: 'Bad request, username is required'
-        }
-      });
-      return;
-    }
-    return models.Group
-      .findOne({ where: { groupname } })
-      .then((group) => {
-        // check if the group exists
-        if (!group) {
-          return res.status(404).send({
-            error: {
-              message: 'Group not found or has not been created'
-            }
+        group.removeUser(user);
+        group.getUser({ attribute: ['username'] })
+        .then((result) => {
+          if (result.length < 1) {
+            models.UserGroup.destroy({ where: { groupname } });
+            models.Message.destroy({ where: { toGroup: groupname } });
+            group.destroy();
+          }
+          res.status(200).send({
+            username,
+            message:
+            `${username} was successfully removed from ${groupname}`
           });
-        }
-        return models.User
-          .findOne({ where: { username } })
-          .then((user) => {
-            // check if the username belongs to a registered user
-            if (!user) {
-              return res.status(404).send({
-                error: {
-                  message: 'User not found. User has no PostIt account'
-                }
-              });
-            }
-            return models.UserGroup
-              .findOne({
-                where: {
-                  username,
-                  groupname
-                }
-              })
-              .then((result) => {
-                if (result !== null) {
-                  models.UserGroup.destroy({
-                    where: { username, groupname }
-                  });
-                  return res.status(200).send({
-                    username,
-                    message:
-                    `${username}
-                    was successfully removed from
-                    ${groupname}`
-                  });
-                }
-                return res.status(404).send({
-                  error: {
-                    message: `No such user in ${groupname}`
-                  }
-                });
-              }).catch(error =>
-                res.status(500).send({ error: error.message, status: 500 }));
-          }).catch(error =>
-            res.status(500).send({ error: error.message, status: 500 }));
-      });
+        }).catch(error => errorResponse(res, 500, null, error));
+      }).catch(error => errorResponse(res, 500, null, error));
   },
-  // Get List of group members
+  /**
+  * fetchMembers controller
+  * Allows a see all the members of the group they belong
+  *
+  * Route: GET: /api/groups/:groupname/members/
+  *
+  * @param  {object} req - request object parameter
+  * @param  {object} res - response object paramter
+  * @return {object} returns a response object
+  */
   fetchMembers(req, res) {
-    const groupname = req.params.groupname;
-    if (!groupname || groupname.trim() === '') {
-      res.status(400).send({
-        error: {
-          message: 'Bad request, go to group you want to view its member'
-        }
-      });
-      return;
-    }
-    return models.Group.findOne({ where: { groupname } })
-      .then((group) => {
-        if (!group) {
-          res.status(400).send({
-            error: { message: `Group - ${groupname} does not exist` }
-          });
-        } else {
-          return models.UserGroup
-          .findAll({ where: { groupname } })
-          .then((result) => {
-            if (result.length === 0) {
-              res.status(204).send({
-                message: 'You have not added any members'
-              });
-            } else {
-              res.status(200).send(result);
-            }
-          });
-        }
-      }).catch(error =>
-        res.status(500).send({ error: error.message, status: 500 }));
+    const { group, user } = req.body;
+    group.hasUser(user)
+    .then((userInGroup) => {
+      if (!userInGroup) {
+        const errorMessage =
+          `User does not belong to group '${req.params.groupname}'`;
+        return errorResponse(res, 401, errorMessage, null);
+      }
+      group.getUser({ attributes: ['id', 'username', 'email', 'createdAt'] })
+      .then(result => res.status(200).send(result))
+      .catch(error => errorResponse(res, 500, null, error));
+    }).catch(error => errorResponse(res, 500, null, error));
   }
 };

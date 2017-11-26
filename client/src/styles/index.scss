@@ -1,0 +1,115 @@
+$primary-font: "Roboto", sans-serif;
+$secondary-font: "Opens Sans", sans-serif;
+$primary-background: #212121;
+$primary-light: #FFF8E1;
+$primary-color: #FFC107;
+$offset-color: #FF6F00;
+$primary-color-hover: #FFA000;
+$white: #FFF;
+$smoke: #9E9E9E;
+$smoke2: #757575;
+$smoke3: #424242; 
+$margin: 15px;
+@mixin background($color) {
+  -webkit-linear-gradient: $color;
+     -moz-linear-gradient: $color;
+      -ms-linear-gradient: $color;
+          linear-gradient: $color;
+}
+
+
+body {
+	background-color: $primary-background;
+	color: $white;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+	
+main {
+    flex: 1 0 auto;
+}
+.headline {
+	margin-top: 80px;
+	text-align: left;
+	z-index: 2;
+}
+.heading {
+	margin-bottom: $margin;
+}
+.brief {
+	margin-bottom: 30px;
+	color: $smoke;
+	&:hover {
+		color: $white;
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
+	}
+}
+.quick-access {
+	p {
+		display: inline-block;
+		margin-left: $margin;
+		color: &smoke;
+		a {
+			text-decoration: none !important;
+			color: $primary-color;
+			&:hover {
+				text-decoration: underline !important;
+			}
+		}
+	}
+}
+.register {
+	color: $white;
+}
+#landing-image {
+	position: relative;
+	top: 20px;
+	right: -40px;
+	img {
+		z-index: 0;
+		height: 50rem;
+	}
+}
+@media (max-width:767px){
+	#landing-image {
+		position: relative;
+		top: 40px;
+		right: -20px;
+		img {
+			height: 50rem
+		}
+	}
+}
+@media (max-width:600px){
+	.headline {
+		text-align: center;
+	}
+	#landing-image {
+		display: none;
+		img {
+			display: none;
+		}
+	}
+}
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import "typography";
+@import "forms";
+@import "search-form";
+@import "buttons";
+@import "dashboard";
+@import "dashboard-myspace";
+@import "dashboard-group";
+@import "dashboard-messages";
+@import "nav";
+@import "alerts";

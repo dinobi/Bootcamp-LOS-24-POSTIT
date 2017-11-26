@@ -1,6 +1,20 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
+/**
+ * Modal Component
+ * Displays a modal when triggered
+ *
+ * @class Modal
+ * @extends {React.Component}
+ */
 class Modal extends React.Component {
+  /**
+   * Creates an instance of Modal.
+   *
+   * @param {any} props
+   * @memberof Modal
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -9,9 +23,11 @@ class Modal extends React.Component {
     this.modalToggle = this.modalToggle.bind(this);
   }
   /**
+   * This method is called when a modal needs to
+   * be opened or closed
    *
    * @memberof Modal
-   * @returns {Object} - new state
+   * @returns {void}
    */
   modalToggle() {
     this.setState({
@@ -21,33 +37,37 @@ class Modal extends React.Component {
   /**
    *
    *
-   * @returns { jsx } jsx - modal composition
+   * @returns {jsx} jsx - modal composition
    * @memberof Modal
    */
   render() {
     const coverClass =
       this.state.modalOpened ?
-      'modal-cover modal-cover-active' :
-      'modal-cover';
+        'modal-cover modal-cover-active' :
+        'modal-cover';
     const containerClass =
       this.state.modalOpened ?
-      'modal-container modal-container-active' :
-      'modal-container';
+        'modal-container modal-container-active' :
+        'modal-container';
+    const { action, modalTitle, children } = this.props;
     return (
       <div>
         <a onClick={this.modalToggle}>
-          {this.props.action}
+          {action}
         </a>
         <div className={containerClass}>
           <div className='modal-header'>
             <h5 className="black-text left">
-              {this.props.modalTitle}
+              {modalTitle}
             </h5>
-            <i className="fa fa-times black-text right" onClick={this.modalToggle}>
+            <i
+              className="fa fa-times black-text right"
+              onClick={this.modalToggle}
+            >
             </i>
           </div>
           <div className='modal-body'>
-            {this.props.children}
+            {children}
           </div>
           <div className='modal-footer'></div>
         </div>
@@ -56,5 +76,14 @@ class Modal extends React.Component {
     );
   }
 }
+
+Modal.defaultProps = {
+  modalTtitle: '',
+  action: {}
+};
+Modal.propTypes = {
+  modalTitle: PropTypes.string.isRequired,
+  action: PropTypes.object.isRequired,
+};
 
 export default Modal;

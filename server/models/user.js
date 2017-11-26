@@ -4,27 +4,33 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
-      allowNull: false  //  dont write to db if data is not supplied
+      allowNull: false,  //  dont write to db if data is not supplied
+      validate: {
+        notEmpty: true
+      }
     },
     email: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,  //  dont write to db if data is not supplied
       validate: {
-        isEmail: true
+        isEmail: true,
+        notEmpty: true
       }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false, //  dont write to db if data is not supplied
+      validate: {
+        notEmpty: true
+      }
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: false, //  dont write to db if data is not supplied
-    },
-    lastSeen: {
-      allowNull: true,
-      type: DataTypes.DATE
+      validate: {
+        not: ['[a-z]', 'i']
+      }
     }
   });
   User.associate = (models) => {
