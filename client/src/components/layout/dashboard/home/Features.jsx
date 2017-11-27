@@ -37,10 +37,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     Write Post
-                    <i className="material-icons right"
-                    >
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">
@@ -73,9 +69,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     Create Group
-                    <i className="material-icons right">
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">
@@ -106,9 +99,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     Add Member
-                    <i className="material-icons right">
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">
@@ -145,9 +135,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     View Messages
-                    <i className="material-icons right">
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">
@@ -181,9 +168,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     Search Member
-                    <i className="material-icons right">
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">
@@ -217,9 +201,6 @@ const Features = () =>
                     className="card-title activator grey-text text-darken-4"
                   >
                     Search Wikipedia
-                    <i className="material-icons right">
-                      more_vert
-                    </i>
                   </span>
                 </div>
                 <div className="card-reveal">

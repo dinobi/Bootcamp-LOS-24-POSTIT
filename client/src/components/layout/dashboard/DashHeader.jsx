@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import jwtDecode from 'jwt-decode';
-import { onCreateGroup } from '../../../actions';
+import swal from 'sweetalert';
+import { onCreateGroup, onLoginUser } from '../../../actions';
 import {
   Header, Button, // eslint-disable-line no-unused-vars
   InputField, Modal, // eslint-disable-line no-unused-vars
   Form, Textarea, // eslint-disable-line no-unused-vars
-  ErrorAlert // eslint-disable-line no-unused-vars
+  ErrorAlert, IconButton // eslint-disable-line no-unused-vars
 } from '../../commonViews';
 
 /**
@@ -45,8 +46,19 @@ class DashHeader extends React.Component {
     }
     const decodeToken = jwtDecode(token);
     if (decodeToken.exp * 1000 < (new Date().getTime())) {
-      localStorage.removeItem('userAuth');
-      location.hash = '#login';
+      const username = decodeToken.data.username;
+      swal({
+        text: 'enter password to re-authenticate',
+        content: {
+          element: 'input',
+          attributes: {
+            placeholder: 'Type your password',
+            type: 'password',
+          },
+        },
+      }).then((password) => {
+        this.props.onLoginUser({ username, password });
+      });
     }
   }
   /**
@@ -130,18 +142,18 @@ class DashHeader extends React.Component {
           <li className="nav-item">
             <Modal action={createGroup} modalTitle="Create a new group">
               <Form id="create-group-form" onSubmit={this.handleCreate}>
+                <p>Name:</p>
                 <InputField
                   inputClass="input-field"
                   onFocus={this.onFocus}
                   placeholder="Enter a group name"
-                  id="group_name"
                   type="text"
                   inputRef={(input) => { this.groupname = input; }}
                 />
+                <p>Description:</p>
                 <Textarea
                   onFocus={this.onFocus}
                   placeholder="Enter group description"
-                  id="group-description"
                   textRef={(input) => { this.description = input; }}
                 />
                 {
@@ -170,7 +182,7 @@ DashHeader.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ onCreateGroup }, dispatch)
+  bindActionCreators({ onCreateGroup, onLoginUser }, dispatch)
 );
 
 

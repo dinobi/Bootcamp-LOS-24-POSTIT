@@ -99,13 +99,14 @@ class Groups extends React.Component {
   render() {
     let { groups } = this.props;
     groups = groups.groups;
+    const toggleOn = 'fa fa-toggle-on side-icon';
     return (
       <div>
         <DashHeader />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu active="groups" />
+              <SideMenu active="groups" toggle={toggleOn}/>
             </aside>
             <section className="col s12 m9 l10">
               <DashboardContent
@@ -149,9 +150,9 @@ class Groups extends React.Component {
 
                   <div className="row">
                     {groups.length > 0 ?
-                      groups.map((group, index) =>
+                      groups.map(group =>
                         <GroupCard
-                          key={index}
+                          key={group.id}
                           groupName={group.groupname}
                           location={
                             <a href={`#groups/${group.groupname}`}>
@@ -163,7 +164,7 @@ class Groups extends React.Component {
                           archive={
                             <IconButton
                               iconClass=
-                              "fa fa-archive fa-1x grey-text right tooltipped"
+                              "fa fa-archive grey-text hang tooltipped"
                               dataPosition="bottom"
                               dataDelay="50"
                               dataTooltip={`Archive ${group.groupname}`}

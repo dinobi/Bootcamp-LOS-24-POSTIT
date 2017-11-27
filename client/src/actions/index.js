@@ -7,7 +7,6 @@ import onLoadGroups from './loadGroups';
 import onLoginUser from './loginUser';
 import onLogoutUser from './logoutUser';
 import onRemoveMember from './removeMember';
-import onSearch from './search';
 import onSelectMember from './selectMember';
 import onSendMessage from './sendMessage';
 import onSignupUser from './signupUser';
@@ -18,5 +17,6 @@ export {
   onLoginUser, onLogoutUser, loadGroupMessages,
   onLoadGroups, onSignupUser, onSelectMember,
   loadGroupMembers, onCreateGroup, onArchiveGroup,
-  onAddMember, onRemoveMember, onSearch,
-  onSendMessage, onResetPassword, onRequestPassword };
+  onAddMember, onRemoveMember, onSendMessage,
+  onResetPassword, onRequestPassword
+};

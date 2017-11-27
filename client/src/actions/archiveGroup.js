@@ -2,22 +2,40 @@ import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 
+/**
+ * Request to archive a group
+ * @return {object} action
+ */
 export const onDeleteGroupRequest = () => ({
   type: actionType.DELETE_GROUP_REQUEST,
   deleteGroupIsLoading: true
 });
 
+/**
+ * Request to archive group was successful
+ * @param {object} group
+ * @return {object} action
+ */
 export const onDeleteGroupSuccess = group => ({
   type: actionType.DELETE_GROUP_SUCCESS,
   deleteGroupIsLoading: false,
   group
 });
 
+/**
+ * Request to archive a group failed
+ * @return {object} action
+ */
 export const onDeleteGroupFailure = () => ({
   type: actionType.DELETE_GROUP_FAILURE,
   deleteGroupIsLoading: false
 });
 
+/**
+ * Allows a user archive a group
+ * @param {object} groupData
+ * @return {object} action
+ */
 const onArchiveGroup = groupData =>
 (dispatch) => {
   swal({
@@ -42,7 +60,9 @@ const onArchiveGroup = groupData =>
         );
         swal({
           text: errorResponse.response.data.error.message,
-          icon: 'error'
+          icon: 'error',
+          buttons: false,
+          timer: 1000,
         });
       });
     }

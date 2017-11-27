@@ -28,13 +28,17 @@ const onRequestPassword = user =>
       dispatch(requestPasswordSuccess(passRes.data.message));
       swal({
         text: passRes.data.message,
-        icon: 'success'
+        icon: 'success',
+        buttons: false,
+        timer: 1600
       });
     }).catch((passRes) => {
       dispatch(requestPasswordFailure(passRes.response.data.error.message));
       swal({
         text: passRes.response.data.error.message,
-        icon: 'error'
+        icon: 'error',
+        buttons: false,
+        timer: 1600
       });
     });
   };

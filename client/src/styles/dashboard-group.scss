@@ -105,3 +105,15 @@ $critical: #F44336;
 .removeButton:hover, .addButton {
 	color: #000;
 }
+.hang {
+	position: absolute !important;
+	right: 2px;
+	bottom: 2px;
+}
+.hang-top {
+	position: absolute !important;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+	height: 36px;
+}

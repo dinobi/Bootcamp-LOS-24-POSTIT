@@ -23,7 +23,7 @@ const onRemoveMember = dataValue =>
 (dispatch) => {
   if (dataValue.authUser === dataValue.username) {
     swal({
-      text: 'Admin!, are you sure you want to exit this group?',
+      text: 'You are the Admin!, are you sure you want to exit this group?',
       icon: 'warning',
       buttons: ['cancel', 'exit']
     })
@@ -42,7 +42,9 @@ const onRemoveMember = dataValue =>
           dispatch(onRemoveMemberFailure());
           swal({
             text: errorResponse.response.data.error.message,
-            icon: 'error'
+            icon: 'error',
+            buttons: false,
+            timer: 1600
           });
         });
       }

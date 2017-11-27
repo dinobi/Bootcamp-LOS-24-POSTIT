@@ -24,17 +24,18 @@ const onSignupUser = signupCredentials =>
     return axios.post('/api/user/signup', signupCredentials)
     .then((signupResponse) => {
       dispatch(onSignupSuccess(signupResponse.data.userData));
-      swal({
-        text: signupResponse.data.message,
-        icon: 'success'
+      swal(signupResponse.data.message, {
+        icon: 'success',
+        buttons: false,
+        timer: 1600,
       });
       localStorage.setItem('userAuth', signupResponse.data.authToken);
       location.hash = '#';
     }).catch((errorResponse) => {
       dispatch(onSignupFailure());
-      swal({
-        text: errorResponse.response.data.error.message,
-        icon: 'error'
+      swal(errorResponse.response.data.error.message, {
+        buttons: false,
+        timer: 1600,
       });
     });
   };

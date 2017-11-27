@@ -29,14 +29,18 @@ const onResetPassword = user =>
       dispatch(resetPasswordSuccess(passRes.data.message));
       swal({
         text: passRes.data.message,
-        icon: 'success'
+        icon: 'success',
+        buttons: false,
+        timer: 1600
       });
       location.hash = '#login';
     }).catch((passRes) => {
       dispatch(resetPasswordFailure(passRes.response.data.error.message));
       swal({
         text: passRes.response.data.error.message,
-        icon: 'error'
+        icon: 'error',
+        buttons: false,
+        timer: 1600
       });
     });
   };
