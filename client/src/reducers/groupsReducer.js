@@ -9,6 +9,7 @@ const groupsReducer = (state = {
   groupsIsLoading: false,
   createGroupIsLoading: false,
   deleteGroupIsLoading: false,
+  modalOpened: false,
   groups: []
 }, action) => {
   switch (action.type) {
@@ -32,6 +33,7 @@ const groupsReducer = (state = {
     case actionType.CREATE_GROUP_SUCCESS:
       return { ...state,
         createGroupIsLoading: false,
+        modalOpened: action.modalOpened,
         groups: [...state.groups, action.group]
       };
     case actionType.CREATE_GROUP_FAILURE:

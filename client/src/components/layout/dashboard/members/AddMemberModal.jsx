@@ -128,44 +128,51 @@ class AddMemberModal extends React.Component {
    */
   render() {
     const { addMemberButton, modalTitle } = this.props.addMemberModal;
+    const { foundUsers, message,  } = this.state;
     return (
       <Modal action={addMemberButton} modalTitle={modalTitle}
       >
-        <Form id="create-group-form" onSubmit={this.handleAddMember}>
-          <InputField
-            inputClass="input-field"
-            onFocus={this.onFocus}
-            placeholder="Enter a username"
-            id="search"
-            type="text"
-            onChange={() => this.handleSearch()}
-            inputRef={(input) => { this.searchTerm = input; }}
-          />
+        <Form id="search-form" onSubmit={this.handleAddMember}>
+          <fieldset id="search-field">
+            <InputField
+              id="search"
+              inputClass="input-field"
+              onFocus={this.onFocus}
+              placeholder="Search by username"
+              type="search"
+              onChange={() => this.handleSearch()}
+              inputRef={(input) => { this.searchTerm = input; }}
+            />
+          </fieldset>
           {
             this.state.message === '' ? '' :
-              <h5 className="black-text">{this.state.message}</h5>
+              <h5 className="black-text">{message}</h5>
           }
           <SearchResult
-            foundUsers={this.state.foundUsers}
+            foundUsers={foundUsers}
             handleAddMember={this.handleAddMember}
           />
-          <div class="search-pages">
-            <span onClick={() =>
-              this.handlePageNav('prev')}
-              className="search-prev"
-            >
-              <i className="fa fa-chevron-left"></i>
-            </span>
-            <span>
-              {this.state.prevPage + 1}/{this.state.nextPage}
-            </span>
-            <span onClick={() =>
-              this.handlePageNav('next')}
-              className="search-next"
-            >
-              <i className="fa fa-chevron-right"></i>
-            </span>
-          </div>
+          {
+            foundUsers.length > 9 ?
+            <div class="search-pages">
+              <span onClick={() =>
+                this.handlePageNav('prev')}
+                className="search-prev"
+              >
+                <i className="fa fa-chevron-left"></i>
+              </span>
+              <span>
+                {this.state.prevPage + 1}/{this.state.nextPage}
+              </span>
+              <span onClick={() =>
+                this.handlePageNav('next')}
+                className="search-next"
+              >
+                <i className="fa fa-chevron-right"></i>
+              </span>
+            </div> :
+            ''
+          }
         </Form>
       </Modal>
     );

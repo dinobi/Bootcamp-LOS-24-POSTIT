@@ -16,18 +16,11 @@
   padding: 1.5rem;
 }
 
-.search-term input[type="checkbox"] + label{
-  font-size: 20px;
-}
-.amber:checked + label:before {
-  border-right: 2px solid $primary-color;
-  border-bottom: 2px solid $primary-color;
- }
-
 #search-field input[type="search"] {
   display: block;
   -webkit-box-sizing: border-box;
-	box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: none;
   margin: 20px auto;
   width: 100%;
   padding: 20px;
@@ -41,7 +34,9 @@
   transition: all .3s ease-in-out;
 }
 
-#search-field input[type="search"]:focus, #search-field input[type="search"]:hover {
+#search-field input[type="search"]:focus,
+#search-field input[type="search"]:hover,
+ {
   box-shadow: 0 0 5px $primary-color;
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;

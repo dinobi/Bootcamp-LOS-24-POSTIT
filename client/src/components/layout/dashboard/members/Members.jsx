@@ -14,10 +14,10 @@ from '../../../commonViews';
 const Members = ({ members, user, onRemoveMember }) =>
   <div className="members-list">
     {
-      members.map((member) => {
+      members.map((member, index) => {
         return (
           members[0].username === user.username ?
-            <li key={member.id}>
+            <li key={index}>
               <i className="fa fa-circle"></i>
               &nbsp;&nbsp;{member.username}
               <IconButton
@@ -33,7 +33,7 @@ const Members = ({ members, user, onRemoveMember }) =>
               />
             </li>
             :
-            <li key={member.id}>
+            <li key={index}>
             <i className="fa fa-circle"></i>
             &nbsp;&nbsp;{member.username}
           </li>

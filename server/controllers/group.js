@@ -107,7 +107,7 @@ export default {
   */
   fetchMyGroups(req, res) {
     const { user } = req.body;
-    user.getGroup()
+    user.getGroup({ attributes: ['id', 'groupname', 'description'] })
     .then((groups) => {
       if (groups.length === 0) {
         res.status(200).send({ message: 'You have no group yet' });
@@ -136,14 +136,15 @@ export default {
           return errorResponse(res, 409, message, null);
         }
         group.addUser(user)
-        .then(member =>
+        .then((member) => {
+          console.log('>>>MEMBER STUFF>>>:', member[0][0]);
           res.status(201).send({
             member: member[0][0],
             message:
             `${username} was added to ${groupname}`,
             status: 201
-          })
-        ).catch(error => errorResponse(res, 500, null, error));
+          });
+        }).catch(error => errorResponse(res, 500, null, error));
       }).catch(error => errorResponse(res, 500, null, error));
   },
   /**
@@ -167,7 +168,7 @@ export default {
           return errorResponse(res, 404, message, null);
         }
         group.removeUser(user);
-        group.getUser({ attribute: ['username'] })
+        group.getUser({ attributes: ['username'] })
         .then((result) => {
           if (result.length < 1) {
             models.UserGroup.destroy({ where: { groupname } });

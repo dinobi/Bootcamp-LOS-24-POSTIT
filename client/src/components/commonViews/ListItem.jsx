@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const ListItem =
-  ({ onClick, listClass, index, anchorClass, url, iconClass, name }) =>
-    <li className={listClass} key={index}>
+  ({ onClick, listClass, id, anchorClass, url, iconClass, name }) =>
+    <li className={listClass} key={id}>
       <a href={url}
         onClick={onClick}
         className={anchorClass}
@@ -31,7 +31,7 @@ ListItem.defaultProps = {
 };
 ListItem.propTypes = {
   listClass: PropTypes.string.isRequired,
-  index: PropTypes.number,
+  id: PropTypes.number,
   onClick: PropTypes.func,
   anchorClass: PropTypes.string.isRequired,
   iconClass: PropTypes.string,
