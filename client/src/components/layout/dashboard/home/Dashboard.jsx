@@ -21,7 +21,7 @@ const Dashboard = () =>
     <main className="dashboard-ui">
       <div className="row">
         <aside className="col s12 m3 l2 hide-on-small-and-down">
-          <SideMenu active="dashboard" />
+          <SideMenu active="dashboard" toggle="fa fa-toggle-off side-icon"/>
         </aside>
         <Features />
       </div>

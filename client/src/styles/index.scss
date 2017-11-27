@@ -21,7 +21,7 @@ $margin: 15px;
 body {
 	background-color: $primary-background;
 	color: $white;
-	overflow-x: hidden;
+	overflow: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
 	display: flex;

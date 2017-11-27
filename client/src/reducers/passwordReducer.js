@@ -9,38 +9,33 @@ import actionType from '../actionTypes';
  */
 const passwordReducer = (state = {
   passwordRequestIsLoading: false,
-  passwordResetIsLoading: false,
-  message: ''
+  passwordResetIsLoading: false
 }, action) => {
   switch (action.type) {
     case actionType.REQUEST_PASSWORD:
-      return Object.assign({}, state, {
+      return { ...state,
         passwordRequestIsLoading: true
-      });
+      };
     case actionType.REQUEST_PASSWORD_SUCCESS:
-      return Object.assign({}, state, {
-        passwordRequestIsLoading: false,
-        message: action.message
-      });
+      return { ...state,
+        passwordRequestIsLoading: false
+      };
     case actionType.REQUEST_PASSWORD_FAILURE:
-      return Object.assign({}, state, {
-        passwordRequestIsLoading: false,
-        message: action.message
-      });
+      return { ...state,
+        passwordRequestIsLoading: false
+      };
     case actionType.RESET_PASSWORD_REQUEST:
-      return Object.assign({}, state, {
+      return { ...state,
         passwordResetIsLoading: true,
-      });
+      };
     case actionType.RESET_PASSWORD_SUCCESS:
-      return Object.assign({}, state, {
-        passwordResetIsLoading: false,
-        message: action.message
-      });
+      return { ...state,
+        passwordResetIsLoading: false
+      };
     case actionType.RESET_PASSWORD_FAILURE:
-      return Object.assign({}, state, {
-        passwordResetIsLoading: false,
-        message: action.message
-      });
+      return { ...state,
+        passwordResetIsLoading: false
+      };
     default:
       return state;
   }

@@ -61,7 +61,7 @@ class Modal extends React.Component {
               {modalTitle}
             </h5>
             <i
-              className="fa fa-times black-text right"
+              className="fa fa-times black-text hang-top"
               onClick={this.modalToggle}
             >
             </i>

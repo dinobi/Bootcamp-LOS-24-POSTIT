@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import scrollToElement from 'scroll-to-element';
 import MessageLog // eslint-disable-line no-unused-vars
   from './MessageLog.jsx';
 import {
@@ -33,6 +34,7 @@ class MessageBoard extends React.Component {
       // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
   /**
    * handleSend()
@@ -52,6 +54,28 @@ class MessageBoard extends React.Component {
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     document.getElementById('send-message').reset();
+    this.handleScroll();
+  }
+  /**
+   * @returns {void} access dom elements when they
+   * become available
+   * @memberof Group
+   */
+  componentDidMount() {
+    this.handleScroll();
+  }
+  /**
+   * @returns {void}
+   * This method handles smooth scroll to the latest message in
+   * the message log
+   * messages
+   */
+  handleScroll() {
+    scrollToElement('.last', {
+      offset: 10,
+      ease: 'in-expo',
+      duration: 1000
+    });
   }
   /**
    *
@@ -68,6 +92,7 @@ class MessageBoard extends React.Component {
               <MessageLog message={post} key={post.id} />
             )
           }
+          <div className="last"></div>
         </div>
         <Form
           formClass="message-box"

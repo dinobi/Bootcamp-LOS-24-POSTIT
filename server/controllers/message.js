@@ -45,7 +45,7 @@ export default {
             const notification = `Hello, <br><br>You have a new message
             marked as ${priority} on ${groupname}<br><br>
             MESSAGE: ${newMessage.message}<br><br>FROM: ${username}<br><br>
-            click on <a href='${process.env.APP_URL}/#/groups/rainier team'>
+            click on <a href='${process.env.APP_URL}/#/groups/${groupname}'>
             this link</a> to view more`;
             const subject = `PostIt: New ${priority} message`;
             switch (priority.toLowerCase()) {

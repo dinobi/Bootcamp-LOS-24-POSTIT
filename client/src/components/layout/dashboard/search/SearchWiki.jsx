@@ -86,13 +86,14 @@ class SearchWiki extends React.Component {
    * @memberof SearchWiki
    */
   render() {
+    const toggleOff = 'fa fa-toggle-off side-icon';
     return (
       <div>
         <DashHeader />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu active="search-wiki" />
+              <SideMenu active="search-wiki" toggle={toggleOff}/>
             </aside>
             <section className="col s12 m9 l10">
               <div className="dashboard-content dashboard-search">
@@ -100,7 +101,7 @@ class SearchWiki extends React.Component {
                   <h3>Search Wikipedia</h3>
                   <p>Search wikipepdia right from your dashboard.</p>
                 </div>
-                <form id="search-form">
+                <Form id="search-form">
                   <fieldset className="search-term">
                     <SearchBox
                       searchContext="search-wiki"
@@ -109,7 +110,7 @@ class SearchWiki extends React.Component {
                       handleSearch={this.handleSearch}
                     />
                   </fieldset>
-                </form>
+                </Form>
                 <section className="search-result" />
               </div>
             </section>

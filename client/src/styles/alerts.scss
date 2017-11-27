@@ -19,3 +19,24 @@ p.alert.info-alert {
   background-color: $info-alert;
   color: #000;
 }
+.swal-modal {
+  background: $white;
+  border-radius: 1px;
+}
+.swal-button {
+  padding: 7px 19px;
+  color: $white;
+  border-radius: 1px;
+  background-color: $primary-color;
+  font-size: 14px;
+  border: 1px solid transparent;
+  text-shadow: none;
+  &:hover {
+    background-color: $primary-color-hover;
+  }
+  &:focus {
+    @extend .swal-button:hover;
+    border: 1px solid transparent;
+    background-color: red;
+  }
+}

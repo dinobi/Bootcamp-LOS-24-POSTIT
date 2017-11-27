@@ -33,7 +33,7 @@ const onSendMessage = message =>
       text: errorResponse.response.data.error.message,
       icon: 'warning',
       buttons: false,
-      timer: 2000,
+      timer: 1000,
     });
   });
 };

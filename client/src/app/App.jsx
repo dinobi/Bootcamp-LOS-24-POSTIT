@@ -10,8 +10,7 @@ import {
   ResetPassword, Dashboard, Groups,
   Group, SearchWiki, NewGroup
 } from '../components/layout';
-import Home from '../components/commonViews/Home.jsx';
-import NotFound from '../components/commonViews/NotFound.jsx';
+import { Home, NotFound } from '../components/commonViews';
 import '../styles/index.scss';
 
 /**

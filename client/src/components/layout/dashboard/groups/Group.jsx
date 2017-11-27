@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import scrollToElement from 'scroll-to-element';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
@@ -38,11 +39,26 @@ class Group extends React.Component {
     this.handleSend = this.handleSend.bind(this);
   }
   /**
-   * @return {void} - Returns action creators.
+   * @return {void} make resources available
+   * before page loads
+   * @memberof Group
    * */
   componentWillMount() {
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
+  }
+  /**
+   * @return {void} make resources available
+   * when changes to properties occur
+   * @memberof Group
+   * */
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.match.params.groupname !== this.props.match.params.groupname
+    ) {
+      this.props.loadGroupMessages();
+      this.props.loadGroupMembers();
+    }
   }
   /**
    * handleSend()
@@ -61,6 +77,7 @@ class Group extends React.Component {
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     document.getElementById('send-message').reset();
+    this.handleScroll();
   }
 
   /**
@@ -72,7 +89,6 @@ class Group extends React.Component {
     const posts = messages;
     const groupName =
       location.href.split('/')[location.href.split('/').length - 1];
-
     const backToGroup =
       <ListItem
         listClass="dashboard-menu-item"
@@ -80,9 +96,8 @@ class Group extends React.Component {
         iconClass="fa fa-chevron-left"
         name="Back"
       />;
-
     const addMemberModal = {
-      modalTitle: `Search and add new member to ${groupName}`,
+      modalTitle: 'Search and add members by username',
       addMemberButton: <IconButton
         iconClass="fa fa-user-plus tooltipped"
         dataPosition="top"
@@ -91,6 +106,7 @@ class Group extends React.Component {
       />,
       onAddMember: this.props.onAddMember
     };
+    const toggleOn = 'fa fa-toggle-on side-icon';
 
     return (
       <div>
@@ -98,13 +114,13 @@ class Group extends React.Component {
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu back={backToGroup} active="groups" />
+              <SideMenu back={backToGroup} active="groups" toggle={toggleOn} />
             </aside>
             <section className="col s12 m9 l10">
               <DashboardContent
                 wrapperClass="dashboard-content group-gui"
                 iconClass="fa fa-folder-open"
-                title={`${groupName} - message Board`}
+                title={`${groupName} - message board`}
               >
                 <div className="row">
                   <div className="col s12 m9">

@@ -12,23 +12,15 @@ const Footer = () =>
 		<div className="divider"></div>
 		<ul className="right">
 			<li>
-				<a>
-					<i className="fa fa-google-plus"></i>
+				<a href="api-docs">
+					<i className="fa fa-file-code-o"></i>&nbsp;&nbsp;
+					<span>api docs</span>
 				</a>
 			</li>
 			<li>
 				<a href="https://github.com/dinobi/Bootcamp-LOS-24-POSTIT">
-					<i className="fa fa-github"></i>
-				</a>
-			</li>
-			<li>
-				<a>
-					<i className="fa fa-facebook"></i>
-				</a>
-			</li>
-			<li>
-				<a>
-					<i className="fa fa-twitter"></i>
+					<i className="fa fa-github"></i>&nbsp;&nbsp;
+					<span>github</span>
 				</a>
 			</li>
 		</ul>
