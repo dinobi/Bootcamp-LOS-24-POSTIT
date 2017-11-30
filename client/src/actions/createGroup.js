@@ -1,21 +1,14 @@
 import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
-
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-
-export const onCloseModal = () => ({
-  type: CLOSE_MODAL,
-  modalOpened: false
-});
+import authError from '../components/helpers/authError';
 
 /**
  * Request to create a new group
  * @return {object} action
  */
 export const onCreateGroupRequest = () => ({
-  type: actionType.CREATE_GROUP_REQUEST,
-  createGroupIsLoading: true
+  type: actionType.CREATE_GROUP_REQUEST
 });
 
 /**
@@ -25,7 +18,6 @@ export const onCreateGroupRequest = () => ({
  */
 export const onCreateGroupSuccess = group => ({
   type: actionType.CREATE_GROUP_SUCCESS,
-  createGroupIsLoading: false,
   group
 });
 
@@ -34,8 +26,7 @@ export const onCreateGroupSuccess = group => ({
  * @return {object} action
  */
 export const onCreateGroupFailure = () => ({
-  type: actionType.CREATE_GROUP_FAILURE,
-  createGroupIsLoading: false
+  type: actionType.CREATE_GROUP_FAILURE
 });
 
 /**
@@ -46,8 +37,7 @@ export const onCreateGroupFailure = () => ({
 const onCreateGroup = groupData =>
   (dispatch) => {
     dispatch(onCreateGroupRequest(groupData));
-    let headers;
-    apiHandler('/api/create-group', groupData, 'post', headers)
+    apiHandler('/api/create-group', groupData, 'post')
       .then((groupRes) => {
         dispatch(onCreateGroupSuccess(groupRes.data.groupData));
         swal({
@@ -56,8 +46,10 @@ const onCreateGroup = groupData =>
           buttons: false,
           timer: 1600
         });
-        dispatch(onCloseModal());
       }).catch((groupRes) => {
+        if (authError(groupRes) !== 'notAuthError') {
+          return;
+        }
         dispatch(onCreateGroupFailure(groupRes.response.data.error.message));
         swal({
           text: groupRes.response.data.error.message,

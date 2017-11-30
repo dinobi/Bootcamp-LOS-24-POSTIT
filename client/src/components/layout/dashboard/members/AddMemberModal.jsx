@@ -25,11 +25,13 @@ class AddMemberModal extends React.Component {
     super(props);
     this.state = {
       message: '',
+      searchTerm: '',
       foundUsers: [],
       nextPage: 2,
       prevPage: 0
     };
     this.handleAddMember = this.handleAddMember.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.handlePageNav = this.handlePageNav.bind(this);
@@ -46,6 +48,17 @@ class AddMemberModal extends React.Component {
     this.setState({ message: '' });
   }
   /**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value },
+      this.handleSearch);
+  }
+  /**
    * handleSearch()
    * This method performs search for users
    * according to usrername
@@ -56,7 +69,8 @@ class AddMemberModal extends React.Component {
    */
   handleSearch(page = this.state.prevPage + 1) {
     this.setState({ foundUsers: [], message: '' });
-    const searchTerm = this.searchTerm.value.trim();
+    let searchTerm = this.state.searchTerm;
+    searchTerm = searchTerm.trim();
     let headers;
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
@@ -88,7 +102,7 @@ class AddMemberModal extends React.Component {
    * @memberof AddMemberModal
    */
   handlePageNav(page) {
-    if (this.searchTerm.value.trim() !== '') {
+    if (this.state.searchTerm.trim() !== '') {
       if (page === 'prev') {
         if (this.state.prevPage > 0) {
           this.handleSearch(this.state.prevPage);
@@ -128,53 +142,55 @@ class AddMemberModal extends React.Component {
    */
   render() {
     const { addMemberButton, modalTitle } = this.props.addMemberModal;
-    const { foundUsers, message,  } = this.state;
+    const { foundUsers, message, searchTerm } = this.state;
     return (
-      <Modal action={addMemberButton} modalTitle={modalTitle}
-      >
-        <Form id="search-form" onSubmit={this.handleAddMember}>
-          <fieldset id="search-field">
-            <InputField
-              id="search"
-              inputClass="input-field"
-              onFocus={this.onFocus}
-              placeholder="Search by username"
-              type="search"
-              onChange={() => this.handleSearch()}
-              inputRef={(input) => { this.searchTerm = input; }}
+      <div className="col s12">
+        <Modal action={addMemberButton} modalTitle={modalTitle}
+        >
+          <Form id="search-form" onSubmit={this.handleAddMember}>
+            <fieldset id="search-field">
+              <InputField
+                id="searchTerm"
+                inputClass="input-field"
+                onFocus={this.onFocus}
+                placeholder="Search by username"
+                type="search"
+                value={searchTerm}
+                onChange={this.handleChange}
+              />
+            </fieldset>
+            {
+              this.state.message === '' ? '' :
+                <h5 className="black-text">{message}</h5>
+            }
+            <SearchResult
+              foundUsers={foundUsers}
+              handleAddMember={this.handleAddMember}
             />
-          </fieldset>
-          {
-            this.state.message === '' ? '' :
-              <h5 className="black-text">{message}</h5>
-          }
-          <SearchResult
-            foundUsers={foundUsers}
-            handleAddMember={this.handleAddMember}
-          />
-          {
-            foundUsers.length > 9 ?
-            <div class="search-pages">
-              <span onClick={() =>
-                this.handlePageNav('prev')}
-                className="search-prev"
-              >
-                <i className="fa fa-chevron-left"></i>
-              </span>
-              <span>
-                {this.state.prevPage + 1}/{this.state.nextPage}
-              </span>
-              <span onClick={() =>
-                this.handlePageNav('next')}
-                className="search-next"
-              >
-                <i className="fa fa-chevron-right"></i>
-              </span>
-            </div> :
-            ''
-          }
-        </Form>
-      </Modal>
+            {
+              foundUsers.length > 9 ?
+              <div class="search-pages">
+                <span onClick={() =>
+                  this.handlePageNav('prev')}
+                  className="search-prev"
+                >
+                  <i className="fa fa-chevron-left"></i>
+                </span>
+                <span>
+                  {this.state.prevPage + 1}/{this.state.nextPage}
+                </span>
+                <span onClick={() =>
+                  this.handlePageNav('next')}
+                  className="search-next"
+                >
+                  <i className="fa fa-chevron-right"></i>
+                </span>
+              </div> :
+              ''
+            }
+          </Form>
+        </Modal>
+      </div>
     );
   }
 }

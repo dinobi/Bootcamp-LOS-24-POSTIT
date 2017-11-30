@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import jwtDecode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import { onCreateGroup, onLoginUser } from '../../../actions';
+import checkAuthUser from '../../helpers/checkAuthUser';
+import {
+  onLoginUser,
+  onLogoutUser } from '../../../actions';
 import {
   Header, Button, // eslint-disable-line no-unused-vars
   InputField, Modal, // eslint-disable-line no-unused-vars
   Form, Textarea, // eslint-disable-line no-unused-vars
-  ErrorAlert, IconButton // eslint-disable-line no-unused-vars
+  ErrorAlert, IconButton, // eslint-disable-line no-unused-vars
+  ListItem // eslint-disable-line no-unused-vars
 } from '../../commonViews';
 
 /**
@@ -30,7 +34,6 @@ class DashHeader extends React.Component {
     this.state = {
       errorMessage: ''
     };
-    this.handleClick = this.handleClick.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.onFocus = this.onFocus.bind(this);
   }
@@ -40,33 +43,18 @@ class DashHeader extends React.Component {
    */
   componentWillMount() {
     const token = localStorage.getItem('userAuth');
-    if (token === null) {
+    if (checkAuthUser(token) === 'invalid') {
+      localStorage.clear();
       location.hash = '#login';
       return;
     }
-    const decodeToken = jwtDecode(token);
-    if (decodeToken.exp * 1000 < (new Date().getTime())) {
-      const username = decodeToken.data.username;
+    if (checkAuthUser(token).status === 'expired') {
       swal({
-        text: 'enter password to re-authenticate',
-        content: {
-          element: 'input',
-          attributes: {
-            placeholder: 'Type your password',
-            type: 'password',
-          },
-        },
-      }).then((password) => {
-        this.props.onLoginUser({ username, password });
+        text: 'Please login to continue',
+        buttons: false,
+        timer: 1600,
       });
     }
-  }
-  /**
-   * @returns {void}
-   * @memberof React
-   */
-  componentDidMount() {
-    $('.tooltipped').tooltip({ delay: 50 });
   }
 
   /**
@@ -81,23 +69,24 @@ class DashHeader extends React.Component {
     });
   }
   /**
-   * handleClick()
-   * This method is called when the user clicks on the "Menu Icon"
-   * It displays a dropdown of menu items
-   *
-   * @returns {void}
-   * @memberof DashHeader
-   */
-  handleClick() {
-    const mobileNav = $('#mobile-nav');
-    mobileNav.html($('.menu-nav').html());
-    if (mobileNav.hasClass('expanded')) {
-      $('#mobile-nav.expanded').removeClass('expanded').slideUp(500);
-      $('.nav-mobile').removeClass('open');
-    } else {
-      mobileNav.addClass('expanded').slideDown(500);
-      $('.nav-mobile').addClass('open');
-    }
+	 * This method is called when DOM elements are available
+	 *
+	 * @memberof DashHeader
+	 * @returns {void}
+	 */
+  componentDidMount() {
+    setTimeout(() => {
+      $('.tooltipped').tooltip({ delay: 50 });
+      $('.collapsible').collapsible();
+      $('.dropdown-button').dropdown({
+        constrainWidth: true,
+      });
+      $('.button-collapse').sideNav({
+        menuWidth: 300,
+        closeOnClick: true,
+        edge: 'right'
+      });
+    }, 800);
   }
   /**
    * handleCreate()
@@ -126,63 +115,56 @@ class DashHeader extends React.Component {
    * @memberof DashHeader
    */
   render() {
-    const createGroup =
-      <Button
-        btnClass="btn btn-create"
-        name="Create a new group"
-      />;
+    const { active, back } = this.props;
     return (
       <Header
         headerClass="dashboard-header"
         container="nav-wrapper"
         logoClass="dashboard-logo"
-        handleClick={() => this.handleClick()}
+        active={active}
       >
-        <ul className="nav-list right hide-on-small-and-down">
-          <li className="nav-item">
-            <Modal action={createGroup} modalTitle="Create a new group">
-              <Form id="create-group-form" onSubmit={this.handleCreate}>
-                <p>Name:</p>
-                <InputField
-                  inputClass="input-field"
-                  onFocus={this.onFocus}
-                  placeholder="Enter a group name"
-                  type="text"
-                  inputRef={(input) => { this.groupname = input; }}
-                />
-                <p>Description:</p>
-                <Textarea
-                  onFocus={this.onFocus}
-                  placeholder="Enter group description"
-                  textRef={(input) => { this.description = input; }}
-                />
-                {
-                  this.state.errorMessage === '' ? '' :
-                    <ErrorAlert
-                      errorMessage=
-                      {this.state.errorMessage}
-                    />
-                }
-                <Button
-                  type="submit"
-                  btnClass="btn btn-create"
-                  name="Submit"
-                />
-              </Form>
-            </Modal>
-          </li>
-        </ul>
+        <ListItem
+          listClass="nav-item hidden"
+          anchorClass={active === 'dashboard' ? 'active' : ''}
+          url="#dashboard"
+          name="My Space"
+        />
+        <ListItem
+          listClass="nav-item hidden"
+          anchorClass={active === 'groups' ? 'active' : ''}
+          url="#groups"
+          name="Groups Control"
+        />
+        <ListItem
+          listClass="nav-item hidden"
+          anchorClass={active === 'search-wiki' ? 'active' : ''}
+          url="#search-wiki"
+          name="Search Wikipedia"
+        />
+        {back}
+        <li className="nav-item">
+          <Button
+            onClick={this.props.onLogoutUser}
+            type="submit"
+            btnClass="btn btn-create"
+            name="Logout"
+          />
+        </li>
       </Header>
     );
   }
 }
 
 DashHeader.propTypes = {
-  onCreateGroup: PropTypes.func.isRequired
+  onLoginUser: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ onCreateGroup, onLoginUser }, dispatch)
+  bindActionCreators({
+    onLoginUser,
+    onLogoutUser
+  }, dispatch)
 );
 
 

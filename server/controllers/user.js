@@ -39,11 +39,12 @@ export default {
       .then((user) => {
         user.save()
           .then((savedUser) => {
-            const token = generateAuthToken(savedUser);
+            const registeredUser = filterUser(savedUser);
+            const token = generateAuthToken(registeredUser);
             res.status(201)
               .send({
                 message: 'User account successfully created.',
-                userData: filterUser(user),
+                userData: registeredUser,
                 authToken: token
               });
           })
@@ -84,10 +85,11 @@ export default {
               const message = 'Authentication failed. Incorrect password';
               errorResponse(res, 401, message, null);
             } else {
-              const token = generateAuthToken(user);
+              const authUser = filterUser(user);
+              const token = generateAuthToken(authUser);
               return res.status(200).send({
                 message: 'Authentication successful',
-                userData: filterUser(user),
+                userData: authUser,
                 authToken: token
               });
             }
@@ -107,10 +109,11 @@ export default {
             const message = 'Authentication failed. Incorrect password';
             errorResponse(res, 401, message, null);
           } else {
-            const token = generateAuthToken(user);
+            const authUser = filterUser(user);
+            const token = generateAuthToken(authUser);
             return res.status(200).send({
               message: 'Authentication successful',
-              userData: filterUser(user),
+              userData: authUser,
               authToken: token
             });
           }

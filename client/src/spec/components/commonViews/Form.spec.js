@@ -14,9 +14,13 @@ describe('Component: When form component is mounted', () => {
   it('should render self and child components as expected', () => {
     const props = {
       onSubmit: mockData.func,
+      id: mockData.string[3]
     };
     const wrapper = mount(<Form {...props}>children</Form>);
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('form').exists()).toBe(true);
+    expect(wrapper.find('.form').exists()).toBe(true);
+    expect(wrapper.find('input').exists()).toBe(true);
+    // wrapper.find('form').simulate('onSubmit');
   });
 });

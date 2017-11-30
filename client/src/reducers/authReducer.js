@@ -14,39 +14,45 @@ const authReducer = (state = {
 }, action) => {
   switch (action.type) {
     case actionType.SIGNUP_REQUEST:
-      return { ...state,
+      return {
+        ...state,
         userIsLoading: true,
         userIsAuthenticated: false
       };
     case actionType.SIGNUP_SUCCESS:
-      return { ...state,
+      return {
+        ...state,
         userIsLoading: false,
         userIsAuthenticated: true,
         user: action.user
       };
     case actionType.SIGNUP_FAILURE:
-      return { ...state,
+      return {
+        ...state,
         userIsLoading: false,
         userIsAuthenticated: false
       };
     case actionType.LOGIN_REQUEST:
-      return { ...state,
+      return {
+        ...state,
         userIsLoading: true,
         userIsAuthenticated: false,
       };
     case actionType.LOGIN_SUCCESS:
-      return { ...state,
+      return {
+        ...state,
         userIsLoading: false,
         userIsAuthenticated: true,
         user: action.user
       };
     case actionType.LOGIN_FAILURE:
-      return { ...state,
-        userIsLoading: false,
-        userIsAuthenticated: false
+      return {
+        ...state,
+        userIsLoading: false
       };
     case actionType.LOGOUT:
-      return { ...state,
+      return {
+        ...state,
         userIsAuthenticated: false,
         user: {},
       };

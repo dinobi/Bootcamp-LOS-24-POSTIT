@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import scrollToElement from 'scroll-to-element';
+import checkAuthUser from '../../../helpers/checkAuthUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
@@ -44,6 +45,12 @@ class Group extends React.Component {
    * @memberof Group
    * */
   componentWillMount() {
+    const token = localStorage.getItem('userAuth');
+    if (checkAuthUser(token) === 'invalid') {
+      localStorage.clear();
+      location.hash = '#login';
+      return;
+    }
     this.props.loadGroupMessages();
     this.props.loadGroupMembers();
   }
@@ -110,7 +117,7 @@ class Group extends React.Component {
 
     return (
       <div>
-        <DashHeader />
+        <DashHeader back={backToGroup} active="groups" />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
@@ -123,7 +130,7 @@ class Group extends React.Component {
                 title={`${groupName} - message board`}
               >
                 <div className="row">
-                  <div className="col s12 m9">
+                  <div className="col s8 m9">
                     {
                       posts.length > 0 ?
                         <MessageBoard posts={posts} /> :
@@ -167,7 +174,7 @@ class Group extends React.Component {
                         </div>
                     }
                   </div>
-                  <div className="col s12 m3 hide-on-small-and-down">
+                  <div className="col s4 m3">
                     <div className="member-list-title">
                       <h6 className="white-text">
                         Members

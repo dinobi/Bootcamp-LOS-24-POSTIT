@@ -1,6 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 import Logo from '../../images/postit-logo.png';
+import { ListItem } from './';  // eslint-disable-line no-unused-vars
 
 /**
  * Header Component
@@ -10,39 +11,33 @@ import Logo from '../../images/postit-logo.png';
  * @returns {Object} JSX
  * @param {Object} props
  */
-const Header = ({ children, handleClick, headerClass, container, logoClass }) =>
+const Header = ({ headerClass, children, logoClass, container }) =>
   <header className={headerClass}>
     <nav className="amber">
       <div className={container}>
-        <a href='#/' className={logoClass}>
-          <img src={Logo} alt="postit-logo" /></a>
-        <a
-          aria-label="mobile-menu"
-          className="nav-mobile"
-          onClick={handleClick}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <a href="/#" className={logoClass}>
+          <img src={Logo} alt="postit-logo" />
         </a>
-        {children}
-      </div>
-      <div className="mobile-nav-wrapper">
-        <div className="container" id="mobile-nav"></div>
+        <a href="#" data-activates="mobile-menu" className="button-collapse right">
+          <i className="material-icons">menu</i>
+        </a>
+        <ul id="desktop" className="right">
+          {children}
+        </ul>
+        <ul className="side-nav" id="mobile-menu">
+          { children }
+        </ul>
       </div>
     </nav>
   </header>;
 
 Header.defaultProps = {
-  handleClick: () => { },
-  headerClass: '',
-  logoClass: ''
+  navLink: {},
+  headerClass: ''
 };
 Header.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  headerClass: PropTypes.string.isRequired,
-  logoClass: PropTypes.string.isRequired,
-  container: PropTypes.string
+  navLink: PropTypes.object.isRequired,
+  headerClass: PropTypes.string.isRequired
 };
 
 export default Header;

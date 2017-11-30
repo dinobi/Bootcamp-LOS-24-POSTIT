@@ -26,8 +26,11 @@ class ResetPassword extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
+      password: '',
+      confirmPassword: '',
     };
     this.onFocus = this.onFocus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleResetPassword = this.handleResetPassword.bind(this);
   }
 	/**
@@ -42,15 +45,25 @@ class ResetPassword extends React.Component {
     this.setState({ errorMessage: '' });
   }
 	/**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+	/**
 	 * @param {any} event
 	 * @memberof ResetPassword
 	 * @returns {*} - New State object and actions creators
 	 */
   handleResetPassword(event) {
     event.preventDefault();
-    let { password, confirmPassword } = this;
-    password = password.value.trim();
-    confirmPassword = confirmPassword.value.trim();
+    let { password, confirmPassword } = this.state;
+    password = password.trim();
+    confirmPassword = confirmPassword.trim();
     if (password === '' || confirmPassword === '') {
       return this.setState({
         errorMessage: 'Error. All fields are required'
@@ -70,6 +83,7 @@ class ResetPassword extends React.Component {
 	 */
   render() {
     const { loader } = this.props;
+    const { password, confirmPassword } = this.state;
     return (
 			<div>
 				<MainHeader />
@@ -88,17 +102,19 @@ class ResetPassword extends React.Component {
 								type="password"
 								id="password"
 								placeholder="Enter new password"
-								inputRef={(input) => { this.password = input; }}
 								label="Password"
+								value={password}
+								onChange={this.handleChange}
 							/>
 							<InputField
 								inputClass="input-field"
 								onFocus = { this.onFocus }
 								type="password"
-								id="confirm-password"
+								id="confirmPassword"
 								placeholder="Confirm password"
-								inputRef={(input) => { this.confirmPassword = input; }}
 								label="Confirm Password"
+								value={confirmPassword}
+								onChange={this.handleChange}
 							/>
 							{
 								this.state.errorMessage === '' ? '' :

@@ -22,7 +22,6 @@ class MainHeader extends React.Component {
   constructor() {
     super();
     this.state = {};
-    this.handleClick = this.handleClick.bind(this);
   }
 	/**
 	 * handleClick()
@@ -32,16 +31,12 @@ class MainHeader extends React.Component {
 	 * @memberof MainHeader
 	 * @returns {void}
 	 */
-  handleClick() {
-    const mobileNav = $('#mobile-nav');
-    mobileNav.html($('.nav-list').html());
-    if (mobileNav.hasClass('expanded')) {
-      $('#mobile-nav.expanded').removeClass('expanded').slideUp(500);
-      $('.nav-mobile').removeClass('open');
-    } else {
-      mobileNav.addClass('expanded').slideDown(500);
-      $('.nav-mobile').addClass('open');
-    }
+  componentDidMount() {
+    $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true,
+      edge: 'right'
+    });
   }
 	/**
 	 *
@@ -52,35 +47,33 @@ class MainHeader extends React.Component {
     const { isAuthenticated } = this.props;
     return (
 			<Header
-				logoClass="postit-logo"
+				headerClass='main-header'
 				container="container nav-wrapper"
-				handleClick={() => this.handleClick()}
+				logoClass="postit-logo"
 			>
-				<ul className="nav-list right hide-on-small-and-down">
-					<li className="nav-item"><a href="api-docs">API DOCS</a></li>
-					<li className="nav-item">
-						{
-							isAuthenticated ?
-								<a onClick={this.props.onLogoutUser}>
-									LOGOUT
-								</a>
-								:
-								<Link to="login">LOGIN</Link>}
-					</li>
-					<li className="nav-item">
-						<a href={isAuthenticated ? '#dashboard' : '#register'}>
-							<Button
-								btnClass="btn btn-create"
-								name=
-								{
-									isAuthenticated ?
-										'Dashboard' :
-										'Register'
-								}
-							/>
-						</a>
-					</li>
-				</ul>
+				<li className="nav-item"><a href="api-docs">API DOCS</a></li>
+				<li className="nav-item">
+					{
+						isAuthenticated ?
+							<a onClick={this.props.onLogoutUser}>
+								LOGOUT
+							</a>
+							:
+							<a href="#login">LOGIN</a>}
+				</li>
+				<li className="nav-item">
+					<a href={isAuthenticated ? '#dashboard' : '#register'}>
+						<Button
+							btnClass="btn btn-create"
+							name=
+							{
+								isAuthenticated ?
+									'Dashboard' :
+									'Register'
+							}
+						/>
+					</a>
+				</li>
 			</Header>
     );
   }

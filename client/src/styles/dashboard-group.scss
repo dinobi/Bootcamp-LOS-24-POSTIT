@@ -80,6 +80,7 @@ $critical: #F44336;
 }
 .member-list-title {
 	background: #212121;
+	margin-bottom: $margin;
 	padding: 5px 10px;
 	font-weight: 900 !important;
 	h5 {
@@ -87,23 +88,29 @@ $critical: #F44336;
 	}
 }
 
-.members-list > li {
+.members-list > .chip {
 	cursor: pointer;
-	list-style: none;
-	font-weight: 900;
-	padding: 10px;
+	font-weight: bold;
 	&:hover, &:active, &:focus {
-		border-radius: 3px;
 		color: $white;
-		background: linear-gradient($primary-color, $primary-color-hover);
+		background: $smoke;
+	}
+	.removeButton {
+		position: absolute;
+		top: 5px;
+		right: 0;
+		margin-left: 5px;
+		&:hover {
+			color: $primary-color;
+		}
 	}
 }
-.removeButton, .addButton {
+.addButton {
 	position: absolute;
 	right: 20px;
-}
-.removeButton:hover, .addButton {
-	color: #000;
+	&:hover {
+		color: #000;
+	}
 }
 .hang {
 	position: absolute !important;

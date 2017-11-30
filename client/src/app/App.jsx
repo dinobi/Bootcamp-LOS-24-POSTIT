@@ -4,7 +4,7 @@ import {
   HashRouter as Router, // eslint-disable-line no-unused-vars
   Route // eslint-disable-line no-unused-vars
 } from 'react-router-dom';
-import 'jquery';
+import 'jquery/dist/jquery';
 import {
   Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,

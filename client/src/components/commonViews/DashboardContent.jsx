@@ -24,7 +24,7 @@ const DashboardContent =
     </div>;
 DashboardContent.defaultProps = {
   wrapper: '',
-  iconClass: {},
+  iconClass: '',
   title: '',
   subtitle: ''
 };

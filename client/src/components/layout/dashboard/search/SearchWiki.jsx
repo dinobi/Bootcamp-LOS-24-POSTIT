@@ -89,7 +89,7 @@ class SearchWiki extends React.Component {
     const toggleOff = 'fa fa-toggle-off side-icon';
     return (
       <div>
-        <DashHeader />
+        <DashHeader active="search-wiki" />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">

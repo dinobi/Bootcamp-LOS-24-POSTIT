@@ -3,18 +3,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import mockData from '../../mocks/mockData';
-import Button from '../../../components/commonViews/Button';
+import InputField from '../../../components/commonViews/InputField';
 
 jest.mock('react-router-dom');
 
-describe('<Button />: When button component is mounted', () => {
+describe('<InputField />: When button component is mounted', () => {
   it('should render self children and hold function without crashing', () => {
     const props = {
       onClick: mockData.func,
     };
-    const wrapper = shallow(<Button {...props}/>);
+    const wrapper = shallow(<InputField {...props}/>);
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('button').exists()).toBe(true);
+    expect(wrapper.find('input').exists()).toBe(true);
+    expect(wrapper.find('label').exists()).toBe(true);
     wrapper.find('button').simulate('onClick');
   });
 });

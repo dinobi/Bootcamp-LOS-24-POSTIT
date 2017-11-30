@@ -18,10 +18,16 @@ class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: ''
+      errorMessage: '',
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      phone: ''
     };
     this.onFocus = this.onFocus.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 	/**
    * onFocus()
@@ -33,6 +39,16 @@ class SignupForm extends React.Component {
    */
   onFocus() {
     this.setState({ errorMessage: '' });
+  }
+	/**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
   }
 	/**
 	 * onSubmitClick()
@@ -49,12 +65,12 @@ class SignupForm extends React.Component {
     let {
 			username, email, password,
 			confirmPassword, phone
-		} = this;
-    username = username.value.trim();
-    email = email.value.trim();
-    password = password.value;
-    confirmPassword = confirmPassword.value;
-    phone = phone.value.trim();
+		} = this.state;
+    username = username.trim();
+    email = email.trim();
+    password = password.trim();
+    confirmPassword = confirmPassword.trim();
+    phone = phone.trim();
     if (
 			username === '' ||
 			email === '' ||
@@ -76,6 +92,10 @@ class SignupForm extends React.Component {
 	 * @memberof SignupForm
 	 */
   render() {
+    const {
+			username, email,
+			password, confirmPassword,
+			phone } = this.state;
     return (
       <div>
 				<Form
@@ -89,8 +109,9 @@ class SignupForm extends React.Component {
 							id="username"
 							type="text"
 							onFocus={this.onFocus}
-							inputRef = {(input) => { this.username = input; }}
 							label = "Username"
+							value={username}
+							onChange={this.handleChange}
 						/>
 					</div>
 					<div className="row">
@@ -100,8 +121,9 @@ class SignupForm extends React.Component {
 							id="email"
 							type="email"
 							onFocus={this.onFocus}
-							inputRef = {(input) => { this.email = input; }}
 							label = "Email"
+							value={email}
+							onChange={this.handleChange}
 						/>
 					</div>
 					<div className="row">
@@ -111,28 +133,31 @@ class SignupForm extends React.Component {
 							id="password"
 							type="password"
 							onFocus={this.onFocus}
-							inputRef = {(input) => { this.password = input; }}
 							label = "Password"
+							value={password}
+							onChange={this.handleChange}
 						/>
 						<InputField
 							inputClass="input-field col s6"
 							placeHolder="Confirm password"
-							id="confirm-password"
+							id="confirmPassword"
 							type="password"
 							onFocus={this.onFocus}
-							inputRef={(input) => { this.confirmPassword = input; }}
-							label="Confirm Password"
+							label="ConfirmPassword"
+							value={confirmPassword}
+							onChange={this.handleChange}
 						/>
 					</div>
 					<div className="row">
 						<InputField
 							inputClass="input-field col s12"
 							placeHolder="Enter your phone"
-							id="number"
+							id="phone"
 							type="number"
 							onFocus={this.onFocus}
-							inputRef={(input) => { this.phone = input; }}
 							label="Phone Number"
+							value={phone}
+							onChange={this.handleChange}
 						/>
 					</div>
 					{ this.state.errorMessage === '' ? '' :
@@ -143,7 +168,11 @@ class SignupForm extends React.Component {
 					}
 					<Button
 						id="register"
-						name="Register"
+						name={
+							this.props.isLoading ?
+							'Processing...' :
+							'Register'
+						}
 						type="submit"
 						btnClass="btn btn-create"
 						disable={ this.props.isLoading }
