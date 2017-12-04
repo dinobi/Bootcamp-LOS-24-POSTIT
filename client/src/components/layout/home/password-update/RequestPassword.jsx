@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainHeader // eslint-disable-line no-unused-vars
-from '../MainHeader.jsx';
+	from '../MainHeader.jsx';
 import Icon from '../../../../images/postit-icon.png';
 import {
 	InputField, // eslint-disable-line no-unused-vars
-	Button,	Form, // eslint-disable-line no-unused-vars
+	Button, Form, // eslint-disable-line no-unused-vars
 	Footer, ErrorAlert // eslint-disable-line no-unused-vars
 } from '../../../commonViews';
 import { onRequestPassword } from '../../../../actions';
@@ -26,9 +26,11 @@ class RequestPassword extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
+      email: '',
       isLoading: false
     };
     this.onFocus = this.onFocus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleRequestPassword = this.handleRequestPassword.bind(this);
   }
   /**
@@ -42,7 +44,16 @@ class RequestPassword extends React.Component {
   onFocus() {
     this.setState({ errorMessage: '' });
   }
-
+	/**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
 	/**
 	 * handleRequestPassword
 	 * This method is called when a user hits
@@ -54,8 +65,8 @@ class RequestPassword extends React.Component {
 	 */
   handleRequestPassword(event) {
     event.preventDefault();
-    let { email } = this;
-    email = email.value.trim();
+    let { email } = this.state;
+    email = email.trim();
     if (email === '') {
       this.setState({
         errorMessage: 'Error. email is required'
@@ -70,6 +81,7 @@ class RequestPassword extends React.Component {
 	 */
   render() {
     const { loader } = this.props;
+    const { email } = this.state;
     return (
 			<div>
 				<MainHeader />
@@ -88,8 +100,9 @@ class RequestPassword extends React.Component {
 							type="text"
 							id="email"
 							placeholder="Enter your postit associated email"
-							inputRef={(input) => { this.email = input; }}
 							label="Email"
+							value={email}
+							onChange={this.handleChange}
 						/>
 						{
 							this.state.errorMessage === '' ? '' :

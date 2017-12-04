@@ -3,7 +3,7 @@ $error-alert: #F44336;
 $info-alert: #eee;
 
 p.alert {
-  color: #fff;
+  color: #fff !important;
   font-size: 12px;
   border-radius: 5px;
   padding: 5px 10px;

@@ -13,7 +13,7 @@ import { onLoginUser } from '../../../../actions';
 import Icon from '../../../../images/postit-icon.png';
 
 /** Login {component} */
-class Login extends React.Component {
+export class Login extends React.Component {
 	/**
 	 * Creates an instance of Login.
 	 * @param {any} props
@@ -22,12 +22,14 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logoutMessage: '',
       errorMessage: '',
+      username: '',
+      password: '',
       isLoading: false
     };
     this.onFocus = this.onFocus.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 	/**
    * onFocus()
@@ -41,6 +43,16 @@ class Login extends React.Component {
     this.setState({ errorMessage: '' });
   }
 	/**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+	/**
 	 * handleLogin()
 	 * This method is called when a user hits the
 	 * login button
@@ -51,11 +63,13 @@ class Login extends React.Component {
 	 */
   handleLogin(event) {
     event.preventDefault();
-    let { username, password } = this;
-    username = username.value.trim();
-    password = password.value.trim();
+    let { username, password } = this.state;
+    username = username.trim();
+    password = password.trim();
     if (username === '' || password === '') {
-      this.setState({ errorMessage: 'Error. One or more fields are empty' });
+      this.setState({
+        errorMessage: 'Error. Spaces or blank fields are not allowed'
+      });
     } else {
       const loginCreds = { username, password };
       this.props.onLoginUser(loginCreds);
@@ -67,11 +81,7 @@ class Login extends React.Component {
 	 * @memberof Login
 	 */
   render() {
-    if (localStorage.getItem('userAuth') !== null) {
-      location.hash = '#dashboard';
-      return null;
-    }
-    const { errorMessage, isLoading } = this.state;
+    const { username, password, errorMessage } = this.state;
     return (
 			<div>
 				<MainHeader />
@@ -90,8 +100,9 @@ class Login extends React.Component {
 							type="text"
 							id="username"
 							placeholder="Enter your username or email"
-							inputRef={(input) => { this.username = input; }}
 							label="Username or Email"
+							value={username}
+							onChange={this.handleChange}
 						/>
 						<InputField
 							inputClass="input-field"
@@ -99,8 +110,9 @@ class Login extends React.Component {
 							type="password"
 							id="password"
 							placeholder="Enter your password"
-							inputRef={(input) => { this.password = input; }}
 							label="Password"
+							value={password}
+							onChange={this.handleChange}
 						/>
 						{
 							this.state.errorMessage === '' ? '' :
@@ -110,10 +122,15 @@ class Login extends React.Component {
 								/>
 						}
 						<Button
-							disabled={isLoading}
+							id="login"
+							disabled={this.props.isLoading}
 							type="submit"
 							btnClass="btn btn-login"
-							name="Login"
+							name={
+								this.props.isLoading ?
+									'Login in...' :
+									'Login'
+							}
 						/>
 					</Form>
 					<section className="external">
@@ -143,7 +160,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
-  message: state.auth.message
+  isLoading: state.auth.userIsLoading
 });
 
 const mapDispatchToProps = dispatch =>

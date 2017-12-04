@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import GroupCard from './GroupCard.jsx'; // eslint-disable-line no-unused-vars
-import DashHeader // eslint-disable-line no-unused-vars
+import swal from 'sweetalert';
+import checkAuthUser from '../../../helpers/checkAuthUser';
+import GroupCard from './GroupCard.jsx';
+import DashHeader
   from '../DashHeader.jsx';
 import {
-  SideMenu, Card, Form, // eslint-disable-line no-unused-vars
-  Copyright, InputField, // eslint-disable-line no-unused-vars
-  IconButton, DashboardContent // eslint-disable-line no-unused-vars
+  SideMenu, Card, Form,
+  Copyright, InputField,
+  IconButton, DashboardContent
 } from '../../../commonViews';
 import {
   onCreateGroup, onLoadGroups,
@@ -34,8 +36,10 @@ class Groups extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
-      renderChild: true
+      groupname: '',
+      decription: ''
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.onFocus = this.onFocus.bind(this);
   }
@@ -53,6 +57,16 @@ class Groups extends React.Component {
     });
   }
   /**
+	 * handleChange(event)
+   * This method ahndle state changes on an onChange event
+	 *
+   * @param {object} event - events object parameter
+   * @return {object} newState
+   */
+  handleChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+  /**
    * handleCreate()
    * This method is called when a user hit the
    * create group button
@@ -60,9 +74,9 @@ class Groups extends React.Component {
    * @returns {void}
    */
   handleCreate() {
-    let { groupname, description } = this;
-    groupname = groupname.value.trim();
-    description = description.value.trim();
+    let { groupname, description } = this.state;
+    groupname = groupname.trim();
+    description = description.trim();
     if (groupname === '' || description === '') {
       return '';
     }
@@ -84,13 +98,29 @@ class Groups extends React.Component {
       return '';
     }
     const groupData = { groupname };
-    this.props.onArchiveGroup(groupData);
+    swal({
+      text: `Are you sure you want to
+      archive ${groupData.groupname}?`,
+      icon: 'warning',
+      buttons: ['cancel', 'archive']
+    })
+      .then((remove) => {
+        if (remove) {
+          return this.props.onArchiveGroup(groupData);
+        }
+      });
   }
 
   /**
    * @return {void}
    * */
   componentWillMount() {
+    const token = localStorage.getItem('userAuth');
+    if (checkAuthUser(token) === 'invalid') {
+      localStorage.clear();
+      location.hash = '#login';
+      return;
+    }
     this.props.onLoadGroups();
   }
   /**
@@ -98,15 +128,16 @@ class Groups extends React.Component {
    */
   render() {
     let { groups } = this.props;
+    const { groupname, description } = this.state;
     groups = groups.groups;
     const toggleOn = 'fa fa-toggle-on side-icon';
     return (
       <div>
-        <DashHeader />
+        <DashHeader active="groups" />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
-              <SideMenu active="groups" toggle={toggleOn}/>
+              <SideMenu active="groups" toggle={toggleOn} />
             </aside>
             <section className="col s12 m9 l10">
               <DashboardContent
@@ -124,16 +155,18 @@ class Groups extends React.Component {
                           onFocus={this.onFocus}
                           type="text"
                           id="groupname"
-                          inputRef={(input) => { this.groupname = input; }}
                           label="Groupname"
+                          value={groupname}
+                          onChange={this.handleChange}
                         />
                         <InputField
                           inputClass="col s12 m6 input-field"
                           onFocus={this.onFocus}
                           type="text"
                           id="description"
-                          inputRef={(input) => { this.description = input; }}
                           label="Description"
+                          value={description}
+                          onChange={this.handleChange}
                         />
                         <div className="col s12 m1">
                           <IconButton

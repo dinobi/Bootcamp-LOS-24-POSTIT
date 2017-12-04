@@ -4,17 +4,19 @@ import sinon from 'sinon';
 export default {
   func: sinon.spy(),
   // dashboardUser: { groups: [] },
-  promiseFuncResolve: sinon.spy(() => Promise.resolve()),
-  promiseFuncReject: sinon.spy(() => Promise.reject()),
+  promiseFuncResolve: sinon.spy(() => new Promise(() => {})),
+  promiseFuncReject: sinon.spy(() => new Promise.reject()),
   emptyArray: [],
   emptyObject: {},
   emptyString: '   ', 
   match: { params: { id: 1 } },
   matchHash: { params: { id: 1, hash: '' } },
-  // messageObject: { id: 1,
-  //   fromUser: faker.lorem.word(),
-  //   priority: faker.lorem.word(),
-  //   message: faker.lorem.words() },
+  messageObject: {
+    fromUser: 'john_doe',
+    toGroup: 'reactors',
+    priority: 'urgent',
+    message: 'Over before it begins'
+  },
   string: [
     'troy', 'tray', 'fantasy',
     'learning', 'community',
@@ -34,12 +36,6 @@ export default {
   user: { message: [] },
   username: 'searchAgent',
   email: 'searchAgent@postit.com',
-  // randomUser: {
-  //   username: faker.internet.userName(),
-  //   email: faker.internet.email(),
-  //   password: faker.internet.password(),
-  //   phone: faker.phone.phoneNumber(),
-  // },
   staticUser: [
     {
       username: 'john_doe',

@@ -1,33 +1,38 @@
+import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
+import authError from '../components/helpers/authError';
 
 export const onLoadGroupsRequest = () => ({
-  type: actionType.LOAD_GROUPS_REQUEST,
-  groupsIsLoading: true
+  type: actionType.LOAD_GROUPS_REQUEST
 });
 
 export const onLoadGroupsSuccess = groups => ({
   type: actionType.LOAD_GROUPS_SUCCESS,
-  groupsIsLoading: false,
   groups
 });
 
-export const onLoadGroupsFailure = message => ({
-  type: actionType.LOAD_GROUPS_FAILURE,
-  groupsIsLoading: false,
-  message
+export const onLoadGroupsFailure = () => ({
+  type: actionType.LOAD_GROUPS_FAILURE
 });
 
 const onLoadGroups = () =>
-(dispatch) => {
-  dispatch(onLoadGroupsRequest());
-  let headers;
-  apiHandler('/api/groups/me', '', 'get', headers).then((loadGroupsRes) => {
-    dispatch(onLoadGroupsSuccess(loadGroupsRes.data));
-  }).catch((loadGroupsError) => {
-    loadGroupsError = 'Groups could not be loaded';
-    dispatch(onLoadGroupsFailure(loadGroupsError));
-  });
-};
+  (dispatch) => {
+    dispatch(onLoadGroupsRequest());
+    return apiHandler('/api/groups/me', '', 'get').then((loadGroupsRes) => {
+      dispatch(onLoadGroupsSuccess(loadGroupsRes.data));
+    }).catch((loadGroupsRes) => {
+      if (authError(loadGroupsRes) !== 'notAuthError') {
+        return;
+      }
+      dispatch(onLoadGroupsFailure());
+      swal({
+        text: loadGroupsRes.response.data.error.message,
+        icon: 'warning',
+        buttons: false,
+        timer: 1600,
+      });
+    });
+  };
 
 export default onLoadGroups;

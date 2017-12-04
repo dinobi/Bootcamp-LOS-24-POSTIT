@@ -21,7 +21,7 @@
     "test-undo-migration": "export NODE_ENV=test && sequelize db:migrate:undo:all",
     "heroku-postbuild": "npm run build",
     "undo:migration": "heroku run sequelize db:migrate:undo:all",
-    "client-test": "jest --coverage --watch --no-cache"
+    "client-test": "NODE_ENV=test jest /client --coverage --watch --no-cache"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/dinobi/Bootcamp-LOS-24-POSTIT#readme",
   "devDependencies": {
+    "axios-mock-adapter": "^1.10.0",
     "babel-jest": "^20.0.3",
     "babel-plugin-istanbul": "^4.1.4",
     "babel-preset-env": "^1.6.0",
@@ -59,6 +60,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "mock-local-storage": "^1.0.5",
     "nyc": "^11.0.3",
+    "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^15.6.1",
     "redux-mock-store": "^1.2.3",
     "webpack": "^3.4.1",
@@ -131,12 +133,11 @@
     "react-router-redux": "^4.0.8",
     "react-transform-hmr": "^1.0.4",
     "redux": "^3.7.2",
-    "redux-persist": "^4.9.1",
     "redux-immutable-state-invariant": "^2.1.0",
+    "redux-persist": "^4.9.1",
     "redux-thunk": "^2.2.0",
     "s": "^0.1.1",
     "sass-loader": "^6.0.6",
-    "scroll-to-element": "^2.0.0",
     "sequelize": "^4.3.0",
     "sequelize-cli": "^2.7.0",
     "serve-favicon": "^2.4.5",

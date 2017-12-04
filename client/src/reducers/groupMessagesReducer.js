@@ -25,18 +25,18 @@ const groupMessagesReducer = (state = {
         sendMessageIsLoading: false
       };
     case actionType.LOAD_GROUP_MESSAGES_REQUEST:
-      return Object.assign({}, state, {
-        groupsMessagesIsLoading: true,
-      });
+      return { ...state,
+        groupMessagesIsLoading: true,
+      };
     case actionType.LOAD_GROUP_MESSAGES_SUCCESS:
-      return Object.assign({}, state, {
-        groupsMessagesIsLoading: false,
+      return { ...state,
+        groupMessagesIsLoading: false,
         groupMessages: action.groupMessages
-      });
+      };
     case actionType.LOAD_GROUP_MESSAGES_FAILURE:
-      return Object.assign({}, state, {
+      return { ...state,
         groupMessagesIsLoading: false
-      });
+      };
     default:
       return state;
   }

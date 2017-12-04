@@ -122,23 +122,23 @@
 	border: 2px solid $primary-color !important;
 	width: 96.5%;
 	color: #000;
-	border-radius: 5px;
+	border-radius: 3px;
 	margin-bottom: 30px;
-	padding: 0 1rem;
+	padding: .5rem 1rem;
 	font-size: 14px;
 }
 
 #create-group-form textarea {
   display: block;
   min-height: 100px;
-	padding: .5rem 1rem;
+	padding: 0 1rem;
 	margin-bottom: 30px;
   overflow: hidden;
   color: #000;
   font-size: 14px;
   background-color: transparent;
   border: 2px solid $primary-color;
-  border-radius: 5px;
+  border-radius: 3px;
   resize: none;
 }
 #create-group-form textarea:focus {
@@ -195,6 +195,15 @@
   top: 5%;
   margin-left: -400px;
   display: none;
+}
+@media (max-width: 767px) {
+	.modal-container {
+		width: 100%;
+		min-height: 100%;
+		left: 10%;
+		top: 10%;
+		margin-left: -40px;
+	}
 }
 
 .modal-container.modal-container-active {

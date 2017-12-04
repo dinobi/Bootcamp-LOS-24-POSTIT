@@ -1,48 +1,45 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 import actionType from '../actionTypes';
+import authError from '../components/helpers/authError';
 
-export const resetPassword = user => ({
-  type: actionType.RESET_PASSWORD,
-  passwordResetIsLoading: true,
-  user
+export const resetPassword = () => ({
+  type: actionType.RESET_PASSWORD
 });
 
-export const resetPasswordSuccess = message => ({
-  type: actionType.RESET_PASSWORD_SUCCESS,
-  passwordResetIsLoading: false,
-  message
+export const resetPasswordSuccess = () => ({
+  type: actionType.RESET_PASSWORD_SUCCESS
 });
 
-export const resetPasswordFailure = message => ({
-  type: actionType.RESET_PASSWORD_FAILURE,
-  passwordResetIsLoading: false,
-  message
+export const resetPasswordFailure = () => ({
+  type: actionType.RESET_PASSWORD_FAILURE
 });
 
-const onResetPassword = user =>
+const onResetPassword = (user, hash) =>
   (dispatch) => {
-    const hash = location.href.split('/')[location.href.split('/').length - 1];
-    dispatch(resetPassword(user));
+    dispatch(resetPassword());
     return axios.post(`/api/user/reset-password/${hash}`, user)
-    .then((passRes) => {
-      dispatch(resetPasswordSuccess(passRes.data.message));
-      swal({
-        text: passRes.data.message,
-        icon: 'success',
-        buttons: false,
-        timer: 1600
+      .then((passwordRes) => {
+        dispatch(resetPasswordSuccess());
+        swal({
+          text: passwordRes.data.message,
+          icon: 'success',
+          buttons: false,
+          timer: 1600
+        });
+        location.hash = '#login';
+      }).catch((passwordRes) => {
+        if (authError(passwordRes) !== 'notAuthError') {
+          return;
+        }
+        dispatch(resetPasswordFailure());
+        swal({
+          text: passwordRes.response.data.error.message,
+          icon: 'error',
+          buttons: false,
+          timer: 1600
+        });
       });
-      location.hash = '#login';
-    }).catch((passRes) => {
-      dispatch(resetPasswordFailure(passRes.response.data.error.message));
-      swal({
-        text: passRes.response.data.error.message,
-        icon: 'error',
-        buttons: false,
-        timer: 1600
-      });
-    });
   };
 
 export default onResetPassword;

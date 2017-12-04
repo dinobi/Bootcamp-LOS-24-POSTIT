@@ -10,17 +10,13 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const Form = ({ children, id, onSubmit, formClass }) =>
-  <div>
-    <section>
-      <form
-        className={`form ${formClass}`}
-        id={id}
-        onSubmit={onSubmit}
-      >
-        {children}
-      </form>
-    </section>
-  </div>;
+  <form
+    className={`form ${formClass}`}
+    id={id}
+    onSubmit={onSubmit}
+  >
+    {children}
+  </form>;
 
 Form.defaultProps = {
   formClass: '',

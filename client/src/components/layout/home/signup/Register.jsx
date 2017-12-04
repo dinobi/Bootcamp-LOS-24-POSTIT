@@ -20,7 +20,7 @@ import { onSignupUser } from '../../../../actions';
  * @class Register
  * @extends {React.Component}
  */
-class Register extends React.Component {
+export class Register extends React.Component {
 	/**
 	 * Renders a registration form
 	 * @returns {jsx} - jsx for Register component

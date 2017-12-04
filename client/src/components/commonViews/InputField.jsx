@@ -10,7 +10,11 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const InputField =
-  ({ inputClass, onFocus, type, id, placeHolder, onChange, inputRef, label }) =>
+  ({
+    inputClass, onFocus, type, id,
+    placeHolder, onChange, value,
+    inputRef, label
+  }) =>
     <div className={inputClass}>
       <input
         onFocus={onFocus}
@@ -18,8 +22,9 @@ const InputField =
         id={id}
         type={type}
         className="validate"
-        onChange={onChange}
         ref={inputRef}
+        value={value}
+        onChange={onChange}
       />
       <label className="active" htmlFor={id}>{label}</label>
     </div>;
@@ -32,9 +37,11 @@ InputField.defaultProps = {
   placeholder: '',
   onChange: () => { },
   inputRef: () => { },
+  value: '',
   label: ''
 };
 InputField.propTypes = {
+  value: PropTypes.string.isRequired,
   inputClass: PropTypes.string.isRequired,
   onFocus: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,

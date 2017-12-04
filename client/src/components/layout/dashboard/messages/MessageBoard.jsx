@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import scrollToElement from 'scroll-to-element';
 import MessageLog // eslint-disable-line no-unused-vars
   from './MessageLog.jsx';
 import {
@@ -34,7 +33,7 @@ class MessageBoard extends React.Component {
       // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
+    // this.handleScroll = this.handleScroll.bind(this);
   }
   /**
    * handleSend()
@@ -48,11 +47,13 @@ class MessageBoard extends React.Component {
    */
   handleSend(event) {
     event.preventDefault();
+    const groupname =
+      location.href.split('/')[location.href.split('/').length - 1];
     let { message, priority } = this;
     message = message.value.trim();
     priority = priority.value.trim();
     const messageData = { message, priority };
-    this.props.onSendMessage(messageData);
+    this.props.onSendMessage(messageData, groupname);
     document.getElementById('send-message').reset();
     this.handleScroll();
   }
@@ -61,22 +62,22 @@ class MessageBoard extends React.Component {
    * become available
    * @memberof Group
    */
-  componentDidMount() {
-    this.handleScroll();
-  }
+  // componentDidMount() {
+  //   this.handleScroll();
+  // }
   /**
    * @returns {void}
    * This method handles smooth scroll to the latest message in
    * the message log
    * messages
    */
-  handleScroll() {
-    scrollToElement('.last', {
-      offset: 10,
-      ease: 'in-expo',
-      duration: 1000
-    });
-  }
+  // handleScroll() {
+  //   scrollToElement('.last', {
+  //     offset: 10,
+  //     ease: 'in-expo',
+  //     duration: 1000
+  //   });
+  // }
   /**
    *
    *
