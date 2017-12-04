@@ -7,7 +7,8 @@
  */
 const filterUser = user => ({
   username: user.username,
-  email: user.email
+  email: user.email,
+  phone: user.phone
 });
 
 export default filterUser;

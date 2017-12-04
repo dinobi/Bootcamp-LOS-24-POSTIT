@@ -44,10 +44,7 @@ export default {
       .then((group) => {
         group.addUser(user)
         .then(() => res.status(201).send({
-          groupData: {
-            groupname,
-            description
-          },
+          groupData: group,
           message: `${group.groupname} was created successfully`,
         }));
       })
@@ -137,7 +134,6 @@ export default {
         }
         group.addUser(user)
         .then((member) => {
-          console.log('>>>MEMBER STUFF>>>:', member[0][0]);
           res.status(201).send({
             member: member[0][0],
             message:

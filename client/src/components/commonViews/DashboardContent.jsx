@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -24,7 +24,7 @@ const DashboardContent =
     </div>;
 DashboardContent.defaultProps = {
   wrapper: '',
-  iconClass: {},
+  iconClass: '',
   title: '',
   subtitle: ''
 };

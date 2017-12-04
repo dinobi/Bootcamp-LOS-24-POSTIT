@@ -1,10 +1,10 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import {
-  Switch, // eslint-disable-line no-unused-vars
-  HashRouter as Router, // eslint-disable-line no-unused-vars
-  Route // eslint-disable-line no-unused-vars
+  Switch,
+  HashRouter as Router,
+  Route
 } from 'react-router-dom';
-import 'jquery';
+import 'jquery/dist/jquery';
 import {
   Register, Login, RequestPassword,
   ResetPassword, Dashboard, Groups,
@@ -29,7 +29,6 @@ const App = () =>
         <Route path='/reset-password/:hash' component={ResetPassword} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/groups' component={Groups} />
-        <Route path='/create-group' component={NewGroup} />
         <Route path='/groups/:groupname' component={Group} />
         <Route path='/search-wiki' component={SearchWiki} />
         <Route component={NotFound} />

@@ -1,4 +1,3 @@
-
 /**
  * Since we are using JWTs, we just need to remove the token
 * from localStorage. These actions are more useful if we
@@ -10,11 +9,8 @@ export const LOGOUT = 'LOGOUT';
  * @param {message} message
  * @returns {Object} - new state
  */
-export const logout = message => ({
-  type: LOGOUT,
-  userIsAuthenticated: false,
-  userData: {},
-  message
+export const logout = () => ({
+  type: LOGOUT
 });
 /**
  * onLogoutUser()
@@ -23,10 +19,9 @@ export const logout = message => ({
 */
 const onLogoutUser = () =>
   (dispatch) => {
-    const logoutMessage = 'You signed out successfully';
-    dispatch(logout(logoutMessage));
-    location.hash = '#login';
+    dispatch(logout());
     localStorage.clear();
+    location.hash = '#login';
   };
 
 export default onLogoutUser;

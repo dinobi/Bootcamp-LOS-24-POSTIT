@@ -17,9 +17,8 @@ const Members = ({ members, user, onRemoveMember }) =>
       members.map((member, index) => {
         return (
           members[0].username === user.username ?
-            <li key={index}>
-              <i className="fa fa-circle"></i>
-              &nbsp;&nbsp;{member.username}
+            <div className="chip" key={index}>
+              {member.username}
               <IconButton
                 iconClass="fa fa-user-times removeButton tooltipped"
                 dataPosition="bottom"
@@ -31,9 +30,9 @@ const Members = ({ members, user, onRemoveMember }) =>
                   username: member.username
                 })}
               />
-            </li>
+            </div>
             :
-            <li key={index}>
+            <li className="chip" key={index}>
             <i className="fa fa-circle"></i>
             &nbsp;&nbsp;{member.username}
           </li>

@@ -10,15 +10,18 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const IconButton =
-  ({ iconClass, dataPosition, dataDelay, dataTooltip, onClick }) =>
+  ({ name, iconClass, dataPosition, dataDelay, dataTooltip, onClick }) =>
     (<i className={iconClass}
       data-position={dataPosition}
       data-delay={dataDelay}
       data-tooltip={dataTooltip}
       onClick={onClick}
-    />);
+      >
+      {name}
+    </i>);
 
 IconButton.defaultProps = {
+  name: '',
   iconClass: '',
   onClick: () => { },
 };

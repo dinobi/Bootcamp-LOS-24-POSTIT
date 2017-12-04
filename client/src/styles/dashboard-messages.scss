@@ -60,10 +60,12 @@
 	}
 }
 .message-box {
-	margin: 10px 0 10px 15px;
+	z-index: 1000;
+	padding: 10px 0 10px 15px;
 	display: flex;
 	align-items: flex-start;
 	text-align: center;
+	background: $white;
 	textarea {
 		background: $primary-light;
 		color: $primary-background;

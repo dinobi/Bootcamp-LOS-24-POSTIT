@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import scrollToElement from 'scroll-to-element';
+import checkAuthUser from '../../../helpers/checkAuthUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
@@ -44,20 +44,31 @@ class Group extends React.Component {
    * @memberof Group
    * */
   componentWillMount() {
-    this.props.loadGroupMessages();
-    this.props.loadGroupMembers();
+    const token = localStorage.getItem('userAuth');
+    if (checkAuthUser(token) === 'invalid') {
+      localStorage.clear();
+      location.hash = '#login';
+      return;
+    }
+    const groupname =
+      location.href.split('/')[location.href.split('/').length - 1];
+    this.props.loadGroupMessages(groupname);
+    this.props.loadGroupMembers(groupname);
   }
   /**
    * @return {void} make resources available
    * when changes to properties occur
    * @memberof Group
+   * @param {props} nextProps - next available props
    * */
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.match.params.groupname !== this.props.match.params.groupname
     ) {
-      this.props.loadGroupMessages();
-      this.props.loadGroupMembers();
+      const groupname =
+        location.href.split('/')[location.href.split('/').length - 1];
+      this.props.loadGroupMessages(groupname);
+      this.props.loadGroupMembers(groupname);
     }
   }
   /**
@@ -77,7 +88,7 @@ class Group extends React.Component {
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     document.getElementById('send-message').reset();
-    this.handleScroll();
+    // this.handleScroll();
   }
 
   /**
@@ -110,7 +121,7 @@ class Group extends React.Component {
 
     return (
       <div>
-        <DashHeader />
+        <DashHeader back={backToGroup} active="groups" />
         <main className="dashboard-ui">
           <div className="row">
             <aside className="col s12 m3 l2 hide-on-small-and-down">
@@ -123,7 +134,7 @@ class Group extends React.Component {
                 title={`${groupName} - message board`}
               >
                 <div className="row">
-                  <div className="col s12 m9">
+                  <div className="col s8 m9">
                     {
                       posts.length > 0 ?
                         <MessageBoard posts={posts} /> :
@@ -167,7 +178,7 @@ class Group extends React.Component {
                         </div>
                     }
                   </div>
-                  <div className="col s12 m3 hide-on-small-and-down">
+                  <div className="col s4 m3">
                     <div className="member-list-title">
                       <h6 className="white-text">
                         Members

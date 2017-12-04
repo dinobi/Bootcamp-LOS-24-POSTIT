@@ -18,7 +18,7 @@ import LandingImg from '../../images/postit-landing.png';
  * @returns {Object} JSX
  * @param {Object} props
  */
-const Home = ({ isAuthenticated }) =>
+export const Home = ({ isAuthenticated }) =>
   <div>
     <MainHeader />
     <main className="container">
