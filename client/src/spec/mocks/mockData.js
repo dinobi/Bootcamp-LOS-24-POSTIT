@@ -4,8 +4,8 @@ import sinon from 'sinon';
 export default {
   func: sinon.spy(),
   // dashboardUser: { groups: [] },
-  promiseFuncResolve: sinon.spy(() => Promise.resolve()),
-  promiseFuncReject: sinon.spy(() => Promise.reject()),
+  promiseFuncResolve: sinon.spy(() => new Promise(() => {})),
+  promiseFuncReject: sinon.spy(() => new Promise.reject()),
   emptyArray: [],
   emptyObject: {},
   emptyString: '   ', 

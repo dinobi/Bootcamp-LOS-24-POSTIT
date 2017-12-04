@@ -19,8 +19,6 @@ describe('Component: When form component is mounted', () => {
     const wrapper = mount(<Form {...props}>children</Form>);
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('form').exists()).toBe(true);
-    expect(wrapper.find('.form').exists()).toBe(true);
-    expect(wrapper.find('input').exists()).toBe(true);
-    // wrapper.find('form').simulate('onSubmit');
+    wrapper.find('form').simulate('submit');
   });
 });

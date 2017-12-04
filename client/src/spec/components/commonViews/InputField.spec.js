@@ -7,15 +7,15 @@ import InputField from '../../../components/commonViews/InputField';
 
 jest.mock('react-router-dom');
 
-describe('<InputField />: When button component is mounted', () => {
-  it('should render self children and hold function without crashing', () => {
+describe('<InputField />: When InputField component is mounted', () => {
+  it('should render self and children and hold function without crashing', () => {
     const props = {
-      onClick: mockData.func,
+      onChange: mockData.func
     };
-    const wrapper = shallow(<InputField {...props}/>);
+    const wrapper = mount(<InputField {...props} />);
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('input').exists()).toBe(true);
     expect(wrapper.find('label').exists()).toBe(true);
-    wrapper.find('button').simulate('onClick');
+    wrapper.find('input').simulate('change');
   });
 });

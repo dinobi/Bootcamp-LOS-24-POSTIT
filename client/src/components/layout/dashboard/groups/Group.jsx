@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import scrollToElement from 'scroll-to-element';
 import checkAuthUser from '../../../helpers/checkAuthUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
@@ -51,20 +50,25 @@ class Group extends React.Component {
       location.hash = '#login';
       return;
     }
-    this.props.loadGroupMessages();
-    this.props.loadGroupMembers();
+    const groupname =
+      location.href.split('/')[location.href.split('/').length - 1];
+    this.props.loadGroupMessages(groupname);
+    this.props.loadGroupMembers(groupname);
   }
   /**
    * @return {void} make resources available
    * when changes to properties occur
    * @memberof Group
+   * @param {props} nextProps - next available props
    * */
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.match.params.groupname !== this.props.match.params.groupname
     ) {
-      this.props.loadGroupMessages();
-      this.props.loadGroupMembers();
+      const groupname =
+        location.href.split('/')[location.href.split('/').length - 1];
+      this.props.loadGroupMessages(groupname);
+      this.props.loadGroupMembers(groupname);
     }
   }
   /**
@@ -84,7 +88,7 @@ class Group extends React.Component {
     const messageData = { message, priority };
     this.props.onSendMessage(messageData);
     document.getElementById('send-message').reset();
-    this.handleScroll();
+    // this.handleScroll();
   }
 
   /**

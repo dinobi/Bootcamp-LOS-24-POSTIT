@@ -9,7 +9,7 @@ import {
  * @class SignupForm
  * @extends {React.Component}
  */
-class SignupForm extends React.Component {
+export class SignupForm extends React.Component {
 	/**
 	 * Creates an instance of SignupForm.
 	 * @param {props} props - class properties

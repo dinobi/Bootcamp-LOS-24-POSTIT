@@ -16,19 +16,17 @@ export const loadGroupMembersFailure = () => ({
   type: actionType.LOAD_GROUP_MEMBERS_FAILURE
 });
 
-const loadGroupMembers = () =>
+const loadGroupMembers = groupname =>
   (dispatch) => {
     dispatch(loadGroupMembersRequest());
-    const groupname =
-      location.href.split('/')[location.href.split('/').length - 1];
-    apiHandler(`/api/groups/${groupname}/members`, '', 'get')
+    return apiHandler(`/api/groups/${groupname}/members`, '', 'get')
       .then((groupMembersRes) => {
         dispatch(loadGroupMembersSuccess(groupMembersRes.data));
       }).catch((groupMembersRes) => {
         if (authError(groupMembersRes) !== 'notAuthError') {
           return;
         }
-        dispatch(groupMembersRes());
+        dispatch(loadGroupMembersFailure());
         swal({
           text: groupMembersRes.response.data.error.message,
           icon: 'warning',

@@ -9,45 +9,56 @@ import mockData from '../../mocks/mockData';
 import { SideMenu } from '../../../components/commonViews/SideMenu';
 
 jest.mock('react-router-dom');
-jest.unmock('../../../components/commonViews/SideMenu');
+/**
+ * component function
+ * creates a setup for SignupForm component
+ *
+ * @return {function} shallow -
+ * renders a component one level deep
+ * @param {bool} loading 
+ */
+const component = (active) => {
+  const props = {
+    active: active,
+    groups: ['lfc', 'kfc'],
+    user: {
+      username: 'john_doe',
+      email: 'john_doe@postit.com'
+    },
+    onLoadGroups: mockData.func,
+    onLogoutUser: mockData.func
+  }
+  return shallow(<SideMenu {...props} />)
+}
 
 describe('<SideMenu/> Component: Given SideMenu component is mounted', () => {
-  const props = {
-    active: 'groups',
-    onLogOutUser: sinon.spy,
-    groups: [],
-    user: {
-      username: '',
-      email: ''
-    }
-  }
-  const initialState = { user: [], groups: []};
-  const mockStore = configureStore();
-  let store;
-  let wrapperShallow, wrapperMount;
-  const logout = mockData.func;
-  const setup = () => shallow(<SideMenu {...props} />)
-  beforeEach(() => {
-    store = mockStore(initialState);
-    wrapperShallow = shallow(<SideMenu {...props} store={store} />);
-    // wrapperMount = mount(
-    //   <SideMenu {...props} />
-    // );
+  it('should render self as expected', (done) => {
+    const wrapper = component('dashboard');
+    expect(wrapper.exists()).toBe(true);
+    expect(wrapper.length).toBe(1);
+    done()
   });
-
-  it('should render components', () => {
-    wrapperMount = setup();
-    expect(wrapperMount.find('section').exists()).toBe(true);
-    expect(wrapperMount.find('li').exists()).toBe(true);
+  it('should render children as expected', (done) => {
+    const wrapper = component('dashboard')
+    expect(wrapper.find('ListItem').length).toBe(3);
+    // expect(wrapper.find('Button').length).toBe(1);
+    done()
   });
-
-  // it('calls componentDidMount', () => {
-  //   sinon.spy(SideMenu.prototype, 'componentDidMount');
-  //   const wrapper = mount(<SideMenu {...props} store={store} />);
-  //   expect(SideMenu.prototype.componentDidMount.calledOnce).to.equal(true);
-  // });
-
-  // it('should render connected component properly', () => {
-  //   expect(wrapperShallow.length).toBe(1);
-  // });
+  it('should contain h5 element that holds a logged in username', (done) => {
+    const wrapper = component('dashboard')
+    expect(wrapper.find('h5').length).toBe(1);
+    expect(wrapper.find('h5').text()).toEqual('john_doe');
+    done()
+  });
+  it('should contain h5 element that holds a logged in username', (done) => {
+    const wrapper = component('dashboard')
+    expect(wrapper.find('h6').length).toBe(1);
+    expect(wrapper.find('h6').text()).toEqual('john_doe@postit.com');
+    done()
+  });
+  it('should contain an array of authenticated users groups', (done) => {
+    const wrapper = component('dashboard')
+    expect(wrapper.instance().props.groups.length).toBe(2);
+    done()
+  });
 });

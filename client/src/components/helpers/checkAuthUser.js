@@ -10,8 +10,7 @@ const checkAuthUser = (token) => {
   const decodeToken = jwtDecode(token);
   if (decodeToken.exp * 1000 < (new Date().getTime())) {
     const username = decodeToken.data.username;
-    const status = 'expired';
-    return ({ username, status });
+    return ({ username, status: 'expired' });
   }
   return 'valid';
 };

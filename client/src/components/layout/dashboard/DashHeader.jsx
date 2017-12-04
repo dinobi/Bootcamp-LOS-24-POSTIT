@@ -7,7 +7,8 @@ import swal from 'sweetalert';
 import checkAuthUser from '../../helpers/checkAuthUser';
 import {
   onLoginUser,
-  onLogoutUser } from '../../../actions';
+  onLogoutUser
+} from '../../../actions';
 import {
   Header, Button, // eslint-disable-line no-unused-vars
   InputField, Modal, // eslint-disable-line no-unused-vars
@@ -49,8 +50,10 @@ class DashHeader extends React.Component {
       return;
     }
     if (checkAuthUser(token).status === 'expired') {
+      const username = checkAuthUser(token).username;
       swal({
-        text: 'Please login to continue',
+        title: `Hi ${username}!`,
+        text: 'Please login again to continue',
         buttons: false,
         timer: 1600,
       });

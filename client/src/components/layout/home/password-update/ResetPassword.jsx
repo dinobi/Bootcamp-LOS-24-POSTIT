@@ -61,6 +61,7 @@ class ResetPassword extends React.Component {
 	 */
   handleResetPassword(event) {
     event.preventDefault();
+    const hash = location.href.split('/')[location.href.split('/').length - 1];
     let { password, confirmPassword } = this.state;
     password = password.trim();
     confirmPassword = confirmPassword.trim();
@@ -73,7 +74,7 @@ class ResetPassword extends React.Component {
         errorMessage: 'Error. Password do not match'
       });
     } else {
-      this.props.onResetPassword({ password });
+      this.props.onResetPassword({ password }, hash);
     }
   }
 	/**

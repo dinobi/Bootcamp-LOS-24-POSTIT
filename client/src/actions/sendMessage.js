@@ -4,27 +4,22 @@ import apiHandler from '../components/helpers/api-handler';
 import authError from '../components/helpers/authError';
 
 export const onSendMessageRequest = () => ({
-  type: actionType.SEND_MESSAGE_REQUEST,
-  messageIsLoading: true
+  type: actionType.SEND_MESSAGE_REQUEST
 });
 
 export const onSendMessageSuccess = message => ({
   type: actionType.SEND_MESSAGE_SUCCESS,
-  messageIsLoading: false,
   message
 });
 
 export const onSendMessageFailure = () => ({
-  type: actionType.SEND_MESSAGE_FAILURE,
-  messageIsLoading: false
+  type: actionType.SEND_MESSAGE_FAILURE
 });
 
-const onSendMessage = message =>
+const onSendMessage = (message, groupname) =>
   (dispatch) => {
     dispatch(onSendMessageRequest());
-    const groupname =
-      location.href.split('/')[location.href.split('/').length - 1];
-    apiHandler(`/api/groups/${groupname}/send-message`, message, 'post')
+    return apiHandler(`/api/groups/${groupname}/send-message`, message, 'post')
       .then((messageResponse) => {
         dispatch(onSendMessageSuccess(messageResponse.data));
       }).catch((errorResponse) => {

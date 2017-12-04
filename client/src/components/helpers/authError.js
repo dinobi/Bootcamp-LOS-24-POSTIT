@@ -1,5 +1,5 @@
-const authError = (error) => {
-  if (error.response.data.error.message ===
+const authError = (errorRes) => {
+  if (errorRes.response.data.error.message ===
     'Authentication failed. Invalid access token'
   ) {
     localStorage.clear();

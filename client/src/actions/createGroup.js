@@ -37,7 +37,7 @@ export const onCreateGroupFailure = () => ({
 const onCreateGroup = groupData =>
   (dispatch) => {
     dispatch(onCreateGroupRequest(groupData));
-    apiHandler('/api/create-group', groupData, 'post')
+    return apiHandler('/api/create-group', groupData, 'post')
       .then((groupRes) => {
         dispatch(onCreateGroupSuccess(groupRes.data.groupData));
         swal({

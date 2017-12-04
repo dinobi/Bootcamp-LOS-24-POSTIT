@@ -14,6 +14,6 @@ describe('<IconButton />: When IconButton component is mounted', () => {
     };
     const wrapper = shallow(<IconButton {...props}/>);
     expect(wrapper.exists()).toBe(true);
-    wrapper.find('i').simulate('onClick');
+    wrapper.find('i').simulate('click');
   });
 });

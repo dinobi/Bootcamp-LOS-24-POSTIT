@@ -3,27 +3,24 @@ import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import authError from '../components/helpers/authError';
 
-export const requestPassword = user => ({
-  type: actionType.REQUEST_PASSWORD,
-  user
+export const requestPassword = () => ({
+  type: actionType.REQUEST_PASSWORD
 });
 
-export const requestPasswordSuccess = message => ({
-  type: actionType.REQUEST_PASSWORD_SUCCESS,
-  message
+export const requestPasswordSuccess = () => ({
+  type: actionType.REQUEST_PASSWORD_SUCCESS
 });
 
-export const requestPasswordFailure = message => ({
-  type: actionType.REQUEST_PASSWORD_FAILURE,
-  message
+export const requestPasswordFailure = () => ({
+  type: actionType.REQUEST_PASSWORD_FAILURE
 });
 
 const onRequestPassword = user =>
   (dispatch) => {
-    dispatch(requestPassword(user));
+    dispatch(requestPassword());
     return axios.post('/api/user/request-password', user)
       .then((passwordRes) => {
-        dispatch(requestPasswordSuccess(passwordRes.data.message));
+        dispatch(requestPasswordSuccess());
         swal({
           text: passwordRes.data.message,
           icon: 'success',
@@ -34,9 +31,7 @@ const onRequestPassword = user =>
         if (authError(passwordRes) !== 'notAuthError') {
           return;
         }
-        dispatch(requestPasswordFailure(
-          passwordRes.response.data.error.message
-        ));
+        dispatch(requestPasswordFailure());
         swal({
           text: passwordRes.response.data.error.message,
           icon: 'error',

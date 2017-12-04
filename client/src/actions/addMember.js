@@ -34,14 +34,11 @@ export const onAddMemberFailure = () => ({
  * @return {object} action
  * @param {object} user
  */
-const onAddMember = user =>
+const onAddMember = (user, groupname) =>
   (dispatch) => {
     dispatch(onAddMemberRequest());
-    const groupname =
-      location.href.split('/')[location.href.split('/').length - 1];
     return apiHandler(`/api/groups/${groupname}/add-member`, user, 'post')
       .then((addMemberResponse) => {
-        console.log('>>>>IT GOT HERE>>>');
         dispatch(onAddMemberSuccess(addMemberResponse.data.member));
         swal({
           text: addMemberResponse.data.message,

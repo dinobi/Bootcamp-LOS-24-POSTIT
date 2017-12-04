@@ -128,7 +128,9 @@ class AddMemberModal extends React.Component {
    */
   handleAddMember(selectedUser) {
     const { username } = selectedUser;
-    this.props.addMemberModal.onAddMember({ username });
+    const groupname =
+    location.href.split('/')[location.href.split('/').length - 1];
+    this.props.addMemberModal.onAddMember({ username }, groupname);
     const users = this.state.foundUsers.filter(
       user => selectedUser.username !== user.username
     );

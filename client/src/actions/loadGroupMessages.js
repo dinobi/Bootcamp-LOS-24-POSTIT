@@ -12,23 +12,21 @@ export const loadGroupMessagesSuccess = groupMessages => ({
   groupMessages
 });
 
-export const loadGroupMessagesFailure = message => ({
-  type: actionType.LOAD_GROUP_MESSAGES_FAILURE,
-  message
+export const loadGroupMessagesFailure = () => ({
+  type: actionType.LOAD_GROUP_MESSAGES_FAILURE
 });
 
-const loadGroupMessages = () =>
+const loadGroupMessages = groupname =>
 (dispatch) => {
   dispatch(loadGroupMessagesRequest());
-  const groupname =
-    location.href.split('/')[location.href.split('/').length - 1];
-  apiHandler(`/api/groups/${groupname}/show-messages`, '', 'get')
+  return apiHandler(`/api/groups/${groupname}/show-messages`, '', 'get')
   .then((groupMessagesRes) => {
     dispatch(loadGroupMessagesSuccess(groupMessagesRes.data));
   }).catch((groupMessagesRes) => {
     if (authError(groupMessagesRes) !== 'notAuthError') {
       return;
     }
+    dispatch(loadGroupMessagesFailure());
     swal({
       text: groupMessagesRes.response.data.error.message,
       icon: 'warning',

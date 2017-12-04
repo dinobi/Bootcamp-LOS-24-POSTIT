@@ -9,7 +9,6 @@ import App from './App.jsx';
 import '../styles/index.scss';
 
 const app = document.getElementById('app');
-
 ReactDOM.render(
   <Provider store={ store }>
     <App />

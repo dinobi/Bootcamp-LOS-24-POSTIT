@@ -27,12 +27,12 @@ export class SideMenu extends React.Component {
    * @memberof SideMenu
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
-    }
+    // const token = localStorage.getItem('userAuth');
+    // if (checkAuthUser(token) === 'invalid') {
+    //   localStorage.clear();
+    //   location.hash = '#login';
+    //   return;
+    // }
     this.props.onLoadGroups();
   }
 	/**
@@ -102,7 +102,7 @@ export class SideMenu extends React.Component {
 							<li><a href="#groups">Groups Control</a></li>
 							<li className="divider"></li>
 							<li>
-								<a onClick={this.props.onLogoutUser}>Logout</a>
+								<a id="logout" onClick={this.props.onLogoutUser}>Logout</a>
 							</li>
 						</ul>
 					</section>

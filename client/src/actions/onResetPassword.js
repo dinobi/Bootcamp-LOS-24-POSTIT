@@ -3,31 +3,24 @@ import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import authError from '../components/helpers/authError';
 
-export const resetPassword = user => ({
-  type: actionType.RESET_PASSWORD,
-  user
+export const resetPassword = () => ({
+  type: actionType.RESET_PASSWORD
 });
 
-export const resetPasswordSuccess = message => ({
-  type: actionType.RESET_PASSWORD_SUCCESS,
-  message
+export const resetPasswordSuccess = () => ({
+  type: actionType.RESET_PASSWORD_SUCCESS
 });
 
-export const resetPasswordFailure = message => ({
-  type: actionType.RESET_PASSWORD_FAILURE,
-  message
+export const resetPasswordFailure = () => ({
+  type: actionType.RESET_PASSWORD_FAILURE
 });
 
-const onResetPassword = user =>
+const onResetPassword = (user, hash) =>
   (dispatch) => {
-    const hash = location.href.split('/')[location.href.split('/').length - 1];
-    dispatch(resetPassword(user));
+    dispatch(resetPassword());
     return axios.post(`/api/user/reset-password/${hash}`, user)
       .then((passwordRes) => {
-        if (authError(passwordRes) !== 'notAuthError') {
-          return;
-        }
-        dispatch(resetPasswordSuccess(passwordRes.data.message));
+        dispatch(resetPasswordSuccess());
         swal({
           text: passwordRes.data.message,
           icon: 'success',
@@ -36,7 +29,10 @@ const onResetPassword = user =>
         });
         location.hash = '#login';
       }).catch((passwordRes) => {
-        dispatch(resetPasswordFailure(passwordRes.response.data.error.message));
+        if (authError(passwordRes) !== 'notAuthError') {
+          return;
+        }
+        dispatch(resetPasswordFailure());
         swal({
           text: passwordRes.response.data.error.message,
           icon: 'error',

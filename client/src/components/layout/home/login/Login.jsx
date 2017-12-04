@@ -81,10 +81,6 @@ export class Login extends React.Component {
 	 * @memberof Login
 	 */
   render() {
-    if (localStorage.getItem('userAuth') !== null) {
-      location.hash = '#dashboard';
-      return null;
-    }
     const { username, password, errorMessage } = this.state;
     return (
 			<div>
@@ -126,13 +122,14 @@ export class Login extends React.Component {
 								/>
 						}
 						<Button
+							id="login"
 							disabled={this.props.isLoading}
 							type="submit"
 							btnClass="btn btn-login"
 							name={
 								this.props.isLoading ?
-								'Login in...' :
-								'Login'
+									'Login in...' :
+									'Login'
 							}
 						/>
 					</Form>
@@ -163,7 +160,6 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
-  message: state.auth.message,
   isLoading: state.auth.userIsLoading
 });
 

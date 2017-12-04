@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import swal from 'sweetalert';
 import checkAuthUser from '../../../helpers/checkAuthUser';
-import GroupCard from './GroupCard.jsx'; // eslint-disable-line no-unused-vars
-import DashHeader // eslint-disable-line no-unused-vars
+import GroupCard from './GroupCard.jsx';
+import DashHeader
   from '../DashHeader.jsx';
 import {
-  SideMenu, Card, Form, // eslint-disable-line no-unused-vars
-  Copyright, InputField, // eslint-disable-line no-unused-vars
-  IconButton, DashboardContent // eslint-disable-line no-unused-vars
+  SideMenu, Card, Form,
+  Copyright, InputField,
+  IconButton, DashboardContent
 } from '../../../commonViews';
 import {
   onCreateGroup, onLoadGroups,
@@ -97,7 +98,17 @@ class Groups extends React.Component {
       return '';
     }
     const groupData = { groupname };
-    this.props.onArchiveGroup(groupData);
+    swal({
+      text: `Are you sure you want to
+      archive ${groupData.groupname}?`,
+      icon: 'warning',
+      buttons: ['cancel', 'archive']
+    })
+      .then((remove) => {
+        if (remove) {
+          return this.props.onArchiveGroup(groupData);
+        }
+      });
   }
 
   /**
@@ -146,7 +157,7 @@ class Groups extends React.Component {
                           id="groupname"
                           label="Groupname"
                           value={groupname}
-                          onChange = {this.handleChange}
+                          onChange={this.handleChange}
                         />
                         <InputField
                           inputClass="col s12 m6 input-field"
@@ -155,7 +166,7 @@ class Groups extends React.Component {
                           id="description"
                           label="Description"
                           value={description}
-                          onChange = {this.handleChange}
+                          onChange={this.handleChange}
                         />
                         <div className="col s12 m1">
                           <IconButton

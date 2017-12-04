@@ -19,7 +19,7 @@ export const onLoadGroupsFailure = () => ({
 const onLoadGroups = () =>
   (dispatch) => {
     dispatch(onLoadGroupsRequest());
-    apiHandler('/api/groups/me', '', 'get').then((loadGroupsRes) => {
+    return apiHandler('/api/groups/me', '', 'get').then((loadGroupsRes) => {
       dispatch(onLoadGroupsSuccess(loadGroupsRes.data));
     }).catch((loadGroupsRes) => {
       if (authError(loadGroupsRes) !== 'notAuthError') {
