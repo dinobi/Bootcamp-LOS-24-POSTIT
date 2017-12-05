@@ -27,13 +27,33 @@ export class SideMenu extends React.Component {
    * @memberof SideMenu
    * */
   componentWillMount() {
-    // const token = localStorage.getItem('userAuth');
-    // if (checkAuthUser(token) === 'invalid') {
-    //   localStorage.clear();
-    //   location.hash = '#login';
-    //   return;
-    // }
+    const token = localStorage.getItem('userAuth');
+    if (checkAuthUser(token) === 'invalid') {
+      localStorage.clear();
+      location.hash = '#login';
+      return;
+    }
     this.props.onLoadGroups();
+  }
+	/**
+   * @return {void} make resources available
+   * when changes to properties occur
+   * @memberof SideMenu
+   * @param {props} nextProps - next available props
+   */
+  componentWillReceiveProps(nextProps) {
+    setTimeout(() => {
+      $('.tooltipped').tooltip({ delay: 50 });
+      $('.collapsible').collapsible();
+      $('.dropdown-button').dropdown({
+        constrainWidth: true,
+      });
+      $('.button-collapse').sideNav({
+        menuWidth: 300,
+        closeOnClick: true,
+        edge: 'right'
+      });
+    }, 800);
   }
 	/**
 	 * @returns {jsx} jsx component for side menu

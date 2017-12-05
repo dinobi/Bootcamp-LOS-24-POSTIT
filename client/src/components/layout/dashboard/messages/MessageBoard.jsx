@@ -33,7 +33,29 @@ class MessageBoard extends React.Component {
       // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
-    // this.handleScroll = this.handleScroll.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+  /**
+   * Handles scrolling to specified element
+   *
+   * @memberof Group
+   */
+  handleScroll() {
+    setTimeout(() => {
+      const messages = $('.postlogs');
+      const newMessage = messages.find('.post:last-child');
+      const scrollTop = messages.prop('scrollTop');
+      const scrollHeight = messages.prop('scrollHeight');
+      messages.scrollTop(scrollHeight);
+    }, 800);
+  }
+  /**
+   * Access available DOM elements
+   * 
+   * @memberof Group
+   */
+  componentDidMount() {
+    this.handleScroll();
   }
   /**
    * handleSend()
@@ -54,30 +76,9 @@ class MessageBoard extends React.Component {
     priority = priority.value.trim();
     const messageData = { message, priority };
     this.props.onSendMessage(messageData, groupname);
-    document.getElementById('send-message').reset();
     this.handleScroll();
+    document.getElementById('send-message').reset();
   }
-  /**
-   * @returns {void} access dom elements when they
-   * become available
-   * @memberof Group
-   */
-  // componentDidMount() {
-  //   this.handleScroll();
-  // }
-  /**
-   * @returns {void}
-   * This method handles smooth scroll to the latest message in
-   * the message log
-   * messages
-   */
-  // handleScroll() {
-  //   scrollToElement('.last', {
-  //     offset: 10,
-  //     ease: 'in-expo',
-  //     duration: 1000
-  //   });
-  // }
   /**
    *
    *
@@ -93,7 +94,6 @@ class MessageBoard extends React.Component {
               <MessageLog message={post} key={post.id} />
             )
           }
-          <div className="last"></div>
         </div>
         <Form
           formClass="message-box"
