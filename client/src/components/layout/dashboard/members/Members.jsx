@@ -33,8 +33,7 @@ const Members = ({ members, user, onRemoveMember }) =>
             </div>
             :
             <li className="chip" key={index}>
-            <i className="fa fa-circle"></i>
-            &nbsp;&nbsp;{member.username}
+              {member.username}
           </li>
         );
       })

@@ -38,6 +38,7 @@ class Group extends React.Component {
     };
     this.handleSend = this.handleSend.bind(this);
   }
+
   /**
    * @return {void} make resources available
    * before page loads
@@ -60,7 +61,7 @@ class Group extends React.Component {
    * when changes to properties occur
    * @memberof Group
    * @param {props} nextProps - next available props
-   * */
+   */
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.match.params.groupname !== this.props.match.params.groupname
@@ -82,13 +83,14 @@ class Group extends React.Component {
    */
   handleSend(event) {
     event.preventDefault();
+    const groupname =
+      location.href.split('/')[location.href.split('/').length - 1];
     let { message, priority } = this;
     message = message.value.trim();
     priority = priority.value.trim();
     const messageData = { message, priority };
-    this.props.onSendMessage(messageData);
+    this.props.onSendMessage(messageData, groupname);
     document.getElementById('send-message').reset();
-    // this.handleScroll();
   }
 
   /**
