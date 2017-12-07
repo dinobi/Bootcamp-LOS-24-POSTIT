@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import mockData from '../../mocks/mockData';
+import mockData from '../../../mocks/mockData';
 import ConnectedLogin, { Login }
-from '../../../components/layout/home/login/Login';
+from '../../../../components/layout/home/login/Login';
 
 /**
  * component function

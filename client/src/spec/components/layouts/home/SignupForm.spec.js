@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import mockData from '../../mocks/mockData';
+import mockData from '../../../mocks/mockData';
 import { SignupForm }
-from '../../../components/layout/home/signup/SignupForm';
+from '../../../../components/layout/home/signup/SignupForm';
 
 /**
  * component function

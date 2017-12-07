@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import checkAuthUser from '../../../helpers/checkAuthUser';
+import authUser from '../../../helpers/authUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
@@ -15,7 +15,7 @@ import {
 } from '../../../commonViews';
 import {
   loadGroupMessages, loadGroupMembers, onSendMessage,
-  onAddMember, onRemoveMember
+  onAddMember, onRemoveMember, onLogoutUser
 }
   from '../../../../actions';
 
@@ -25,7 +25,7 @@ import {
  * @class Group
  * @extends {React.Component}
  */
-class Group extends React.Component {
+export class Group extends React.Component {
   /**
    * Creates an instance of Group.
    * @param {any} props
@@ -44,11 +44,8 @@ class Group extends React.Component {
    * @memberof Group
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
@@ -213,6 +210,7 @@ Group.defaultProps = {
   onSendMessage: () => { },
   onAddMember: () => { },
   onRemoveMember: () => { },
+  onLogoutUser: () => { }
 };
 
 Group.propTypes = {
@@ -222,7 +220,8 @@ Group.propTypes = {
   loadGroupMembers: PropTypes.func.isRequired,
   onSendMessage: PropTypes.func.isRequired,
   onAddMember: PropTypes.func.isRequired,
-  onRemoveMember: PropTypes.func.isRequired
+  onRemoveMember: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -237,7 +236,8 @@ const mapDispatchToProps = dispatch => (
     loadGroupMembers,
     onSendMessage,
     onAddMember,
-    onRemoveMember
+    onRemoveMember,
+    onLogoutUser
   }, dispatch)
 );
 

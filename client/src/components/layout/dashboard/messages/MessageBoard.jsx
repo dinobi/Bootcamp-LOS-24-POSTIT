@@ -33,7 +33,6 @@ class MessageBoard extends React.Component {
       // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
-    // this.handleScroll = this.handleScroll.bind(this);
   }
   /**
    * handleSend()
@@ -62,9 +61,9 @@ class MessageBoard extends React.Component {
    * become available
    * @memberof Group
    */
-  // componentDidMount() {
-  //   this.handleScroll();
-  // }
+  componentDidMount() {
+    this.handleScroll();
+  }
   /**
    * @returns {void}
    * This method handles smooth scroll to the latest message in
@@ -93,7 +92,6 @@ class MessageBoard extends React.Component {
               <MessageLog message={post} key={post.id} />
             )
           }
-          <div className="last"></div>
         </div>
         <Form
           formClass="message-box"

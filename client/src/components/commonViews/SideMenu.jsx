@@ -1,10 +1,12 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+/* eslint-disable-line no-unused-vars */
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import checkAuthUser from '../helpers/checkAuthUser';
+import authUser from '../helpers/authUser';
 import { onLogoutUser, onLoadGroups } from '../../actions';
-import { ListItem, IconButton } from './'; // eslint-disable-line no-unused-vars
+import { ListItem, IconButton } from './';
 /**
  * SideMenu component
  * Shows a side menu navigation on the dashboard
@@ -20,20 +22,31 @@ export class SideMenu extends React.Component {
 	 */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: '',
+      email: ''
+    };
   }
 	/**
 	 * @returns {void}
    * @memberof SideMenu
    * */
   componentWillMount() {
-    // const token = localStorage.getItem('userAuth');
-    // if (checkAuthUser(token) === 'invalid') {
-    //   localStorage.clear();
-    //   location.hash = '#login';
-    //   return;
-    // }
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
+    }
     this.props.onLoadGroups();
+  }
+	/**
+	 * @returns {void}
+   * @memberof SideMenu
+   * */
+  componentDidMount() {
+    this.props.onLoadGroups();
+    this.setState({
+      username: authUser().username,
+      email: authUser().email
+    });
   }
 	/**
 	 * @returns {jsx} jsx component for side menu
@@ -41,7 +54,8 @@ export class SideMenu extends React.Component {
 	 */
   render() {
     const { active, back, toggle, groups } = this.props;
-    const { email, username } = this.props.user;
+		// const { email, username } = this.props.user;
+    const { email, username } = this.state;
     return (
 			<div className="dashboard-menu">
 				<section className="my-tab">
@@ -121,7 +135,6 @@ SideMenu.defaultProps = {
 };
 SideMenu.propTypes = {
   active: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
   toggle: PropTypes.string.isRequired,
   back: PropTypes.object
 };
@@ -130,7 +143,6 @@ const mapDispatchToProps = dispatch =>
 bindActionCreators({ onLogoutUser, onLoadGroups }, dispatch);
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   groups: state.groups.groups
 });
 

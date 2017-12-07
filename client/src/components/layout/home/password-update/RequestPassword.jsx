@@ -16,7 +16,7 @@ import { onRequestPassword } from '../../../../actions';
  * @class RequestPassword
  * @extends {React.Component}
  */
-class RequestPassword extends React.Component {
+export class RequestPassword extends React.Component {
 	/**
 	 * Creates an instance of RequestPassword.
 	 * @param {props} props - class properties
@@ -112,14 +112,15 @@ class RequestPassword extends React.Component {
 								/>
 						}
 						<Button
+							id="request-password"
 							type="submit"
 							btnClass="btn btn-login"
 							disabled={loader}
 							name=
 							{
 								loader ?
-									<p>sending...</p> :
-									<p>Send reset link</p>
+									'sending...' :
+									'Send reset link'
 							}
 						/>
 					</Form>

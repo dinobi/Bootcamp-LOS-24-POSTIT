@@ -1,3 +1,4 @@
+/* eslint-disable-line no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -5,8 +6,9 @@ import { bindActionCreators } from 'redux';
 import { Link } // eslint-disable-line no-unused-vars
 from 'react-router-dom';
 import { onLogoutUser } from '../../../actions';
-import { Header, Button, ListItem } // eslint-disable-line no-unused-vars
+import { Header, Button, ListItem }
 from '../../commonViews';
+import authUser from '../../helpers/authUser';
 
 /**
  * MainHeader Compopnent
@@ -21,7 +23,9 @@ class MainHeader extends React.Component {
 	 */
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isAuthenticated: false
+    };
   }
 	/**
 	 * handleClick()
@@ -37,6 +41,9 @@ class MainHeader extends React.Component {
       closeOnClick: true,
       edge: 'right'
     });
+    this.setState({
+      isAuthenticated: authUser().userIsAuthenticated
+    });
   }
 	/**
 	 *
@@ -44,7 +51,7 @@ class MainHeader extends React.Component {
 	 * @memberof MainHeader
 	 */
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated } = this.state;
     return (
 			<Header
 				headerClass='main-header'
@@ -80,20 +87,14 @@ class MainHeader extends React.Component {
 }
 
 MainHeader.defaultProp = {
-  isAuthenticated: false,
   onLogoutUser: () => { }
 };
 MainHeader.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
   onLogoutUser: PropTypes.func.isRequired
 };
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.userIsAuthenticated,
-});
 
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({ onLogoutUser }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
+export default connect(null, mapDispatchToProps)(MainHeader);
 

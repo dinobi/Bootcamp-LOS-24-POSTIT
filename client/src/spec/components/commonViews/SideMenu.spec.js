@@ -47,7 +47,7 @@ describe('<SideMenu/> Component: Given SideMenu component is mounted', () => {
   it('should contain h5 element that holds a logged in username', (done) => {
     const wrapper = component('dashboard')
     expect(wrapper.find('h5').length).toBe(1);
-    expect(wrapper.find('h5').text()).toEqual('john_doe');
+    expect(wrapper.find('h5').text()).toEqual('\xa0\xa0john_doe');
     done()
   });
   it('should contain h5 element that holds a logged in username', (done) => {
