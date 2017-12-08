@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import checkAuthUser from '../../../helpers/checkAuthUser';
+import authUser from '../../../helpers/authUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
@@ -15,7 +15,7 @@ import {
 } from '../../../commonViews';
 import {
   loadGroupMessages, loadGroupMembers, onSendMessage,
-  onAddMember, onRemoveMember
+  onAddMember, onRemoveMember, onLogoutUser
 }
   from '../../../../actions';
 
@@ -25,7 +25,7 @@ import {
  * @class Group
  * @extends {React.Component}
  */
-class Group extends React.Component {
+export class Group extends React.Component {
   /**
    * Creates an instance of Group.
    * @param {any} props
@@ -45,12 +45,25 @@ class Group extends React.Component {
    * @memberof Group
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
+    // const groupname =
+    //   location.href.split('/')[location.href.split('/').length - 1];
+    // this.props.loadGroupMessages(groupname);
+    // this.props.loadGroupMembers(groupname);
+  }
+  /**
+   * @return {object} set new state based on user
+   * authentication status
+   *
+   * @memberof Group
+   * */
+  componentDidMount() {
+    this.setState({
+      username: authUser().username,
+      email: authUser().email
+    });
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
     this.props.loadGroupMessages(groupname);
@@ -97,7 +110,7 @@ class Group extends React.Component {
    * @returns {JSX} for Group component
    */
   render() {
-    const { user } = this.props;
+    const { username } = this.state;
     const { messages, members } = this.props;
     const posts = messages;
     const groupName =
@@ -192,7 +205,7 @@ class Group extends React.Component {
                     <Members
                       members={members}
                       onRemoveMember={this.props.onRemoveMember}
-                      user={user}
+                      username={username}
                     />
                   </div>
                 </div>
@@ -215,6 +228,7 @@ Group.defaultProps = {
   onSendMessage: () => { },
   onAddMember: () => { },
   onRemoveMember: () => { },
+  onLogoutUser: () => { }
 };
 
 Group.propTypes = {
@@ -224,11 +238,11 @@ Group.propTypes = {
   loadGroupMembers: PropTypes.func.isRequired,
   onSendMessage: PropTypes.func.isRequired,
   onAddMember: PropTypes.func.isRequired,
-  onRemoveMember: PropTypes.func.isRequired
+  onRemoveMember: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   messages: state.messages.groupMessages,
   members: state.members.groupMembers,
 });
@@ -239,7 +253,8 @@ const mapDispatchToProps = dispatch => (
     loadGroupMembers,
     onSendMessage,
     onAddMember,
-    onRemoveMember
+    onRemoveMember,
+    onLogoutUser
   }, dispatch)
 );
 

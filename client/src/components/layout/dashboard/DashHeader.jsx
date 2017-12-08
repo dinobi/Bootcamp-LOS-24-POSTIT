@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import checkAuthUser from '../../helpers/checkAuthUser';
+import authUser from '../../helpers/authUser';
 import {
   onLoginUser,
   onLogoutUser
@@ -43,19 +43,16 @@ class DashHeader extends React.Component {
    * @memberof DashHeader
    */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
-    if (checkAuthUser(token).status === 'expired') {
-      const username = checkAuthUser(token).username;
+    if (authUser().status === 'expired') {
+      const username = authUser().username;
       swal({
         title: `Hi ${username}!`,
         text: 'Please login again to continue',
         buttons: false,
-        timer: 1600,
+        timer: 2000,
       });
     }
   }

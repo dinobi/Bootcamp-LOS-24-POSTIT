@@ -1,12 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
-import SearchBox // eslint-disable-line no-unused-vars
+import SearchBox
   from './SearchBox.jsx';
-import DashHeader // eslint-disable-line no-unused-vars
+import DashHeader
   from '../DashHeader.jsx';
 import {
-  InputField, SideMenu, // eslint-disable-line no-unused-vars
-  Form, Copyright // eslint-disable-line no-unused-vars
+  InputField, SideMenu,
+  Form, Copyright
 } from '../../../commonViews';
 /**
  * SearchWiki Page

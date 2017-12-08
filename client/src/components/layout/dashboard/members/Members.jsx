@@ -1,6 +1,6 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import PropTypes from 'prop-types';
-import { IconButton } // eslint-disable-line no-unused-vars
+import { IconButton }
 from '../../../commonViews';
 
 /**
@@ -11,12 +11,12 @@ from '../../../commonViews';
  * @returns {Object} JSX
  * @param {Object} props
  */
-const Members = ({ members, user, onRemoveMember }) =>
+const Members = ({ members, username, onRemoveMember }) =>
   <div className="members-list">
     {
       members.map((member, index) => {
         return (
-          members[0].username === user.username ?
+          members[0].username === username ?
             <div className="chip" key={index}>
               {member.username}
               <IconButton

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageLog // eslint-disable-line no-unused-vars
+import MessageLog
   from './MessageLog.jsx';
 import {
-  DashHeader, SideMenu, // eslint-disable-line no-unused-vars
-  Copyright, IconButton, // eslint-disable-line no-unused-vars
-  Select, Button, // eslint-disable-line no-unused-vars
-  Form, Textarea // eslint-disable-line no-unused-vars
+  DashHeader, SideMenu,
+  Copyright, IconButton,
+  Select, Button,
+  Form, Textarea
 }
   from '../../../commonViews';
 import { onSendMessage } from '../../../../actions';
@@ -36,14 +36,14 @@ class MessageBoard extends React.Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
   /**
-   * Handles scrolling to specified element
+   * Handles scrolling to specified dom element
    *
    * @memberof Group
+   * @returns {void}
    */
   handleScroll() {
     setTimeout(() => {
       const messages = $('.postlogs');
-      const newMessage = messages.find('.post:last-child');
       const scrollTop = messages.prop('scrollTop');
       const scrollHeight = messages.prop('scrollHeight');
       messages.scrollTop(scrollHeight);
@@ -51,8 +51,9 @@ class MessageBoard extends React.Component {
   }
   /**
    * Access available DOM elements
-   * 
+   *
    * @memberof Group
+   * @return {void}
    */
   componentDidMount() {
     this.handleScroll();

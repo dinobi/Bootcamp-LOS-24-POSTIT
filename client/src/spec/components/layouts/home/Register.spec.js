@@ -4,8 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import mockData from '../../mocks/mockData';
-import ConnectedRegister, { Register } from '../../../components/layout/home/signup/Register';
+import mockData from '../../../mocks/mockData';
+import ConnectedRegister, { Register }
+from '../../../../components/layout/home/signup/Register';
 
 jest.mock('react-router-dom');
 const initialState = {

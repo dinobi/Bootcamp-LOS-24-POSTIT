@@ -115,8 +115,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Hammer: 'hammerjs/hammer'
+      'window.jQuery': 'jquery'
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

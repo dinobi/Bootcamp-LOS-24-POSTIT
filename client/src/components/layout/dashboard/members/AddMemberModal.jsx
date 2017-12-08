@@ -1,10 +1,10 @@
 import React from 'react';
 import apiHandler from '../../../../components/helpers/api-handler';
-import SearchResult // eslint-disable-line no-unused-vars
+import SearchResult
   from '../search/SearchResult.jsx';
 import {
-  Modal, Form, // eslint-disable-line no-unused-vars
-  InputField, ErrorAlert // eslint-disable-line no-unused-vars
+  Modal, Form,
+  InputField, ErrorAlert
 } from '../../../commonViews';
 
 /**

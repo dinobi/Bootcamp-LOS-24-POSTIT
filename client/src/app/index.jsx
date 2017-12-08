@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'jquery';
+import 'jquery/dist/jquery';
 import { Provider } from 'react-redux';
 import 'materialize-css';
 import store from '../store/configureStore';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import swal from 'sweetalert';
-import checkAuthUser from '../../../helpers/checkAuthUser';
+import authUser from '../../../helpers/authUser';
 import GroupCard from './GroupCard.jsx';
 import DashHeader
   from '../DashHeader.jsx';
@@ -14,7 +14,7 @@ import {
 } from '../../../commonViews';
 import {
   onCreateGroup, onLoadGroups,
-  onArchiveGroup
+  onArchiveGroup, onLogoutUser
 } from '../../../../actions';
 
 /**
@@ -37,7 +37,7 @@ class Groups extends React.Component {
     this.state = {
       errorMessage: '',
       groupname: '',
-      decription: ''
+      description: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
@@ -110,16 +110,12 @@ class Groups extends React.Component {
         }
       });
   }
-
   /**
    * @return {void}
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
     this.props.onLoadGroups();
   }
@@ -230,14 +226,16 @@ Groups.defaultProps = {
   groups: {},
   onCreateGroup: () => { },
   onLoadGroup: () => { },
-  onArchiveGroup: () => { }
+  onArchiveGroup: () => { },
+  onLogoutUser: () => { }
 };
 
 Groups.propTypes = {
   groups: PropTypes.object.isRequired,
   onCreateGroup: PropTypes.func.isRequired,
   onLoadGroups: PropTypes.func.isRequired,
-  onArchiveGroup: PropTypes.func.isRequired
+  onArchiveGroup: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -249,6 +247,7 @@ const mapDispatchToProps = dispatch => (
     onCreateGroup,
     onLoadGroups,
     onArchiveGroup,
+    onLogoutUser
   }, dispatch)
 );
 
