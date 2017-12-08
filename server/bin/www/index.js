@@ -12,4 +12,6 @@ const port = parseInt(process.env.PORT, 10) || portNum;
 app.set('port', port);
 
 const server = http.createServer(app);
-server.listen(port);
+server.listen(port, () => {
+  console.log(`TIA is on port ${port}`);
+});

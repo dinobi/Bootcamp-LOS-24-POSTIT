@@ -1,4 +1,4 @@
-/* eslint-disable-line no-unused-vars */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -40,13 +40,37 @@ export class SideMenu extends React.Component {
 	/**
 	 * @returns {void}
    * @memberof SideMenu
-   * */
+   *
+	 */
   componentDidMount() {
-    this.props.onLoadGroups();
     this.setState({
       username: authUser().username,
       email: authUser().email
     });
+  }
+	/**
+	 * @returns {void} make resources available
+	 * when changes to properties occur
+	 *
+   * @memberof SideMenu
+	 * @param {any} nextProps
+	 *
+	 * when changes to properties occur
+   *
+	 */
+  componentWillReceiveProps(nextProps) {
+    setTimeout(() => {
+      $('.tooltipped').tooltip({ delay: 50 });
+      $('.collapsible').collapsible();
+      $('.dropdown-button').dropdown({
+        constrainWidth: true,
+      });
+      $('.button-collapse').sideNav({
+        menuWidth: 300,
+        closeOnClick: true,
+        edge: 'right'
+      });
+    }, 800);
   }
 	/**
 	 * @returns {jsx} jsx component for side menu
@@ -60,7 +84,7 @@ export class SideMenu extends React.Component {
 			<div className="dashboard-menu">
 				<section className="my-tab">
 					<h5><i className="fa fa-circle">
-						</i>&nbsp;&nbsp;{username}
+					</i>&nbsp;&nbsp;{username}
 					</h5>
 					<h6>{email}</h6>
 				</section>
@@ -95,15 +119,15 @@ export class SideMenu extends React.Component {
 							</div>
 							{
 								groups.length > 0 ?
-								groups.map(group =>
-									<div className="collapsible-body" key={group.id}>
-										<a href={`#groups/${group.groupname}`}>
-											<i className="fa fa-folder"></i>
-											&nbsp;&nbsp;{group.groupname}
-										</a>
-									</div>
-								) :
-								<div className="collapsible-body"><span>None</span></div>
+									groups.map(group =>
+										<div className="collapsible-body" key={group.id}>
+											<a href={`#groups/${group.groupname}`}>
+												<i className="fa fa-folder"></i>
+												&nbsp;&nbsp;{group.groupname}
+											</a>
+										</div>
+									) :
+									<div className="collapsible-body"><span>None</span></div>
 							}
 						</li>
 					</ul>
@@ -113,14 +137,13 @@ export class SideMenu extends React.Component {
 						<i className="fa fa-gear"></i>
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;
 						<ul id='more-menu' class='dropdown-content'>
-							<li><a href="#groups">Groups Control</a></li>
-							<li className="divider"></li>
-							<li>
-								<a id="logout" onClick={this.props.onLogoutUser}>Logout</a>
-							</li>
-						</ul>
-					</section>
-
+						<li><a href="#groups">Groups Control</a></li>
+						<li className="divider"></li>
+						<li>
+							<a id="logout" onClick={this.props.onLogoutUser}>Logout</a>
+						</li>
+					</ul>
+				</section>
 			</div>
     );
   }
@@ -140,7 +163,7 @@ SideMenu.propTypes = {
 };
 
 const mapDispatchToProps = dispatch =>
-bindActionCreators({ onLogoutUser, onLoadGroups }, dispatch);
+	bindActionCreators({ onLogoutUser, onLoadGroups }, dispatch);
 
 const mapStateToProps = state => ({
   groups: state.groups.groups

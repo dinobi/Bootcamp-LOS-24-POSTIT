@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-	Button, InputField, Form // eslint-disable-line no-unused-vars
+	Button, InputField, Form
 } from '../../../commonViews';
 /**
  *

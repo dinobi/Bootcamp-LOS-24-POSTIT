@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import SignupForm // eslint-disable-line no-unused-vars
-	from './SignupForm.jsx'; // eslint-disable-line no-unused-vars
-import MainHeader // eslint-disable-line no-unused-vars
+import SignupForm
+	from './SignupForm.jsx';
+import MainHeader
 	from '../MainHeader.jsx';
 import {
-	InputField, // eslint-disable-line no-unused-vars
-	Button, Footer // eslint-disable-line no-unused-vars
+	InputField,
+	Button, Footer
 } from '../../../commonViews';
 import { onSignupUser } from '../../../../actions';
 

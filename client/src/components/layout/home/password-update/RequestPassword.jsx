@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
 	from '../MainHeader.jsx';
 import Icon from '../../../../images/postit-icon.png';
 import {
-	InputField, // eslint-disable-line no-unused-vars
-	Button, Form, // eslint-disable-line no-unused-vars
-	Footer, ErrorAlert // eslint-disable-line no-unused-vars
+	InputField,
+	Button, Form,
+	Footer, ErrorAlert
 } from '../../../commonViews';
 import { onRequestPassword } from '../../../../actions';
 /**

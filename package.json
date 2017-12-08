@@ -1,27 +1,29 @@
 {
   "name": "postit-app",
-  "main": "index.js",
-  "version": "1.0.0",
-  "description": "full stack web messaging application",
+  "main": "index.jsx",
+  "version": "2.0.1",
+  "description": "PostIt: A full stack group messaging application",
   "engines": {
     "node": "6.11.2",
     "npm": "5.4.0"
   },
   "scripts": {
     "babel-version": "babel --version",
-    "build": "npm run remove-dist && webpack --config ./webpack.config.production.js --progress --colors",
+    "build": "npm run remove-dist && npm run remove-build && npm run build:client && npm run build:server",
+    "build:client": "webpack --config ./webpack.config.production.js --progress --colors",
+    "build:server": "babel -d ./build ./server -s --copy-files",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "migration": "heroku run sequelize db:migrate",
-    "start": "NODE_ENV=production babel-node ./server/bin/www",
-    "remove-dist": "node_modules/.bin/rimraf ./client/dist",
     "exec": "NODE_ENV=development nodemon ./server/bin/www --exec babel-node ./server/app",
+    "migration": "heroku run sequelize db:migrate",
+    "remove-dist": "node_modules/.bin/rimraf ./client/dist",
+    "remove-build": "node_modules/.bin/rimraf ./build",
+    "start": "NODE_ENV=production node ./build/bin/www",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha test/index --compilers js:babel-register --timeout 10000",
-    "test-dev": "NODE_ENV=test mocha test/index --compilers js:babel-core/register --timeout 10000",
+    "test:client": "NODE_ENV=test jest /client --coverage --watch --no-cache",
     "test-migration": "export NODE_ENV=test && sequelize db:migrate",
     "test-undo-migration": "export NODE_ENV=test && sequelize db:migrate:undo:all",
     "heroku-postbuild": "npm run build",
-    "undo:migration": "heroku run sequelize db:migrate:undo:all",
-    "client-test": "NODE_ENV=test jest /client --coverage --watch --no-cache"
+    "undo:migration": "heroku run sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -30,10 +32,11 @@
   "keywords": [
     "server",
     "node",
-    "postit"
+    "postit",
+    "messaging"
   ],
   "author": "Dinobi Kenkwo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/issues"
   },

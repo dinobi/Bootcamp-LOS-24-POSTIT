@@ -16,13 +16,10 @@ $margin: 15px;
       -ms-linear-gradient: $color;
           linear-gradient: $color;
 }
-
-
 body {
 	background-color: $primary-background;
 	color: $white;
 	overflow: hidden;
-	overflow-y: auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
 	display: flex;

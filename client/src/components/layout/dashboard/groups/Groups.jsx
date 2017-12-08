@@ -37,7 +37,7 @@ class Groups extends React.Component {
     this.state = {
       errorMessage: '',
       groupname: '',
-      decription: ''
+      description: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
@@ -110,7 +110,6 @@ class Groups extends React.Component {
         }
       });
   }
-
   /**
    * @return {void}
    * */

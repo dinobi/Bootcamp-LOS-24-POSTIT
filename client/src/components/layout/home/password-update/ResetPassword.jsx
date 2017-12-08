@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Icon from '../../../../images/postit-icon.png';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
 from '../MainHeader.jsx';
 import {
-	InputField, // eslint-disable-line no-unused-vars
-	Button, Footer, Form // eslint-disable-line no-unused-vars
+	InputField,
+	Button, Footer, Form
 } from '../../../commonViews';
 import { onResetPassword } from '../../../../actions';
 /**

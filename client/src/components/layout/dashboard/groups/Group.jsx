@@ -38,6 +38,7 @@ export class Group extends React.Component {
     };
     this.handleSend = this.handleSend.bind(this);
   }
+
   /**
    * @return {void} make resources available
    * before page loads
@@ -47,6 +48,22 @@ export class Group extends React.Component {
     if (authUser() === false) {
       return this.props.onLogoutUser();
     }
+    // const groupname =
+    //   location.href.split('/')[location.href.split('/').length - 1];
+    // this.props.loadGroupMessages(groupname);
+    // this.props.loadGroupMembers(groupname);
+  }
+  /**
+   * @return {object} set new state based on user
+   * authentication status
+   *
+   * @memberof Group
+   * */
+  componentDidMount() {
+    this.setState({
+      username: authUser().username,
+      email: authUser().email
+    });
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
     this.props.loadGroupMessages(groupname);
@@ -57,7 +74,7 @@ export class Group extends React.Component {
    * when changes to properties occur
    * @memberof Group
    * @param {props} nextProps - next available props
-   * */
+   */
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.match.params.groupname !== this.props.match.params.groupname
@@ -79,20 +96,21 @@ export class Group extends React.Component {
    */
   handleSend(event) {
     event.preventDefault();
+    const groupname =
+      location.href.split('/')[location.href.split('/').length - 1];
     let { message, priority } = this;
     message = message.value.trim();
     priority = priority.value.trim();
     const messageData = { message, priority };
-    this.props.onSendMessage(messageData);
+    this.props.onSendMessage(messageData, groupname);
     document.getElementById('send-message').reset();
-    // this.handleScroll();
   }
 
   /**
    * @returns {JSX} for Group component
    */
   render() {
-    const { user } = this.props;
+    const { username } = this.state;
     const { messages, members } = this.props;
     const posts = messages;
     const groupName =
@@ -187,7 +205,7 @@ export class Group extends React.Component {
                     <Members
                       members={members}
                       onRemoveMember={this.props.onRemoveMember}
-                      user={user}
+                      username={username}
                     />
                   </div>
                 </div>
@@ -225,7 +243,6 @@ Group.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   messages: state.messages.groupMessages,
   members: state.members.groupMembers,
 });

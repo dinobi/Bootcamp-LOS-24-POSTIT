@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } // eslint-disable-line no-unused-vars
+import { Link }
 from 'react-router-dom';
 import { onLogoutUser } from '../../../actions';
 import { Header, Button, ListItem }

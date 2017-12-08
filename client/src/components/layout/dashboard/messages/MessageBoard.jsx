@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageLog // eslint-disable-line no-unused-vars
+import MessageLog
   from './MessageLog.jsx';
 import {
-  DashHeader, SideMenu, // eslint-disable-line no-unused-vars
-  Copyright, IconButton, // eslint-disable-line no-unused-vars
-  Select, Button, // eslint-disable-line no-unused-vars
-  Form, Textarea // eslint-disable-line no-unused-vars
+  DashHeader, SideMenu,
+  Copyright, IconButton,
+  Select, Button,
+  Form, Textarea
 }
   from '../../../commonViews';
 import { onSendMessage } from '../../../../actions';
@@ -33,6 +33,30 @@ class MessageBoard extends React.Component {
       // posts: this.props.posts
     };
     this.handleSend = this.handleSend.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+  /**
+   * Handles scrolling to specified dom element
+   *
+   * @memberof Group
+   * @returns {void}
+   */
+  handleScroll() {
+    setTimeout(() => {
+      const messages = $('.postlogs');
+      const scrollTop = messages.prop('scrollTop');
+      const scrollHeight = messages.prop('scrollHeight');
+      messages.scrollTop(scrollHeight);
+    }, 800);
+  }
+  /**
+   * Access available DOM elements
+   *
+   * @memberof Group
+   * @return {void}
+   */
+  componentDidMount() {
+    this.handleScroll();
   }
   /**
    * handleSend()
@@ -53,30 +77,9 @@ class MessageBoard extends React.Component {
     priority = priority.value.trim();
     const messageData = { message, priority };
     this.props.onSendMessage(messageData, groupname);
+    this.handleScroll();
     document.getElementById('send-message').reset();
-    this.handleScroll();
   }
-  /**
-   * @returns {void} access dom elements when they
-   * become available
-   * @memberof Group
-   */
-  componentDidMount() {
-    this.handleScroll();
-  }
-  /**
-   * @returns {void}
-   * This method handles smooth scroll to the latest message in
-   * the message log
-   * messages
-   */
-  // handleScroll() {
-  //   scrollToElement('.last', {
-  //     offset: 10,
-  //     ease: 'in-expo',
-  //     duration: 1000
-  //   });
-  // }
   /**
    *
    *

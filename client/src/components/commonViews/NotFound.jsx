@@ -1,8 +1,8 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 // import 404 from '../../../images/404.png';
-import MainHeader // eslint-disable-line no-unused-vars
-from '../layout/home/MainHeader.jsx';
-import Footer from './Footer.jsx'; // eslint-disable-line no-unused-vars
+import MainHeader
+  from '../layout/home/MainHeader.jsx';
+import Footer from './Footer.jsx';
 
 /**
  * NotFound Component
