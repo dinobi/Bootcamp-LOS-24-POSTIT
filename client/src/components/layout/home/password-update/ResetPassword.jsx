@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Icon from '../../../../images/postit-icon.png';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
 from '../MainHeader.jsx';
 import {
-	InputField, // eslint-disable-line no-unused-vars
-	Button, Footer, Form // eslint-disable-line no-unused-vars
+	InputField,
+	Button, Footer, Form
 } from '../../../commonViews';
 import { onResetPassword } from '../../../../actions';
 /**
@@ -16,7 +16,7 @@ import { onResetPassword } from '../../../../actions';
  * @class ResetPassword
  * @extends {React.Component}
  */
-class ResetPassword extends React.Component {
+export class ResetPassword extends React.Component {
 	/**
 	 * Creates an instance of ResetPassword.
 	 * @param {props} props - class properties
@@ -71,7 +71,7 @@ class ResetPassword extends React.Component {
       });
     }		else if (password !== confirmPassword) {
       this.setState({
-        errorMessage: 'Error. Password do not match'
+        errorMessage: 'Error. Passwords do not match'
       });
     } else {
       this.props.onResetPassword({ password }, hash);
@@ -125,14 +125,15 @@ class ResetPassword extends React.Component {
 								</p>
 							}
 							<Button
+								id="reset-password"
 								type="submit"
 								btnClass="btn btn-login"
 								disabled={loader}
 								name=
 									{
 										loader ?
-										<p>processing...</p> :
-										<p>Reset</p>
+										'processing...' :
+										'Reset'
 									}
 							/>
 						</Form>

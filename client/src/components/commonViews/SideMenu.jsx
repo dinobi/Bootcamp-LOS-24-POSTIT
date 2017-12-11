@@ -1,10 +1,12 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import checkAuthUser from '../helpers/checkAuthUser';
+import authUser from '../helpers/authUser';
 import { onLogoutUser, onLoadGroups } from '../../actions';
-import { ListItem, IconButton } from './'; // eslint-disable-line no-unused-vars
+import { ListItem, IconButton } from './';
 /**
  * SideMenu component
  * Shows a side menu navigation on the dashboard
@@ -20,28 +22,31 @@ export class SideMenu extends React.Component {
 	 */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: '',
+      email: ''
+    };
   }
 	/**
 	 * @returns {void}
    * @memberof SideMenu
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
     this.props.onLoadGroups();
   }
 	/**
-   * @return {void} make resources available
-   * when changes to properties occur
+	 * @returns {void}
    * @memberof SideMenu
-   * @param {props} nextProps - next available props
-   */
-  componentWillReceiveProps(nextProps) {
+   *
+	 */
+  componentDidMount() {
+    this.setState({
+      username: authUser().username,
+      email: authUser().email
+    });
     setTimeout(() => {
       $('.tooltipped').tooltip({ delay: 50 });
       $('.collapsible').collapsible();
@@ -61,12 +66,13 @@ export class SideMenu extends React.Component {
 	 */
   render() {
     const { active, back, toggle, groups } = this.props;
-    const { email, username } = this.props.user;
+		// const { email, username } = this.props.user;
+    const { email, username } = this.state;
     return (
 			<div className="dashboard-menu">
 				<section className="my-tab">
 					<h5><i className="fa fa-circle">
-						</i>&nbsp;&nbsp;{username}
+					</i>&nbsp;&nbsp;{username}
 					</h5>
 					<h6>{email}</h6>
 				</section>
@@ -93,7 +99,7 @@ export class SideMenu extends React.Component {
 						name="Search Wikipedia"
 					/>
 					{back}
-					<ul class="collapsible active-group" data-collapsible="accordion">
+					<ul className="collapsible active-group" data-collapsible="accordion">
 						<li>
 							<div className="collapsible-header">
 								<i className="fa fa-plug"></i>
@@ -101,15 +107,15 @@ export class SideMenu extends React.Component {
 							</div>
 							{
 								groups.length > 0 ?
-								groups.map(group =>
-									<div className="collapsible-body" key={group.id}>
-										<a href={`#groups/${group.groupname}`}>
-											<i className="fa fa-folder"></i>
-											&nbsp;&nbsp;{group.groupname}
-										</a>
-									</div>
-								) :
-								<div className="collapsible-body"><span>None</span></div>
+									groups.map(group =>
+										<div className="collapsible-body" key={group.id}>
+											<a href={`#groups/${group.groupname}`}>
+												<i className="fa fa-folder"></i>
+												&nbsp;&nbsp;{group.groupname}
+											</a>
+										</div>
+									) :
+									<div className="collapsible-body"><span>None</span></div>
 							}
 						</li>
 					</ul>
@@ -118,15 +124,14 @@ export class SideMenu extends React.Component {
 					<a className="dropdown-button" data-activates='more-menu'>
 						<i className="fa fa-gear"></i>
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<ul id='more-menu' class='dropdown-content'>
-							<li><a href="#groups">Groups Control</a></li>
-							<li className="divider"></li>
-							<li>
-								<a id="logout" onClick={this.props.onLogoutUser}>Logout</a>
-							</li>
-						</ul>
-					</section>
-
+						<ul id='more-menu' className='dropdown-content'>
+						<li><a href="#groups">Groups Control</a></li>
+						<li className="divider"></li>
+						<li>
+							<a id="logout" onClick={this.props.onLogoutUser}>Logout</a>
+						</li>
+					</ul>
+				</section>
 			</div>
     );
   }
@@ -141,16 +146,14 @@ SideMenu.defaultProps = {
 };
 SideMenu.propTypes = {
   active: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
   toggle: PropTypes.string.isRequired,
   back: PropTypes.object
 };
 
 const mapDispatchToProps = dispatch =>
-bindActionCreators({ onLogoutUser, onLoadGroups }, dispatch);
+	bindActionCreators({ onLogoutUser, onLoadGroups }, dispatch);
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   groups: state.groups.groups
 });
 

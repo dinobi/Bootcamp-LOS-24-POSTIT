@@ -32,19 +32,9 @@ const onLoginUser = loginData =>
           icon: 'success',
           buttons: false
         });
-        const currentLocation =
-          location.href.split('#')[1];
-        const memory = currentLocation !== '/login' ?
-          currentLocation : 'dashboard';
-        location.hash = `#${memory}`;
+        location.hash = '#dashboard';
       }).catch((loginError) => {
         dispatch(onLoginFailure());
-        const currentLocation =
-          location.href.split('/')[location.href.split('/').length - 1];
-        if (currentLocation !== 'login') {
-          localStorage.clear();
-          location.hash = '#login';
-        }
         swal(loginError.response.data.error.message, {
           timer: 1600,
           buttons: false

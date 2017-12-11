@@ -1,13 +1,14 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import { Link } from 'react-router-dom'; // eslint-disable-line no-unused-vars
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
   from '../layout/home/MainHeader.jsx';
 import {
-  Footer, Button // eslint-disable-line no-unused-vars
+  Footer, Button
 } from '../commonViews';
 import LandingImg from '../../images/postit-landing.png';
+import authUser from '../helpers/authUser';
 
 /**
  * Home Component
@@ -18,14 +19,14 @@ import LandingImg from '../../images/postit-landing.png';
  * @returns {Object} JSX
  * @param {Object} props
  */
-export const Home = ({ isAuthenticated }) =>
+export const Home = () =>
   <div>
     <MainHeader />
     <main className="container">
       <div className="row">
         <div className="col s12 m6 headline">
           {
-            isAuthenticated ?
+            authUser().userIsAuthenticated ?
               <div className="get-started">
                 <h1 className="heading">Get Started Guide</h1>
                 <h6 className="brief">1. Go to your personal dashboard </h6>
@@ -79,8 +80,4 @@ Home.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.userIsAuthenticated,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

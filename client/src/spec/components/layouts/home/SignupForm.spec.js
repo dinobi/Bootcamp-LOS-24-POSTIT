@@ -1,12 +1,12 @@
 /* globals expect */
-/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import mockData from '../../mocks/mockData';
+import mockData from '../../../mocks/mockData';
 import { SignupForm }
-from '../../../components/layout/home/signup/SignupForm';
+from '../../../../components/layout/home/signup/SignupForm';
 
 /**
  * component function
@@ -14,6 +14,7 @@ from '../../../components/layout/home/signup/SignupForm';
  *
  * @return {function} shallow -
  * renders a component one level deep
+ * 
  * @param {bool} loading 
  */
 const component = (loading) => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import swal from 'sweetalert';
-import checkAuthUser from '../../../helpers/checkAuthUser';
+import authUser from '../../../helpers/authUser';
 import GroupCard from './GroupCard.jsx';
 import DashHeader
   from '../DashHeader.jsx';
@@ -14,7 +14,7 @@ import {
 } from '../../../commonViews';
 import {
   onCreateGroup, onLoadGroups,
-  onArchiveGroup
+  onArchiveGroup, onLogoutUser
 } from '../../../../actions';
 
 /**
@@ -26,7 +26,7 @@ import {
  * @class Groups
  * @extends {React.Component}
  */
-class Groups extends React.Component {
+export class Groups extends React.Component {
   /**
    * Creates an instance of Groups.
    * @param {any} props - state properties
@@ -35,26 +35,11 @@ class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
       groupname: '',
-      decription: ''
+      description: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-  }
-  /**
-   * onFocus()
-   * This method is called when the user focuses on an input field,
-   * which clear any error messages afterwards.
-   *
-   * @memberof Groups
-   * @returns {void}
-   */
-  onFocus() {
-    this.setState({
-      errorMessage: '',
-    });
   }
   /**
 	 * handleChange(event)
@@ -110,16 +95,12 @@ class Groups extends React.Component {
         }
       });
   }
-
   /**
    * @return {void}
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
     this.props.onLoadGroups();
   }
@@ -146,6 +127,14 @@ class Groups extends React.Component {
                 title="My Groups"
                 subtitle="Create or select a group to start messaging"
               >
+                {
+                  !this.props.createLoading &&
+                  !this.props.groupsLoading &&
+                  !this.props.deleteLoading ? '' :
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                }
                 <div className="features dashboard-group">
                   <Card cardControl="card card-control">
                     <Form id="group-control">
@@ -230,18 +219,29 @@ Groups.defaultProps = {
   groups: {},
   onCreateGroup: () => { },
   onLoadGroup: () => { },
-  onArchiveGroup: () => { }
+  onArchiveGroup: () => { },
+  onLogoutUser: () => { },
+  groupCreating: false,
+  groupsLoading: false,
+  deleteLoading: false,
 };
 
 Groups.propTypes = {
   groups: PropTypes.object.isRequired,
   onCreateGroup: PropTypes.func.isRequired,
   onLoadGroups: PropTypes.func.isRequired,
-  onArchiveGroup: PropTypes.func.isRequired
+  onArchiveGroup: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired,
+  createLoading: PropTypes.bool.isRequired,
+  groupsLoading: PropTypes.bool.isRequired,
+  deleteLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  groups: state.groups
+  groups: state.groups,
+  createLoading: state.groups.createGroupIsLoading,
+  groupsLoading: state.groups.groupsIsLoading,
+  deleteLoading: state.groups.deleteGroupIsLoading
 });
 
 const mapDispatchToProps = dispatch => (
@@ -249,6 +249,7 @@ const mapDispatchToProps = dispatch => (
     onCreateGroup,
     onLoadGroups,
     onArchiveGroup,
+    onLogoutUser
   }, dispatch)
 );
 

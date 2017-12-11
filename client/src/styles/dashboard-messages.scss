@@ -115,3 +115,10 @@
 		width: 90%;
 	}
 }
+.progress {
+  height: 2px;
+  background-color: $primary-color;
+}
+.progress .indeterminate {
+  background-color: $offset-color;
+}

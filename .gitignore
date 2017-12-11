@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/build
 /client/node_modules
 /client/dist
 /client/src/spec/components/__snapshots__

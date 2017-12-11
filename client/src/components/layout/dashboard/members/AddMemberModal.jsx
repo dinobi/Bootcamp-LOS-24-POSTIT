@@ -1,10 +1,10 @@
 import React from 'react';
 import apiHandler from '../../../../components/helpers/api-handler';
-import SearchResult // eslint-disable-line no-unused-vars
+import SearchResult
   from '../search/SearchResult.jsx';
 import {
-  Modal, Form, // eslint-disable-line no-unused-vars
-  InputField, ErrorAlert // eslint-disable-line no-unused-vars
+  Modal, Form,
+  InputField, ErrorAlert
 } from '../../../commonViews';
 
 /**
@@ -69,8 +69,7 @@ class AddMemberModal extends React.Component {
    */
   handleSearch(page = this.state.prevPage + 1) {
     this.setState({ foundUsers: [], message: '' });
-    let searchTerm = this.state.searchTerm;
-    searchTerm = searchTerm.trim();
+    const searchTerm = this.state.searchTerm;
     let headers;
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
@@ -79,7 +78,7 @@ class AddMemberModal extends React.Component {
         '', 'GET', headers).then(
         (users) => {
           const { userData } = users.data;
-          if (users.data.userData.length > 0) {
+          if (userData.length > 0) {
             this.setState({ foundUsers: userData, message: '' });
           } else {
             this.setState({
@@ -102,18 +101,16 @@ class AddMemberModal extends React.Component {
    * @memberof AddMemberModal
    */
   handlePageNav(page) {
-    if (this.state.searchTerm.trim() !== '') {
-      if (page === 'prev') {
-        if (this.state.prevPage > 0) {
-          this.handleSearch(this.state.prevPage);
-          this.setState({ nextPage: this.state.nextPage - 1 });
-          this.setState({ prevPage: this.state.prevPage - 1 });
-        }
-      } else {
-        this.handleSearch(this.state.nextPage);
-        this.setState({ nextPage: this.state.nextPage + 1 });
-        this.setState({ prevPage: this.state.prevPage + 1 });
+    if (page === 'prev') {
+      if (this.state.prevPage > 0) {
+        this.handleSearch(this.state.prevPage);
+        this.setState({ nextPage: this.state.nextPage - 1 });
+        this.setState({ prevPage: this.state.prevPage - 1 });
       }
+    } else {
+      this.handleSearch(this.state.nextPage);
+      this.setState({ nextPage: this.state.nextPage + 1 });
+      this.setState({ prevPage: this.state.prevPage + 1 });
     }
   }
   /**
@@ -129,7 +126,7 @@ class AddMemberModal extends React.Component {
   handleAddMember(selectedUser) {
     const { username } = selectedUser;
     const groupname =
-    location.href.split('/')[location.href.split('/').length - 1];
+      location.href.split('/')[location.href.split('/').length - 1];
     this.props.addMemberModal.onAddMember({ username }, groupname);
     const users = this.state.foundUsers.filter(
       user => selectedUser.username !== user.username
@@ -171,24 +168,24 @@ class AddMemberModal extends React.Component {
             />
             {
               foundUsers.length > 9 ?
-              <div class="search-pages">
-                <span onClick={() =>
-                  this.handlePageNav('prev')}
-                  className="search-prev"
-                >
-                  <i className="fa fa-chevron-left"></i>
-                </span>
-                <span>
-                  {this.state.prevPage + 1}/{this.state.nextPage}
-                </span>
-                <span onClick={() =>
-                  this.handlePageNav('next')}
-                  className="search-next"
-                >
-                  <i className="fa fa-chevron-right"></i>
-                </span>
-              </div> :
-              ''
+                <div class="search-pages">
+                  <span onClick={() =>
+                    this.handlePageNav('prev')}
+                    className="search-prev"
+                  >
+                    <i className="fa fa-chevron-left"></i>
+                  </span>
+                  <span>
+                    {this.state.prevPage + 1}/{this.state.nextPage}
+                  </span>
+                  <span onClick={() =>
+                    this.handlePageNav('next')}
+                    className="search-next"
+                  >
+                    <i className="fa fa-chevron-right"></i>
+                  </span>
+                </div> :
+                ''
             }
           </Form>
         </Modal>

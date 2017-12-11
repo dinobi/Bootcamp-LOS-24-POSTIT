@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
 	from '../MainHeader.jsx';
 import Icon from '../../../../images/postit-icon.png';
 import {
-	InputField, // eslint-disable-line no-unused-vars
-	Button, Form, // eslint-disable-line no-unused-vars
-	Footer, ErrorAlert // eslint-disable-line no-unused-vars
+	InputField,
+	Button, Form,
+	Footer, ErrorAlert
 } from '../../../commonViews';
 import { onRequestPassword } from '../../../../actions';
 /**
@@ -16,7 +16,7 @@ import { onRequestPassword } from '../../../../actions';
  * @class RequestPassword
  * @extends {React.Component}
  */
-class RequestPassword extends React.Component {
+export class RequestPassword extends React.Component {
 	/**
 	 * Creates an instance of RequestPassword.
 	 * @param {props} props - class properties
@@ -112,14 +112,15 @@ class RequestPassword extends React.Component {
 								/>
 						}
 						<Button
+							id="request-password"
 							type="submit"
 							btnClass="btn btn-login"
 							disabled={loader}
 							name=
 							{
 								loader ?
-									<p>sending...</p> :
-									<p>Send reset link</p>
+									'sending...' :
+									'Send reset link'
 							}
 						/>
 					</Form>

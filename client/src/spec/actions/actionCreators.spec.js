@@ -7,7 +7,6 @@ import swal from 'sweetalert';
 import * as types from '../../actionTypes';
 import * as action from '../../actions';
 import mockData from '../mocks/mockData';
-import setAuthToken from '../mocks/localStorage';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -64,12 +63,6 @@ describe('actions', () => {
             done();
           });
       });
-    // it('should create actions to logout a user',
-    //   (done) => {
-    //     const expectedActions = { type: 'LOGOUT' }
-    //     expect(action.onLogoutUser()).toEqual(expectedActions);
-    //     done();
-    //   });
   })
 
   describe('Signup Action', () => {

@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const Select = ({ children, id, selectRef, selectClass }) =>
-<select id={id} ref={selectRef} className={selectClass}>
-  { children }
-</select>;
+  <select id={id} ref={selectRef} className={selectClass}>
+    {children}
+  </select>;
 
 Select.defaultProps = {
   id: '',

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import checkAuthUser from '../../../helpers/checkAuthUser';
+import swal from 'sweetalert';
+import authUser from '../../../helpers/authUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
-import WelcomeCard from './WelcomeCard.jsx';
 import Members from '../members/Members.jsx';
 import AddMemberModal from '../members/AddMemberModal.jsx';
 import DashHeader from '../DashHeader.jsx';
@@ -15,7 +15,7 @@ import {
 } from '../../../commonViews';
 import {
   loadGroupMessages, loadGroupMembers, onSendMessage,
-  onAddMember, onRemoveMember
+  onAddMember, onRemoveMember, onLogoutUser
 }
   from '../../../../actions';
 
@@ -25,7 +25,7 @@ import {
  * @class Group
  * @extends {React.Component}
  */
-class Group extends React.Component {
+export class Group extends React.Component {
   /**
    * Creates an instance of Group.
    * @param {any} props
@@ -33,10 +33,7 @@ class Group extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      errorMessage: '',
-    };
-    this.handleSend = this.handleSend.bind(this);
+    this.state = {};
   }
 
   /**
@@ -45,12 +42,17 @@ class Group extends React.Component {
    * @memberof Group
    * */
   componentWillMount() {
-    const token = localStorage.getItem('userAuth');
-    if (checkAuthUser(token) === 'invalid') {
-      localStorage.clear();
-      location.hash = '#login';
-      return;
+    if (authUser() === false) {
+      return this.props.onLogoutUser();
     }
+  }
+  /**
+   * @return {object} set new state based on user
+   * authentication status
+   *
+   * @memberof Group
+   * */
+  componentDidMount() {
     const groupname =
       location.href.split('/')[location.href.split('/').length - 1];
     this.props.loadGroupMessages(groupname);
@@ -72,34 +74,21 @@ class Group extends React.Component {
       this.props.loadGroupMembers(groupname);
     }
   }
-  /**
-   * handleSend()
-   *
-   * This method is called when the user clicks
-   * the "send" button for messages
-   * @param {any} event
-   * @memberof Group
-   * @return {void}
-   */
-  handleSend(event) {
-    event.preventDefault();
-    const groupname =
-      location.href.split('/')[location.href.split('/').length - 1];
-    let { message, priority } = this;
-    message = message.value.trim();
-    priority = priority.value.trim();
-    const messageData = { message, priority };
-    this.props.onSendMessage(messageData, groupname);
-    document.getElementById('send-message').reset();
-  }
 
   /**
    * @returns {JSX} for Group component
    */
   render() {
-    const { user } = this.props;
+    const { username } = this.state;
     const { messages, members } = this.props;
     const posts = messages;
+    const newMessageBoard = [{
+      id: 0,
+      createdAt: Date.now(),
+      priority: 'normal',
+      fromUser: 'Postit',
+      message: 'Welcome to your new message board.'
+    }];
     const groupName =
       location.href.split('/')[location.href.split('/').length - 1];
     const backToGroup =
@@ -136,48 +125,17 @@ class Group extends React.Component {
                 title={`${groupName} - message board`}
               >
                 <div className="row">
+                  {
+                    !this.props.loading ? '' :
+                    <div class="progress">
+                      <div class="indeterminate"></div>
+                    </div>
+                  }
                   <div className="col s8 m9">
                     {
                       posts.length > 0 ?
-                        <MessageBoard posts={posts} /> :
-                        <div className="message-board">
-                          <div className="postlogs">
-                            <WelcomeCard
-                              emptyBoard={posts.message}
-                            />
-                          </div>
-                          <Form
-                            formClass="message-box"
-                            id="send-message"
-                            onSubmit={this.handleSend}
-                          >
-                            <Textarea
-                              textRef={(input) => { this.message = input; }}
-                              textClass="compose"
-                              placeholder="always be nice..."
-                            />
-                            <Select
-                              id="priority"
-                              selectRef={(input) => { this.priority = input; }}
-                              selectClass="browser-default action-btn select"
-                            >
-                              <option value="Normal">Normal</option>
-                              <option value="Urgent">Urgent</option>
-                              <option value="Critical">Critical</option>
-                            </Select>
-                            <Button
-                              type="submit"
-                              btnClass="browser-default action-btn send"
-                              name={
-                                <IconButton
-                                  iconClass="fa fa-send tooltipped"
-                                  dataPosition="top"
-                                  dataDelay="50"
-                                  dataTooltip="send message"
-                                />}
-                            />
-                          </Form>
-                        </div>
+                      <MessageBoard posts={posts} /> :
+                      <MessageBoard posts={newMessageBoard} />
                     }
                   </div>
                   <div className="col s4 m3">
@@ -192,7 +150,7 @@ class Group extends React.Component {
                     <Members
                       members={members}
                       onRemoveMember={this.props.onRemoveMember}
-                      user={user}
+                      username={username}
                     />
                   </div>
                 </div>
@@ -215,6 +173,8 @@ Group.defaultProps = {
   onSendMessage: () => { },
   onAddMember: () => { },
   onRemoveMember: () => { },
+  onLogoutUser: () => { },
+  loading: false
 };
 
 Group.propTypes = {
@@ -224,13 +184,15 @@ Group.propTypes = {
   loadGroupMembers: PropTypes.func.isRequired,
   onSendMessage: PropTypes.func.isRequired,
   onAddMember: PropTypes.func.isRequired,
-  onRemoveMember: PropTypes.func.isRequired
+  onRemoveMember: PropTypes.func.isRequired,
+  onLogoutUser: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   messages: state.messages.groupMessages,
   members: state.members.groupMembers,
+  loading: state.messages.groupMessagesIsLoading
 });
 
 const mapDispatchToProps = dispatch => (
@@ -239,7 +201,8 @@ const mapDispatchToProps = dispatch => (
     loadGroupMembers,
     onSendMessage,
     onAddMember,
-    onRemoveMember
+    onRemoveMember,
+    onLogoutUser
   }, dispatch)
 );
 

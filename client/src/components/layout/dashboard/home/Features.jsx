@@ -1,6 +1,6 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import {
-  Card, Button, DashboardContent // eslint-disable-line no-unused-vars
+  Card, Button, DashboardContent
 } from '../../../commonViews';
 import cardIcons from '../../../../images/cardStuff.png';
 

@@ -10,7 +10,6 @@ const store = process.env.NODE_ENV === 'development' ?
     rootReducer,
     compose(
       applyMiddleware(...[reduxImmutableStateInvariant(), thunk]),
-      autoRehydrate(),
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   )
@@ -18,9 +17,8 @@ const store = process.env.NODE_ENV === 'development' ?
   createStore(
     rootReducer,
     applyMiddleware(thunk),
-    autoRehydrate()
   );
 
-persistStore(store);
+// persistStore(store);
 
 export default store;

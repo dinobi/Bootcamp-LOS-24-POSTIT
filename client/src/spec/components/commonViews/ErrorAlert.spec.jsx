@@ -1,5 +1,5 @@
 /* globals expect */
-/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import mockData from '../../mocks/mockData';
@@ -7,7 +7,7 @@ import ErrorAlert from '../../../components/commonViews/ErrorAlert';
 
 jest.mock('react-router-dom');
 
-describe('<ErrorAlert />: When button component is mounted', () => {
+describe('<ErrorAlert />: When component is mounted', () => {
   it('should render self without crashing', () => {
     const props = {
       errorMessage: mockData.longString[0],

@@ -1,7 +1,7 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../../images/postit-logo.png';
-import { ListItem } from './';  // eslint-disable-line no-unused-vars
+import { ListItem } from './';
 
 /**
  * Header Component

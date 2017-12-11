@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MessageLog // eslint-disable-line no-unused-vars
+import MessageLog
   from './MessageLog.jsx';
 import {
-  DashHeader, SideMenu, // eslint-disable-line no-unused-vars
-  Copyright, IconButton, // eslint-disable-line no-unused-vars
-  Select, Button, // eslint-disable-line no-unused-vars
-  Form, Textarea // eslint-disable-line no-unused-vars
+  DashHeader, SideMenu,
+  Copyright, IconButton,
+  Select, Button,
+  Form, Textarea
 }
   from '../../../commonViews';
 import { onSendMessage } from '../../../../actions';
@@ -20,7 +20,7 @@ import { onSendMessage } from '../../../../actions';
  * @class MessageBoard
  * @extends {React.Component}
  */
-class MessageBoard extends React.Component {
+export class MessageBoard extends React.Component {
   /**
    * Creates an instance of MessageBoard.
    * @param {any} props
@@ -28,22 +28,19 @@ class MessageBoard extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      errorMessage: '',
-      // posts: this.props.posts
-    };
+    this.state = {};
     this.handleSend = this.handleSend.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
   }
   /**
-   * Handles scrolling to specified element
+   * Handles scrolling to specified dom element
    *
    * @memberof Group
+   * @returns {void}
    */
   handleScroll() {
     setTimeout(() => {
       const messages = $('.postlogs');
-      const newMessage = messages.find('.post:last-child');
       const scrollTop = messages.prop('scrollTop');
       const scrollHeight = messages.prop('scrollHeight');
       messages.scrollTop(scrollHeight);
@@ -51,8 +48,9 @@ class MessageBoard extends React.Component {
   }
   /**
    * Access available DOM elements
-   * 
+   *
    * @memberof Group
+   * @return {void}
    */
   componentDidMount() {
     this.handleScroll();
@@ -86,11 +84,12 @@ class MessageBoard extends React.Component {
    * @memberof MessageBoard
    */
   render() {
+    const { posts, sending } = this.props;
     return (
       <div className="message-board">
         <div className="postlogs">
           {
-            this.props.posts.map(post =>
+            posts.map(post =>
               <MessageLog message={post} key={post.id} />
             )
           }
@@ -119,7 +118,11 @@ class MessageBoard extends React.Component {
             btnClass="browser-default send"
             name={
               <IconButton
-                iconClass="fa fa-send tooltipped"
+                iconClass= {
+                  sending ?
+                  'fa fa-ellipsis-h' :
+                  'fa fa-send tooltipped'
+                }
                 dataPosition="top"
                 dataDelay="50"
                 dataTooltip="send message"
@@ -133,15 +136,18 @@ class MessageBoard extends React.Component {
 
 MessageBoard.defaultProps = {
   onSendMessage: () => { },
-  posts: []
+  posts: [],
+  sending: false
 };
 MessageBoard.propTypes = {
   posts: PropTypes.array.isRequired,
-  onSendMessage: PropTypes.func.isRequired
+  onSendMessage: PropTypes.func.isRequired,
+  sending: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   messages: state.messages.groupMessages,
+  sending: state.messages.sendMessageIsLoading
 });
 
 const mapDispatchToProps = dispatch => (

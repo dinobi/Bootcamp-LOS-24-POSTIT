@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  * @param {Object} props
  */
 const IconButton =
-  ({ name, iconClass, dataPosition, dataDelay, dataTooltip, onClick }) =>
+  ({ id, name, iconClass, dataPosition, dataDelay, dataTooltip, onClick }) =>
     (<i className={iconClass}
       data-position={dataPosition}
       data-delay={dataDelay}
@@ -21,6 +21,7 @@ const IconButton =
     </i>);
 
 IconButton.defaultProps = {
+  id: '',
   name: '',
   iconClass: '',
   onClick: () => { },
