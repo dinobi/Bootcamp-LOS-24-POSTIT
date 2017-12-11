@@ -20,7 +20,7 @@ import { onSendMessage } from '../../../../actions';
  * @class MessageBoard
  * @extends {React.Component}
  */
-class MessageBoard extends React.Component {
+export class MessageBoard extends React.Component {
   /**
    * Creates an instance of MessageBoard.
    * @param {any} props
@@ -28,10 +28,7 @@ class MessageBoard extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      errorMessage: '',
-      // posts: this.props.posts
-    };
+    this.state = {};
     this.handleSend = this.handleSend.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
   }
@@ -87,11 +84,12 @@ class MessageBoard extends React.Component {
    * @memberof MessageBoard
    */
   render() {
+    const { posts, sending } = this.props;
     return (
       <div className="message-board">
         <div className="postlogs">
           {
-            this.props.posts.map(post =>
+            posts.map(post =>
               <MessageLog message={post} key={post.id} />
             )
           }
@@ -120,7 +118,11 @@ class MessageBoard extends React.Component {
             btnClass="browser-default send"
             name={
               <IconButton
-                iconClass="fa fa-send tooltipped"
+                iconClass= {
+                  sending ?
+                  'fa fa-ellipsis-h' :
+                  'fa fa-send tooltipped'
+                }
                 dataPosition="top"
                 dataDelay="50"
                 dataTooltip="send message"
@@ -134,15 +136,18 @@ class MessageBoard extends React.Component {
 
 MessageBoard.defaultProps = {
   onSendMessage: () => { },
-  posts: []
+  posts: [],
+  sending: false
 };
 MessageBoard.propTypes = {
   posts: PropTypes.array.isRequired,
-  onSendMessage: PropTypes.func.isRequired
+  onSendMessage: PropTypes.func.isRequired,
+  sending: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   messages: state.messages.groupMessages,
+  sending: state.messages.sendMessageIsLoading
 });
 
 const mapDispatchToProps = dispatch => (

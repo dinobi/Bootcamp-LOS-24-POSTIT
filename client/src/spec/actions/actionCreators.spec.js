@@ -63,12 +63,6 @@ describe('actions', () => {
             done();
           });
       });
-    // it('should create actions to logout a user',
-    //   (done) => {
-    //     const expectedActions = { type: 'LOGOUT' }
-    //     expect(action.onLogoutUser()).toEqual(expectedActions);
-    //     done();
-    //   });
   })
 
   describe('Signup Action', () => {

@@ -26,7 +26,7 @@ import {
  * @class Groups
  * @extends {React.Component}
  */
-class Groups extends React.Component {
+export class Groups extends React.Component {
   /**
    * Creates an instance of Groups.
    * @param {any} props - state properties
@@ -35,26 +35,11 @@ class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
       groupname: '',
       description: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-  }
-  /**
-   * onFocus()
-   * This method is called when the user focuses on an input field,
-   * which clear any error messages afterwards.
-   *
-   * @memberof Groups
-   * @returns {void}
-   */
-  onFocus() {
-    this.setState({
-      errorMessage: '',
-    });
   }
   /**
 	 * handleChange(event)
@@ -142,6 +127,14 @@ class Groups extends React.Component {
                 title="My Groups"
                 subtitle="Create or select a group to start messaging"
               >
+                {
+                  !this.props.createLoading &&
+                  !this.props.groupsLoading &&
+                  !this.props.deleteLoading ? '' :
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                }
                 <div className="features dashboard-group">
                   <Card cardControl="card card-control">
                     <Form id="group-control">
@@ -227,7 +220,10 @@ Groups.defaultProps = {
   onCreateGroup: () => { },
   onLoadGroup: () => { },
   onArchiveGroup: () => { },
-  onLogoutUser: () => { }
+  onLogoutUser: () => { },
+  groupCreating: false,
+  groupsLoading: false,
+  deleteLoading: false,
 };
 
 Groups.propTypes = {
@@ -235,11 +231,17 @@ Groups.propTypes = {
   onCreateGroup: PropTypes.func.isRequired,
   onLoadGroups: PropTypes.func.isRequired,
   onArchiveGroup: PropTypes.func.isRequired,
-  onLogoutUser: PropTypes.func.isRequired
+  onLogoutUser: PropTypes.func.isRequired,
+  createLoading: PropTypes.bool.isRequired,
+  groupsLoading: PropTypes.bool.isRequired,
+  deleteLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  groups: state.groups
+  groups: state.groups,
+  createLoading: state.groups.createGroupIsLoading,
+  groupsLoading: state.groups.groupsIsLoading,
+  deleteLoading: state.groups.deleteGroupIsLoading
 });
 
 const mapDispatchToProps = dispatch => (

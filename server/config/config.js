@@ -14,6 +14,7 @@ module.exports = {
     dialect: 'postgres'
   },
   production: {
-    use_env_variable: 'POSTIT_DATABASE_URL'
+    use_env_variable: 'POSTIT_DATABASE_URL',
+    dialect: 'postgres'
   }
 };

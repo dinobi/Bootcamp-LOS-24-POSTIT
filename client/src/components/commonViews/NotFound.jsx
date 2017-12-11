@@ -3,6 +3,7 @@ import React from 'react';
 import MainHeader
   from '../layout/home/MainHeader.jsx';
 import Footer from './Footer.jsx';
+import notFoundImage from '../../images/postit-preloader.png';
 
 /**
  * NotFound Component
@@ -16,7 +17,9 @@ import Footer from './Footer.jsx';
 const NotFound = () =>
   <div>
     <MainHeader />
-    <div className="center landing">
+    <div className="center not-found-page">
+      <img className="bouncing" src={notFoundImage} alt="not-found-image" />
+      <br />
       <h1>404</h1>
       <h2>Not Found</h2>
     </div>
