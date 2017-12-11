@@ -47,18 +47,6 @@ export class SideMenu extends React.Component {
       username: authUser().username,
       email: authUser().email
     });
-  }
-	/**
-	 * @returns {void} make resources available
-	 * when changes to properties occur
-	 *
-   * @memberof SideMenu
-	 * @param {any} nextProps
-	 *
-	 * when changes to properties occur
-   *
-	 */
-  componentWillReceiveProps(nextProps) {
     setTimeout(() => {
       $('.tooltipped').tooltip({ delay: 50 });
       $('.collapsible').collapsible();
@@ -111,7 +99,7 @@ export class SideMenu extends React.Component {
 						name="Search Wikipedia"
 					/>
 					{back}
-					<ul class="collapsible active-group" data-collapsible="accordion">
+					<ul className="collapsible active-group" data-collapsible="accordion">
 						<li>
 							<div className="collapsible-header">
 								<i className="fa fa-plug"></i>
@@ -136,7 +124,7 @@ export class SideMenu extends React.Component {
 					<a className="dropdown-button" data-activates='more-menu'>
 						<i className="fa fa-gear"></i>
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<ul id='more-menu' class='dropdown-content'>
+						<ul id='more-menu' className='dropdown-content'>
 						<li><a href="#groups">Groups Control</a></li>
 						<li className="divider"></li>
 						<li>

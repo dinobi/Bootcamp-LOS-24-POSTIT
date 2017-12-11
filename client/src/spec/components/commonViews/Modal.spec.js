@@ -1,5 +1,5 @@
 /* globals expect */
-/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../../../components/commonViews/Modal';
@@ -7,10 +7,10 @@ import mockData from '../../mocks/mockData';
 
 /**
  * component function
- * creates a setup for SignupForm component
+ * creates a setup for Modal component
  *
  * @return {function} mount -
- * renders a component to the dom
+ * renders a component to the DOM
  * @param {bool} loading 
  */
 const component = (opened, action) => {

@@ -1,14 +1,21 @@
 /* globals expect */
-/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import sinon from 'sinon';
+import thunk from 'redux-thunk';
+import ls from '../../localStorage.js';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import mockedStore from '../../mockedStore';
 import mockData from '../../mocks/mockData';
-import { SideMenu } from '../../../components/commonViews/SideMenu';
+import SideMenu from '../../../components/commonViews/SideMenu';
 
 jest.mock('react-router-dom');
+
+const middleware = [thunk];
+const configure = configureStore(middleware);
+const store = configure(mockedStore);
 /**
  * component function
  * creates a setup for SignupForm component
@@ -18,20 +25,25 @@ jest.mock('react-router-dom');
  * @param {bool} loading 
  */
 const component = (active) => {
-  const props = {
-    active: active,
-    groups: ['lfc', 'kfc'],
+  const state = {
     user: {
       username: 'john_doe',
       email: 'john_doe@postit.com'
     },
-    onLoadGroups: mockData.func,
+  }
+  const props = {
+    active: active,
+    groups: ['lfc', 'kfc'],
+    onLoadGroups: mockData.promiseFuncResolve,
     onLogoutUser: mockData.func
   }
-  return shallow(<SideMenu {...props} />)
+  return mount(<Provider store={store}><SideMenu {...props} /></Provider>);
 }
 
 describe('<SideMenu/> Component: Given SideMenu component is mounted', () => {
+  beforeAll(() => {
+    ls.setLocalStorage();
+  });
   it('should render self as expected', (done) => {
     const wrapper = component('dashboard');
     expect(wrapper.exists()).toBe(true);
@@ -41,7 +53,6 @@ describe('<SideMenu/> Component: Given SideMenu component is mounted', () => {
   it('should render children as expected', (done) => {
     const wrapper = component('dashboard')
     expect(wrapper.find('ListItem').length).toBe(3);
-    // expect(wrapper.find('Button').length).toBe(1);
     done()
   });
   it('should contain h5 element that holds a logged in username', (done) => {
@@ -57,8 +68,13 @@ describe('<SideMenu/> Component: Given SideMenu component is mounted', () => {
     done()
   });
   it('should contain an array of authenticated users groups', (done) => {
-    const wrapper = component('dashboard')
-    expect(wrapper.instance().props.groups.length).toBe(2);
+    const wrapper = component('dashboard');
+    expect(wrapper.instance().props.children.props.groups.length).toBe(2);
+    done()
+  });
+  it('should not call onLogoutUser when user is authenticated', (done) => {
+    const wrapper = component('dashboard');
+    expect(wrapper.instance().props.children.props.onLogoutUser.calledOnce).toBe(false);
     done()
   });
 });

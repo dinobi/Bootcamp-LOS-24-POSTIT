@@ -23,7 +23,7 @@ import {
  * @class DashHeader
  * @extends {React.Component}
  */
-class DashHeader extends React.Component {
+export class DashHeader extends React.Component {
   /**
    * Creates an instance of DashboardHeader
    *

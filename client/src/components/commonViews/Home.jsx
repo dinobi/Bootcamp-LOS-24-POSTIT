@@ -1,11 +1,11 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import { Link } from 'react-router-dom'; // eslint-disable-line no-unused-vars
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import MainHeader // eslint-disable-line no-unused-vars
+import MainHeader
   from '../layout/home/MainHeader.jsx';
 import {
-  Footer, Button // eslint-disable-line no-unused-vars
+  Footer, Button
 } from '../commonViews';
 import LandingImg from '../../images/postit-landing.png';
 import authUser from '../helpers/authUser';

@@ -11,7 +11,7 @@ import NotFound from '../../../components/commonViews/NotFound';
 jest.mock('react-router-dom');
 /**
  * component function
- * creates a setup for SignupForm component
+ * creates a setup for NotFound component
  *
  * @return {function} shallow -
  * renders a component one level deep

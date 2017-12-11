@@ -23,7 +23,7 @@ class SearchWiki extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchQuery: ''
+      searchTerm: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -38,7 +38,7 @@ class SearchWiki extends React.Component {
    */
   handleChange(event) {
     this.setState({
-      searchQuery: event.target.value
+      searchTerm: event.target.value
     });
   }
   /**
@@ -56,7 +56,7 @@ class SearchWiki extends React.Component {
     $.ajax({
       type: 'GET',
       url: `https://en.wikipedia.org/w/api.php?action=opensearch&search=
-        ${this.state.searchQuery}&format=json&callback=?`,
+        ${this.state.searchTerm}&format=json&callback=?`,
       dataType: 'json',
       cache: false,
       success: (data) => {
@@ -105,7 +105,7 @@ class SearchWiki extends React.Component {
                   <fieldset className="search-term">
                     <SearchBox
                       searchContext="search-wiki"
-                      searchQuery={this.state.searchTerm}
+                      searchTerm={this.state.searchTerm}
                       handleChange={this.handleChange}
                       handleSearch={this.handleSearch}
                     />

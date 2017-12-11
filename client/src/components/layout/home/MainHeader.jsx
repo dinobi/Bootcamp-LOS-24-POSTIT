@@ -16,7 +16,7 @@ import authUser from '../../helpers/authUser';
  * @class MainHeader
  * @extends {React.Component}
  */
-class MainHeader extends React.Component {
+export class MainHeader extends React.Component {
 	/**
 	 * Creates an instance of MainHeader.
 	 * @memberof MainHeader
