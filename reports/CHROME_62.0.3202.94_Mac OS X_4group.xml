@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="4group"
+    errors="0" failures="1" hostname="" id="" package="4group" skipped="0"
+    tests="1" time="147.8" timestamp="Mon, 11 Dec 2017 22:45:52 GMT">
+  
+    <testcase name="GROUPS: User should be able to login" classname="4group" time="147.8" assertions="1">  <failure message="Timed out while waiting for element &lt;body&gt; to be present for 4000 milliseconds.">    at Object.GROUPSUserShouldBeAbleToLogin [as GROUPS: User should be able to login] (/Users/andeladeveloper/Desktop/version-control/Bootcamp-LOS-24-POSTIT/e2e-tests/4group.js:6:8)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

@@ -33,7 +33,9 @@ export class Group extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: ''
+    };
   }
 
   /**
@@ -45,6 +47,7 @@ export class Group extends React.Component {
     if (authUser() === false) {
       return this.props.onLogoutUser();
     }
+    this.setState({ username: authUser().username });
   }
   /**
    * @return {object} set new state based on user

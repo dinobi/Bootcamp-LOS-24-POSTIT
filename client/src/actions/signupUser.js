@@ -26,7 +26,7 @@ const onSignupUser = signupCredentials =>
           buttons: false,
           timer: 1600,
         });
-        localStorage.setItem('userAuth', signupResponse.data);
+        localStorage.setItem('userAuth', signupResponse.data.authToken);
         location.hash = '#';
       }).catch((errorResponse) => {
         dispatch(onSignupFailure());
