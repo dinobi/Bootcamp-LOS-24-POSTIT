@@ -26,7 +26,12 @@ const InputField =
         value={value}
         onChange={onChange}
       />
-      <label className="active" htmlFor={id}>{label}</label>
+      <label
+        className="active"
+        htmlFor={id}
+      >
+      {label}
+      </label>
     </div>;
 
 InputField.defaultProps = {

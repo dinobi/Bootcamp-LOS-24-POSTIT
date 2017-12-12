@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -66,10 +67,16 @@ export class RequestPassword extends React.Component {
   handleRequestPassword(event) {
     event.preventDefault();
     let { email } = this.state;
+    const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
     email = email.trim();
     if (email === '') {
       this.setState({
-        errorMessage: 'Error. email is required'
+        errorMessage: 'Error: Email is required'
+      });
+    } else if (!emailRE.test(email)) {
+      this.setState({
+        errorMessage:
+				'Error: Enter a valid email address'
       });
     } else {
       this.props.onRequestPassword({ email });

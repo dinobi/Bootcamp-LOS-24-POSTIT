@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -70,6 +71,8 @@ export class SignupForm extends React.Component {
     email = email.trim();
     password = password.trim();
     confirmPassword = confirmPassword.trim();
+    const alphanumeric = /^[a-zA-Z0-9_]*$/;
+    const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
     phone = phone.trim();
     if (
 			username === '' ||
@@ -77,9 +80,31 @@ export class SignupForm extends React.Component {
 			password === '' ||
 			confirmPassword === '' ||
 			phone === '') {
-      this.setState({ errorMessage: 'Error. One or more fields are empty' });
+      this.setState({ errorMessage: 'Error: One or more fields are empty' });
+    } else if (username.length < 3) {
+      this.setState({
+        errorMessage: 'Error: username should be atleast 3 characters long'
+      });
+    } else if (username.length > 18) {
+      this.setState({
+        errorMessage: 'Error: Username should not exceed 18 characters'
+      });
+    } else if (!alphanumeric.test(username)) {
+      this.setState({
+        errorMessage:
+				'Error: Username can contain only alphabets, numbers, or underscore'
+      });
+    } else if (!emailRE.test(email)) {
+      this.setState({
+        errorMessage:
+				'Error: Enter a valid email address'
+      });
+    } else if (password.length < 6) {
+      this.setState({
+        errorMessage: 'Error: password should be up to 6 characters long' });
     } else if (password !== confirmPassword) {
-      this.setState({ errorMessage: 'Error. Passwords do not match' });
+      this.setState({
+        errorMessage: 'Error: Passwords do not match' });
     } else {
         // collect user input
       const userData = { username, email, password, phone };

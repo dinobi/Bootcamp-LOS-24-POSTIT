@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="1"
+            tests="9">
+
+  <testsuite name="signup"
+    errors="1" failures="1" hostname="" id="" package="signup" skipped="8"
+    tests="9" time="3.964" timestamp="Mon, 11 Dec 2017 17:32:06 GMT">
+  
+    <testcase name="SIGNUP: User should get an error if fields are empty" classname="signup" time="3.964" assertions="2">
+
+      <failure message="Testing if element &lt;p.error-alert&gt; contains text: &#34;Error: One or more fields are empty&#34;. Element could not be located.">    at Object.SIGNUPUserShouldGetAnErrorIfFieldsAreEmpty [as SIGNUP: User should get an error if fields are empty] (/Users/andeladeveloper/Desktop/version-control/Bootcamp-LOS-24-POSTIT/e2e-tests/signup.js:9:15)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+      ERROR: Unable to locate element: &#34;p.error-alert&#34; using: css selector
+    at command (/usr/local/lib/node_modules/nightwatch/lib/api/assertions/containsText.js:46:21)
+    at module.exports.BaseAssertion._scheduleAssertion (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:87:17)
+    at module.exports.BaseAssertion._executeCommand (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:82:17)
+    at AssertionInstance.commandFn [as _commandFn] (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:180:21)
+    at AsyncTree.runCommand (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:154:30)
+    at AsyncTree.runChildNode (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:114:8)
+    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:80:10)
+    at AsyncTree.walkUp (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:97:8)
+    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:90:12)
+    at AsyncTree.traverse (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:73:8)
+    </system-err>
+  
+
+  
+    
+    <testcase
+      name="SIGNUP: User should get an error if username is less than 3 characters" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error if username is greater than 18 characters" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error if username is not alphanumeric" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error if email is invalid" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error if password is less than 6 characters" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error if passwords do not match" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should be able to create a new account with correct details" classname="signup">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="SIGNUP: User should get an error message if username has been taken" classname="signup">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>
