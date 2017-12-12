@@ -257,6 +257,14 @@
               </ul>
           </li>
           <li>
+            <a href="#search-for-users" class="toc-h1 toc-link" data-title="Search For Users">Search For Users</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#search-users" class="toc-h2 toc-link" data-title="Search For Users">Search Users</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#post-messages-to-group" class="toc-h1 toc-link" data-title="Post Messages to Group">Post Messages to Group</a>
               <ul class="toc-list-h2">
                   <li>
@@ -269,6 +277,14 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#view-message" class="toc-h2 toc-link" data-title="View Group Messages">View Message</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#archive-created-group" class="toc-h1 toc-link" data-title="Archive Created Group">Archive Created Group</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#archive-group" class="toc-h2 toc-link" data-title="Archive Created Group">Archive group</a>
                   </li>
               </ul>
           </li>
@@ -314,21 +330,57 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User account successfully created."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"userData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxx@postit.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0805xxxxxxx"</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08000000000"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImZpcnN0bmFtZSI6ImFtYXJhIiwibGFzdG5hbWUiOiJlbGVrd2FjaGkiLCJ1c2VybmFtZSI6ImFtYXJhIiwiZW1haWwiOiJhbWFyYUBwb3N0aXQuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkQnMzRW1RYUhEQkxjbnRyTmxOMU11dWtGM0pWdnVEOWVUb1loOGM2MTlkM2N5SUZ1aXJDNWkiLCJwaG9uZSI6IjA4MDU4NTczOTcyIiwidXBkYXRlZEF0IjoiMjAxNy0xMC0xN1QxODowMTo0Mi42MzBaIiwiY3JlYXRlZEF0IjoiMjAxNy0xMC0xN1QxODowMTo0Mi42MzBaIiwiaWQiOjEwLCJsYXN0U2VlbiI6bnVsbH0sImlhdCI6MTUwODI2MzMwMn0.lsudeLC5FjsW46Yb323RVb0r0AL1WMtaZQHwWLxUrPU"</span><span class="w">
+    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiZm9vX2JhciIsImVtYWlsIjoiZm9vX2JhckBnbWFpbC5jb20iLCJwaG9uZSI6IjA4MDAwMDAwMDAwIn0sImlhdCI6MTUxMzA1MjEyNywiZXhwIjoxNTEzMTM4NTI3fQ.i3Tui-AGFb7TX42KKESf5dNVxNvmu33iHnNPOk8LBtI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>API Failure Response:
- 400, 409</p>
-</blockquote>
+ 400, 413, 409</p>
 
+<p>The above failure responses are JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username should be atleast 3 characters long"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username should not exceed 18 characters"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">413</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username can contain only alphabets, numbers, and underscore"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enter a valid email"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password should be up to 6 characters long"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
 <p>This endpoint creates a new user account on PostIt</p>
 
 <p></code><code>&#39;/api/user/signup/&#39;</code></p>
@@ -342,16 +394,6 @@
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>firstname</td>
-<td>Required</td>
-<td>Firstname of the PostIt account creator.</td>
-</tr>
-<tr>
-<td>lastname</td>
-<td>Required</td>
-<td>Lastname of the PostIt account creator.</td>
-</tr>
 <tr>
 <td>username</td>
 <td>Required</td>
@@ -375,7 +417,7 @@
 </tbody></table>
 
 <aside class="notice">
-Input validations such as name format and email have been put in place for better data collection
+Input validations such as username format and email have been put in place for valid data collection
 </aside>
 <h2 id='login-a-user'>Login a user</h2><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
@@ -391,20 +433,36 @@ Input validations such as name format and email have been put in place for bette
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication successful"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImZpcnN0bmFtZSI6ImRpbm9iaSIsImxhc3RuYW1lIjoia2Vua3dvIiwidXNlcm5hbWUiOiJkaW5vYmkiLCJlbWFpbCI6ImRpbm8ua2VubmV0Y29ycEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRiMjgzelNJNmk2SlhuS1BjYTBNM051MVE1aFVnQ3k1VnpLM2tOVUFMdXVWSThHM01ZQU5TRyIsInBob25lIjoiMDgwMzI5NTI5OTgiLCJsYXN0U2VlbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAxNy0xMC0xNVQyMjozNDoxMC45MDFaIiwidXBkYXRlZEF0IjoiMjAxNy0xMC0xNVQyMjozNDoxMC45MDFaIn0sImlhdCI6MTUwODI2Mjg3M30.AEZAxILfIjLE7VT6L99y4ZTtzK73-YcAi2vQj6jxR6I"</span><span class="w">
+    </span><span class="s2">"userData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar@gmail.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08000000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiZm9vX2JhciIsImVtYWlsIjoiZm9vX2JhckBnbWFpbC5jb20iLCJwaG9uZSI6IjA4MDAwMDAwMDAwIn0sImlhdCI6MTUxMzA1MjIxNiwiZXhwIjoxNTEzMTM4NjE2fQ.1nH053XtTgK04fAnDvCEIKsz3WiP1SXGttCASdDvODw"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>API Failure Response:
- 404</p>
+ 404, 401</p>
 
 <p>The above failure response is a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication failed. User does not exist"</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication failed. Username is incorrect or does not exist"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication failed. Incorrect password"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -452,20 +510,83 @@ Username can either be the username or email of the associated account
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group - xxxxxxx, was created successfully"</span><span class="w">
+    </span><span class="s2">"groupData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"groupname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is just a test group"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:26:17.181Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:26:17.181Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group was created successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>API Failure Response:
- 409</p>
+ 400, 413, 409</p>
 
-<p>The above failure response is a JSON structured like this:</p>
+<p>The above failure responses are a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group - groupxxxxx, Already Exist"</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A group name is required"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group name is too short. minimum of 3 characters is allowed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group name is too long. max of 15 characters is allowed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">413</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A group description is required"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description is too long. max of 45 characters is allowed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">413</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description is too short. minimum of 15 characters is allowed"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group already exist"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">409</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -486,20 +607,25 @@ Username can either be the username or email of the associated account
 <tr>
 <td>groupname</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>groupname of the broadcast group.</td>
 </tr>
 <tr>
 <td>description</td>
 <td>Required</td>
-<td>Description of the broadcast group.</td>
+<td>description of the broadcast group.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Required</td>
+<td>authentication token of the group creator</td>
 </tr>
 </tbody></table>
 
 <aside class="warning">
-groupname is case sensitive and no two groups should have the same name
+groupnames are all lower-case and no two groups can have the same name
 </aside>
 <h1 id='add-member-to-group'>Add Member To Group</h1>
-<aside class="notice">Remove other registered users from groups.</aside>
+<aside class="notice">Add other registered users to created groups.</aside>
 <h2 id='add-member'>Add Member</h2><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
@@ -513,7 +639,14 @@ groupname is case sensitive and no two groups should have the same name
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxxxx was successfully added to groupxxxxxx"</span><span class="w">
+    </span><span class="s2">"member"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"groupname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:29:42.171Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:29:42.171Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar was added to test-group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -524,18 +657,20 @@ groupname is case sensitive and no two groups should have the same name
 <p>The above failure response is a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username not found. User has no PostIt account."</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User not found. User has no PostIt account"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
 </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group not found or has not been created"</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group does not exist on PostIt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint allows an authenticated user add members to their created group</p>
+<p>This endpoint allows an authenticated user add members to a created group</p>
 
 <p></code><code>&#39;/api/groups/:groupname/user/&#39;</code></p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -558,9 +693,14 @@ groupname is case sensitive and no two groups should have the same name
 <td>Required</td>
 <td>username of the user to be added to group.</td>
 </tr>
+<tr>
+<td>token</td>
+<td>Required</td>
+<td>authentication token of the group member</td>
+</tr>
 </tbody></table>
 <h1 id='remove-member-from-group'>Remove Member From Group</h1>
-<aside class="notice">Add other registered users to created groups.</aside>
+<aside class="notice">Remove other registered users from created group.</aside>
 <h2 id='remove-member'>Remove Member</h2><pre class="highlight javascript tab-javascript"><code>
 </code></pre>
 <blockquote>
@@ -574,7 +714,9 @@ groupname is case sensitive and no two groups should have the same name
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxxx was successfully removed from groupxxxx"</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe2 was successfully removed from test-group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -585,14 +727,16 @@ groupname is case sensitive and no two groups should have the same name
 <p>The above failure response is a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username not found. User has no PostIt account."</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No such user in test-group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
 </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group not found or has not been created"</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-groups does not exist on PostIt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
@@ -612,12 +756,103 @@ groupname is case sensitive and no two groups should have the same name
 <tr>
 <td>groupname</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>groupname of the broadcast group.</td>
 </tr>
 <tr>
 <td>username</td>
 <td>Required</td>
-<td>username of the user to be added to group.</td>
+<td>username of the user to be removed from group.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Required</td>
+<td>authentication token of the group creator.</td>
+</tr>
+</tbody></table>
+<h1 id='search-for-users'>Search For Users</h1>
+<aside class="notice">A page that allows registered users search for other users.</aside>
+<h2 id='search-users'>Search Users</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 200</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"userData"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe@postit.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe@gmail.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"userData"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No search result for pete"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 400</p>
+
+<p>The above failure responses are a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-groups does not exist on PostIt"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows an authenticated user search for other users</p>
+
+<p></code><code>&#39;/api/search/:groupname/:searchTerm/:page&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/search/:groupname/:searchTerm/:page</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupname</td>
+<td>Required</td>
+<td>group where search is performed.</td>
+</tr>
+<tr>
+<td>searchTerm</td>
+<td>Required</td>
+<td>user to search for.</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Required</td>
+<td>search result page.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Required</td>
+<td>authentication token of the group creator</td>
 </tr>
 </tbody></table>
 <h1 id='post-messages-to-group'>Post Messages to Group</h1>
@@ -636,25 +871,26 @@ groupname is case sensitive and no two groups should have the same name
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We made..."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxx"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Groupxxxx"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"critical"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is just a test message"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:46:14.253Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:46:14.253Z"</span><span class="p">,</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>API Failure Response:
- 400, 401</p>
+ 400, 401, 404</p>
 
-<p>The above failure response is a JSON structured like this:</p>
+<p>The above failure responses are a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message body cannot be empty"</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You forgot to include a message body"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -662,7 +898,26 @@ groupname is case sensitive and no two groups should have the same name
 </span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User does not belong to group 'groupxxxx'"</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid priority level"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User does not belong to group 'test-group'"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-groups does not exist on PostIt"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -683,22 +938,22 @@ groupname is case sensitive and no two groups should have the same name
 <tr>
 <td>message</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
-</tr>
-<tr>
-<td>fromUser</td>
-<td>Required</td>
-<td>username of the post creator.</td>
+<td>body of the message.</td>
 </tr>
 <tr>
 <td>toGroup</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>broadcast groupname.</td>
 </tr>
 <tr>
 <td>priority</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>priority level of the message.</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Required</td>
+<td>authentication token of the message creator.</td>
 </tr>
 </tbody></table>
 <h1 id='view-group-messages'>View Group Messages</h1>
@@ -716,32 +971,36 @@ groupname is case sensitive and no two groups should have the same name
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"We made it..."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"userxxx"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groupxxx"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"critical"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:45:13.731Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yayy!!"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groupxxx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is just a test message"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo_bar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"toGroup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-17T18:47:04.722Z"</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:46:14.253Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
 </span></code></pre>
 <blockquote>
 <p>API Failure Response:
- 404</p>
+ 401, 404</p>
 
-<p>The above failure response is a JSON structured like this:</p>
+<p>The above failure responses are a JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Group: groupxxxx, does not exist on postit."</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User does not belong to group 'test-group'"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-groups does not exist on PostIt"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -760,24 +1019,91 @@ groupname is case sensitive and no two groups should have the same name
 </tr>
 </thead><tbody>
 <tr>
-<td>message</td>
+<td>groupname</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>groupname of the broadcast group.</td>
 </tr>
 <tr>
-<td>fromUser</td>
+<td>token</td>
 <td>Required</td>
-<td>username of the user to be added to group.</td>
+<td>authentication token of group member.</td>
+</tr>
+</tbody></table>
+<h1 id='archive-created-group'>Archive Created Group</h1>
+<aside class="notice">Archive a user created group.</aside>
+<h2 id='archive-group'>Archive group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>HEADERS:
+ x-access-token: text/plain</p>
+
+<p>API Success Response:
+ 200</p>
+
+<p>The above success response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"groupname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is just a test group"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:26:17.181Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-12T04:26:17.181Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-group has been archived"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>API Failure Response:
+ 400, 403, 404,</p>
+
+<p>The above failure response is a JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bad request, groupname is required"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-groups does not exist on PostIt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span><span class="p">[</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have permission to delete test-group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint allows a group creator archive a created group</p>
+
+<p></code><code>&#39;/api/groups/delete-group/&#39;</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://postit-webapp.herokuapp.com/api/groups/delete-group/</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupname</td>
+<td>Required</td>
+<td>groupname of the broadcast group.</td>
 </tr>
 <tr>
-<td>toGroup</td>
+<td>token</td>
 <td>Required</td>
-<td>Groupname of the broadcast group.</td>
-</tr>
-<tr>
-<td>priority</td>
-<td>Required</td>
-<td>Groupname of the broadcast group.</td>
+<td>authentication token of the group creator.</td>
 </tr>
 </tbody></table>
 <h1 id='random-or-unknown-routes'>Random or Unknown Routes</h1>
@@ -866,8 +1192,12 @@ groupname is case sensitive and no two groups should have the same name
 <td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests --</td>
+<td>409</td>
+<td>Conflict -- The request could not be completed due to a conflict with the current state of the target resource.</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Payload Too Large -- The server is refusing to process a request because the request payload is larger than the server is willing or able to process.</td>
 </tr>
 <tr>
 <td>500</td>
