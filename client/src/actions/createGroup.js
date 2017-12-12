@@ -54,8 +54,8 @@ const onCreateGroup = groupData =>
         swal({
           text: groupRes.response.data.error.message,
           icon: 'error',
-          buttons: false,
-          timer: 1600
+          buttons: true,
+          timer: 2000
         });
       });
   };

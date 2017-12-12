@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="10">
+
+  <testsuite name="2signup"
+    errors="0" failures="0" hostname="" id="" package="2signup" skipped="0"
+    tests="10" time="46.74" timestamp="Mon, 11 Dec 2017 19:23:52 GMT">
+  
+    <testcase name="SIGNUP: User should get an error if fields are empty" classname="2signup" time="4.060" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if username is less than 3 characters" classname="2signup" time="4.716" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if username is greater than 18 characters" classname="2signup" time="4.892" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if username is not alphanumeric" classname="2signup" time="4.738" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if email is invalid" classname="2signup" time="4.714" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if password is less than 6 characters" classname="2signup" time="4.649" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error if passwords do not match" classname="2signup" time="4.693" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should be able to create a new account with correct details" classname="2signup" time="6.845" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error message if username has been taken" classname="2signup" time="3.659" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should get an error message if email has been taken" classname="2signup" time="3.778" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

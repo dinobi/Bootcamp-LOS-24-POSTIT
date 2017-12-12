@@ -6,6 +6,7 @@
 /client/node_modules
 /client/dist
 /client/src/spec/components/__snapshots__
+/report
 
 # misc
 .DS_Store
