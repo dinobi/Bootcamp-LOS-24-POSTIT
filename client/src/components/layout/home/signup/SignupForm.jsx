@@ -83,7 +83,7 @@ export class SignupForm extends React.Component {
       this.setState({ errorMessage: 'Error: One or more fields are empty' });
     } else if (username.length < 3) {
       this.setState({
-        errorMessage: 'Error: username should be atleast 3 characters long'
+        errorMessage: 'Error: Username should be atleast 3 characters long'
       });
     } else if (username.length > 18) {
       this.setState({
@@ -101,7 +101,7 @@ export class SignupForm extends React.Component {
       });
     } else if (password.length < 6) {
       this.setState({
-        errorMessage: 'Error: password should be up to 6 characters long' });
+        errorMessage: 'Error: Password should be up to 6 characters long' });
     } else if (password !== confirmPassword) {
       this.setState({
         errorMessage: 'Error: Passwords do not match' });

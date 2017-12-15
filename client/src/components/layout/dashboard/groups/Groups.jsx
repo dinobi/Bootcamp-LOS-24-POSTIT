@@ -105,7 +105,10 @@ export class Groups extends React.Component {
     this.props.onLoadGroups();
   }
   /**
-   * @return {jsx} -  of groups components
+   * render method
+   * renders react element to the DOM
+   *
+   * @return {jsx} -  markup for Groups component
    */
   render() {
     let { groups } = this.props;
@@ -131,8 +134,8 @@ export class Groups extends React.Component {
                   !this.props.createLoading &&
                   !this.props.groupsLoading &&
                   !this.props.deleteLoading ? '' :
-                  <div class="progress">
-                    <div class="indeterminate"></div>
+                  <div className="progress">
+                    <div className="indeterminate"></div>
                   </div>
                 }
                 <div className="features dashboard-group">

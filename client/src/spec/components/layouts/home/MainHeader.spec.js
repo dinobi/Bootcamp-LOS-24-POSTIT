@@ -42,7 +42,7 @@ describe('<MainHeader />: When MainHeader component is mounted',
     it('should render children as expected', (done) => {
       const wrapper = component(false)
       expect(wrapper.find('Header').length).toBe(1);
-      expect(wrapper.find('li').length).toBe(4);
+      expect(wrapper.find('li').length).toBe(3);
       done()
     });
   });

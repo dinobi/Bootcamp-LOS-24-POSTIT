@@ -33,10 +33,8 @@ export class DashHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: ''
+      username: ''
     };
-    this.handleCreate = this.handleCreate.bind(this);
-    this.onFocus = this.onFocus.bind(this);
   }
   /**
    * @returns {void}
@@ -56,18 +54,6 @@ export class DashHeader extends React.Component {
       });
     }
   }
-
-  /**
-   * This method is called when DOM element is on focus eg: input field,
-   * if the state of the field has errored, the error is cleared.
-   *
-   * @returns {void}
-   */
-  onFocus() {
-    this.setState({
-      errorMessage: ''
-    });
-  }
   /**
 	 * This method is called when DOM elements are available
 	 *
@@ -75,41 +61,18 @@ export class DashHeader extends React.Component {
 	 * @returns {void}
 	 */
   componentDidMount() {
-    setTimeout(() => {
-      $('.tooltipped').tooltip({ delay: 50 });
-      $('.collapsible').collapsible();
-      $('.dropdown-button').dropdown({
-        constrainWidth: true,
-      });
-      $('.button-collapse').sideNav({
-        menuWidth: 300,
-        closeOnClick: true,
-        edge: 'right'
-      });
-    }, 800);
+    $('.tooltipped').tooltip({ delay: 50 });
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown({
+      constrainWidth: true,
+    });
+    $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true,
+      edge: 'right'
+    });
   }
-  /**
-   * handleCreate()
-   * This method is called when the user clicks on the "Create group"
-   * It displays makes an api call that handles group creation
-   *
-   * @param {event} event
-   * @return {void}
-   */
-  handleCreate(event) {
-    event.preventDefault();
-    let { groupname, description } = this;
-    groupname = groupname.value.trim();
-    description = description.value.trim();
-    if (groupname === '' || description === '') {
-      this.setState({
-        errorMessage: 'Error. All field are required to create a new group'
-      });
-    } else {
-      const groupData = { groupname, description };
-      this.props.onCreateGroup(groupData);
-    }
-  }
+
   /**
    * @returns {jsx} jsx component for dashboad header
    * @memberof DashHeader
@@ -156,13 +119,11 @@ export class DashHeader extends React.Component {
 }
 
 DashHeader.propTypes = {
-  onLoginUser: PropTypes.func.isRequired,
   onLogoutUser: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    onLoginUser,
     onLogoutUser
   }, dispatch)
 );

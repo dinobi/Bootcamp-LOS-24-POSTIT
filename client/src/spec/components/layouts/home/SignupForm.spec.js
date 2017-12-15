@@ -68,7 +68,7 @@ describe('<SignupForm />: When SignupForm component is mounted',
       button.simulate('click', onSubmitClick());
       wrapper.instance().onSubmitClick({ preventDefault: () => { } });
       expect(wrapper.state('errorMessage'))
-        .toEqual('Error. One or more fields are empty');
+        .toEqual('Error: One or more fields are empty');
       done();
     });
   it('should clear error message state when input' +
@@ -77,6 +77,173 @@ describe('<SignupForm />: When SignupForm component is mounted',
     const onFocus = mockData.func;
     wrapper.find('#username').simulate('focus', onFocus());
     expect(wrapper.state('errorMessage')).toEqual('');
+    done();
+  });
+  it('should have error message if username is less than ' +
+  '3 characters',
+  (done) => {
+    const wrapper = component(false);
+    const onSubmitClick = mockData.func;
+    const button = wrapper.find('#register');
+    const username = wrapper.find('#username').simulate('change', {
+      target:
+      { value: 'ki', id: 'username' }
+    });
+    const email = wrapper.find('#email').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].email, id: 'email' }
+    });
+    const password =
+      wrapper.find('#password').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].password, id: 'password' }
+      });
+    const confirmPassword =
+      wrapper.find('#confirmPassword').simulate('change', {
+        target:
+        { value: mockData.staticUser[1].password, id: 'confirmPassword' }
+      });
+    const phone = wrapper.find('#phone').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].phone, id: 'phone' }
+    });
+    button.simulate('click', onSubmitClick());
+    wrapper.instance().onSubmitClick({ preventDefault: () => { } });
+    expect(wrapper.state('errorMessage'))
+      .toEqual('Error: Username should be atleast 3 characters long');
+    done();
+  });
+  it('should have error message if username is contain invalid ' +
+  'characters',
+  (done) => {
+    const wrapper = component(false);
+    const onSubmitClick = mockData.func;
+    const button = wrapper.find('#register');
+    const username = wrapper.find('#username').simulate('change', {
+      target:
+      { value: '#hello', id: 'username' }
+    });
+    const email = wrapper.find('#email').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].email, id: 'email' }
+    });
+    const password =
+      wrapper.find('#password').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].password, id: 'password' }
+      });
+    const confirmPassword =
+      wrapper.find('#confirmPassword').simulate('change', {
+        target:
+        { value: mockData.staticUser[1].password, id: 'confirmPassword' }
+      });
+    const phone = wrapper.find('#phone').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].phone, id: 'phone' }
+    });
+    button.simulate('click', onSubmitClick());
+    wrapper.instance().onSubmitClick({ preventDefault: () => { } });
+    expect(wrapper.state('errorMessage'))
+      .toEqual('Error: Username can contain only alphabets, numbers, or underscore');
+    done();
+  });
+  it('should have error message if username exceed 18 characters',
+  (done) => {
+    const wrapper = component(false);
+    const onSubmitClick = mockData.func;
+    const button = wrapper.find('#register');
+    const username = wrapper.find('#username').simulate('change', {
+      target:
+      { value: 'This_is_too_long_for_a_username', id: 'username' }
+    });
+    const email = wrapper.find('#email').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].email, id: 'email' }
+    });
+    const password =
+      wrapper.find('#password').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].password, id: 'password' }
+      });
+    const confirmPassword =
+      wrapper.find('#confirmPassword').simulate('change', {
+        target:
+        { value: mockData.staticUser[1].password, id: 'confirmPassword' }
+      });
+    const phone = wrapper.find('#phone').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].phone, id: 'phone' }
+    });
+    button.simulate('click', onSubmitClick());
+    wrapper.instance().onSubmitClick({ preventDefault: () => { } });
+    expect(wrapper.state('errorMessage'))
+      .toEqual('Error: Username should not exceed 18 characters');
+    done();
+  });
+  it('should have error message if email is invalid',
+  (done) => {
+    const wrapper = component(false);
+    const onSubmitClick = mockData.func;
+    const button = wrapper.find('#register');
+    const username = wrapper.find('#username').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].username, id: 'username' }
+    });
+    const email = wrapper.find('#email').simulate('change', {
+      target:
+      { value: 'john_doe@gmail', id: 'email' }
+    });
+    const password =
+      wrapper.find('#password').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].password, id: 'password' }
+      });
+    const confirmPassword =
+      wrapper.find('#confirmPassword').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].password, id: 'confirmPassword' }
+      });
+    const phone = wrapper.find('#phone').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].phone, id: 'phone' }
+    });
+    button.simulate('click', onSubmitClick());
+    wrapper.instance().onSubmitClick({ preventDefault: () => { } });
+    expect(wrapper.state('errorMessage'))
+      .toEqual('Error: Enter a valid email address');
+    done();
+  });
+  it('should have error message if password is less than 6 characters',
+  (done) => {
+    const wrapper = component(false);
+    const onSubmitClick = mockData.func;
+    const button = wrapper.find('#register');
+    const username = wrapper.find('#username').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].username, id: 'username' }
+    });
+    const email = wrapper.find('#email').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].email, id: 'email' }
+    });
+    const password =
+      wrapper.find('#password').simulate('change', {
+        target:
+        { value: 'joe12', id: 'password' }
+      });
+    const confirmPassword =
+      wrapper.find('#confirmPassword').simulate('change', {
+        target:
+        { value: mockData.staticUser[1].password, id: 'confirmPassword' }
+      });
+    const phone = wrapper.find('#phone').simulate('change', {
+      target:
+      { value: mockData.staticUser[0].phone, id: 'phone' }
+    });
+    button.simulate('click', onSubmitClick());
+    wrapper.instance().onSubmitClick({ preventDefault: () => { } });
+    expect(wrapper.state('errorMessage'))
+      .toEqual('Error: Password should be up to 6 characters long');
     done();
   });
   it('should have error message if password and ' +
@@ -110,7 +277,7 @@ describe('<SignupForm />: When SignupForm component is mounted',
       button.simulate('click', onSubmitClick());
       wrapper.instance().onSubmitClick({ preventDefault: () => { } });
       expect(wrapper.state('errorMessage'))
-        .toEqual('Error. Passwords do not match');
+        .toEqual('Error: Passwords do not match');
       done();
     });
   it('should have button with label "processing" if user ' +

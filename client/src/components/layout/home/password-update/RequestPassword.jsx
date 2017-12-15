@@ -27,8 +27,7 @@ export class RequestPassword extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
-      email: '',
-      isLoading: false
+      email: ''
     };
     this.onFocus = this.onFocus.bind(this);
     this.handleChange = this.handleChange.bind(this);

@@ -1,9 +1,9 @@
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-15';
-import jwtDecode from 'jwt-decode';
 import jwt from 'jsonwebtoken';
 import localStorage from 'mock-local-storage'
+import jquery from 'jquery/dist/jquery';
 // React 15 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -13,16 +13,19 @@ global.window = {}
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
-global.$ = jest.fn();
+global.sinon = sinon;
+global.$ = jquery;
+$.prototype.tooltip = () => { };
+$.prototype.collapsible = () => { };
+$.prototype.dropdown = () => { };
+$.prototype.sideNav = () => { };
+
 
 
 
 // Mock browser api and make it available in all test files without importing
 
 const localStorageMock = {
-  // getItem: jest.fn(),
-  // setItem: jest.fn(),
-  // clear: jest.fn()
   getItem: function (key) {
     return this[key];
   },

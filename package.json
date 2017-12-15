@@ -164,7 +164,10 @@
       "./client/src/spec/jestsetup.js"
     ],
     "collectCoverageFrom": [
-      "client/src/**/*.{js,jsx}"
+      "client/src/**/*.{js,jsx}",
+      "!client/src/app/index.jsx",
+      "!client/src/reducers/index.js",
+      "!client/src/store/configureStore.js"
     ],
     "moduleFileExtensions": [
       "js",

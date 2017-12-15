@@ -34,9 +34,10 @@ const getMembersEmail = (groupname, username) => {
  *
  * @return {object} returns a response object
  * @return {string} error | info
+ *
  * @param  {object} req - request object parameter
  * @param  {object} res - response object paramter
- * @param {string} mailType - password reset or notification check
+ * @param {string} mailType - passworid reset or notification check
  * @param {string} email - email address of recipient
  * @param {object} param1 - mail content
  */

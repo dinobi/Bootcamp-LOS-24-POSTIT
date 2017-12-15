@@ -1,51 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="5">
 
   <testsuite name="3login"
-    errors="0" failures="0" hostname="" id="" package="3login" skipped="0"
-    tests="5" time="15.28" timestamp="Mon, 11 Dec 2017 19:40:32 GMT">
+    errors="0" failures="1" hostname="" id="" package="3login" skipped="3"
+    tests="5" time="6.298" timestamp="Tue, 12 Dec 2017 20:21:00 GMT">
   
-    <testcase name="LOGIN: User should get an error if fields are empty" classname="3login" time="4.102" assertions="2">
+    <testcase name="LOGIN: User should get an error if fields are empty" classname="3login" time="3.797" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="LOGIN: User should get an error if username does not exist" classname="3login" time="2.654" assertions="3">
+    <testcase name="LOGIN: User should get an error if username does not exist" classname="3login" time="2.501" assertions="3">
 
     
 
-    
-
-    
-    </testcase>
-  
-    <testcase name="LOGIN: User should get an error if email does not exist" classname="3login" time="2.952" assertions="3">
-
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="LOGIN: User should get an error if password is incorrect" classname="3login" time="2.745" assertions="3">
-
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="LOGIN: User should login with a correct user detail" classname="3login" time="2.825" assertions="3">
-
-    
-
-    
+      <failure message="Testing if element &lt;div.swal-text&gt; contains text: &#34;Authentication failed. Username is incorrect or does not exist&#34;.">    at Object.LOGINUserShouldGetAnErrorIfUsernameDoesNotExist [as LOGIN: User should get an error if username does not exist] (/Users/andeladeveloper/Desktop/version-control/Bootcamp-LOS-24-POSTIT/e2e-tests/3login.js:21:15)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
 
     
     </testcase>
@@ -53,6 +27,23 @@
 
   
 
+  
+    
+    <testcase
+      name="LOGIN: User should get an error if email does not exist" classname="3login">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="LOGIN: User should get an error if password is incorrect" classname="3login">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="LOGIN: User should login with a correct user detail" classname="3login">
+      <skipped />
+    </testcase>
+    
   
   </testsuite>
 </testsuites>

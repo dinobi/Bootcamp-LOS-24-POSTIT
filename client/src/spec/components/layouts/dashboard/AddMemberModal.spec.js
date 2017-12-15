@@ -9,9 +9,16 @@ import mockedStore from '../../../mockedStore';
 import AddMemberModal
   from '../../../../components/layout/dashboard/members/AddMemberModal';
 
-let wrapper;
+const middleware = [thunk];
+let users = {
+
+}
+let groups = ['lfc', 'kfc'];
+const configure = configureStore(middleware);
+const store = configure(mockedStore);
 let tree;
-const props = {
+let wrapper;
+let props = {
   addMemberModal: {
     modalTitle: 'Search and add members by username',
     addMemberButton: 'Add Member',
@@ -60,6 +67,19 @@ describe('<AddMemberModal />: When AddMemberModal component is mounted',
         { value: mockData.string[0], id: 'searchTerm' }
       });
       expect(tree.state('searchTerm')).toEqual(mockData.string[0]);
+      done();
+    });
+    it('should call the handleChange method as performs on change event', (done) => {
+      const tree = shallow(<AddMemberModal {...props} />);
+      const handleChange = mockData.func;
+      const handleSearch = mockData.func;
+      tree.find('#searchTerm').simulate('change', {
+        target:
+        { value: mockData.staticUser[0].username, id: 'searchTerm' }
+      });
+      expect(tree.instance().handleChange.length).toBe(1);
+      expect(tree.state('searchTerm'))
+      .toEqual(mockData.staticUser[0].username);
       done();
     });
   });

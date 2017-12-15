@@ -47,18 +47,16 @@ export class SideMenu extends React.Component {
       username: authUser().username,
       email: authUser().email
     });
-    setTimeout(() => {
-      $('.tooltipped').tooltip({ delay: 50 });
-      $('.collapsible').collapsible();
-      $('.dropdown-button').dropdown({
-        constrainWidth: true,
-      });
-      $('.button-collapse').sideNav({
-        menuWidth: 300,
-        closeOnClick: true,
-        edge: 'right'
-      });
-    }, 800);
+    $('.tooltipped').tooltip({ delay: 50 });
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown({
+      constrainWidth: true,
+    });
+    $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true,
+      edge: 'right'
+    });
   }
 	/**
 	 * @returns {jsx} jsx component for side menu

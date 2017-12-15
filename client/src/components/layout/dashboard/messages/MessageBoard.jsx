@@ -39,12 +39,10 @@ export class MessageBoard extends React.Component {
    * @returns {void}
    */
   handleScroll() {
-    setTimeout(() => {
-      const messages = $('.postlogs');
-      const scrollTop = messages.prop('scrollTop');
-      const scrollHeight = messages.prop('scrollHeight');
-      messages.scrollTop(scrollHeight);
-    }, 800);
+    const messages = $('.postlogs');
+    const scrollTop = messages.prop('scrollTop');
+    const scrollHeight = messages.prop('scrollHeight');
+    messages.scrollTop(scrollHeight);
   }
   /**
    * Access available DOM elements

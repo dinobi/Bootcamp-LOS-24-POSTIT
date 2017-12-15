@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import swal from 'sweetalert';
 import authUser from '../../../helpers/authUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import Members from '../members/Members.jsx';
@@ -130,8 +129,8 @@ export class Group extends React.Component {
                 <div className="row">
                   {
                     !this.props.loading ? '' :
-                    <div class="progress">
-                      <div class="indeterminate"></div>
+                    <div className="progress">
+                      <div className="indeterminate"></div>
                     </div>
                   }
                   <div className="col s8 m9">
@@ -200,8 +199,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    loadGroupMessages,
     loadGroupMembers,
+    loadGroupMessages,
     onSendMessage,
     onAddMember,
     onRemoveMember,

@@ -68,7 +68,7 @@ export class Login extends React.Component {
     password = password.trim();
     if (username === '' || password === '') {
       this.setState({
-        errorMessage: 'Error. Spaces or blank fields are not allowed'
+        errorMessage: 'Error: Spaces or blank fields are not allowed'
       });
     } else {
       const loginCreds = { username, password };
@@ -159,7 +159,6 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userData: state.auth.userData,
   isLoading: state.auth.userIsLoading
 });
 

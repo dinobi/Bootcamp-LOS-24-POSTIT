@@ -5,44 +5,44 @@
 
   <testsuite name="1home"
     errors="0" failures="0" hostname="" id="" package="1home" skipped="0"
-    tests="6" time="22.35" timestamp="Mon, 11 Dec 2017 19:23:29 GMT">
+    tests="6" time="25.59" timestamp="Tue, 12 Dec 2017 20:19:58 GMT">
   
-    <testcase name="HOME: User should be able to see a home page" classname="1home" time="3.901" assertions="2">
+    <testcase name="HOME: User should be able to see a home page" classname="1home" time="7.298" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should be able to access the register page" classname="1home" time="3.858" assertions="2">
+    <testcase name="SIGNUP: User should be able to access the register page" classname="1home" time="3.658" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="LOGIN: User should be able to access the login page" classname="1home" time="3.813" assertions="2">
+    <testcase name="LOGIN: User should be able to access the login page" classname="1home" time="3.675" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="FORGOT PASSWORD: User should be able to see the forgot password page" classname="1home" time="3.760" assertions="2">
+    <testcase name="FORGOT PASSWORD: User should be able to see the forgot password page" classname="1home" time="3.674" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="NOT FOUND: User should be see a not found page" classname="1home" time="3.794" assertions="2">
+    <testcase name="NOT FOUND: User should be see a not found page" classname="1home" time="3.662" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="API DOCS: User should be see the API documentation page" classname="1home" time="3.223" assertions="2">
+    <testcase name="API DOCS: User should be see the API documentation page" classname="1home" time="3.621" assertions="2">
 
     
 

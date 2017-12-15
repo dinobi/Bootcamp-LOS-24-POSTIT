@@ -1,19 +1,25 @@
 /* globals expect */
-
 import React from 'react';
 import PropTypes from 'prop-types';
+import thunk from 'redux-thunk';
+import ls from '../../../localStorage.js';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import mockedStore from '../../../mockedStore';
 import mockData from '../../../mocks/mockData';
 import ConnectedLogin, { Login }
   from '../../../../components/layout/home/login/Login';
 
+const middleware = [thunk];
+const configure = configureStore(middleware);
+const store = configure(mockedStore);
 /**
  * component function
  * creates a setup for Login component
  *
- * @return {function} mouny -
- * renders a full DOM
+ * @return {function} shallow -
+ * renders a react component one level deep
+ * 
  * @param {bool} loading 
  */
 const component = (loading) => {
@@ -23,7 +29,6 @@ const component = (loading) => {
     user: {}
   };
   const props = {
-    userData: mockData.staticUser[0],
     isLoading: loading,
     onLoginUser: jest.fn(),
     onChange: mockData.func,
@@ -73,7 +78,7 @@ describe('<Login />: When Login component is mounted',
         button.simulate('click', handleLogin());
         wrapper.instance().handleLogin({ preventDefault: () => { } });
         expect(wrapper.state('errorMessage'))
-          .toEqual('Error. Spaces or blank fields are not allowed');
+          .toEqual('Error: Spaces or blank fields are not allowed');
         done();
       });
     it('should clear error message state when input' +
@@ -102,8 +107,18 @@ describe('<Login />: When Login component is mounted',
         button.simulate('click', handleLogin());
         wrapper.instance().handleLogin({ preventDefault: () => { } });
         expect(wrapper.state('errorMessage')).not
-          .toEqual('Error. One or more fields are empty');
+          .toEqual('Error: Spaces or blank fields are not allowed');
         expect(button.props().name).toEqual('Login in...');
         done()
       });
+    it('should call onLoginUser when user is loggin in', (done) => {
+      const onLoginUser = mockData.promiseFuncResolve;
+      const tree = shallow(
+        <ConnectedLogin
+          onLoginUser={onLoginUser}
+          store={store}
+        />);
+        expect(tree.length).toBe(1);
+      done()
+    });
   });
