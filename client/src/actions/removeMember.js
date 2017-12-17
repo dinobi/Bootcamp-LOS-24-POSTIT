@@ -1,27 +1,51 @@
-
 import swal from 'sweetalert';
 import actionType from '../actionTypes';
 import apiHandler from '../components/helpers/api-handler';
 import authError from '../components/helpers/authError';
 
+/**
+ * Request to remove group member
+ *
+ * @return {object} action
+ */
 export const onRemoveMemberRequest = () => ({
   type: actionType.REMOVE_MEMBER_REQUEST
 });
 
+/**
+ * Request to remove group member success
+ *
+ * @return {object} action
+ *
+ * @param {object} member
+ */
 export const onRemoveMemberSuccess = member => ({
   type: actionType.REMOVE_MEMBER_SUCCESS,
   member
 });
 
+/**
+ * Request to remove group member failure
+ *
+ * @return {object} action
+ */
 export const onRemoveMemberFailure = () => ({
   type: actionType.SEND_MESSAGE_FAILURE
 });
 
+/**
+ * Allows a user remove other users from group
+ *
+ * @return {object} action
+ *
+ * @param {object} dataValue - contains member and
+ * authenticated group admin
+ */
 const onRemoveMember = dataValue =>
   (dispatch) => {
     if (dataValue.authUser === dataValue.username) {
       swal({
-        text: 'You are the Admin!,are you sure you want to exit this group?',
+        text: 'You are the Admin!, are you sure you want to exit this group?',
         icon: 'warning',
         buttons: ['cancel', 'exit']
       })

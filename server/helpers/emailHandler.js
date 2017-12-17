@@ -11,6 +11,7 @@ dotenv.config();
  *
  * @param {groupname} groupname
  * @param {username} username of sender
+ *
  * @returns {promise} Array - array of members email addresses
  */
 const getMembersEmail = (groupname, username) => {
@@ -32,11 +33,12 @@ const getMembersEmail = (groupname, username) => {
  * sendMail helper
  * Sends out email based on supplied addresses and request
  *
- * @return {object} returns a response object
- * @return {string} error | info
+ * @return {(object|string)} returns a response object or
+ * an error string
+ *
  * @param  {object} req - request object parameter
  * @param  {object} res - response object paramter
- * @param {string} mailType - password reset or notification check
+ * @param {string} mailType - passworid reset or notification check
  * @param {string} email - email address of recipient
  * @param {object} param1 - mail content
  */

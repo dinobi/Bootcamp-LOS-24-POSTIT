@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
  * DashboardContent Component
  *
  * @method DashboardContent
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const DashboardContent =

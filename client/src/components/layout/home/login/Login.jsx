@@ -16,7 +16,9 @@ import Icon from '../../../../images/postit-icon.png';
 export class Login extends React.Component {
 	/**
 	 * Creates an instance of Login.
+	 *
 	 * @param {any} props
+	 *
 	 * @memberof Login
 	 */
   constructor(props) {
@@ -37,6 +39,7 @@ export class Login extends React.Component {
    * which clear any error messages afterwards.
    *
    * @memberof Login
+	 *
    * @returns {void}
    */
   onFocus() {
@@ -47,6 +50,7 @@ export class Login extends React.Component {
    * This method ahndle state changes on an onChange event
 	 *
    * @param {object} event - events object parameter
+	 *
    * @return {object} newState
    */
   handleChange(event) {
@@ -58,7 +62,9 @@ export class Login extends React.Component {
 	 * login button
 	 *
 	 * @returns {void}
+	 *
 	 * @param {any} event
+	 *
 	 * @memberof Login
 	 */
   handleLogin(event) {
@@ -68,11 +74,12 @@ export class Login extends React.Component {
     password = password.trim();
     if (username === '' || password === '') {
       this.setState({
-        errorMessage: 'Error. Spaces or blank fields are not allowed'
+        errorMessage: 'Error: Spaces or blank fields are not allowed'
       });
     } else {
       const loginCreds = { username, password };
       this.props.onLoginUser(loginCreds);
+      document.getElementById('auth-form').reset();
     }
   }
 	/**
@@ -159,7 +166,6 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userData: state.auth.userData,
   isLoading: state.auth.userIsLoading
 });
 

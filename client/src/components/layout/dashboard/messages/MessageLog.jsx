@@ -7,7 +7,9 @@ import moment from 'moment';
  * Displays a message when a component has errored
  *
  * @method MessageLog
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const MessageLog = ({ message }) => {

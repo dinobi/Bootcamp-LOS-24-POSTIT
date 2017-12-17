@@ -9,6 +9,7 @@ const jwtSecret = process.env.JWT_SECRET || 'PrivateKey';
 * Generates an jwt authentication token for a user
 *
 * @returns {string} token for user verification
+*
 * @param  {object} user - user object parameter
 */
 const generateAuthToken = (user) => {
@@ -25,6 +26,7 @@ const generateAuthToken = (user) => {
 * @param  {object} req - request object parameter
 * @param  {object} res - response object paramter
 * @param  {object} next - response object paramter
+*
 * @return {function} next() - calls the next middleware
 */
 const authUser = (req, res, next) => {

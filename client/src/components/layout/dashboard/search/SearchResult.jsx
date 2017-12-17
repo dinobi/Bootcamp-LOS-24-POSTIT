@@ -7,7 +7,9 @@ import { ListItem, Button } from '../../../commonViews';
  * Displays a all search result
  *
  * @method SearchResult
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const SearchResult = ({ foundUsers, handleAddMember }) =>

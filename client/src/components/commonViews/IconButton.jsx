@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays actionable icons where required
  *
  * @method IconButton
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const IconButton =

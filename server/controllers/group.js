@@ -11,6 +11,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   createGroup(req, res) {
@@ -65,6 +66,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   deleteGroup(req, res) {
@@ -100,6 +102,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   fetchMyGroups(req, res) {
@@ -121,6 +124,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   addMember(req, res) {
@@ -152,6 +156,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   removeMember(req, res) {
@@ -187,6 +192,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   fetchMembers(req, res) {

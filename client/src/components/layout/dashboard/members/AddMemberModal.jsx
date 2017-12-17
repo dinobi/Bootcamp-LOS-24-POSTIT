@@ -13,12 +13,15 @@ import {
  * new group members
  *
  * @class AddMemberModal
+ *
  * @extends {React.Component}
  */
 class AddMemberModal extends React.Component {
   /**
    * Creates an instance of AddMemberModal.
+   *
    * @param {any} props
+   *
    * @memberof AddMemberModal
    */
   constructor(props) {
@@ -42,6 +45,7 @@ class AddMemberModal extends React.Component {
    * which clear any error messages afterwards.
    *
    * @memberof AddMemberModal
+   *
    * @returns {void}
    */
   onFocus() {
@@ -52,6 +56,7 @@ class AddMemberModal extends React.Component {
    * This method ahndle state changes on an onChange event
 	 *
    * @param {object} event - events object parameter
+   *
    * @return {object} newState
    */
   handleChange(event) {
@@ -64,7 +69,9 @@ class AddMemberModal extends React.Component {
    * according to usrername
    *
    * @returns {array} array of found users
+   *
    * @param {any} [page=this.state.prevPage + 1]
+   *
    * @memberof AddMemberModal
    */
   handleSearch(page = this.state.prevPage + 1) {
@@ -97,7 +104,9 @@ class AddMemberModal extends React.Component {
    * returns result for that page
    *
    * @returns {array} array of users
+   *
    * @param {any} page
+   *
    * @memberof AddMemberModal
    */
   handlePageNav(page) {
@@ -119,6 +128,7 @@ class AddMemberModal extends React.Component {
    * hits the add member button
    *
    * @param {Object} selectedUser - selected user object
+   *
    * @memberof AddMemberModal
    *
    * @returns {Object} new state
@@ -134,9 +144,8 @@ class AddMemberModal extends React.Component {
     this.setState({ foundUsers: users });
   }
   /**
-   *
-   *
    * @returns {jsx} jsx of AddMemberModal
+   *
    * @memberof AddMemberModal
    */
   render() {

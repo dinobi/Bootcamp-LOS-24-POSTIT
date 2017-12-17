@@ -28,7 +28,7 @@ const props = {
  * @param {bool} loading 
  */
 const component = () => {
-  return mount(<Provider store={store}><MessageBoard {...props} /></Provider>);
+  return shallow(<MessageBoard {...props} />);
 }
 describe('<MessageBoard />: When MessageBoard component is mounted',
   () => {
@@ -47,7 +47,6 @@ describe('<MessageBoard />: When MessageBoard component is mounted',
       expect(wrapper.find('TextArea').length).toBe(1);
       expect(wrapper.find('Select').length).toBe(1);
       expect(wrapper.find('Button').length).toBe(1);
-      expect(wrapper.find('IconButton').length).toBe(1);
       expect(wrapper.find('.postlogs').length).toBe(1);
       done()
     });

@@ -45,19 +45,16 @@ nav ul a {
 		color: $white;
 		background-color: $primary-color-hover !important;
 	}
-	// .btn, .btn-large, .btn-flat, .btn-floating {
-	// 	margin-left: $margin;
-	// 	margin-right: $margin;
-	// }
 }
 nav li:last-child a:hover {
 	background-color: $primary-color !important;
 }
-nav .side-nav li:last-child a:hover{
+nav .side-nav li:last-child a:hover {
 	background-color: $primary-background !important;
 }
 /** Dashboard header **/
 .dashboard-header nav ul {
+	padding-right: 15px;
 	a {
 		color: $offset-color;
 		&:hover {
@@ -120,5 +117,10 @@ nav .side-nav li:last-child a:hover{
 	}
 	.nav-item.hidden {
 		display: block;
+	}
+}
+.back {
+	a:hover {
+		background: none !important
 	}
 }

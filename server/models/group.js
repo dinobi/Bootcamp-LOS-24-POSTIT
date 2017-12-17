@@ -4,14 +4,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
-      allowNull: false,  //  dont write to db if data is not supplied
+      allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: true, //  dont write to db if data is not supplied
+      allowNull: true,
       defaultValue: 'There is no description for this group'
     }
   });

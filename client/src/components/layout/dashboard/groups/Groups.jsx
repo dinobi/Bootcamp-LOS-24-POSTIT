@@ -67,6 +67,8 @@ export class Groups extends React.Component {
     }
     const groupData = { groupname, description };
     this.props.onCreateGroup(groupData);
+    this.setState({ groupname: '', description: '' });
+    document.getElementById('groups-control').reset();
   }
   /**
    * handleArchive()
@@ -74,7 +76,9 @@ export class Groups extends React.Component {
    * the archive group button
    *
    * @param {string} groupname
+   *
    * @returns {object} actionCreator
+   *
    * @memberof Groups
    */
   handleArchive(groupname) {
@@ -105,7 +109,10 @@ export class Groups extends React.Component {
     this.props.onLoadGroups();
   }
   /**
-   * @return {jsx} -  of groups components
+   * render method
+   * renders react element to the DOM
+   *
+   * @return {jsx} -  markup for Groups component
    */
   render() {
     let { groups } = this.props;
@@ -131,8 +138,8 @@ export class Groups extends React.Component {
                   !this.props.createLoading &&
                   !this.props.groupsLoading &&
                   !this.props.deleteLoading ? '' :
-                  <div class="progress">
-                    <div class="indeterminate"></div>
+                  <div className="progress">
+                    <div className="indeterminate"></div>
                   </div>
                 }
                 <div className="features dashboard-group">

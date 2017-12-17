@@ -1,6 +1,12 @@
 import axios from 'axios';
 // Create an abstraction for the api handler
-
+/*
+* apiHandler
+* creates an abstraction of axios api calls
+* to the server
+*
+* @returns {(void|string|object)}
+*/
 const apiHandler = (url, body, method) => {
   const token = localStorage.getItem('userAuth');
   if (token === null && location.hash !== '#register') {

@@ -6,8 +6,9 @@ import errorResponse from '../helpers/errorResponse';
  * extracts username of currently logged in user from
  * a decoded token and save for future request
  *
- * @returns {next} next - next middleware to handle request
- * @returns {object} res - response when user cannot be found
+ * @returns {(next|object)} next - next middleware to handle request
+ * or res - response object when user cannot be found
+ *
  * @param {object} req - response object
  * @param {object} res - response object
  * @param {next} next - function
@@ -26,8 +27,9 @@ const verifyAuthUser = (req, res, next) => {
  * verifies that a user exist and extracts user
  * for future request
  *
- * @returns {next} next - next middleware to handle request
- * @returns {object} res - response when user cannot be found
+ * @returns {(next|object)} next - next middleware to handle request
+ * or res - response object when user cannot be found
+ *
  * @param {object} req - response object
  * @param {object} res - response object
  * @param {next} next - function
@@ -55,8 +57,9 @@ const verifyUser = (req, res, next) => {
  * verifies that a group exist and extracts group
  * for future use
  *
- * @returns {next} next - next middleware to handle request
- * @returns {object} res - response when user cannot be found
+ * @returns {(next|object)} next - next middleware to handle request
+ * or res - response object when user cannot be found
+ *
  * @param {object} req - response object
  * @param {object} res - response object
  * @param {next} next - function

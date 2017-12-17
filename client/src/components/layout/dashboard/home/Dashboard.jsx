@@ -12,7 +12,9 @@ import {
  * the features of the app
  *
  * @method Dashboard
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Dashboard = () =>

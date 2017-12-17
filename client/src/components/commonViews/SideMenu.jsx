@@ -12,6 +12,7 @@ import { ListItem, IconButton } from './';
  * Shows a side menu navigation on the dashboard
  *
  * @class SideMenu
+ *
  * @extends {React.Component}
  */
 export class SideMenu extends React.Component {
@@ -47,25 +48,23 @@ export class SideMenu extends React.Component {
       username: authUser().username,
       email: authUser().email
     });
-    setTimeout(() => {
-      $('.tooltipped').tooltip({ delay: 50 });
-      $('.collapsible').collapsible();
-      $('.dropdown-button').dropdown({
-        constrainWidth: true,
-      });
-      $('.button-collapse').sideNav({
-        menuWidth: 300,
-        closeOnClick: true,
-        edge: 'right'
-      });
-    }, 800);
+    $('.tooltipped').tooltip({ delay: 50 });
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown({
+      constrainWidth: true,
+    });
+    $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true,
+      edge: 'right'
+    });
   }
 	/**
 	 * @returns {jsx} jsx component for side menu
 	 * @memberof SideMenu
 	 */
   render() {
-    const { active, back, toggle, groups } = this.props;
+    const { active, toggle, groups } = this.props;
 		// const { email, username } = this.props.user;
     const { email, username } = this.state;
     return (
@@ -98,7 +97,6 @@ export class SideMenu extends React.Component {
 						url="#search-wiki"
 						name="Search Wikipedia"
 					/>
-					{back}
 					<ul className="collapsible active-group" data-collapsible="accordion">
 						<li>
 							<div className="collapsible-header">

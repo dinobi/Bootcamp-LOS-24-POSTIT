@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
  * Button Component
  *
  * @method Button
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Button = ({ id, type, name, btnClass, disabled, onClick }) =>

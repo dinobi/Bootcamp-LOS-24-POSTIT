@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import swal from 'sweetalert';
 import authUser from '../../../helpers/authUser';
 import MessageBoard from '../messages/MessageBoard.jsx';
 import Members from '../members/Members.jsx';
@@ -28,7 +27,9 @@ import {
 export class Group extends React.Component {
   /**
    * Creates an instance of Group.
+   *
    * @param {any} props
+   *
    * @memberof Group
    */
   constructor(props) {
@@ -41,6 +42,7 @@ export class Group extends React.Component {
   /**
    * @return {void} make resources available
    * before page loads
+   *
    * @memberof Group
    * */
   componentWillMount() {
@@ -64,7 +66,9 @@ export class Group extends React.Component {
   /**
    * @return {void} make resources available
    * when changes to properties occur
+   *
    * @memberof Group
+   *
    * @param {props} nextProps - next available props
    */
   componentWillReceiveProps(nextProps) {
@@ -95,12 +99,13 @@ export class Group extends React.Component {
     const groupName =
       location.href.split('/')[location.href.split('/').length - 1];
     const backToGroup =
-      <ListItem
-        listClass="dashboard-menu-item"
-        url="#groups"
-        iconClass="fa fa-chevron-left"
-        name="Back"
-      />;
+      <a href="#groups">
+        <Button
+          type="submit"
+          btnClass="btn btn-create"
+          name="Back to Groups"
+        />
+      </a>;
     const addMemberModal = {
       modalTitle: 'Search and add members by username',
       addMemberButton: <IconButton
@@ -130,18 +135,44 @@ export class Group extends React.Component {
                 <div className="row">
                   {
                     !this.props.loading ? '' :
-                    <div class="progress">
-                      <div class="indeterminate"></div>
+                    <div className="progress">
+                      <div className="indeterminate"></div>
                     </div>
                   }
-                  <div className="col s8 m9">
+                  <div className="col s12 m9">
                     {
                       posts.length > 0 ?
                       <MessageBoard posts={posts} /> :
                       <MessageBoard posts={newMessageBoard} />
                     }
                   </div>
-                  <div className="col s4 m3">
+                  <a
+                    data-activates="members-stuff"
+                    className="members button-collapse"
+                  >
+                  <button
+                    className=
+                    "btn-floating btn-large waves-effect waves-light green"
+                  >
+                    <i className="fa fa-group"></i>
+                  </button>
+                  </a>
+                  <div className="col m3 hide-on-small-and-down">
+                    <div className="member-list-title">
+                      <h6 className="white-text">
+                        Members
+                        <span className="addButton">
+                          <AddMemberModal addMemberModal={addMemberModal} />
+                        </span>
+                      </h6>
+                    </div>
+                    <Members
+                      members={members}
+                      onRemoveMember={this.props.onRemoveMember}
+                      username={username}
+                    />
+                  </div>
+                  <div className="side-nav" id="members-stuff">
                     <div className="member-list-title">
                       <h6 className="white-text">
                         Members
@@ -200,8 +231,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    loadGroupMessages,
     loadGroupMembers,
+    loadGroupMessages,
     onSendMessage,
     onAddMember,
     onRemoveMember,

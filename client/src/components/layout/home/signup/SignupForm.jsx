@@ -13,7 +13,9 @@ import {
 export class SignupForm extends React.Component {
 	/**
 	 * Creates an instance of SignupForm.
+	 *
 	 * @param {props} props - class properties
+	 *
 	 * @memberof SignupForm
 	 */
   constructor(props) {
@@ -36,6 +38,7 @@ export class SignupForm extends React.Component {
    * which clear any error messages afterwards.
    *
    * @memberof SignupForm
+	 *
    * @returns {void}
    */
   onFocus() {
@@ -46,6 +49,7 @@ export class SignupForm extends React.Component {
    * This method ahndle state changes on an onChange event
 	 *
    * @param {object} event - events object parameter
+	 *
    * @return {object} newState
    */
   handleChange(event) {
@@ -58,7 +62,9 @@ export class SignupForm extends React.Component {
 	 * the signup form
 	 *
 	 * @returns {void}
+	 *
 	 * @param {any} event
+	 *
 	 * @memberof SignupForm
 	 */
   onSubmitClick(event) {
@@ -83,37 +89,53 @@ export class SignupForm extends React.Component {
       this.setState({ errorMessage: 'Error: One or more fields are empty' });
     } else if (username.length < 3) {
       this.setState({
-        errorMessage: 'Error: username should be atleast 3 characters long'
+        errorMessage: 'Error: Username should be atleast 3 characters long',
+        password: '',
+        confirmPassword: '',
       });
     } else if (username.length > 18) {
       this.setState({
-        errorMessage: 'Error: Username should not exceed 18 characters'
+        errorMessage: 'Error: Username should not exceed 18 characters',
+        password: '',
+        confirmPassword: '',
       });
     } else if (!alphanumeric.test(username)) {
       this.setState({
         errorMessage:
-				'Error: Username can contain only alphabets, numbers, or underscore'
+				'Error: Username can contain only alphabets, numbers, or underscore',
+        password: '',
+        confirmPassword: '',
       });
     } else if (!emailRE.test(email)) {
       this.setState({
         errorMessage:
-				'Error: Enter a valid email address'
+				'Error: Enter a valid email address',
+        password: '',
+        confirmPassword: '',
       });
     } else if (password.length < 6) {
       this.setState({
-        errorMessage: 'Error: password should be up to 6 characters long' });
+        errorMessage: 'Error: Password should be up to 6 characters long',
+        password: '',
+        confirmPassword: '',
+      });
     } else if (password !== confirmPassword) {
       this.setState({
-        errorMessage: 'Error: Passwords do not match' });
+        errorMessage: 'Error: Passwords do not match',
+        password: '',
+        confirmPassword: '',
+      });
     } else {
         // collect user input
       const userData = { username, email, password, phone };
         // call the signup form action
       this.props.onSignupUser(userData);
+      document.getElementById('signup-form').reset();
     }
   }
 	/**
 	 * @returns {jsx} jsx for SignupForm
+	 *
 	 * @memberof SignupForm
 	 */
   render() {

@@ -8,7 +8,9 @@ import { ListItem } from './';
  * Displays a page header where required
  *
  * @method Header
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Header = ({ headerClass, children, logoClass, container }) =>
@@ -18,11 +20,14 @@ const Header = ({ headerClass, children, logoClass, container }) =>
         <a href="/#" className={logoClass}>
           <img src={Logo} alt="postit-logo" />
         </a>
-        <a href="#" data-activates="mobile-menu" className="button-collapse right">
+        <a
+          data-activates="mobile-menu"
+          className="button-collapse right"
+        >
           <i className="material-icons">menu</i>
         </a>
         <ul id="desktop" className="right">
-          {children}
+          { children }
         </ul>
         <ul className="side-nav" id="mobile-menu">
           { children }

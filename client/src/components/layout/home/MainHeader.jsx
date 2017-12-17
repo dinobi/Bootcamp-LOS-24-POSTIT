@@ -14,11 +14,13 @@ import authUser from '../../helpers/authUser';
  * MainHeader Compopnent
  *
  * @class MainHeader
+ *
  * @extends {React.Component}
  */
 export class MainHeader extends React.Component {
 	/**
 	 * Creates an instance of MainHeader.
+	 *
 	 * @memberof MainHeader
 	 */
   constructor() {
@@ -33,6 +35,7 @@ export class MainHeader extends React.Component {
    * It displays a dropdown of navigation menu items
 	 *
 	 * @memberof MainHeader
+	 *
 	 * @returns {void}
 	 */
   componentDidMount() {
@@ -46,8 +49,8 @@ export class MainHeader extends React.Component {
     });
   }
 	/**
-	 *
 	 * @returns {*} jsx for MainHeader
+	 *
 	 * @memberof MainHeader
 	 */
   render() {

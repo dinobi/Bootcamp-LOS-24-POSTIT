@@ -15,14 +15,6 @@ const configure = configureStore(middleware);
 const store = configure(mockedStore);
 let wrapper;
 let tree;
-const props = {
-  loading: false,
-  loadGroupMessages: mockData.func,
-  loadGroupMembers: mockData.func,
-  onLogoutUser: mockData.func,
-  onAddMember: mockData.func,
-  onRemoveMember: mockData.func
-};
 /**
  * component function
  * creates a setup for Group component
@@ -32,7 +24,19 @@ const props = {
  * @param {bool} loading 
  */
 const component = (loading) => {
-  return mount(<Provider store={store}><ConnectedGroup {...props} /></Provider>);
+  const props = {
+    loading: loading,
+    match:
+      { params:
+        { groupname: 'rainier' }
+      },
+    loadGroupMessages: mockData.func,
+    loadGroupMembers: mockData.func,
+    onLogoutUser: mockData.func,
+    onAddMember: mockData.func,
+    onRemoveMember: mockData.func
+  };
+  return shallow(<Group {...props} />);
 }
 describe('<Group />: When Group component is mounted',
   () => {
@@ -45,14 +49,60 @@ describe('<Group />: When Group component is mounted',
       expect(wrapper.length).toBe(1);
       done()
     });
-    it('should render children as expected', (done) => {
-      const wrapper = component(false)
-      expect(wrapper.find('DashHeader').length).toBe(1);
-      expect(wrapper.find('SideMenu').length).toBe(1);
-      expect(wrapper.find('DashboardContent').length).toBe(1);
-      expect(wrapper.find('MessageBoard').length).toBe(1);
-      expect(wrapper.find('AddMemberModal').length).toBe(1);
-      expect(wrapper.find('Members').length).toBe(1);
+    it('should render self as expected', (done) => {
+      tree = shallow(<ConnectedGroup store={store} />)
+      expect(tree.length).toBe(1);
+      done()
+    });
+    it('should render self as expected', (done) => {
+      tree = shallow(<ConnectedGroup store={store} />)
+      expect(tree.length).toBe(1);
+      done()
+    });
+    it('should not re-render when groupname does not change', (done) => {
+      wrapper = component();
+      let nextProps = {
+        match: {
+          params: {
+            groupname: 'rainier'
+          }
+        }
+      }
+      wrapper.setProps(nextProps);
+      expect(wrapper.instance().props.match.params.groupname)
+      // expect(wrapper.instance().props.loadGroupMessages.calledOnce).toBe(false);
+      // expect(wrapper.instance().props.loadGroupMembers.calledOnce).toBe(false);
+      done()
+    });
+    it('should re-render when groupname changes', (done) => {
+      wrapper = component();
+      let nextProps = {
+        match: {
+          params: {
+            groupname: 'lfc'
+          }
+        }
+      }
+      wrapper.setProps(nextProps);
+      expect(wrapper.instance().props.match.params.groupname).toEqual('lfc');
+      // expect(wrapper.instance().props.loadGroupMessages.calledOnce).toBe(true);
+      // expect(wrapper.instance().props.loadGroupMembers.calledOnce).toBe(true);
+      done()
+    });
+    it('should show a loader when loading state is set to true', (done) => {
+      const wrapper = component(true);
+      expect(wrapper.instance().props.loading).toBe(true);
+      done()
+    });
+    it('should save state of an authorized user', (done) => {
+      const wrapper = component();
+      expect(wrapper.state().username).toBe('john_doe');
+      done()
+    });
+    it('should not save state of an unauthorized user', (done) => {
+      ls.clearLocalStorage();
+      const wrapper = component();
+      expect(wrapper.state().username).toBe('');
       done()
     });
   });

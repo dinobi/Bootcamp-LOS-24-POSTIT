@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
  * Displays a modal when triggered
  *
  * @class Modal
+ *
  * @extends {React.Component}
  */
 class Modal extends React.Component {

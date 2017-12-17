@@ -14,16 +14,18 @@ import { onSignupUser } from '../../../../actions';
 
 /**
  * Register Page
- *
  * Registers a new user on the application
  *
  * @class Register
+ *
  * @extends {React.Component}
  */
 export class Register extends React.Component {
 	/**
 	 * Renders a registration form
+	 *
 	 * @returns {jsx} - jsx for Register component
+	 *
 	 * @memberof Register
 	 */
   render() {

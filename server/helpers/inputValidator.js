@@ -8,8 +8,9 @@ const alphanumeric = /^[a-zA-Z0-9_]*$/;
  * signupValidator
  * validates users input during signup process
  *
- * @returns {object} res - response object when check fails
- * @returns {string} validated - value when check passes
+ * @returns {(object|string)} res - response object when check fails
+ * or validated - string value when check passes
+ *
  * @param {object} req - response object
  * @param {object} res - response object
  */
@@ -63,8 +64,9 @@ const signupValidator = (req, res) => {
  * loginValidator
  * validates users input during signin process
  *
- * @returns {object} res - response object when check fails
- * @returns {string} validated - value when check passes
+ * @returns {(object|string)} res - response object when check fails
+ * or validated - value when check passes
+ *
  * @param {object} req - response object
  * @param {object} res - response object
  */
@@ -89,9 +91,9 @@ const loginValidator = (req, res) => {
  * loginValidator
  * validates users input for uniqueness and validity
  * during signup process
+ * @returns {(object|string)} res - response object when check fails or
+ * validated - value when check passes
  *
- * @returns {object} res - response object when check fails
- * @returns {string} validated - value when check passes
  * @param {object} res - response object
  * @param {object} error - error response object
  */
@@ -120,8 +122,9 @@ const uniqueValidator = (res, error) => {
  * messageValidator
  * validates user created messages
  *
- * @returns {object} res - response object when check fails
- * @returns {string} validated - value when check passes
+ * @returns {(object|string)} res - response object when check fails
+ * or validated - string value when check passes
+ *
  * @param {string} message - user created message
  * @param {object} priority - user selected priority
  * @param {object} req - response object

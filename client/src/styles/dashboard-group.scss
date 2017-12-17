@@ -13,11 +13,8 @@ $critical: #F44336;
 }
 @media (max-width: 600px) {
 	.tag {
-		float: none;
-		display: inline-block;
 		position: relative;
-		right: 0;
-		top: 0;
+		top: 10px;
 		
 	}
 }
@@ -73,6 +70,11 @@ $critical: #F44336;
 	height: 60vh;
 	overflow-y: auto;
 }
+@media (max-width: 600px) {
+	.members-list {
+		padding: 0px 15px;
+	}
+} 
 .tooltipped {
 	position: relative !important;
 	float: right;
@@ -123,4 +125,15 @@ $critical: #F44336;
 	top: 0;
 	cursor: pointer;
 	height: 36px;
+}
+
+.members.button-collapse {
+	position: fixed;
+	right: 23px;
+	top: 100px;
+}
+@media (min-width: 601px) {
+  .members.button-collapse, a.button-collapse {
+    display: none !important;
+  }
 }

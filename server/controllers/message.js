@@ -12,6 +12,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   createMessage(req, res) {
@@ -85,10 +86,11 @@ export default {
   * Allows users view all the messages that has been
   * sent to groups that they belong
   *
-  * Route: POST: /api/groups/:groupname/show-message/
+  * Route: GET: /api/groups/:groupname/show-message/
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   fetchMessages(req, res) {

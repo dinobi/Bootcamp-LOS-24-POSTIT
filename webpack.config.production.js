@@ -5,17 +5,7 @@ const port = process.env.PORT || 3001;
 const outputPath = `${__dirname}/client/dist`;
 
 module.exports = {
-  devServer: {
-    inline: true,
-    // Silence WebpackDevServer's own logs since they're generally not useful.
-    // It will still show compile warnings and errors with this setting.
-    clientLogLevel: 'none',
-    port,
-    compress: true,
-    hot: true,
-    quiet: true,
-  },
-  devtool: 'cheap-source-map',
+  devtool: 'source-map',
   entry: './client/src/app/index.jsx',
   output: {
     path: outputPath,
@@ -23,7 +13,7 @@ module.exports = {
     publicPath: '/dist/'
   },
   resolve: {
-    modules: ['node_modules', './src'],
+    modules: ['node_modules', './client/src'],
     extensions: ['.js', '.jsx'],
   },
   module: {
@@ -85,7 +75,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       sourceMap: true,
@@ -103,19 +92,14 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
         APP_URL: JSON.stringify(process.env.APP_URL),
-        POSTIT_DATABASE_URL: JSON.stringify(process.env.POSTIT_DATABASE_URL),
         JWT_EXPIRY_TIME: JSON.stringify(process.env.JWT_EXPIRY_TIME),
-        JWT_SECRET: JSON.stringify(process.env.JWT_SECRET),
-        MAIL_PASSWORD: JSON.stringify(process.env.MAIL_PASSWORD),
-        MAIL_SERVICE: JSON.stringify(process.env.MAIL_SERVICE),
-        MAIL_USER: JSON.stringify(process.env.MAIL_USER),
-        HASH_SECRET: JSON.stringify(process.env.HASH_SECRET)
       }
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      'window.jQuery': 'jquery',
+      Hammer: 'hammerjs/hammer'
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),

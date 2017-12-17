@@ -23,6 +23,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   createNewUser(req, res) {
@@ -64,6 +65,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   authUser(req, res) {
@@ -128,6 +130,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   search(req, res) {
@@ -189,6 +192,7 @@ export default {
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   requestPassword(req, res) {
@@ -263,10 +267,11 @@ export default {
   * resetPassword controller
   * Allows users reset password after request has been made
   *
-  * Route: POST: /api/user/request-password/
+  * Route: POST: /api/user/reset-password/:hash/
   *
   * @param  {object} req - request object parameter
   * @param  {object} res - response object paramter
+  *
   * @return {object} returns a response object
   */
   resetPassword(req, res) {

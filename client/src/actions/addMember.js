@@ -12,8 +12,10 @@ export const onAddMemberRequest = () => ({
 });
 
 /**
- * Request to add user was success
+ * Request to add user success
+ *
  * @return {object} action
+ *
  * @param {object} member
  */
 export const onAddMemberSuccess = member => ({
@@ -23,6 +25,7 @@ export const onAddMemberSuccess = member => ({
 
 /**
  * Request to add user failed
+ *
  * @return {object} action
  */
 export const onAddMemberFailure = () => ({
@@ -31,8 +34,11 @@ export const onAddMemberFailure = () => ({
 
 /**
  * Allows a user add other users to group
+ *
  * @return {object} action
+ *
  * @param {object} user
+ * @param {object} groupname
  */
 const onAddMember = (user, groupname) =>
   (dispatch) => {

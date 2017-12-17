@@ -5,6 +5,7 @@ import React from 'react';
  * Displays page footer where required
  *
  * @method Footer
+ *
  * @returns {Object} JSX
  */
 const Footer = () =>

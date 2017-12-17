@@ -2,9 +2,11 @@ import actionType from '../actionTypes';
 
 /**
  * password reducer to handles reset and request password action
+ *
  * @param {state} state - initial app state object
  * @param {action} action - action creator to update state
  * @param {action.type} action.type - action type to listen for
+ *
  * @return {object} - new state object
  */
 const passwordReducer = (state = {
