@@ -1,8 +1,10 @@
 import errorResponse from './errorResponse';
 /**
+ * Group name and description length checker
  *
- * @returns {object} res - response object when check fails
- * @returns {string} validLength - value when check passes
+ * @returns {(object|string)} res - response object when check fails or
+ * validLength - value when check passes
+ *
  * @param {object} res - response object
  * @param {string} name - group name to validate
  * @param {string} desc - group description to validate

@@ -14,12 +14,15 @@ import { onResetPassword } from '../../../../actions';
 /**
  *
  * @class ResetPassword
+ *
  * @extends {React.Component}
  */
 export class ResetPassword extends React.Component {
 	/**
 	 * Creates an instance of ResetPassword.
+	 *
 	 * @param {props} props - class properties
+	 *
 	 * @memberof ResetPassword
 	 */
   constructor(props) {
@@ -39,6 +42,7 @@ export class ResetPassword extends React.Component {
    * which clear any error messages afterwards.
    *
    * @memberof ResetPassword
+	 *
    * @returns {void}
    */
   onFocus() {
@@ -49,6 +53,7 @@ export class ResetPassword extends React.Component {
    * This method ahndle state changes on an onChange event
 	 *
    * @param {object} event - events object parameter
+	 *
    * @return {object} newState
    */
   handleChange(event) {
@@ -56,7 +61,9 @@ export class ResetPassword extends React.Component {
   }
 	/**
 	 * @param {any} event
+	 *
 	 * @memberof ResetPassword
+	 *
 	 * @returns {*} - New State object and actions creators
 	 */
   handleResetPassword(event) {
@@ -80,6 +87,7 @@ export class ResetPassword extends React.Component {
 	/**
 	 *
 	 * @memberof ResetPassword
+	 *
 	 * @returns {*} react elements
 	 */
   render() {

@@ -1,5 +1,12 @@
 import jwtDecode from 'jwt-decode';
 
+/*
+* authUser
+* verifies that a user has no token and
+* also verifies if token has expired
+*
+* @returns {(boolean|object)}
+*/
 const authUser = () => {
   const token = localStorage.getItem('userAuth');
   if (token === null) {

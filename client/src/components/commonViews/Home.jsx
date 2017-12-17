@@ -16,7 +16,9 @@ import authUser from '../helpers/authUser';
  * a users authentication status
  *
  * @method Home
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 export const Home = () =>

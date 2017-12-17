@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       primaryKey: true,
-      allowNull: false,  //  dont write to db if data is not supplied
+      allowNull: false,
       validate: {
         notEmpty: true
       }
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,  //  dont write to db if data is not supplied
+      allowNull: false,
       validate: {
         isEmail: true,
         notEmpty: true
@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false, //  dont write to db if data is not supplied
+      allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false, //  dont write to db if data is not supplied
+      allowNull: false,
       validate: {
         not: ['[a-z]', 'i']
       }

@@ -9,7 +9,9 @@ import {
  * Displays a search input field and submit button
  *
  * @method SearchBox
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const SearchBox =

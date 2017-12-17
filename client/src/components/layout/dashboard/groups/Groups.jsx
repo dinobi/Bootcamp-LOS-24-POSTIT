@@ -67,6 +67,8 @@ export class Groups extends React.Component {
     }
     const groupData = { groupname, description };
     this.props.onCreateGroup(groupData);
+    this.setState({ groupname: '', description: '' });
+    document.getElementById('groups-control').reset();
   }
   /**
    * handleArchive()
@@ -74,7 +76,9 @@ export class Groups extends React.Component {
    * the archive group button
    *
    * @param {string} groupname
+   *
    * @returns {object} actionCreator
+   *
    * @memberof Groups
    */
   handleArchive(groupname) {

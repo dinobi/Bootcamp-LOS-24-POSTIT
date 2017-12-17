@@ -12,6 +12,7 @@ import { ListItem, IconButton } from './';
  * Shows a side menu navigation on the dashboard
  *
  * @class SideMenu
+ *
  * @extends {React.Component}
  */
 export class SideMenu extends React.Component {
@@ -63,7 +64,7 @@ export class SideMenu extends React.Component {
 	 * @memberof SideMenu
 	 */
   render() {
-    const { active, back, toggle, groups } = this.props;
+    const { active, toggle, groups } = this.props;
 		// const { email, username } = this.props.user;
     const { email, username } = this.state;
     return (
@@ -96,7 +97,6 @@ export class SideMenu extends React.Component {
 						url="#search-wiki"
 						name="Search Wikipedia"
 					/>
-					{back}
 					<ul className="collapsible active-group" data-collapsible="accordion">
 						<li>
 							<div className="collapsible-header">

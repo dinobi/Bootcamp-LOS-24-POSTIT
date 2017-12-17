@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays an input field element
  *
  * @method InputField
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const InputField =

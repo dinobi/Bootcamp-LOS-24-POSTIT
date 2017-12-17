@@ -8,7 +8,9 @@ from '../../../commonViews';
  * Displays a list of group members
  *
  * @method Members
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Members = ({ members, username, onRemoveMember }) =>

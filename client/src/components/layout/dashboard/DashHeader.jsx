@@ -10,17 +10,18 @@ import {
   onLogoutUser
 } from '../../../actions';
 import {
-  Header, Button, // eslint-disable-line no-unused-vars
-  InputField, Modal, // eslint-disable-line no-unused-vars
-  Form, Textarea, // eslint-disable-line no-unused-vars
-  ErrorAlert, IconButton, // eslint-disable-line no-unused-vars
-  ListItem // eslint-disable-line no-unused-vars
+  Header, Button,
+  InputField, Modal,
+  Form, Textarea,
+  ErrorAlert, IconButton,
+  ListItem
 } from '../../commonViews';
 
 /**
  * DashboardHeader Component
  *
  * @class DashHeader
+ *
  * @extends {React.Component}
  */
 export class DashHeader extends React.Component {
@@ -28,6 +29,7 @@ export class DashHeader extends React.Component {
    * Creates an instance of DashboardHeader
    *
    * @param {any} props
+   *
    * @memberof DashHeader
    */
   constructor(props) {
@@ -38,6 +40,7 @@ export class DashHeader extends React.Component {
   }
   /**
    * @returns {void}
+   *
    * @memberof DashHeader
    */
   componentWillMount() {
@@ -58,6 +61,7 @@ export class DashHeader extends React.Component {
 	 * This method is called when DOM elements are available
 	 *
 	 * @memberof DashHeader
+   *
 	 * @returns {void}
 	 */
   componentDidMount() {
@@ -75,6 +79,7 @@ export class DashHeader extends React.Component {
 
   /**
    * @returns {jsx} jsx component for dashboad header
+   *
    * @memberof DashHeader
    */
   render() {
@@ -104,7 +109,9 @@ export class DashHeader extends React.Component {
           url="#search-wiki"
           name="Search Wikipedia"
         />
-        {back}
+        <li className="nav-item back">
+          {back}
+        </li>
         <li className="nav-item">
           <Button
             onClick={this.props.onLogoutUser}

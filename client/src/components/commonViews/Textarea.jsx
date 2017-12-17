@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays a textarea for composing posts
  *
  * @method TextArea
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const TextArea = ({ onFocus, placeholder, id, textRef }) =>

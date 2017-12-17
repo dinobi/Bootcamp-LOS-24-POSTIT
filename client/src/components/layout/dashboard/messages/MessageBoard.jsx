@@ -18,12 +18,15 @@ import { onSendMessage } from '../../../../actions';
  * Displays a message board of messages in a group
  *
  * @class MessageBoard
+ *
  * @extends {React.Component}
  */
 export class MessageBoard extends React.Component {
   /**
    * Creates an instance of MessageBoard.
+   *
    * @param {any} props
+   *
    * @memberof MessageBoard
    */
   constructor(props) {
@@ -36,6 +39,7 @@ export class MessageBoard extends React.Component {
    * Handles scrolling to specified dom element
    *
    * @memberof Group
+   *
    * @returns {void}
    */
   handleScroll() {
@@ -48,6 +52,7 @@ export class MessageBoard extends React.Component {
    * Access available DOM elements
    *
    * @memberof Group
+   *
    * @return {void}
    */
   componentDidMount() {
@@ -60,7 +65,9 @@ export class MessageBoard extends React.Component {
    * the send message button
    *
    * @param {any} event
+   *
    * @memberof MessageBoard
+   *
    * @return {void}
    */
   handleSend(event) {
@@ -76,9 +83,8 @@ export class MessageBoard extends React.Component {
     document.getElementById('send-message').reset();
   }
   /**
-   *
-   *
    * @returns {jsx} jsx component for message board
+   *
    * @memberof MessageBoard
    */
   render() {

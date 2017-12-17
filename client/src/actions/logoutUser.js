@@ -1,21 +1,20 @@
 /**
- * Since we are using JWTs, we just need to remove the token
-* from localStorage. These actions are more useful if we
-* were calling the API to log the user out
+* Since we are using JWTs, we just need to remove the token
+* from localStorage.
 */
 export const LOGOUT = 'LOGOUT';
 /**
+ * logout a user from the application
  *
- * @param {message} message
  * @returns {Object} - new state
  */
 export const logout = () => ({
   type: LOGOUT
 });
 /**
- * onLogoutUser()
- * @return {function} - onLogoutRequest()
- * and onLogoutSuccess that logout a user
+ * Allows a user logout from the app
+ *
+ * @return {function} - logout a user
 */
 const onLogoutUser = () =>
   (dispatch) => {

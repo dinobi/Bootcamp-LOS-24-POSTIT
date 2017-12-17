@@ -15,12 +15,12 @@ module.exports = {
     hot: true,
     quiet: true,
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   entry: [require.resolve('webpack-hot-middleware/client'),
     path.join(__dirname, '/client/src/app/index.jsx')
   ],
   resolve: {
-    modules: ['node_modules', './src'],
+    modules: ['node_modules', './client/src'],
     extensions: ['.js', '.jsx'],
   },
   module: {
@@ -98,13 +98,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
         APP_URL: JSON.stringify(process.env.APP_URL),
-        POSTIT_DATABASE_URL: JSON.stringify(process.env.POSTIT_DATABASE_URL),
-        JWT_EXPIRY_TIME: JSON.stringify(process.env.JWT_EXPIRY_TIME),
-        JWT_SECRET: JSON.stringify(process.env.JWT_SECRET),
-        MAIL_PASSWORD: JSON.stringify(process.env.MAIL_PASSWORD),
-        MAIL_SERVICE: JSON.stringify(process.env.MAIL_SERVICE),
-        MAIL_USER: JSON.stringify(process.env.MAIL_USER),
-        HASH_SECRET: JSON.stringify(process.env.HASH_SECRET)
+        JWT_EXPIRY_TIME: JSON.stringify(process.env.JWT_EXPIRY_TIME)
       }
     }),
     // Add module names to factory functions so they appear in browser profiler.
@@ -113,7 +107,6 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     // Watcher doesn't work well if you mistype casing in a path so we use
     // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     // new ModuleScopePlugin('client/src'),

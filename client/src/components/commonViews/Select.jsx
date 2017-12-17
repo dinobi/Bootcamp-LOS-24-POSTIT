@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays a select tool for varying data options
  *
  * @method Select
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Select = ({ children, id, selectRef, selectClass }) =>

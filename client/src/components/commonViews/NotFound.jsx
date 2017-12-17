@@ -12,6 +12,7 @@ import notFoundImage from '../../images/postit-preloader.png';
  * a wrong url
  *
  * @method NotFound
+ *
  * @returns {Object} JSX
  */
 const NotFound = () =>

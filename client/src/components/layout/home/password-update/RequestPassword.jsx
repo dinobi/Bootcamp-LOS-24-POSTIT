@@ -15,12 +15,15 @@ import { onRequestPassword } from '../../../../actions';
 /**
  *
  * @class RequestPassword
+ *
  * @extends {React.Component}
  */
 export class RequestPassword extends React.Component {
 	/**
 	 * Creates an instance of RequestPassword.
+	 *
 	 * @param {props} props - class properties
+	 *
 	 * @memberof RequestPassword
 	 */
   constructor(props) {
@@ -39,6 +42,7 @@ export class RequestPassword extends React.Component {
    * which clear any error messages afterwards.
    *
    * @memberof RequestPassword
+	 *
    * @returns {void}
    */
   onFocus() {
@@ -49,6 +53,7 @@ export class RequestPassword extends React.Component {
    * This method ahndle state changes on an onChange event
 	 *
    * @param {object} event - events object parameter
+	 *
    * @return {object} newState
    */
   handleChange(event) {
@@ -60,7 +65,9 @@ export class RequestPassword extends React.Component {
 	 * the request password button
 	 *
 	 * @param {any} event
+	 *
 	 * @memberof RequestPassword
+	 *
 	 * @returns {*} - New State object and actions
 	 */
   handleRequestPassword(event) {
@@ -83,6 +90,7 @@ export class RequestPassword extends React.Component {
   }
 	/**
 	 * @returns {jsx} jsx for RequestPassword
+	 *
 	 * @memberof RequestPassword
 	 */
   render() {

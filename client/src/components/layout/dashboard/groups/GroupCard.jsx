@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays created group card for existing groups
  *
  * @method GroupCard
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const GroupCard = ({ location, description, archive }) =>

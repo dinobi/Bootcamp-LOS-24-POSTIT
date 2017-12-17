@@ -2,15 +2,15 @@ export default (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
     fromUser: {
       type: DataTypes.STRING,
-      allowNull: false //  dont write to db if data is not supplied
+      allowNull: false
     },
     toGroup: {
       type: DataTypes.STRING,
-      allowNull: false //  dont write to db if data is not supplied
+      allowNull: false
     },
     message: {
       type: DataTypes.STRING,
-      allowNull: false //  dont write to db if data is not supplied
+      allowNull: false
     },
     priority: {
       type: DataTypes.STRING,

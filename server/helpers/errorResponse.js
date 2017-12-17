@@ -4,6 +4,7 @@
  * Handles structured error responses based on status code
  *
  * @returns {Object} res - error response object
+ *
  * @param {*} res - response object parameter
  * @param {*} statusCode - error status code
  * @param {*} message - defined error message

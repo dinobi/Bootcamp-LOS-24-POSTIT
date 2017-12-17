@@ -5,6 +5,7 @@ import authError from '../components/helpers/authError';
 
 /**
  * Request to create a new group
+ *
  * @return {object} action
  */
 export const onCreateGroupRequest = () => ({
@@ -13,7 +14,9 @@ export const onCreateGroupRequest = () => ({
 
 /**
  * Request to create group success
+ *
  * @return {object} action
+ *
  * @param {object} group
  */
 export const onCreateGroupSuccess = group => ({
@@ -23,6 +26,7 @@ export const onCreateGroupSuccess = group => ({
 
 /**
  * Request to create group failure
+ *
  * @return {object} action
  */
 export const onCreateGroupFailure = () => ({
@@ -31,7 +35,9 @@ export const onCreateGroupFailure = () => ({
 
 /**
  * Allows a user create a new group
+ *
  * @return {object} action
+ *
  * @param {object} groupData
  */
 const onCreateGroup = groupData =>

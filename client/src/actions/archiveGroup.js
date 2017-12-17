@@ -5,6 +5,7 @@ import authError from '../components/helpers/authError';
 
 /**
  * Request to archive a group
+ *
  * @return {object} action
  */
 export const onDeleteGroupRequest = () => ({
@@ -13,7 +14,9 @@ export const onDeleteGroupRequest = () => ({
 
 /**
  * Request to archive group was successful
+ *
  * @param {object} group
+ *
  * @return {object} action
  */
 export const onDeleteGroupSuccess = group => ({
@@ -23,6 +26,7 @@ export const onDeleteGroupSuccess = group => ({
 
 /**
  * Request to archive a group failed
+ *
  * @return {object} action
  */
 export const onDeleteGroupFailure = () => ({
@@ -31,7 +35,9 @@ export const onDeleteGroupFailure = () => ({
 
 /**
  * Allows a user archive a group
+ *
  * @param {object} groupData
+ *
  * @return {object} action
  */
 const onArchiveGroup = groupData =>

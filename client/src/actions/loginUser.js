@@ -1,25 +1,44 @@
 import axios from 'axios';
 import swal from 'sweetalert';
-// There are three possible states for user login
-// so we will need actions for each of them
 import actionType from '../actionTypes';
 
-// Login request action creator
+/**
+ * Request to login user
+ *
+ * @return {object} action
+ */
 export const onLoginRequest = () => ({
   type: actionType.LOGIN_REQUEST
 });
 
-// Login success action creator
+/**
+ * Request to login user success
+ *
+ * @return {object} action
+ *
+ * @param {object} user
+ */
 export const onLoginSuccess = user => ({
   type: actionType.LOGIN_SUCCESS,
   user
 });
 
-// Login failure action creator
+/**
+ * Request to login user failure
+ *
+ * @return {object} action
+ */
 export const onLoginFailure = () => ({
   type: actionType.LOGIN_FAILURE
 });
 
+/**
+ * Allows a user login to the application
+ *
+ * @return {object} action
+ *
+ * @param {object} loginData
+ */
 const onLoginUser = loginData =>
   (dispatch) => {
     dispatch(onLoginRequest());

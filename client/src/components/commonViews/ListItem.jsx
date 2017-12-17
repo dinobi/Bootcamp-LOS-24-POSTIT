@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
  * required
  *
  * @method ListItem
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const ListItem =

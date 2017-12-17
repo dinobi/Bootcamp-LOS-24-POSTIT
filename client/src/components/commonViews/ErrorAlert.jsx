@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
  * Displays a message when a component has errored
  *
  * @method ErrorAlert
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const ErrorAlert = ({ errorMessage }) =>

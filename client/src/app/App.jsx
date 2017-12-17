@@ -15,8 +15,10 @@ import '../styles/index.scss';
 
 /**
  * App Component
+ *
  * @method App
- * @returns {Object} JSX
+ *
+ * @returns {object} JSX
  */
 const App = () =>
   (

@@ -1,8 +1,10 @@
 import actionType from '../actionTypes';
 /**
  * users reducer to return user data
+ *
  * @param {object} state
  * @param {object} action
+ *
  * @return {object} action.payload
  */
 const groupsReducer = (state = {

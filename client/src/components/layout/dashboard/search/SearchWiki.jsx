@@ -13,11 +13,13 @@ import {
  * Enables a user search wikipedia
  *
  * @class SearchWiki
+ *
  * @extends {React.Component}
  */
 class SearchWiki extends React.Component {
   /**
    * Creates an instance of SearchWiki.
+   *
    * @memberof SearchWiki
    */
   constructor() {
@@ -33,7 +35,9 @@ class SearchWiki extends React.Component {
    * handleChange()
    * This method changes component state based on
    * occuring onChange events
+   *
    * @param {event} event - change event
+   *
    * @return {void}
    */
   handleChange(event) {
@@ -48,7 +52,9 @@ class SearchWiki extends React.Component {
    * hits the search button
    *
    * @returns {jsx} jsx for search result
+   *
    * @param {any} event
+   *
    * @memberof SearchWiki
    */
   handleSearch(event) {
@@ -83,6 +89,7 @@ class SearchWiki extends React.Component {
   }
   /**
    * @returns {jsx} jsx for search component
+   *
    * @memberof SearchWiki
    */
   render() {

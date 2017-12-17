@@ -8,7 +8,9 @@ import cardIcons from '../../../../images/cardStuff.png';
  * Features Component
  *
  * @method Features
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Features = () =>
@@ -21,38 +23,6 @@ const Features = () =>
     >
       <div className="features">
         <div className="row">
-          <div className="col s12 m4">
-            <Card>
-              <div className="card small">
-                <div
-                  className="card-image waves-effect waves-block waves-light"
-                >
-                  <img className="activator"
-                    src={cardIcons}
-                    alt="write post illustration"
-                  />
-                </div>
-                <div className="card-content">
-                  <span
-                    className="card-title activator grey-text text-darken-4"
-                  >
-                    Write Post
-                  </span>
-                </div>
-                <div className="card-reveal">
-                  <span className="card-title grey-text text-darken-4">
-                    Write Message
-                    <i className="material-icons right">
-                      close
-                    </i>
-                  </span>
-                  <p>
-                    Compose a message and send as broadcast to group members.
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
           <div className="col s12 m4">
             <Card>
               <div className="card small">
@@ -78,7 +48,13 @@ const Features = () =>
                       close
                     </i>
                   </span>
-                  <p>Create a new group, add members and start posting.</p>
+                  <p>
+                    Create group with a unique name and add a
+                    brief description for the group.
+                  </p>
+                  <a href="#groups" className="btn btn-create white-text">
+                    Get Started
+                  </a>
                 </div>
               </div>
             </Card>
@@ -109,9 +85,47 @@ const Features = () =>
                     </i>
                   </span>
                   <p>
-                    Add a new member to your created group for them
-                    to start sending and receiving posts within the group.
+                    Add other registered users to your created group, and
+                    get connected through the group message board
                   </p>
+                  <a href="#groups" className="btn btn-create white-text">
+                    Get Started
+                  </a>
+                </div>
+              </div>
+            </Card>
+          </div>
+          <div className="col s12 m4">
+            <Card>
+              <div className="card small">
+                <div
+                  className="card-image waves-effect waves-block waves-light"
+                >
+                  <img className="activator"
+                    src={cardIcons}
+                    alt="write post illustration"
+                  />
+                </div>
+                <div className="card-content">
+                  <span
+                    className="card-title activator grey-text text-darken-4"
+                  >
+                    Write Post
+                  </span>
+                </div>
+                <div className="card-reveal">
+                  <span className="card-title grey-text text-darken-4">
+                    Write Message
+                    <i className="material-icons right">
+                      close
+                    </i>
+                  </span>
+                  <p>
+                    Compose messages and send as broadcasts to group members.
+                  </p>
+                  <a href="#groups" className="btn btn-create white-text">
+                    Get Started
+                  </a>
                 </div>
               </div>
             </Card>
@@ -148,6 +162,9 @@ const Features = () =>
                     View what your group members are writing about
                     and stay in the know.
                   </p>
+                  <a href="#groups" className="btn btn-create white-text">
+                    Get Started
+                  </a>
                 </div>
               </div>
             </Card>
@@ -178,9 +195,12 @@ const Features = () =>
                     </i>
                   </span>
                   <p>
-                    Search for a user who has registered with postit,
-                    or any group to see if they exist on postit.
+                    Search for other users that own a postit account, and
+                    add them to your group.
                   </p>
+                  <a href="#groups" className="btn btn-create white-text">
+                    Get Started
+                  </a>
                 </div>
               </div>
             </Card>
@@ -211,9 +231,12 @@ const Features = () =>
                     </i>
                   </span>
                   <p>
-                    Search wikipedia right from your inbox and start posting
+                    Search wikipedia right from your dashboard and start posting
                     messages backed by fact.
                   </p>
+                  <a href="#search-wiki" className="btn btn-create white-text">
+                    Get Started
+                  </a>
                 </div>
               </div>
             </Card>

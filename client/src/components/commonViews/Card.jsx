@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 
 /**
  * Card Component
+ *
  * @method Card
+ *
  * @returns {Object} JSX
+ *
  * @param {Object} props
  */
 const Card = ({ children, cardControl }) =>
