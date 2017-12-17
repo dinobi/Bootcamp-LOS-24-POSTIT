@@ -132,8 +132,8 @@ $critical: #F44336;
 	right: 23px;
 	top: 100px;
 }
-.search.button-collapse {
-	position: fixed;
-	right: 23px;
-	top: 180px;
+@media (min-width: 601px) {
+  .members.button-collapse, a.button-collapse {
+    display: none !important;
+  }
 }
