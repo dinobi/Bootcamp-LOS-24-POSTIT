@@ -24,7 +24,7 @@ const SearchResult = ({ foundUsers, handleAddMember }) =>
           />
           <Button
             onClick={() => handleAddMember(foundUser)}
-            btnClass="btn btn-create right"
+            btnClass="btn add-button right"
             name="Add"
           />
         </div>
