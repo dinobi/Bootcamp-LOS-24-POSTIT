@@ -48,12 +48,11 @@
 }
 
 .search-result {
-  padding: 10px 30px;
+  padding: 10px;
   div {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 5px 30px;
     text-align: left;
     vertical-align: middle;
   }
@@ -69,6 +68,11 @@
   em {
     font-weight: 700;
   }
+}
+.search-result {
+  max-height: 400px;
+  width: 100%;
+  overflow-y: auto;
 }
 .search-result h5, .search-result li > a  {
   color: #000;

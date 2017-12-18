@@ -29,6 +29,11 @@
   transition: .2s ease-out;
   cursor: pointer;
 }
+.add-button {
+  @extend .btn-create;
+    min-width: 0px;
+    padding: 0px 10px;
+}
 
 .btn-create:focus, .btn-large:focus,
 .btn-floating:focus {
