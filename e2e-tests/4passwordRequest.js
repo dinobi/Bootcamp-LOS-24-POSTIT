@@ -25,7 +25,7 @@ module.exports = {
       .resizeWindow(1280, 800)
       .url('http://localhost:3001/#/request-password')
       .waitForElementVisible('body', 4000)
-      .setValue('input#email', 'foo_bar@postit.com')
+      .setValue('input#email', 'johnie@postit.com')
       .click('button#request-password')
       .waitForElementVisible('div.swal-text', 1600)
       .assert.containsText('div.swal-text', 'We do not have this email in our record')

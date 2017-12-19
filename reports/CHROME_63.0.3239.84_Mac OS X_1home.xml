@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="6">
+
+  <testsuite name="1home"
+    errors="0" failures="0" hostname="" id="" package="1home" skipped="0"
+    tests="6" time="24.58" timestamp="Tue, 19 Dec 2017 08:29:36 GMT">
+  
+    <testcase name="HOME: User should be able to see a home page" classname="1home" time="4.000" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: User should be able to access the register page" classname="1home" time="3.953" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="LOGIN: User should be able to access the login page" classname="1home" time="4.010" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="FORGOT PASSWORD: User should be able to see the forgot password page" classname="1home" time="3.960" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="NOT FOUND: User should be see a not found page" classname="1home" time="5.357" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="API DOCS: User should be see the API documentation page" classname="1home" time="3.297" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+      ERROR: Unable to locate element: &#34;div.search-result&#34; using: css selector
+    at command (/usr/local/lib/node_modules/nightwatch/lib/api/assertions/containsText.js:46:21)
+    at module.exports.BaseAssertion._scheduleAssertion (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:87:17)
+    at module.exports.BaseAssertion._executeCommand (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:82:17)
+    at AssertionInstance.commandFn [as _commandFn] (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:180:21)
+    at AsyncTree.runCommand (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:154:30)
+    at AsyncTree.runChildNode (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:114:8)
+    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:80:10)
+    at AsyncTree.walkUp (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:97:8)
+    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:90:12)
+    at AsyncTree.traverse (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:73:8)
+    </system-err>
+  
+
+  
+  </testsuite>
+</testsuites>
