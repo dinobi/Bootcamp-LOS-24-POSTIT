@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="12">
+
+  <testsuite name="4group"
+    errors="0" failures="0" hostname="" id="" package="4group" skipped="0"
+    tests="12" time="51.02" timestamp="Thu, 21 Dec 2017 07:33:49 GMT">
+  
+    <testcase name="GROUPS: User should get an error if groupname is less than 3 characters" classname="4group" time="10.57" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should get an error if groupname is more than 15 characters" classname="4group" time="4.114" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should get an error if description is less than 15 characters" classname="4group" time="4.418" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should get an error if description is more than 45 characters" classname="4group" time="4.658" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should get an error if groupname contain invalid characters" classname="4group" time="4.574" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: It should create a new group with valid inputs" classname="4group" time="4.527" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should get an error if groupname already exist" classname="4group" time="4.488" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should be able to view the group message board" classname="4group" time="1.817" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should be able to send a new group message" classname="4group" time="3.060" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should see a members list containing group creator" classname="4group" time="1.665" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: User should be able to search and add other registered users to group" classname="4group" time="4.980" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: A logged-in user should be able to logout" classname="4group" time="2.151" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

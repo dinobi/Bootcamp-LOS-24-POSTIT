@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, Button } from '../../../commonViews';
+import { IconButton } from '../../../commonViews';
 
 /**
  * SearchResult Component
@@ -16,18 +16,13 @@ const SearchResult = ({ foundUsers, handleAddMember }) =>
   <section className="search-result">
     {
       foundUsers.map(foundUser =>
-        <div key={foundUser.id}>
-          <ListItem key={foundUser.id}
-          name={foundUser.username}
-          iconClass="fa fa-user"
-          listClass="result-item"
-          />
-          <Button
+        <span className="chip result-item" key={foundUser.id}>
+          {foundUser.username}
+          <IconButton
+            iconClass="fa fa-plus"
             onClick={() => handleAddMember(foundUser)}
-            btnClass="btn add-button right"
-            name="Add"
           />
-        </div>
+        </span>
       )
     }
   </section>;

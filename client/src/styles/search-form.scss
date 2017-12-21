@@ -70,7 +70,8 @@
   }
 }
 .search-result {
-  max-height: 400px;
+  min-height: 10vh;
+  max-height: 40vh;
   width: 100%;
   overflow-y: auto;
 }
@@ -78,8 +79,13 @@
   color: #000;
   text-align: left;
 }
+.result-item {
+  vertical-align: center;
+  i {
+    margin-left: 10px;
+  }
+}
 .search-pages {
-  margin-top: 20px;
   text-align: center;
   span {
     padding: 3px 15px;

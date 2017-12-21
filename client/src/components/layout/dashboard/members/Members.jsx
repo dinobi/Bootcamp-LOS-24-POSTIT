@@ -34,9 +34,9 @@ const Members = ({ members, username, onRemoveMember }) =>
               />
             </div>
             :
-            <li className="chip" key={index}>
+            <div className="chip" key={index}>
               {member.username}
-          </li>
+            </div>
         );
       })
     }

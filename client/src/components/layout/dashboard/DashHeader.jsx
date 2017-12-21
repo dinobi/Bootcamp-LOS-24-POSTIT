@@ -114,6 +114,7 @@ export class DashHeader extends React.Component {
         </li>
         <li className="nav-item">
           <Button
+            id="logout"
             onClick={this.props.onLogoutUser}
             type="submit"
             btnClass="btn btn-create"
