@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="1"
-            failures="1"
-            tests="11">
+<testsuites errors="0"
+            failures="0"
+            tests="12">
 
   <testsuite name="4group"
-    errors="1" failures="1" hostname="" id="" package="4group" skipped="0"
-    tests="11" time="45.94" timestamp="Tue, 19 Dec 2017 08:32:08 GMT">
+    errors="0" failures="0" hostname="" id="" package="4group" skipped="0"
+    tests="12" time="51.02" timestamp="Thu, 21 Dec 2017 07:33:49 GMT">
   
-    <testcase name="GROUPS: User should get an error if groupname is less than 3 characters" classname="4group" time="10.49" assertions="6">
+    <testcase name="GROUPS: User should get an error if groupname is less than 3 characters" classname="4group" time="10.57" assertions="6">
 
     
 
@@ -22,7 +22,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should get an error if groupname is more than 15 characters" classname="4group" time="4.622" assertions="3">
+    <testcase name="GROUPS: User should get an error if groupname is more than 15 characters" classname="4group" time="4.114" assertions="3">
 
     
 
@@ -31,7 +31,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should get an error if description is less than 15 characters" classname="4group" time="3.933" assertions="3">
+    <testcase name="GROUPS: User should get an error if description is less than 15 characters" classname="4group" time="4.418" assertions="3">
 
     
 
@@ -40,7 +40,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should get an error if description is more than 45 characters" classname="4group" time="4.575" assertions="3">
+    <testcase name="GROUPS: User should get an error if description is more than 45 characters" classname="4group" time="4.658" assertions="3">
 
     
 
@@ -49,7 +49,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should get an error if groupname contain invalid characters" classname="4group" time="4.533" assertions="3">
+    <testcase name="GROUPS: User should get an error if groupname contain invalid characters" classname="4group" time="4.574" assertions="3">
 
     
 
@@ -58,7 +58,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: It should create a new group with valid inputs" classname="4group" time="4.515" assertions="3">
+    <testcase name="GROUPS: It should create a new group with valid inputs" classname="4group" time="4.527" assertions="3">
 
     
 
@@ -85,7 +85,7 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should be able to send a new group message" classname="4group" time="3.016" assertions="5">
+    <testcase name="GROUPS: User should be able to send a new group message" classname="4group" time="3.060" assertions="5">
 
     
 
@@ -98,39 +98,36 @@
     
     </testcase>
   
-    <testcase name="GROUPS: User should see a members list containing group creator" classname="4group" time="1.661" assertions="2">
+    <testcase name="GROUPS: User should see a members list containing group creator" classname="4group" time="1.665" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="GROUPS: User should be able to search for other registered users" classname="4group" time="2.295" assertions="3">
+    <testcase name="GROUPS: User should be able to search and add other registered users to group" classname="4group" time="4.980" assertions="6">
 
     
 
-      <failure message="Testing if element &lt;div.search-result&gt; contains text: &#34;foo_bar&#34;. Element could not be located.">    at Object.GROUPSUserShouldBeAbleToSearchForOtherRegisteredUsers [as GROUPS: User should be able to search for other registered users] (/Users/andeladeveloper/Desktop/version-control/Bootcamp-LOS-24-POSTIT/e2e-tests/4group.js:136:15)
-    at _combinedTickCallback (internal/process/next_tick.js:73:7)
-    at process._tickCallback (internal/process/next_tick.js:104:9)</failure>
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="GROUPS: A logged-in user should be able to logout" classname="4group" time="2.151" assertions="2">
+
+    
 
     
     </testcase>
   
 
-  
-    <system-err>
-      ERROR: Unable to locate element: &#34;div.search-result&#34; using: css selector
-    at command (/usr/local/lib/node_modules/nightwatch/lib/api/assertions/containsText.js:46:21)
-    at module.exports.BaseAssertion._scheduleAssertion (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:87:17)
-    at module.exports.BaseAssertion._executeCommand (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:82:17)
-    at AssertionInstance.commandFn [as _commandFn] (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:180:21)
-    at AsyncTree.runCommand (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:154:30)
-    at AsyncTree.runChildNode (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:114:8)
-    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:80:10)
-    at AsyncTree.walkUp (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:97:8)
-    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:90:12)
-    at AsyncTree.traverse (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:73:8)
-    </system-err>
   
 
   

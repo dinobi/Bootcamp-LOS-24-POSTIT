@@ -125,7 +125,7 @@ module.exports = {
       .assert.containsText('div.chip', 'john_doe')
       .pause(1600);
   },
-  'GROUPS: User should be able to search for other registered users': (client) => {
+  'GROUPS: User should be able to search and add other registered users to group': (client) => {
     client
       .waitForElementVisible('div.member-list-title', 1000)
       .click('span.addButton')
@@ -133,8 +133,21 @@ module.exports = {
       .waitForElementVisible('div.modal-header', 1000)
       .setValue('input#searchTerm', 'foo_bar')
       .pause(2000)
-      .waitForElementVisible('li.result-item', 1000)
-      .assert.containsText('div.search-result', 'foo_bar')
+      .waitForElementVisible('section.search-result', 1000)
+      .assert.containsText('span.result-item', 'foo_bar')
+      .click('i.fa-plus')
+      .waitForElementVisible('div.swal-text', 1600)
+      .assert.containsText('div.swal-text', 'foo_bar was added to rainier-team')
+      .pause(1000)
+      .click('i.fa-times');
+  },
+  'GROUPS: A logged-in user should be able to logout': (client) => {
+    client
+      .waitForElementVisible('header.dashboard-header', 1000)
+      .pause(1000)
+      .assert.containsText('button#logout', 'LOGOUT')
+      .click('button#logout')
+      .pause(1000)
       .end();
   }
 };

@@ -5,74 +5,65 @@
 
   <testsuite name="2signup"
     errors="0" failures="0" hostname="" id="" package="2signup" skipped="0"
-    tests="11" time="102.5" timestamp="Tue, 19 Dec 2017 08:30:01 GMT">
+    tests="11" time="104.0" timestamp="Thu, 21 Dec 2017 07:31:41 GMT">
   
-    <testcase name="SIGNUP: User should get an error if fields are empty" classname="2signup" time="4.023" assertions="2">
+    <testcase name="SIGNUP: User should get an error if fields are empty" classname="2signup" time="4.420" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if username is less than 3 characters" classname="2signup" time="9.541" assertions="2">
+    <testcase name="SIGNUP: User should get an error if username is less than 3 characters" classname="2signup" time="9.582" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if username is greater than 18 characters" classname="2signup" time="9.744" assertions="2">
+    <testcase name="SIGNUP: User should get an error if username is greater than 18 characters" classname="2signup" time="9.791" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if username is not alphanumeric" classname="2signup" time="9.610" assertions="2">
+    <testcase name="SIGNUP: User should get an error if username is not alphanumeric" classname="2signup" time="9.732" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if email is invalid" classname="2signup" time="9.645" assertions="2">
+    <testcase name="SIGNUP: User should get an error if email is invalid" classname="2signup" time="9.729" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if password is less than 6 characters" classname="2signup" time="9.618" assertions="2">
+    <testcase name="SIGNUP: User should get an error if password is less than 6 characters" classname="2signup" time="9.847" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error if passwords do not match" classname="2signup" time="9.643" assertions="2">
+    <testcase name="SIGNUP: User should get an error if passwords do not match" classname="2signup" time="9.849" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should be able to create a new account with correct details" classname="2signup" time="11.60" assertions="2">
+    <testcase name="SIGNUP: User should be able to create a new account with correct details" classname="2signup" time="11.82" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="SIGNUP: User should get an error message if username has been taken" classname="2signup" time="8.719" assertions="3">
-
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="SIGNUP: User should get an error message if email has been taken" classname="2signup" time="8.699" assertions="3">
+    <testcase name="SIGNUP: User should get an error message if username has been taken" classname="2signup" time="8.802" assertions="3">
 
     
 
@@ -81,7 +72,16 @@
     
     </testcase>
   
-    <testcase name="SIGNUP: should signup a new user with different email and unsername" classname="2signup" time="11.66" assertions="2">
+    <testcase name="SIGNUP: User should get an error message if email has been taken" classname="2signup" time="8.742" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="SIGNUP: should signup a new user with different email and unsername" classname="2signup" time="11.65" assertions="2">
 
     
 
@@ -89,20 +89,6 @@
     </testcase>
   
 
-  
-    <system-err>
-      ERROR: Unable to locate element: &#34;div.search-result&#34; using: css selector
-    at command (/usr/local/lib/node_modules/nightwatch/lib/api/assertions/containsText.js:46:21)
-    at module.exports.BaseAssertion._scheduleAssertion (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:87:17)
-    at module.exports.BaseAssertion._executeCommand (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:82:17)
-    at AssertionInstance.commandFn [as _commandFn] (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:180:21)
-    at AsyncTree.runCommand (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:154:30)
-    at AsyncTree.runChildNode (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:114:8)
-    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:80:10)
-    at AsyncTree.walkUp (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:97:8)
-    at AsyncTree.walkDown (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:90:12)
-    at AsyncTree.traverse (/usr/local/lib/node_modules/nightwatch/lib/core/queue.js:73:8)
-    </system-err>
   
 
   
