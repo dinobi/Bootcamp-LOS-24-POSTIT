@@ -70,8 +70,6 @@ describe('<Group />: When Group component is mounted',
       }
       wrapper.setProps(nextProps);
       expect(wrapper.instance().props.match.params.groupname)
-      // expect(wrapper.instance().props.loadGroupMessages.calledOnce).toBe(false);
-      // expect(wrapper.instance().props.loadGroupMembers.calledOnce).toBe(false);
       done()
     });
     it('should re-render when groupname changes', (done) => {
@@ -85,8 +83,6 @@ describe('<Group />: When Group component is mounted',
       }
       wrapper.setProps(nextProps);
       expect(wrapper.instance().props.match.params.groupname).toEqual('lfc');
-      // expect(wrapper.instance().props.loadGroupMessages.calledOnce).toBe(true);
-      // expect(wrapper.instance().props.loadGroupMembers.calledOnce).toBe(true);
       done()
     });
     it('should show a loader when loading state is set to true', (done) => {
