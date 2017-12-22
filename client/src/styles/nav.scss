@@ -53,13 +53,19 @@ nav .side-nav li:last-child a:hover {
 	background-color: $primary-background !important;
 }
 /** Dashboard header **/
-.dashboard-header nav ul {
-	padding-right: 15px;
-	a {
-		color: $offset-color;
-		&:hover {
-			background-color: transparent;
-			color: $white;
+.dashboard-header {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	nav ul {
+		padding-right: 15px;
+		a {
+			color: $offset-color;
+			&:hover {
+				background-color: transparent;
+				color: $white;
+			}
 		}
 	}
 }

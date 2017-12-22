@@ -14,10 +14,10 @@ const DashboardContent =
   ({ children, wrapperClass, iconClass, title, subtitle }) =>
     <div className={wrapperClass}>
       <div className="bot-msg">
-        <h3>
+        <h5>
           <i className={iconClass}></i>
           &nbsp;{title}
-        </h3>
+        </h5>
         <p>{subtitle}</p>
       </div>
       <div>

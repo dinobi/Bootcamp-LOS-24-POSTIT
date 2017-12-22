@@ -6,7 +6,7 @@ import DashHeader
   from '../DashHeader.jsx';
 import {
   InputField, SideMenu,
-  Form, Copyright
+  Form, Copyright, DashboardContent
 } from '../../../commonViews';
 /**
  * SearchWiki Page
@@ -103,11 +103,12 @@ class SearchWiki extends React.Component {
               <SideMenu active="search-wiki" toggle={toggleOff} />
             </aside>
             <section className="col s12 m9 l10">
-              <div className="dashboard-content dashboard-search">
-                <div className="bot-msg">
-                  <h3>Search Wikipedia</h3>
-                  <p>Search wikipepdia right from your dashboard.</p>
-                </div>
+              <DashboardContent
+                wrapperClass="dashboard-content dashboard-search"
+                iconClass="fa fa-wikipedia-w"
+                title="Search Wikipedia"
+                subtitle="Search wikipepdia right from your dashboard"
+              >
                 <Form id="search-form">
                   <fieldset className="search-term">
                     <SearchBox
@@ -119,7 +120,7 @@ class SearchWiki extends React.Component {
                   </fieldset>
                 </Form>
                 <section className="search-result" />
-              </div>
+              </DashboardContent>
             </section>
           </div>
         </main>

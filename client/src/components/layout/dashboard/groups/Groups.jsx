@@ -68,7 +68,6 @@ export class Groups extends React.Component {
     const groupData = { groupname, description };
     this.props.onCreateGroup(groupData);
     this.setState({ groupname: '', description: '' });
-    document.getElementById('groups-control').reset();
   }
   /**
    * handleArchive()
