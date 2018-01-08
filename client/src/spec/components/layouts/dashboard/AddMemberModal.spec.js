@@ -69,7 +69,7 @@ describe('<AddMemberModal />: When AddMemberModal component is mounted',
       expect(tree.state('searchTerm')).toEqual(mockData.string[0]);
       done();
     });
-    it('should call the handleChange method as performs on change event', (done) => {
+    it('should call the handleChange method as user performs an on change event', (done) => {
       const tree = shallow(<AddMemberModal {...props} />);
       const handleChange = mockData.func;
       const handleSearch = mockData.func;

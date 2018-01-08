@@ -28,9 +28,17 @@ describe('<SearchWiki />: When SearchWiki component is mounted',
       done()
     });
     it('should render children as expected', (done) => {
-      const wrapper = component(false)
+      const wrapper = component()
+      expect(wrapper.find('DashboardContent').length).toBe(1);
       expect(wrapper.find('Form').length).toBe(1);
       expect(wrapper.find('SearchBox').length).toBe(1);
       done()
+    });
+    it('should have a handleSearch method that performs a search action', (done) => {
+      const wrapper = component();
+      const handleSearchSpy = jest.spyOn(wrapper.instance(), 'handleSearch')
+      wrapper.instance().handleSearch({ preventDefault: () => { } })
+      expect(handleSearchSpy).toHaveBeenCalledTimes(1);
+      done();
     });
   });

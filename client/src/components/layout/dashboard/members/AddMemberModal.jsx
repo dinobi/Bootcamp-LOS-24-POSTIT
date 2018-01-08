@@ -194,7 +194,7 @@ class AddMemberModal extends React.Component {
                     <i className="fa fa-chevron-right"></i>
                   </span>
                 </div> :
-                <div class="search-pages">
+                <div className="search-pages">
                   <span onClick={() =>
                     this.handlePageNav('prev')}
                     className="search-prev"

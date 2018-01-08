@@ -1,5 +1,5 @@
 # Bootcamp-LOS-24-PostIt
-I (Dinobi) took on the development of this project as part of the requirements to become a fellow at [Andela](https://andela.com/). I thank Phil, Victoria, Tracy, Femi and the rest of the BFA/LFA's of bootcamp-los-24 for all their support
+I (Dinobi) took on the development of this project as part of the requirements to become a fellow at [Andela](https://andela.com/).
 
 ![postit-landing](https://user-images.githubusercontent.com/13672476/29314076-3ff95124-81b4-11e7-824c-d2757e27d5a4.png)
 
@@ -100,6 +100,10 @@ directory, while the documentation site is:
 Check the [contributing](contributing.md) file, it contains everything you need to know.
 
 ## Credits
+A big thank you to [Temi Lajumoke](https://github.com/temilaj), [Franklin](https://github.com/Chieze-Franklin), 
+[Philip Newman](philip.newman@andela.com), [Victoria](victoria.offoma@andela.com), 
+[Tracy](https://github.com/tezebuike), [Femi](https://github.com/KaiserPhemi) and all of 
+LOS-30 Andelans for their support and encouragement.
 
 ## License
 [MIT](https://github.com/dinobi/Bootcamp-LOS-24-POSTIT/blob/develop/LICENSE)

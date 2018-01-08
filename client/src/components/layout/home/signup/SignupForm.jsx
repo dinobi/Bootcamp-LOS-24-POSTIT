@@ -130,7 +130,13 @@ export class SignupForm extends React.Component {
       const userData = { username, email, password, phone };
         // call the signup form action
       this.props.onSignupUser(userData);
-      document.getElementById('signup-form').reset();
+      this.setState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phone: ''
+      });
     }
   }
 	/**
