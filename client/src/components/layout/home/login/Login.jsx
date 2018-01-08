@@ -79,7 +79,10 @@ export class Login extends React.Component {
     } else {
       const loginCreds = { username, password };
       this.props.onLoginUser(loginCreds);
-      document.getElementById('auth-form').reset();
+      this.setState({
+        username: '',
+        password: ''
+      });
     }
   }
 	/**

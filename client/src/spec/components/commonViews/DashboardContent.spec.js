@@ -12,7 +12,7 @@ describe('<DashboardComponent/>: When component is mounted', () => {
     };
     const wrapper = mount(<DashboardContent {...props}>children</DashboardContent>);
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('h3').exists()).toBe(true);
+    expect(wrapper.find('h5').exists()).toBe(true);
     expect(wrapper.find('i').exists()).toBe(true);
   });
 });
