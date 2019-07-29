@@ -28,7 +28,6 @@ roboto*
 /client/public/dist
 /.nyc_output
 /coverage
-package-lock.json
 
 # testing
 /coverage

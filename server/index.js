@@ -1,20 +1,31 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 import express from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
 import logger from 'morgan';
+import open from 'open';
+import chalk from 'chalk';
 import favicon from 'serve-favicon';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import routes from './routes';
-import config from '../webpack.config';
+import config from '../webpack.config.dev';
+
+
+dotenv.config();
+const env = process.env.NODE_ENV;
+const portNum = env === 'production' ? 5000 : 3001;
+const port = parseInt(process.env.PORT, 10) || portNum;
+
 
 // Set express app
 const app = express();
 
 // Log all requests to the console
 app.use(logger('dev'));
-const env = process.env.NODE_ENV || 'development';
 const compiler = webpack(config);
 
 if (env === 'development') {
@@ -49,7 +60,11 @@ app.all('api/*', (req, res) => res.status(404).send({
   message: 'Resource not found.!',
 }));
 
-// Default catch-all route that sends a success message on all req.
+// Routes function that recieves app as argument to define our endpoint.
 routes(app);
 
-module.exports = app;
+// Tell app to listen and serve requests on specified port
+app.listen(port, () => {
+  console.log(chalk.green(`postit is on port ${port}`));
+  open(`http://localhost:${port}`);
+});
