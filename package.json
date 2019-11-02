@@ -127,7 +127,7 @@
     "nodemailer": "^4.0.1",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.2",
-    "open": "0.0.5",
+    "open": "6.0.0",
     "pg": "^6.4.0",
     "pg-hstore": "^2.3.2",
     "postcss-flexbugs-fixes": "3.0.0",
